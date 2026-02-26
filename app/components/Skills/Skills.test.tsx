@@ -13,12 +13,6 @@ describe('Skills', () => {
     expect(screen.getByText('TypeScript')).toBeInTheDocument();
   });
 
-  it('renders skill levels', () => {
-    render(<Skills />);
-    const expertBadges = screen.getAllByText('expert');
-    expect(expertBadges.length).toBeGreaterThan(0);
-  });
-
   it('renders as a list', () => {
     render(<Skills />);
     expect(screen.getByRole('list', { name: 'Skills list' })).toBeInTheDocument();

@@ -1,9 +1,9 @@
-import { memo } from 'react';
 import type { RefObject } from 'react';
+import { memo } from 'react';
 import { useIntersectionObserver } from '~/hooks/useIntersectionObserver';
 import { ProjectCard } from './ProjectCard';
-import type { Project } from './types';
 import styles from './Projects.module.scss';
+import type { Project } from './types';
 
 const projectsData: Project[] = [
   {
@@ -12,18 +12,18 @@ const projectsData: Project[] = [
     url: 'https://budgeto.app',
     description: 'Personal finance management app',
     longDescription:
-      'A beautifully designed personal finance management application that helps users track spending, set budgets, and achieve financial goals. Built with a focus on simplicity and delightful UX.',
-    tags: ['React', 'TypeScript', 'Node.js', 'Finance'],
+      'A beautifully designed personal finance management application that helps users track spending, set budgets, and achieve financial goals. Built with a focus on simplicity, accessibility, and delightful UX. Designed around my own budgeting methodology which has been highly effective for me',
+    tags: ['React', 'React Router', 'TypeScript', 'Node.js', 'Finance'],
     highlight: 'budgeto.app',
   },
   {
     id: 'fogsv',
     name: 'FOG SV',
     url: 'https://fogsv.org.au',
-    description: 'Friends of Grasslands community platform',
+    description: 'Friends of Gulf community website',
     longDescription:
-      'A community platform for Friends of Grasslands in the Southern Valleys region of Australia. Supporting conservation efforts through modern web technology, events management, and community engagement features.',
-    tags: ['React', 'TypeScript', 'Community', 'Conservation'],
+      'A community website for Friends of Gulf St Vincent, based in Adelaide. Built in WordPress with custom theming and plugins to support conservation efforts, events, and educational resources about the local marine environment.',
+    tags: ['WordPress', 'Community', 'Conservation'],
     highlight: 'fogsv.org.au',
   },
 ];
@@ -41,7 +41,9 @@ const Projects = memo(() => {
       <div className={styles.container}>
         <div className={styles.header}>
           <p className={styles.eyebrow}>My Work</p>
-          <h2 id="projects-heading" className={styles.heading}>Featured Projects</h2>
+          <h2 id="projects-heading" className={styles.heading}>
+            Featured Projects
+          </h2>
           <p className={styles.subheading}>
             A selection of projects I've built — combining technical depth with thoughtful design.
           </p>

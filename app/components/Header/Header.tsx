@@ -1,4 +1,4 @@
-import { memo, useState, useCallback, useEffect } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router';
 import styles from './Header.module.scss';
 
@@ -10,14 +10,30 @@ const navItems = [
 ];
 
 const SunIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    aria-hidden="true"
+  >
     <circle cx="12" cy="12" r="4" />
     <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
   </svg>
 );
 
 const MoonIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    aria-hidden="true"
+  >
     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
   </svg>
 );
@@ -63,10 +79,7 @@ const Header = memo(() => {
   }, []);
 
   return (
-    <header
-      className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}
-      role="banner"
-    >
+    <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`} role="banner">
       <div className={styles.container}>
         <Link to="/" className={styles.logo} aria-label="Mitchell Martinez - Home">
           <span className={styles.logoText}>MM</span>
@@ -98,7 +111,7 @@ const Header = memo(() => {
           </button>
 
           <a
-            href="mailto:mitchell@mitchellmartinez.tech"
+            href="mailto:contact@mitchellmartinez.tech"
             className={styles.ctaButton}
             aria-label="Contact Mitchell via email"
           >
@@ -113,7 +126,10 @@ const Header = memo(() => {
           aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
           aria-controls="mobile-menu"
         >
-          <span className={`${styles.hamburger} ${isMobileMenuOpen ? styles.open : ''}`} aria-hidden="true" />
+          <span
+            className={`${styles.hamburger} ${isMobileMenuOpen ? styles.open : ''}`}
+            aria-hidden="true"
+          />
         </button>
       </div>
 
