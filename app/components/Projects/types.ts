@@ -6,4 +6,9 @@ export interface Project {
   longDescription: string;
   tags: string[];
   highlight: string;
+  fullWidth?: boolean;
+  image?: {
+    src: string;
+    alt: string;
+  };
 }
