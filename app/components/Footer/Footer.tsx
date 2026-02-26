@@ -15,7 +15,7 @@ const Footer = memo(() => {
 
           <nav className={styles.links} aria-label="Footer navigation">
             <a
-              href="mailto:mitchell@mitchellmartinez.tech"
+              href="mailto:contact@mitchellmartinez.tech"
               className={styles.link}
               aria-label="Email Mitchell"
             >
@@ -55,9 +55,7 @@ const Footer = memo(() => {
           <p className={styles.copyright}>
             © {currentYear} Mitchell Martinez. All rights reserved.
           </p>
-          <p className={styles.madeWith}>
-            Made with React & TypeScript
-          </p>
+          <p className={styles.madeWith}>Made with React & TypeScript</p>
         </div>
       </div>
     </footer>

@@ -17,12 +17,14 @@ describe('Hero', () => {
   it('renders the Get in Touch CTA', () => {
     render(<Hero />);
     const emailLink = screen.getByLabelText('Send Mitchell an email');
-    expect(emailLink).toHaveAttribute('href', 'mailto:mitchell@mitchellmartinez.tech');
+    expect(emailLink).toHaveAttribute('href', 'mailto:contact@mitchellmartinez.tech');
   });
 
   it('renders the LinkedIn CTA', () => {
     render(<Hero />);
-    const linkedinLink = screen.getByLabelText("Visit Mitchell's LinkedIn profile (opens in new tab)");
+    const linkedinLink = screen.getByLabelText(
+      "Visit Mitchell's LinkedIn profile (opens in new tab)"
+    );
     expect(linkedinLink).toHaveAttribute('href', 'https://linkedin.com/in/mitchellmartinezadl');
   });
 
