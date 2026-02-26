@@ -16,7 +16,11 @@ const About = memo(() => {
       <div className={styles.container}>
         <div className={styles.grid}>
           <div className={styles.imageWrapper}>
-            <div className={styles.avatar} aria-label="Mitchell Martinez initials avatar" role="img">
+            <div
+              className={styles.avatar}
+              aria-label="Mitchell Martinez initials avatar"
+              role="img"
+            >
               <span className={styles.initials}>MM</span>
             </div>
             <div className={styles.avatarDecoration} aria-hidden="true" />
@@ -29,19 +33,31 @@ const About = memo(() => {
             </h2>
             <div className={styles.body}>
               <p>
-                I'm Mitchell, a frontend engineer with a passion for building beautiful,
-                performant web applications that users love. I specialize in React and TypeScript,
-                bringing together technical excellence and thoughtful design.
+                G'day! I'm Mitch, a frontend engineer with a passion for building beautiful,
+                performant web applications that users love. I specialise in frontend web
+                development, primarily in React.
               </p>
               <p>
-                My approach combines clean architecture with meticulous attention to detail —
-                from pixel-perfect animations to accessible, inclusive interfaces that work
-                for everyone.
+                My approach combines great design and excellent user experiences with top-tier
+                engineering applications. I love building beautiful web applications that work well,
+                are straightforward to use, and don't piss off the customer. The customer experience
+                is top of mind in every single thing I do.
               </p>
               <p>
-                When I'm not pushing pixels, I'm exploring the intersection of design and
-                engineering, building side projects, and staying at the cutting edge of
-                frontend technology.
+                Keeping up with the right latest technologies is essential in our ever-changing
+                world. I am well-versed in AI, modern web development practices, and emerging
+                technologies. I make time to keep my skills up to date to ensure customers get the
+                best experience.
+              </p>
+              <p>
+                I believe technology can be a powerful force for bringing people together, and
+                uplifting us all - when used right. Outside of engineering, I love hiking, keeping
+                fit, music, and languages. My favourite places to hang out are my local libraries
+                and pubs.
+              </p>
+              <p>
+                Interested in collaborating? Flick me a LinkedIn message or email. I'd love to work
+                with you on something great!
               </p>
             </div>
 

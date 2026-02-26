@@ -4,18 +4,18 @@
   "type": "module",
   "scripts": {
     "build": "react-router build",
+    "build:storybook": "storybook build",
     "lint": "eslint --config ./eslint.config.js \"{src,public,cypress,scripts,.react-router}/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "npm run lint -- --fix",
     "start": "react-router dev",
     "start:network": "react-router dev --host 0.0.0.0",
     "start:prod": "react-router-serve ./build/server/index.js",
-    "typecheck": "echo typecheck",
     "storybook": "storybook dev -p 6006",
-    "build:storybook": "storybook build",
-    "test": "echo test",
+    "test": "vitest",
     "test:ci": "echo test",
     "test:e2e": "playwright test",
-    "test:e2e:init": "playwright install --with-deps"
+    "test:e2e:init": "playwright install --with-deps",
+    "typecheck": "react-router typegen && tsc --noEmit",
   },
   "dependencies": {
     "@react-router/node": "^7.2.0",
