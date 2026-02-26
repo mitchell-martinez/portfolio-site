@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import type { RefObject } from 'react';
 import { useIntersectionObserver } from '~/hooks/useIntersectionObserver';
+import { CtaLink } from '~/components/ui/CtaLink/CtaLink';
 import styles from './Hero.module.scss';
 
 const Hero = memo(() => {
@@ -38,25 +39,24 @@ const Hero = memo(() => {
         </p>
 
         <div className={styles.ctaGroup} role="group" aria-label="Primary actions">
-          <a
+          <CtaLink
             href="mailto:mitchell@mitchellmartinez.tech"
-            className={styles.ctaPrimary}
+            variant="primary"
             aria-label="Send Mitchell an email"
           >
             Get in Touch
-          </a>
-          <a
+          </CtaLink>
+          <CtaLink
             href="https://linkedin.com/in/mitchellmartinezadl"
-            className={styles.ctaSecondary}
-            target="_blank"
-            rel="noopener noreferrer"
+            variant="secondary"
+            external
             aria-label="Visit Mitchell's LinkedIn profile (opens in new tab)"
           >
             LinkedIn
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
               <path d="M7 17L17 7M17 7H7M17 7v10" />
             </svg>
-          </a>
+          </CtaLink>
         </div>
 
         <div className={styles.scrollIndicator} aria-hidden="true">

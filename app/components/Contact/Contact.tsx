@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import type { RefObject } from 'react';
 import { useIntersectionObserver } from '~/hooks/useIntersectionObserver';
+import { CtaLink } from '~/components/ui/CtaLink/CtaLink';
 import styles from './Contact.module.scss';
 
 const Contact = memo(() => {
@@ -27,9 +28,9 @@ const Contact = memo(() => {
             </p>
 
             <div className={styles.ctaGroup} role="group" aria-label="Contact options">
-              <a
+              <CtaLink
                 href="mailto:mitchell@mitchellmartinez.tech"
-                className={styles.ctaPrimary}
+                variant="primary"
                 aria-label="Send Mitchell an email at mitchell@mitchellmartinez.tech"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
@@ -37,12 +38,11 @@ const Contact = memo(() => {
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
                 </svg>
                 Send an Email
-              </a>
-              <a
+              </CtaLink>
+              <CtaLink
                 href="https://linkedin.com/in/mitchellmartinezadl"
-                className={styles.ctaSecondary}
-                target="_blank"
-                rel="noopener noreferrer"
+                variant="secondary"
+                external
                 aria-label="Connect with Mitchell on LinkedIn (opens in new tab)"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -50,7 +50,7 @@ const Contact = memo(() => {
                   <circle cx="4" cy="4" r="2" />
                 </svg>
                 Connect on LinkedIn
-              </a>
+              </CtaLink>
             </div>
           </div>
 

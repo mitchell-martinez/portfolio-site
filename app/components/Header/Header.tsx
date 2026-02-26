@@ -1,11 +1,12 @@
 import { memo, useState, useCallback, useEffect } from 'react';
+import { Link, useLocation } from 'react-router';
 import styles from './Header.module.scss';
 
 const navItems = [
-  { label: 'About', href: '#about' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'About', href: '/about' },
+  { label: 'Skills', href: '/skills' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 const SunIcon = () => (
@@ -25,6 +26,7 @@ const Header = memo(() => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  const location = useLocation();
 
   const handleScroll = useCallback(() => {
     setIsScrolled(window.scrollY > 20);
@@ -68,21 +70,21 @@ const Header = memo(() => {
       role="banner"
     >
       <div className={styles.container}>
-        <a href="#" className={styles.logo} aria-label="Mitchell Martinez - Home">
+        <Link to="/" className={styles.logo} aria-label="Mitchell Martinez - Home">
           <span className={styles.logoText}>MM</span>
-        </a>
+        </Link>
 
         <nav className={styles.nav} aria-label="Main navigation">
           <ul className={styles.navList} role="list">
             {navItems.map(item => (
               <li key={item.href}>
-                <a
-                  href={item.href}
-                  className={styles.navLink}
+                <Link
+                  to={item.href}
+                  className={`${styles.navLink} ${location.pathname === item.href ? styles.navLinkActive : ''}`}
                   onClick={handleNavClick}
                 >
                   {item.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -126,14 +128,14 @@ const Header = memo(() => {
           <ul className={styles.mobileNavList} role="list">
             {navItems.map(item => (
               <li key={item.href}>
-                <a
-                  href={item.href}
-                  className={styles.mobileNavLink}
+                <Link
+                  to={item.href}
+                  className={`${styles.mobileNavLink} ${location.pathname === item.href ? styles.navLinkActive : ''}`}
                   onClick={handleNavClick}
                   tabIndex={isMobileMenuOpen ? 0 : -1}
                 >
                   {item.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
