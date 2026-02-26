@@ -49,11 +49,11 @@
   width: min(280px, 70vw);
   height: min(280px, 70vw);
   border-radius: 40px;
-  background: linear-gradient(135deg, $color-bg-secondary, $color-bg-tertiary);
+  background: var(--color-bg-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid $color-border;
+  border: 1px solid var(--color-border);
 
   @include respond-to('md') {
     width: 320px;
@@ -65,17 +65,14 @@
   font-size: clamp(4rem, 10vw, 6rem);
   font-weight: 700;
   letter-spacing: -0.04em;
-  background: linear-gradient(135deg, $color-text-primary, $color-accent);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--color-text-primary);
 }
 
 .avatarDecoration {
   position: absolute;
   inset: -20px;
   border-radius: 50px;
-  background: radial-gradient(circle at 30% 30%, rgba(0, 113, 227, 0.2), transparent 60%);
+  background: radial-gradient(circle at 30% 30%, var(--color-surface-subtle), transparent 60%);
   filter: blur(30px);
   z-index: 0;
 }
@@ -88,7 +85,7 @@
 
 .eyebrow {
   font-size: 0.875rem;
-  color: $color-accent;
+  color: var(--color-text-secondary);
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -99,7 +96,7 @@
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.15;
-  color: $color-text-primary;
+  color: var(--color-text-primary);
 }
 
 .body {
@@ -109,7 +106,7 @@
 
   p {
     font-size: clamp(1rem, 2vw, 1.0625rem);
-    color: $color-text-secondary;
+    color: var(--color-text-secondary);
     line-height: 1.75;
   }
 }
@@ -118,7 +115,7 @@
   display: flex;
   gap: 2rem;
   padding-top: 0.5rem;
-  border-top: 1px solid $color-border;
+  border-top: 1px solid var(--color-border);
   flex-wrap: wrap;
 }
 
@@ -131,12 +128,12 @@
 .statNumber {
   font-size: clamp(1.75rem, 4vw, 2.25rem);
   font-weight: 700;
-  color: $color-text-primary;
+  color: var(--color-text-primary);
   letter-spacing: -0.03em;
 }
 
 .statLabel {
   font-size: 0.8125rem;
-  color: $color-text-secondary;
+  color: var(--color-text-secondary);
   font-weight: 400;
 }

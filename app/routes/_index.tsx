@@ -17,8 +17,8 @@ export const meta: MetaFunction = () => [
 ];
 
 const SectionFallback = () => (
-  <div style={{ minHeight: '50vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-    <div style={{ width: 40, height: 40, borderRadius: '50%', border: '3px solid #0071e3', borderTopColor: 'transparent', animation: 'spin 0.8s linear infinite' }} />
+  <div className="section-fallback">
+    <div className="spinner" />
   </div>
 );
 
