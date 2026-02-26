@@ -1,17 +1,9 @@
 import { memo, useMemo } from 'react';
 import type { RefObject } from 'react';
 import { useIntersectionObserver } from '~/hooks/useIntersectionObserver';
+import { ProjectCard } from './ProjectCard';
+import type { Project } from './types';
 import styles from './Projects.module.scss';
-
-interface Project {
-  id: string;
-  name: string;
-  url: string;
-  description: string;
-  longDescription: string;
-  tags: string[];
-  highlight?: string;
-}
 
 const projectsData: Project[] = [
   {
@@ -59,46 +51,7 @@ const Projects = memo(() => {
 
         <ul className={styles.grid} role="list" aria-label="Featured projects">
           {projects.map((project, index) => (
-            <li
-              key={project.id}
-              className={styles.card}
-              style={{ transitionDelay: `${index * 0.15}s` }}
-            >
-              <div className={styles.cardInner}>
-                <div className={styles.cardTop}>
-                  <div className={styles.projectMeta}>
-                    <div className={styles.projectDot} aria-hidden="true" />
-                    <span className={styles.projectType}>{project.description}</span>
-                  </div>
-
-                  <h3 className={styles.projectName}>{project.name}</h3>
-                  <p className={styles.projectDescription}>{project.longDescription}</p>
-                </div>
-
-                <div className={styles.cardBottom}>
-                  <ul className={styles.tags} role="list" aria-label={`Technologies used in ${project.name}`}>
-                    {project.tags.map(tag => (
-                      <li key={tag} className={styles.tag}>{tag}</li>
-                    ))}
-                  </ul>
-
-                  <a
-                    href={project.url}
-                    className={styles.projectLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Visit ${project.name} at ${project.highlight} (opens in new tab)`}
-                  >
-                    <span>{project.highlight}</span>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                      <path d="M7 17L17 7M17 7H7M17 7v10" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-
-              <div className={styles.cardGlow} aria-hidden="true" />
-            </li>
+            <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </ul>
       </div>
