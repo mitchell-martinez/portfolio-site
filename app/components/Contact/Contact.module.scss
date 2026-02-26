@@ -1,0 +1,165 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.contact {
+  padding: 6rem 1.5rem;
+  background: $color-bg-secondary;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity $transition-slow, transform $transition-slow;
+
+  @include respond-to('md') {
+    padding: 8rem 2rem;
+  }
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  position: relative;
+  border-radius: $border-radius-xl;
+  overflow: hidden;
+  background: linear-gradient(135deg, $color-bg-tertiary, rgba(0, 113, 227, 0.05));
+  border: 1px solid $color-border;
+  padding: 3rem 2rem;
+
+  @include respond-to('md') {
+    padding: 4rem 3rem;
+  }
+
+  @include respond-to('lg') {
+    padding: 5rem 4rem;
+  }
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+}
+
+.eyebrow {
+  font-size: 0.875rem;
+  color: $color-accent;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.heading {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  color: $color-text-primary;
+  margin-bottom: 1.5rem;
+}
+
+.headingAccent {
+  background: linear-gradient(135deg, $color-accent, #64a5ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.description {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  color: $color-text-secondary;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+
+.ctaGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.ctaPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.875rem 1.75rem;
+  background: $color-accent;
+  color: white;
+  border-radius: 980px;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color $transition-fast, transform $transition-fast, box-shadow $transition-fast;
+  @include focus-ring;
+
+  &:hover {
+    background: $color-accent-hover;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 113, 227, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.ctaSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.875rem 1.75rem;
+  background: rgba(255, 255, 255, 0.07);
+  color: $color-text-primary;
+  border-radius: 980px;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid $color-border;
+  transition: background-color $transition-fast, transform $transition-fast, border-color $transition-fast;
+  @include focus-ring;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.decoration {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decorCircle1 {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 113, 227, 0.12), transparent 70%);
+  right: -100px;
+  top: -100px;
+  filter: blur(40px);
+}
+
+.decorCircle2 {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(100, 50, 255, 0.08), transparent 70%);
+  right: 100px;
+  bottom: -80px;
+  filter: blur(40px);
+}
