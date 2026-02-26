@@ -15,7 +15,7 @@
     "test:ci": "echo test",
     "test:e2e": "playwright test",
     "test:e2e:init": "playwright install --with-deps",
-    "typecheck": "react-router typegen && tsc --noEmit",
+    "typecheck": "react-router typegen && tsc --noEmit"
   },
   "dependencies": {
     "@react-router/node": "^7.2.0",
