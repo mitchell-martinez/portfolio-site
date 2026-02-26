@@ -5,5 +5,5 @@ export interface Project {
   description: string;
   longDescription: string;
   tags: string[];
-  highlight?: string;
+  highlight: string;
 }

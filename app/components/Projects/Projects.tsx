@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react';
+import { memo } from 'react';
 import type { RefObject } from 'react';
 import { useIntersectionObserver } from '~/hooks/useIntersectionObserver';
 import { ProjectCard } from './ProjectCard';
@@ -31,8 +31,6 @@ const projectsData: Project[] = [
 const Projects = memo(() => {
   const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.05, triggerOnce: true });
 
-  const projects = useMemo(() => projectsData, []);
-
   return (
     <section
       ref={ref as RefObject<HTMLElement>}
@@ -50,7 +48,7 @@ const Projects = memo(() => {
         </div>
 
         <ul className={styles.grid} role="list" aria-label="Featured projects">
-          {projects.map((project, index) => (
+          {projectsData.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </ul>

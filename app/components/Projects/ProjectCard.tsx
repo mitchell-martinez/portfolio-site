@@ -1,8 +1,6 @@
 import type { Project } from './types';
 import styles from './Projects.module.scss';
 
-export type { Project };
-
 interface ProjectCardProps {
   project: Project;
   index: number;

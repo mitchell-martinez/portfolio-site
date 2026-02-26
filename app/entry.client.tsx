@@ -15,8 +15,10 @@ startTransition(() => {
 // Runs only after hydration to avoid any impact on initial page load.
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(() => {
-      // SW registration failed — offline mode unavailable in this context.
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch((err) => {
+      if (process.env.NODE_ENV !== 'production') {
+        console.warn('[SW] Registration failed:', err);
+      }
     });
   });
 }

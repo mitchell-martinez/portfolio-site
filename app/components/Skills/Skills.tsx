@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react';
+import { memo } from 'react';
 import type { RefObject } from 'react';
 import { useIntersectionObserver } from '~/hooks/useIntersectionObserver';
 import { SkillCard } from './SkillCard';
@@ -19,13 +19,12 @@ const skillsData: Skill[] = [
 
 const levelOrder: Record<string, number> = { expert: 0, advanced: 1, intermediate: 2 };
 
+const sortedSkills: Skill[] = [...skillsData].sort(
+  (a, b) => levelOrder[a.level] - levelOrder[b.level]
+);
+
 const Skills = memo(() => {
   const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.05, triggerOnce: true });
-
-  const sortedSkills = useMemo(
-    () => [...skillsData].sort((a, b) => levelOrder[a.level] - levelOrder[b.level]),
-    []
-  );
 
   return (
     <section
