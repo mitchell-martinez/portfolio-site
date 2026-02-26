@@ -1,0 +1,53 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'reset';
+
+:root {
+  --color-bg: #{$color-bg};
+  --color-bg-secondary: #{$color-bg-secondary};
+  --color-bg-tertiary: #{$color-bg-tertiary};
+  --color-accent: #{$color-accent};
+  --color-accent-hover: #{$color-accent-hover};
+  --color-text-primary: #{$color-text-primary};
+  --color-text-secondary: #{$color-text-secondary};
+  --color-border: #{$color-border};
+  --font-system: #{$font-system};
+}
+
+html {
+  font-family: $font-system;
+  background-color: $color-bg;
+  color: $color-text-primary;
+  font-size: 16px;
+}
+
+body {
+  background-color: $color-bg;
+  color: $color-text-primary;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: rgba(0, 113, 227, 0.3);
+  color: $color-text-primary;
+}
+
+:focus-visible {
+  outline: 2px solid $color-accent;
+  outline-offset: 3px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+
+  @include respond-to('md') {
+    padding: 0 2rem;
+  }
+
+  @include respond-to('lg') {
+    padding: 0 3rem;
+  }
+}
