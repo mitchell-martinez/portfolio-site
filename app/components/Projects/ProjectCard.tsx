@@ -8,7 +8,7 @@ interface ProjectCardProps {
 
 const ProjectCard = ({ project, index }: ProjectCardProps) => (
   <li
-    className={styles.card}
+    className={`${styles.card}${project.fullWidth ? ` ${styles.cardFullWidth}` : ''}`}
     style={{ transitionDelay: `${index * 0.15}s` }}
   >
     <div className={styles.cardInner}>
@@ -20,12 +20,24 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => (
 
         <h3 className={styles.projectName}>{project.name}</h3>
         <p className={styles.projectDescription}>{project.longDescription}</p>
+
+        {project.image && (
+          <img
+            src={project.image.src}
+            alt={project.image.alt}
+            className={styles.projectImage}
+            loading="lazy"
+            decoding="async"
+          />
+        )}
       </div>
 
       <div className={styles.cardBottom}>
         <ul className={styles.tags} role="list" aria-label={`Technologies used in ${project.name}`}>
           {project.tags.map(tag => (
-            <li key={tag} className={styles.tag}>{tag}</li>
+            <li key={tag} className={styles.tag}>
+              {tag}
+            </li>
           ))}
         </ul>
 
@@ -37,7 +49,15 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => (
           aria-label={`Visit ${project.name} at ${project.highlight} (opens in new tab)`}
         >
           <span>{project.highlight}</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            aria-hidden="true"
+          >
             <path d="M7 17L17 7M17 7H7M17 7v10" />
           </svg>
         </a>
