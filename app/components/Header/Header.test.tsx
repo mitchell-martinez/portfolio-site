@@ -28,4 +28,18 @@ describe('Header', () => {
     await user.click(menuButton);
     expect(screen.getByLabelText('Close menu')).toBeInTheDocument();
   });
+
+  it('renders the theme toggle button defaulting to dark mode', () => {
+    render(<Header />);
+    // Default theme is dark, so button should offer to switch to light
+    expect(screen.getByRole('button', { name: /switch to light mode/i })).toBeInTheDocument();
+  });
+
+  it('switches the theme toggle label after click', async () => {
+    const user = userEvent.setup();
+    render(<Header />);
+    const toggleButton = screen.getByRole('button', { name: /switch to light mode/i });
+    await user.click(toggleButton);
+    expect(screen.getByRole('button', { name: /switch to dark mode/i })).toBeInTheDocument();
+  });
 });

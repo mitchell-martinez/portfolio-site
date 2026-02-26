@@ -33,7 +33,7 @@
 .gradientOrb1 {
   width: min(600px, 80vw);
   height: min(600px, 80vw);
-  background: radial-gradient(circle, rgba(0, 113, 227, 0.15), transparent 70%);
+  background: radial-gradient(circle, var(--color-glow), transparent 70%);
   top: -20%;
   right: -10%;
   animation-delay: 0s;
@@ -42,7 +42,7 @@
 .gradientOrb2 {
   width: min(400px, 60vw);
   height: min(400px, 60vw);
-  background: radial-gradient(circle, rgba(100, 50, 255, 0.1), transparent 70%);
+  background: radial-gradient(circle, var(--color-glow), transparent 70%);
   bottom: 10%;
   left: -5%;
   animation-delay: -3s;
@@ -51,7 +51,7 @@
 .gradientOrb3 {
   width: min(300px, 50vw);
   height: min(300px, 50vw);
-  background: radial-gradient(circle, rgba(0, 200, 150, 0.08), transparent 70%);
+  background: radial-gradient(circle, var(--color-glow), transparent 70%);
   top: 40%;
   left: 40%;
   animation-delay: -6s;
@@ -61,8 +61,8 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    linear-gradient(var(--color-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-grid-line) 1px, transparent 1px);
   background-size: 60px 60px;
   mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
 }
@@ -90,7 +90,7 @@
 
 .eyebrow {
   font-size: clamp(0.875rem, 2vw, 1rem);
-  color: $color-accent;
+  color: var(--color-text-secondary);
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -103,7 +103,7 @@
   letter-spacing: -0.04em;
   line-height: 0.95;
   margin-bottom: 1.5rem;
-  color: $color-text-primary;
+  color: var(--color-text-primary);
 }
 
 .firstName {
@@ -112,7 +112,8 @@
 
 .lastName {
   display: block;
-  background: linear-gradient(135deg, $color-text-primary 0%, $color-accent 100%);
+  // Monochromatic gradient: primary text fading to secondary grey
+  background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-text-secondary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -121,19 +122,19 @@
 .tagline {
   font-size: clamp(1.25rem, 3vw, 1.75rem);
   font-weight: 400;
-  color: $color-text-secondary;
+  color: var(--color-text-secondary);
   margin-bottom: 1.5rem;
   line-height: 1.4;
 }
 
 .taglineHighlight {
-  color: $color-text-primary;
+  color: var(--color-text-primary);
   font-weight: 500;
 }
 
 .description {
   font-size: clamp(1rem, 2vw, 1.125rem);
-  color: $color-text-secondary;
+  color: var(--color-text-secondary);
   max-width: 600px;
   margin: 0 auto 3rem;
   line-height: 1.7;
@@ -151,8 +152,8 @@
   display: inline-flex;
   align-items: center;
   padding: 0.875rem 2rem;
-  background: $color-accent;
-  color: white;
+  background: var(--color-cta-bg);
+  color: var(--color-cta-text);
   border-radius: 980px;
   font-size: 1rem;
   font-weight: 500;
@@ -161,9 +162,9 @@
   @include focus-ring;
 
   &:hover {
-    background: $color-accent-hover;
+    background: var(--color-cta-bg-hover);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 113, 227, 0.4);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
   }
 
   &:active {
@@ -176,19 +177,19 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.875rem 2rem;
-  background: rgba(255, 255, 255, 0.07);
-  color: $color-text-primary;
+  background: var(--color-surface-subtle);
+  color: var(--color-text-primary);
   border-radius: 980px;
   font-size: 1rem;
   font-weight: 500;
   text-decoration: none;
-  border: 1px solid $color-border;
+  border: 1px solid var(--color-border);
   transition: background-color $transition-fast, transform $transition-fast, border-color $transition-fast;
   @include focus-ring;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.25);
+    background: var(--color-surface-hover);
+    border-color: var(--color-border-strong);
     transform: translateY(-2px);
   }
 
@@ -212,7 +213,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: $color-accent;
+  background: var(--color-text-secondary);
   animation: bounce 2s ease-in-out infinite;
 }
 

@@ -3,7 +3,7 @@
 
 .skills {
   padding: 6rem 1.5rem;
-  background: $color-bg-secondary;
+  background: var(--color-bg-secondary);
 
   @include respond-to('md') {
     padding: 8rem 2rem;
@@ -30,7 +30,7 @@
 
 .eyebrow {
   font-size: 0.875rem;
-  color: $color-accent;
+  color: var(--color-text-secondary);
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -41,13 +41,13 @@
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 700;
   letter-spacing: -0.03em;
-  color: $color-text-primary;
+  color: var(--color-text-primary);
   margin-bottom: 1rem;
 }
 
 .subheading {
   font-size: clamp(1rem, 2vw, 1.125rem);
-  color: $color-text-secondary;
+  color: var(--color-text-secondary);
   max-width: 500px;
   margin: 0 auto;
   line-height: 1.6;
@@ -78,8 +78,8 @@
 
   &:hover {
     transform: translateY(-4px);
-    border-color: rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--color-border-strong);
+    background: var(--color-surface-hover);
   }
 }
 
@@ -94,6 +94,8 @@
   line-height: 1;
 }
 
+// All level badges use the same monochromatic base; expert gets slightly
+// brighter text to maintain a visual hierarchy without colour.
 .level {
   font-size: 0.6875rem;
   font-weight: 600;
@@ -101,35 +103,32 @@
   text-transform: uppercase;
   padding: 0.25rem 0.625rem;
   border-radius: 100px;
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
 
   &.expert {
-    background: rgba(0, 113, 227, 0.15);
-    color: #4da3ff;
-    border: 1px solid rgba(0, 113, 227, 0.3);
+    color: var(--color-text-primary);
   }
 
   &.advanced {
-    background: rgba(52, 199, 89, 0.1);
-    color: #5dd67a;
-    border: 1px solid rgba(52, 199, 89, 0.25);
+    color: var(--color-text-secondary);
   }
 
   &.intermediate {
-    background: rgba(255, 159, 10, 0.1);
-    color: #ffaa33;
-    border: 1px solid rgba(255, 159, 10, 0.25);
+    color: var(--color-text-secondary);
+    opacity: 0.7;
   }
 }
 
 .skillName {
   font-size: 1.125rem;
   font-weight: 600;
-  color: $color-text-primary;
+  color: var(--color-text-primary);
   letter-spacing: -0.01em;
 }
 
 .skillDescription {
   font-size: 0.875rem;
-  color: $color-text-secondary;
+  color: var(--color-text-secondary);
   line-height: 1.55;
 }
