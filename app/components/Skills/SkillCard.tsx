@@ -1,8 +1,6 @@
 import type { Skill } from './types';
 import styles from './Skills.module.scss';
 
-export type { Skill };
-
 interface SkillCardProps {
   skill: Skill;
   index: number;

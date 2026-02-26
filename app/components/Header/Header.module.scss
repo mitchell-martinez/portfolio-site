@@ -209,8 +209,8 @@
   &:hover {
     color: var(--color-text-primary);
   }
+}
 
-  &:last-child {
-    border-bottom: none;
-  }
+li:last-child .mobileNavLink {
+  border-bottom: none;
 }

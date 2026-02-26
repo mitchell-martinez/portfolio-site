@@ -19,8 +19,11 @@ export default defineConfig({
       // We register the SW manually in entry.client.tsx for SSR compatibility.
       injectRegister: null,
       injectManifest: {
-        // Precache all built assets + the pre-rendered HTML pages.
-        globPatterns: ['**/*.{js,css,html,svg,png,ico,woff2,webmanifest}'],
+        // Precache versioned JS/CSS/asset files only. HTML pages are intentionally
+        // excluded so the NetworkFirst navigation route in sw.ts handles them —
+        // this means users always get fresh HTML when online, and fall back to
+        // the most recently cached version when offline.
+        globPatterns: ['**/*.{js,css,svg,png,ico,woff2,webmanifest}'],
       },
       manifest: {
         name: 'Mitchell Martinez',

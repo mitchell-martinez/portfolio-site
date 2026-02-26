@@ -25,7 +25,13 @@ const MoonIcon = () => (
 const Header = memo(() => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  // Read the theme that the anti-FOUC inline script has already applied to
+  // <html data-theme>. Using a lazy initializer avoids the wrong-icon flash
+  // that would occur if we defaulted to 'dark' and corrected it in an effect.
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    if (typeof document === 'undefined') return 'dark';
+    return (document.documentElement.getAttribute('data-theme') as 'dark' | 'light') ?? 'dark';
+  });
   const location = useLocation();
 
   const handleScroll = useCallback(() => {
@@ -36,14 +42,6 @@ const Header = memo(() => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [handleScroll]);
-
-  // Sync React state with the data-theme already set by the anti-FOUC script.
-  useEffect(() => {
-    const current = document.documentElement.getAttribute('data-theme');
-    if (current === 'light' || current === 'dark') {
-      setTheme(current);
-    }
-  }, []);
 
   const toggleTheme = useCallback(() => {
     const next = theme === 'dark' ? 'light' : 'dark';

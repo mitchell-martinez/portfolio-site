@@ -15,16 +15,17 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(self.clients.claim());
 });
 
-// Inject the Workbox precache manifest at build time.
-// This precaches ALL pre-rendered HTML pages and all versioned JS/CSS assets,
-// giving the browser instant first-load performance and offline capability.
+// Precache all versioned JS/CSS/asset files (injected by vite-plugin-pwa at
+// build time). HTML pages are deliberately excluded from the precache manifest
+// so that the NetworkFirst route below handles all navigations — meaning users
+// always receive fresh server-rendered HTML when online.
 precacheAndRoute(self.__WB_MANIFEST);
 cleanupOutdatedCaches();
 
 // Navigation requests (HTML pages): NetworkFirst strategy.
 // Try to fetch fresh HTML from the server (3 s timeout). If the user is
-// offline or the server is slow, serve the pre-rendered HTML from cache.
-// This means any route the user has visited before works fully offline.
+// offline or the server is slow, serve the cached version from a previous
+// visit. This means any route the user has visited before works fully offline.
 registerRoute(
   ({ request }) => request.mode === 'navigate',
   new NetworkFirst({
