@@ -1,5 +1,7 @@
+import type { ReactNode } from 'react';
+
 export interface Skill {
   name: string;
-  icon: string;
+  icon: ReactNode;
   description: string;
 }
