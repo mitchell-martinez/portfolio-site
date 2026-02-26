@@ -1,7 +1,7 @@
-import { memo } from 'react';
 import type { RefObject } from 'react';
-import { useIntersectionObserver } from '~/hooks/useIntersectionObserver';
+import { memo } from 'react';
 import { CtaLink } from '~/components/ui/CtaLink/CtaLink';
+import { useIntersectionObserver } from '~/hooks/useIntersectionObserver';
 import styles from './Hero.module.scss';
 
 const Hero = memo(() => {
@@ -29,18 +29,16 @@ const Hero = memo(() => {
         </h1>
         <p className={styles.tagline}>
           Frontend Engineer.{' '}
-          <span className={styles.taglineHighlight}>
-            Building beautiful digital experiences.
-          </span>
+          <span className={styles.taglineHighlight}>Building beautiful digital experiences.</span>
         </p>
         <p className={styles.description}>
-          Specializing in React, TypeScript, and modern web technologies to craft
-          performant, accessible, and visually stunning applications.
+          Specializing in React, TypeScript, and modern web technologies to craft performant,
+          accessible, and visually stunning applications.
         </p>
 
         <div className={styles.ctaGroup} role="group" aria-label="Primary actions">
           <CtaLink
-            href="mailto:mitchell@mitchellmartinez.tech"
+            href="mailto:contact@mitchellmartinez.tech"
             variant="primary"
             aria-label="Send Mitchell an email"
           >
@@ -53,7 +51,15 @@ const Hero = memo(() => {
             aria-label="Visit Mitchell's LinkedIn profile (opens in new tab)"
           >
             LinkedIn
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              aria-hidden="true"
+            >
               <path d="M7 17L17 7M17 7H7M17 7v10" />
             </svg>
           </CtaLink>
