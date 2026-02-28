@@ -1,5 +1,5 @@
-@use '../../styles/variables' as *;
-@use '../../styles/mixins' as *;
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
 
 .header {
   position: fixed;
@@ -8,7 +8,10 @@
   right: 0;
   z-index: 100;
   padding: 1rem 0;
-  transition: background-color $transition-medium, backdrop-filter $transition-medium, border-color $transition-medium;
+  transition:
+    background-color $transition-medium,
+    backdrop-filter $transition-medium,
+    border-color $transition-medium;
   border-bottom: 1px solid transparent;
 
   &.scrolled {
@@ -97,7 +100,9 @@
   height: 36px;
   border-radius: $border-radius-sm;
   color: var(--color-text-secondary);
-  transition: color $transition-fast, background-color $transition-fast;
+  transition:
+    color $transition-fast,
+    background-color $transition-fast;
   @include focus-ring;
 
   &:hover {
@@ -107,24 +112,7 @@
 }
 
 .ctaButton {
-  padding: 0.5rem 1.25rem;
-  background: var(--color-cta-bg);
-  color: var(--color-cta-text);
-  border-radius: 980px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  transition: background-color $transition-fast, transform $transition-fast;
-  text-decoration: none;
-  @include focus-ring;
-
-  &:hover {
-    background: var(--color-cta-bg-hover);
-    transform: translateY(-1px);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
+  white-space: nowrap;
 }
 
 .mobileMenuButton {
@@ -160,8 +148,12 @@
     transition: transform $transition-fast;
   }
 
-  &::before { top: -7px; }
-  &::after { top: 7px; }
+  &::before {
+    top: -7px;
+  }
+  &::after {
+    top: 7px;
+  }
 
   &.open {
     background-color: transparent;
@@ -181,6 +173,7 @@
   overflow: hidden;
   transition: max-height $transition-medium;
   border-top: 1px solid transparent;
+  background: var(--color-bg);
 
   &.mobileMenuOpen {
     max-height: 400px;
