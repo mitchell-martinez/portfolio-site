@@ -61,7 +61,7 @@
   },
   {
     "name": "AEM",
-    "icon": "📸",
+    "icon": "/icons/adobe.svg",
     "description": "Component development, integration with React"
   },
   {
