@@ -1,0 +1,428 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 6rem 1.5rem 4rem;
+
+  @include respond-to('md') {
+    padding: 8rem 2rem 4rem;
+  }
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.gradientOrb1,
+.gradientOrb2,
+.gradientOrb3 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: float 8s ease-in-out infinite;
+}
+
+.gradientOrb1 {
+  width: min(600px, 80vw);
+  height: min(600px, 80vw);
+  background: radial-gradient(circle, var(--color-glow), transparent 70%);
+  top: -20%;
+  right: -10%;
+  animation-delay: 0s;
+}
+
+.gradientOrb2 {
+  width: min(400px, 60vw);
+  height: min(400px, 60vw);
+  background: radial-gradient(circle, var(--color-glow), transparent 70%);
+  bottom: 10%;
+  left: -5%;
+  animation-delay: -3s;
+}
+
+.gradientOrb3 {
+  width: min(300px, 50vw);
+  height: min(300px, 50vw);
+  background: radial-gradient(circle, var(--color-glow), transparent 70%);
+  top: 40%;
+  left: 40%;
+  animation-delay: -6s;
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--color-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-grid-line) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  33% {
+    transform: translateY(-30px) scale(1.05);
+  }
+  66% {
+    transform: translateY(20px) scale(0.95);
+  }
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity $transition-slow,
+    transform $transition-slow;
+
+  .hero.visible & {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.eyebrow {
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.name {
+  font-size: clamp(3rem, 10vw, 7rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  margin-bottom: 1.5rem;
+  color: var(--color-text-primary);
+}
+
+.firstName {
+  display: block;
+}
+
+.lastName {
+  display: block;
+  // Monochromatic gradient: primary text fading to secondary grey
+  background: linear-gradient(
+    135deg,
+    var(--color-text-primary) 0%,
+    var(--color-text-secondary) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.tagline {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+.taglineHighlight {
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+.description {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  line-height: 1.7;
+}
+
+.ctaGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 6rem;
+}
+
+.scrollIndicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.scrollArrow {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-subtle);
+  color: var(--color-text-primary);
+  font-size: 1.75rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform $transition-fast,
+    background-color $transition-fast,
+    border-color $transition-fast;
+  animation: bounce 1.8s ease-in-out infinite;
+  @include focus-ring;
+
+  &:hover {
+    transform: translateY(2px);
+    background: var(--color-surface-hover);
+    border-color: var(--color-border-strong);
+  }
+}
+
+.sectionBlock {
+  padding: 5rem 1.5rem 3rem;
+
+  @include respond-to('md') {
+    padding: 5rem 2rem 3rem;
+  }
+}
+
+.sectionInner {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.sectionText {
+  color: var(--color-text-primary);
+  font-size: clamp(1.125rem, 2.4vw, 1.375rem);
+  line-height: 1.65;
+  max-width: 820px;
+  margin: 0 auto 4rem;
+  text-align: justify;
+}
+
+.budgetoCard {
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: $border-radius-lg;
+  background: var(--color-bg-secondary);
+  padding: 1.5rem;
+  display: grid;
+  gap: 1.5rem;
+
+  @include respond-to('md') {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    padding: 2rem;
+  }
+
+  > .projectCardActions {
+    grid-column: 1 / -1;
+  }
+}
+
+.cardTitle {
+  font-size: clamp(1.25rem, 2.4vw, 1.65rem);
+  margin-bottom: 0.75rem;
+}
+
+.cardText {
+  color: var(--color-text-secondary);
+  line-height: 1.65;
+  margin-bottom: 0.5rem;
+}
+
+.controls {
+  margin-top: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.controlButton {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  background: var(--color-surface-subtle);
+  font-size: 1.5rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background-color $transition-fast,
+    border-color $transition-fast;
+  @include focus-ring;
+
+  &:hover {
+    background: var(--color-surface-hover);
+    border-color: var(--color-border-strong);
+  }
+}
+
+.incomeValue {
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+.donutExperience {
+  width: 100%;
+}
+
+.swipeWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: min(560px, 100%);
+  margin: 0 auto;
+  gap: 0;
+}
+
+.swiper {
+  display: flex;
+  flex-direction: row;
+  width: min(420px, 100%);
+  max-width: min(420px, 100%);
+  overflow-x: scroll;
+  overflow-y: clip;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  align-items: center;
+  padding-block: 1rem;
+}
+
+.swiper::-webkit-scrollbar {
+  display: none;
+}
+
+.swipeCol {
+  flex: 0 0 100%;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: start;
+  padding-inline: 1rem;
+}
+
+.arrow {
+  background: var(--color-surface-subtle);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  transform: translateY(-20px);
+  transition:
+    background-color $transition-fast,
+    opacity 0.15s ease-in-out;
+  @include focus-ring;
+
+  &:hover {
+    background: var(--color-surface-hover);
+  }
+}
+
+.left {
+  margin-right: 0;
+}
+
+.right {
+  margin-left: 0;
+}
+
+.arrowHidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  .arrow {
+    display: none;
+  }
+}
+
+.projectGrid {
+  margin-bottom: 1.5rem;
+  display: grid;
+  gap: 1rem;
+
+  @include respond-to('md') {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.projectCard {
+  border: 1px solid var(--color-border);
+  border-radius: $border-radius-md;
+  background: var(--color-bg-secondary);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.projectCardActions {
+  margin-top: auto;
+  padding-top: 1rem;
+  text-align: center;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 0.3;
+  }
+}
+
+.textLink {
+  color: var(--color-cta-bg);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1.5px;
+  font-weight: 500;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: var(--color-cta-bg-hover);
+  }
+}

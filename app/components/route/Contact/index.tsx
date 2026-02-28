@@ -1,6 +1,6 @@
 import type { RefObject } from 'react';
 import { memo } from 'react';
-import { CtaLink } from '~/components/ui/CtaLink/CtaLink';
+import { ButtonLink } from '~/components/ui/ButtonLink/';
 import { useIntersectionObserver } from '~/hooks/useIntersectionObserver';
 import styles from './Contact.module.scss';
 
@@ -19,7 +19,7 @@ const Contact = memo(() => {
           <div className={styles.content}>
             <p className={styles.eyebrow}>Get In Touch</p>
             <h2 id="contact-heading" className={styles.heading}>
-              Let's build something <span className={styles.headingAccent}>remarkable</span>
+              Let's build your <span className={styles.headingAccent}>great</span> web experience
             </h2>
             <p className={styles.description}>
               Whether you have a project in mind, want to collaborate, or just want to say hello —
@@ -27,7 +27,7 @@ const Contact = memo(() => {
             </p>
 
             <div className={styles.ctaGroup} role="group" aria-label="Contact options">
-              <CtaLink
+              <ButtonLink
                 href="mailto:contact@mitchellmartinez.tech"
                 variant="primary"
                 aria-label="Send Mitchell an email at contact@mitchellmartinez.tech"
@@ -45,8 +45,8 @@ const Contact = memo(() => {
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
                 </svg>
                 Send an Email
-              </CtaLink>
-              <CtaLink
+              </ButtonLink>
+              <ButtonLink
                 href="https://linkedin.com/in/mitchellmartinezadl"
                 variant="secondary"
                 external
@@ -63,7 +63,7 @@ const Contact = memo(() => {
                   <circle cx="4" cy="4" r="2" />
                 </svg>
                 Connect on LinkedIn
-              </CtaLink>
+              </ButtonLink>
             </div>
           </div>
 

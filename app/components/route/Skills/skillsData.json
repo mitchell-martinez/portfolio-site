@@ -1,0 +1,77 @@
+[
+  {
+    "name": "React",
+    "icon": "⚛️",
+    "description": "Hooks, Context, React Router, Integration with external systems like AEM, Server Components"
+  },
+  {
+    "name": "TypeScript",
+    "icon": "/icons/typescript.svg",
+    "description": "Strict typing, generics, advanced patterns"
+  },
+  {
+    "name": "CSS / SCSS",
+    "icon": "/icons/css3.svg",
+    "description": "Animations, Grid, Flexbox, Design Systems"
+  },
+  {
+    "name": "Node.js",
+    "icon": "/icons/nodejs.svg",
+    "description": "APIs, Express, serverless functions"
+  },
+  {
+    "name": "Vite",
+    "icon": "⚡",
+    "description": "Build tooling, HMR, optimization"
+  },
+  {
+    "name": "Testing",
+    "icon": "🧪",
+    "description": "Vitest, RTL, Playwright, TDD"
+  },
+  {
+    "name": "Performance",
+    "icon": "🚀",
+    "description": "Core Web Vitals, lazy loading, caching"
+  },
+  {
+    "name": "Accessibility",
+    "icon": "♿",
+    "description": "WCAG 2.1 AA and AAA, ARIA, keyboard nav"
+  },
+  {
+    "name": "Git / CI/CD",
+    "icon": "/icons/git.svg",
+    "description": "GitHub Actions, branching strategies"
+  },
+  {
+    "name": "AI",
+    "icon": "🤖",
+    "description": "Prompt engineering, agentic workflows, AI-assisted development, LLM integration"
+  },
+  {
+    "name": "Design",
+    "icon": "🎨",
+    "description": "Figma, clean visual design, dark & light mode, responsive layouts, design systems"
+  },
+  {
+    "name": "User Experience",
+    "icon": "🧭",
+    "description": "Customer mindset, ease of use, intuitive navigation, performance, accessibility"
+  },
+  {
+    "name": "AEM",
+    "icon": "📸",
+    "description": "Component development, integration with React"
+  },
+  {
+    "name": "Leadership",
+    "icon": "🤝",
+    "description": "Team building, mentoring, project coordination, event management"
+  },
+  {
+    "name": "Stakeholder management",
+    "icon": "📝",
+    "description": "Communication, expectation setting, adhering to deadlines, providing regular updates, collaboration"
+  }
+]
