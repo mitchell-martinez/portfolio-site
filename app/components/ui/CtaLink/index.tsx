@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import styles from './CtaLink.module.scss';
+import { ButtonLink } from '~/components/ui/ButtonLink/';
 
 interface CtaLinkProps {
   href: string;
@@ -18,19 +18,16 @@ const CtaLink = ({
   className,
   'aria-label': ariaLabel,
 }: CtaLinkProps) => {
-  const externalProps = external
-    ? { target: '_blank' as const, rel: 'noopener noreferrer' }
-    : {};
-
   return (
-    <a
+    <ButtonLink
       href={href}
-      className={`${styles.ctaLink} ${styles[variant]}${className ? ` ${className}` : ''}`}
+      variant={variant}
+      external={external}
+      className={className}
       aria-label={ariaLabel}
-      {...externalProps}
     >
       {children}
-    </a>
+    </ButtonLink>
   );
 };
 

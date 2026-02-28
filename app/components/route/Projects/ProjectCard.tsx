@@ -1,5 +1,6 @@
-import type { Project } from './types';
+import { ButtonLink } from '~/components/ui/ButtonLink/';
 import styles from './Projects.module.scss';
+import type { Project } from './types';
 
 interface ProjectCardProps {
   project: Project;
@@ -41,26 +42,15 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => (
           ))}
         </ul>
 
-        <a
+        <ButtonLink
           href={project.url}
           className={styles.projectLink}
-          target="_blank"
-          rel="noopener noreferrer"
+          variant="secondary"
+          external
           aria-label={`Visit ${project.name} at ${project.highlight} (opens in new tab)`}
         >
           <span>{project.highlight}</span>
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            aria-hidden="true"
-          >
-            <path d="M7 17L17 7M17 7H7M17 7v10" />
-          </svg>
-        </a>
+        </ButtonLink>
       </div>
     </div>
 
