@@ -15,7 +15,7 @@ const Footer = memo(() => {
 
           <nav className={styles.links} aria-label="Footer navigation">
             <a
-              href="mailto:contact@mitchellmartinez.tech"
+              href="mailto:info@mitchellmartinez.tech"
               className={styles.link}
               aria-label="Email Mitchell"
             >

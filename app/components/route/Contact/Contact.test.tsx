@@ -10,7 +10,7 @@ describe('Contact', () => {
   it('renders email CTA', () => {
     render(<Contact />);
     const emailLink = screen.getByLabelText(/Send Mitchell an email/i);
-    expect(emailLink).toHaveAttribute('href', 'mailto:contact@mitchellmartinez.tech');
+    expect(emailLink).toHaveAttribute('href', 'mailto:info@mitchellmartinez.tech');
   });
 
   it('renders LinkedIn CTA', () => {

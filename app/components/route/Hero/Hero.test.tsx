@@ -17,7 +17,7 @@ describe('Hero', () => {
   it('renders the Get in Touch CTA', () => {
     render(<Hero />);
     const emailLink = screen.getByLabelText('Send Mitchell an email');
-    expect(emailLink).toHaveAttribute('href', 'mailto:contact@mitchellmartinez.tech');
+    expect(emailLink).toHaveAttribute('href', 'mailto:info@mitchellmartinez.tech');
   });
 
   it('renders the LinkedIn CTA', () => {

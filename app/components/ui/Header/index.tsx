@@ -130,7 +130,7 @@ const Header = memo(() => {
               </button>
 
               <ButtonLink
-                href="mailto:contact@mitchellmartinez.tech"
+                href="mailto:info@mitchellmartinez.tech"
                 variant="primary"
                 size="sm"
                 className={styles.ctaButton}

@@ -123,7 +123,7 @@ const Prices = memo(() => {
 
               <div className={styles.cardCta}>
                 <ButtonLink
-                  href="mailto:contact@mitchellmartinez.tech"
+                  href="mailto:info@mitchellmartinez.tech"
                   variant={tier.featured ? 'primary' : 'secondary'}
                   aria-label={`Get in touch about the ${tier.name} plan`}
                 >

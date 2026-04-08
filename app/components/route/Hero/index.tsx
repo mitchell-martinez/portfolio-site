@@ -89,7 +89,7 @@ const Hero = memo(() => {
 
           <div className={styles.ctaGroup} role="group" aria-label="Primary actions">
             <ButtonLink
-              href="mailto:contact@mitchellmartinez.tech"
+              href="mailto:info@mitchellmartinez.tech"
               variant="primary"
               aria-label="Send Mitchell an email"
             >

@@ -28,9 +28,9 @@ const Contact = memo(() => {
 
             <div className={styles.ctaGroup} role="group" aria-label="Contact options">
               <ButtonLink
-                href="mailto:contact@mitchellmartinez.tech"
+                href="mailto:info@mitchellmartinez.tech"
                 variant="primary"
-                aria-label="Send Mitchell an email at contact@mitchellmartinez.tech"
+                aria-label="Send Mitchell an email at info@mitchellmartinez.tech"
               >
                 <svg
                   width="20"
