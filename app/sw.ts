@@ -1,9 +1,9 @@
 /// <reference lib="webworker" />
-import { precacheAndRoute, cleanupOutdatedCaches } from 'workbox-precaching';
+import { CacheableResponsePlugin } from 'workbox-cacheable-response';
+import { ExpirationPlugin } from 'workbox-expiration';
+import { cleanupOutdatedCaches, precacheAndRoute } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { NetworkFirst } from 'workbox-strategies';
-import { ExpirationPlugin } from 'workbox-expiration';
-import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 
 declare let self: ServiceWorkerGlobalScope;
 
@@ -11,13 +11,13 @@ declare let self: ServiceWorkerGlobalScope;
 // Combined with registerType: 'autoUpdate' this means users always get the
 // latest version on the next navigation after a new deploy.
 self.skipWaiting();
-self.addEventListener('activate', (event) => {
+self.addEventListener('activate', event => {
   event.waitUntil(self.clients.claim());
 });
 
 // Precache all versioned JS/CSS/asset files (injected by vite-plugin-pwa at
 // build time). HTML pages are deliberately excluded from the precache manifest
-// so that the NetworkFirst route below handles all navigations — meaning users
+// so that the NetworkFirst route below handles all navigations - meaning users
 // always receive fresh server-rendered HTML when online.
 precacheAndRoute(self.__WB_MANIFEST);
 cleanupOutdatedCaches();

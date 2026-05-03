@@ -93,7 +93,7 @@ const Prices = memo(() => {
             Simple, transparent pricing
           </h2>
           <p className={styles.subheading}>
-            Every project is different. These are starting points — I'm happy to tailor a quote to
+            Every project is different. These are starting points - I'm happy to tailor a quote to
             your needs.
           </p>
         </div>

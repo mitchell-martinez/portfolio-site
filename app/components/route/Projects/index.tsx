@@ -67,7 +67,7 @@ const Projects = memo(() => {
             Featured Projects
           </h2>
           <p className={styles.subheading}>
-            A selection of projects I've built — combining technical depth with thoughtful design.
+            A selection of projects I've built - combining technical depth with thoughtful design.
           </p>
         </div>
 
