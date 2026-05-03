@@ -5,7 +5,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig(({ mode }) => {
   // Load all .env variables (not just VITE_-prefixed) so server-side code
-  // can read them via process.env (e.g. RESEND_API_KEY).
+  // can read them via process.env (e.g. SMTP_USER/SMTP_PASS).
   const env = loadEnv(mode, process.cwd(), '');
   for (const [key, value] of Object.entries(env)) {
     if (process.env[key] === undefined) {

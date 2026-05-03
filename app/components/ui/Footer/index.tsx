@@ -40,13 +40,28 @@ const Footer = memo(() => {
               Budgeto
             </a>
             <a
-              href="https://fogsv.org.au"
+              href="/blog"
               className={styles.link}
-              target="_blank"
               rel="noopener noreferrer"
-              aria-label="FOG SV website (opens in new tab)"
+              aria-label="Blog page with articles on frontend development and design"
             >
-              FOG SV
+              Blog
+            </a>
+            <a
+              href="/projects"
+              className={styles.link}
+              rel="noopener noreferrer"
+              aria-label="View all projects on the Projects page"
+            >
+              View Projects
+            </a>
+            <a
+              href="/contact"
+              className={styles.link}
+              rel="noopener noreferrer"
+              aria-label="Contact Mitchell via the Contact page"
+            >
+              Contact Me
             </a>
           </nav>
         </div>

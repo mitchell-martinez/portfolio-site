@@ -1,13 +1,61 @@
+import type { Transporter } from 'nodemailer';
+import nodemailer from 'nodemailer';
 import type { ActionFunctionArgs, MetaFunction } from 'react-router';
 import { useActionData } from 'react-router';
-import { Resend } from 'resend';
 import { Contact } from '~/components/route/Contact/';
 import { checkRateLimit } from '~/utils/rateLimit.server';
 
-let resend: Resend;
-function getResend() {
-  if (!resend) resend = new Resend(process.env.RESEND_API_KEY);
-  return resend;
+let transporter: Transporter | undefined;
+
+function getTransporter() {
+  if (transporter) return transporter;
+
+  const host = process.env.SMTP_HOST || 'smtp.zoho.com';
+  const port = Number(process.env.SMTP_PORT || 465);
+  const secure = process.env.SMTP_SECURE
+    ? process.env.SMTP_SECURE === 'true'
+    : port === 465;
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+  const oauthClientId = process.env.SMTP_OAUTH2_CLIENT_ID;
+  const oauthClientSecret = process.env.SMTP_OAUTH2_CLIENT_SECRET;
+  const oauthRefreshToken = process.env.SMTP_OAUTH2_REFRESH_TOKEN;
+  const oauthAccessUrl =
+    process.env.SMTP_OAUTH2_ACCESS_URL || 'https://accounts.zoho.com/oauth/v2/token';
+  const useOAuth2 = Boolean(oauthClientId && oauthClientSecret && oauthRefreshToken);
+
+  if (!user) {
+    throw new Error('SMTP user is missing. Set SMTP_USER.');
+  }
+
+  if (!useOAuth2 && !pass) {
+    throw new Error(
+      'No SMTP auth method configured. Set SMTP_PASS or SMTP_OAUTH2_CLIENT_ID/SECRET/REFRESH_TOKEN.'
+    );
+  }
+
+  const auth = useOAuth2
+    ? {
+        type: 'OAuth2' as const,
+        user,
+        clientId: oauthClientId!,
+        clientSecret: oauthClientSecret!,
+        refreshToken: oauthRefreshToken!,
+        accessUrl: oauthAccessUrl,
+      }
+    : {
+        user,
+        pass: pass!,
+      };
+
+  transporter = nodemailer.createTransport({
+    host,
+    port,
+    secure,
+    auth,
+  });
+
+  return transporter;
 }
 
 export const meta: MetaFunction = () => [
@@ -49,6 +97,7 @@ export async function action({ request }: ActionFunctionArgs) {
   const email = String(formData.get('email') ?? '').trim();
   const enquiryType = String(formData.get('enquiryType') ?? '').trim();
   const message = String(formData.get('message') ?? '').trim();
+  const sendCopy = formData.get('sendCopy') === 'yes';
 
   const fieldErrors: Record<string, string> = {};
   if (!email) fieldErrors.email = 'Email is required.';
@@ -74,16 +123,44 @@ export async function action({ request }: ActionFunctionArgs) {
     return Response.json({ success: true } satisfies ContactActionData);
   }
 
-  const { error } = await getResend().emails.send({
-    from: 'Portfolio Contact Form <noreply@mitchellmartinez.tech>',
-    to: ['info@mitchellmartinez.tech'],
-    replyTo: email,
-    subject: `[${enquiryType || 'Enquiry'}] New message from ${name || 'Anonymous'}`,
-    text: `Name: ${name || 'Not provided'}\nEmail: ${email}\nEnquiry Type: ${enquiryType || 'Not specified'}\n\n${message}`,
-  });
+  const fromEmail = process.env.CONTACT_FROM_EMAIL || process.env.SMTP_USER;
+  const fromName = process.env.CONTACT_FROM_NAME || 'Portfolio Contact Form';
+  const toEmail = process.env.CONTACT_TO_EMAIL || 'info@mitchellmartinez.tech';
+  const senderName = name || 'Anonymous';
+  const enquiryLabel = enquiryType || 'Enquiry';
+  const enquiryText = `Name: ${senderName}\nEmail: ${email}\nEnquiry Type: ${enquiryType || 'Not specified'}\n\n${message}`;
 
-  if (error) {
-    console.error('Resend error:', error);
+  try {
+    const transporter = getTransporter();
+
+    const mailJobs = [
+      transporter.sendMail({
+        from: fromEmail ? `${fromName} <${fromEmail}>` : fromName,
+        to: toEmail,
+        replyTo: email,
+        subject: `[${enquiryLabel}] New enquiry from ${senderName}`,
+        text: enquiryText,
+      }),
+    ];
+
+    if (sendCopy) {
+      mailJobs.push(
+        transporter.sendMail({
+          from: fromEmail ? `${fromName} <${fromEmail}>` : fromName,
+          to: email,
+          replyTo: toEmail,
+          subject: `Copy of your enquiry to Mitchell Martinez`,
+          text:
+            `Hi ${name || 'there'},\n\n` +
+            `Thanks for getting in touch. This is a copy of the enquiry you submitted through the website.\n\n` +
+            `${enquiryText}\n\n` +
+            `Mitchell will reply as soon as possible.`,
+        })
+      );
+    }
+
+    await Promise.all(mailJobs);
+  } catch {
     return Response.json(
       {
         success: false,
