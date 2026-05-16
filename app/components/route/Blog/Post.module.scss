@@ -114,6 +114,13 @@
     font-weight: 600;
   }
 
+  // Keep in-page heading links visible below the fixed app nav.
+  h2,
+  h3,
+  h4 {
+    scroll-margin-top: 5.3rem;
+  }
+
   p {
     margin: 0;
   }
@@ -137,6 +144,35 @@
     li + li {
       margin-top: 0.4rem;
     }
+    
+    // Use a nice bullet for all Markdown lists (hyphens and asterisks)
+    list-style-type: none;
+
+    margin-left: 0; // align with main content
+    padding-left: 0; // remove default browser indent
+
+    li {
+      position: relative;
+      padding-left: 1.3em;
+    }
+    li::marker {
+      content: '';
+    }
+    li:before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      top: 0.3em;
+      color: var(--color-text-secondary);
+      font-size: 1.1em;
+      line-height: 1;
+    }
+  }
+
+  // Ensure same gap after lists as above
+  ul + p,
+  ol + p {
+    margin-top: 1.25rem;
   }
 
   blockquote {
