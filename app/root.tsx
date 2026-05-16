@@ -1,10 +1,13 @@
-import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
 import type { LinksFunction } from 'react-router';
+import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
 import globalStyles from '~/styles/global.scss?url';
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: globalStyles },
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+  { rel: 'icon', type: 'image/svg+xml', href: '/icons/icon-192.svg' },
+  { rel: 'shortcut icon', href: '/icons/icon-192.svg' },
+  { rel: 'apple-touch-icon', href: '/icons/icon-192.svg' },
 ];
 
 // Inline script that runs synchronously before any CSS is applied.

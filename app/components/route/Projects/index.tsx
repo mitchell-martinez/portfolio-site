@@ -20,17 +20,6 @@ const projectsData: Project[] = [
     image: { src: '/images/budgeto_donut.png', alt: 'Budgeto app dashboard screenshot' },
   },
   {
-    id: 'fogsv',
-    name: 'Friends of Gulf St Vincent',
-    url: 'https://fogsv.org.au',
-    description: 'Friends of Grasslands community platform',
-    longDescription:
-      'A community website for Friends of Gulf St Vincent, based in Adelaide. Built in WordPress with custom theming and plugins to support conservation efforts, events, and educational resources about the local marine environment.',
-    tags: ['React', 'TypeScript', 'Community', 'Conservation'],
-    highlight: 'fogsv.org.au',
-    image: { src: '/images/fogsv.png', alt: 'Friends of Gulf St Vincent website screenshot' },
-  },
-  {
     id: 'studio-zanetti',
     name: 'Studio Zanetti',
     url: 'https://studiozanetti.com.au',
@@ -40,6 +29,17 @@ const projectsData: Project[] = [
       'A refined studio showcase site with a strong visual identity, streamlined navigation, and mobile-first responsiveness. Built to highlight portfolio work and drive direct enquiries.',
     tags: ['React', 'TypeScript', 'Design', 'Performance'],
     highlight: 'studiozanetti.com.au',
+  },
+  {
+    id: 'fogsv',
+    name: 'Friends of Gulf St Vincent',
+    url: 'https://fogsv.org.au',
+    description: 'Friends of Gulf St Vincent community platform',
+    longDescription:
+      'A community website for Friends of Gulf St Vincent, based in Adelaide. Built in WordPress with custom theming and plugins to support conservation efforts, events, and educational resources about the local marine environment.',
+    tags: ['React', 'TypeScript', 'Community', 'Conservation'],
+    highlight: 'fogsv.org.au',
+    image: { src: '/images/fogsv.png', alt: 'Friends of Gulf St Vincent website screenshot' },
   },
   {
     id: 'optus',

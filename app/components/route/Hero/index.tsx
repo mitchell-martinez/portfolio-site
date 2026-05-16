@@ -66,7 +66,7 @@ const Hero = memo(() => {
           <p className={styles.eyebrow}>Hello, I'm</p>
           <h1 className={styles.name}>
             <span className={styles.firstName}>Mitchell</span>
-            <span className={styles.lastName}> Martinez</span>
+            <span className={styles.lastName}> Martínez</span>
           </h1>
           <p className={styles.tagline}>
             Frontend Engineer.{' '}
