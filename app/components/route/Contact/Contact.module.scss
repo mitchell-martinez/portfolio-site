@@ -138,18 +138,12 @@
   color: var(--color-cta-text);
   transition:
     background-color $transition-fast,
-    transform $transition-fast,
     box-shadow $transition-fast;
   @include focus-ring;
 
   &:hover {
     background: var(--color-cta-bg-hover);
-    transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-  }
-
-  &:active {
-    transform: translateY(0);
   }
 }
 
