@@ -1,50 +1,82 @@
 ---
-title: Hello, world
-description: A first post to kick the tyres on the new blog — Markdown in, static HTML out.
-frontPageDescription: A quick hello from the new Articles section and how posts are generated.
+title: Why you should write blog posts for SEO and AI discovery
+description: Practical blogging improves SEO and helps AI assistants find and trust your site.
+frontPageDescription: Practical blogging improves SEO and helps AI assistants find and trust your site.
 date: 2025-01-15
 tags:
-  - meta
-  - announcements
+  - seo
+  - content-strategy
+  - ai-search
 cover:
   src: /images/blog/hello-world/cover.svg
-  alt: A stylised "hello" greeting in soft gradient colours
+  alt: Abstract chart and search icons representing SEO growth
 ---
 
-Welcome to the new blog. This page was built from a single Markdown file at build
-time — no client-side Markdown parsing, no JavaScript needed to read this article.
+Blog posts are one of the most reliable ways to improve visibility online.
 
-## Why a thin CMS?
+Not just in Google results, but in AI-powered tools that answer questions and
+recommend sources.
 
-The goal here is simple:
+People search for topics that interest them, your site comes up; if they like your content, they might stick around to see the other stuff you offer.
 
-- **Performance first.** Posts are pre-rendered to static HTML and cached by the
-  service worker, so they load instantly and work offline.
-- **Zero runtime cost.** The Markdown pipeline only runs during `build`. Visitors
-  never download `unified`, `remark`, `rehype`, or Shiki.
-- **Plain files in git.** Each post is a `.md` file under `content/blog/`. No
-  database, no admin server, no vendor lock-in.
+## Why blogging helps SEO
 
-## Code blocks look nice, too
+Every good blog post creates a new entry point to your site.
 
-```ts
-// Computed at build time — visitors never run this.
-import { getAllPosts } from '~/lib/posts.server';
+When a post targets a real question someone asks, it can rank for long-tail
+searches that your homepage will never rank for by itself.
 
-export async function loader() {
-  return { posts: getAllPosts() };
-}
-```
+Over time, this builds:
 
-```scss
-.prose {
-  max-width: 70ch;
-  line-height: 1.7;
-}
-```
+- **Topical authority:** Search engines see that your site consistently covers a topic.
+- **Keyword depth:** You naturally rank for many related phrases, not one head term.
+- **Internal linking opportunities:** Posts can link to your services, projects, and contact page.
 
-## What's next
+## Why blogging helps AI discovery
 
-Tags, an RSS feed, OG image generation, and a Keystatic admin UI for editing posts
-in the browser are coming in a follow-up. For now, drop a new `.md` file in
-`content/blog/` and rebuild — that's it.
+AI assistants and answer engines need clear, crawlable sources.
+
+Blog posts give them exactly that: specific pages with focused intent, semantic
+headings, and direct answers.
+
+This improves your chances of being surfaced when people ask questions like:
+
+- "Who can build a React portfolio site?"
+- "How do I improve website SEO as a freelancer?"
+- "Best practices for fast frontend sites"
+
+When your content is useful and structured, AI systems can understand it faster
+and trust it more.
+
+## My publishing approach
+
+My approach for blogs is simple:
+
+- Write posts based on real things I've done or seen
+- Use clear titles that match search intent.
+- Add short summaries in frontmatter so listing pages and SEO metadata stay sharp.
+- Keep content technical but readable.
+- Link posts to relevant projects and service pages.
+- At the end, get AI to review my content for searchability
+
+## Why this setup supports SEO performance
+
+This site generates blog pages from markdown at build time, so posts are fast,
+lightweight, and fully crawlable.
+
+Now that might sound pretty technical, but basically what it means is:
+- Visitors to my site can load these posts quickly
+- Google and AI tools such as ChatGPT can easily find them
+- More people find this site and hopefully become clients
+
+It's a fantastic practice that I can support you with too!
+
+## What to expect next
+
+I plan to keep publishing posts about software engineering, building good user experiences and improving your digital presence.
+
+The goal is two fold:
+- Talk about the real projects I've worked on
+- Share tips that other engineers can learn from
+
+If you'd like help with your website strategy or SEO direction, or want to suggest content for me to write about, you can reach out via my contact page [here](/contact). Hope to hear from you soon!
