@@ -14,16 +14,6 @@ const Hero = memo(() => {
 
   const leftover = Math.max(0, income - spending);
 
-  const handleScrollToSell = useCallback(() => {
-    const el = document.getElementById('value-prop');
-    if (!el) return;
-    const top =
-      el.getBoundingClientRect().top +
-      window.scrollY -
-      parseFloat(getComputedStyle(document.documentElement).fontSize) * 2;
-    window.scrollTo({ top, behavior: 'smooth' });
-  }, []);
-
   const incrementIncome = useCallback(() => {
     setIncome(prev => prev + 50);
   }, []);
@@ -103,17 +93,6 @@ const Hero = memo(() => {
             >
               LinkedIn
             </ButtonLink>
-          </div>
-
-          <div className={styles.scrollIndicator}>
-            <button
-              type="button"
-              className={styles.scrollArrow}
-              onClick={handleScrollToSell}
-              aria-label="Scroll to next section"
-            >
-              v
-            </button>
           </div>
         </div>
       </section>
@@ -314,7 +293,7 @@ const Hero = memo(() => {
               to="/prices"
               variant="primary"
               aria-label="View pricing"
-              style={{ paddingInline: '3.5rem' }}
+              className={styles.wideCtaButton}
             >
               Prices
             </ButtonLink>
@@ -322,7 +301,7 @@ const Hero = memo(() => {
               to="/resume"
               variant="secondary"
               aria-label="View resume"
-              style={{ paddingInline: '3.5rem' }}
+              className={styles.wideCtaButton}
             >
               Resume
             </ButtonLink>

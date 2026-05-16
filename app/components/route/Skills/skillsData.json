@@ -2,76 +2,145 @@
   {
     "name": "React",
     "icon": "⚛️",
-    "description": "Hooks, Context, React Router, Integration with external systems like AEM, Server Components"
+    "description": "Hooks, Context, React Router, integration with external systems like AEM, Server Components",
+    "category": "technical"
   },
   {
     "name": "TypeScript",
     "icon": "/icons/typescript.svg",
-    "description": "Strict typing, generics, advanced patterns"
+    "description": "Strict typing, generics, advanced patterns",
+    "category": "technical"
   },
   {
     "name": "CSS / SCSS",
     "icon": "/icons/css3.svg",
-    "description": "Animations, Grid, Flexbox, Design Systems"
+    "description": "Animations, Grid, Flexbox, Design Systems",
+    "category": "technical"
   },
   {
     "name": "Node.js",
     "icon": "/icons/nodejs.svg",
-    "description": "APIs, Express, serverless functions"
+    "description": "APIs, Express, serverless functions",
+    "category": "technical"
   },
   {
     "name": "Vite",
     "icon": "⚡",
-    "description": "Build tooling, HMR, optimization"
+    "description": "Build tooling, HMR, optimization",
+    "category": "technical"
   },
   {
     "name": "Testing",
     "icon": "🧪",
-    "description": "Vitest, RTL, Playwright, TDD"
+    "description": "Vitest, RTL, Playwright, TDD",
+    "category": "technical"
   },
   {
     "name": "Performance",
     "icon": "🚀",
-    "description": "Core Web Vitals, lazy loading, caching"
+    "description": "Core Web Vitals, lazy loading, caching",
+    "category": "technical"
   },
   {
     "name": "Accessibility",
     "icon": "♿",
-    "description": "WCAG 2.1 AA and AAA, ARIA, keyboard nav"
+    "description": "WCAG 2.1 AA and AAA, ARIA, keyboard nav",
+    "category": "technical"
   },
   {
     "name": "Git / CI/CD",
     "icon": "/icons/git.svg",
-    "description": "GitHub Actions, branching strategies"
+    "description": "GitHub Actions, branching strategies",
+    "category": "technical"
   },
   {
     "name": "AI",
     "icon": "🤖",
-    "description": "Prompt engineering, agentic workflows, AI-assisted development, LLM integration"
+    "description": "Prompt engineering, agentic workflows, AI-assisted development, LLM integration",
+    "category": "technical"
   },
   {
     "name": "Design",
     "icon": "🎨",
-    "description": "Figma, clean visual design, dark & light mode, responsive layouts, design systems"
+    "description": "Figma, clean visual design, dark & light mode, responsive layouts, design systems",
+    "category": "business"
   },
   {
     "name": "User Experience",
     "icon": "🧭",
-    "description": "Customer mindset, ease of use, intuitive navigation, performance, accessibility"
+    "description": "Customer mindset, ease of use, intuitive navigation, performance, accessibility",
+    "category": "business"
   },
   {
     "name": "AEM",
     "icon": "/icons/adobe.svg",
-    "description": "Component development, integration with React"
+    "description": "Component development, integration with React",
+    "category": "technical"
+  },
+  {
+    "name": "WordPress",
+    "icon": "/icons/wordpress-brand.svg",
+    "description": "Custom themes, plugin integration, content modeling, and performance-focused builds",
+    "category": "technical"
   },
   {
     "name": "Leadership",
     "icon": "🤝",
-    "description": "Team building, mentoring, project coordination, event management"
+    "description": "Team building, mentoring, project coordination, event management",
+    "category": "business"
   },
   {
     "name": "Stakeholder management",
     "icon": "📝",
-    "description": "Communication, expectation setting, adhering to deadlines, providing regular updates, collaboration"
+    "description": "Communication, expectation setting, adhering to deadlines, providing regular updates, collaboration",
+    "category": "business"
+  },
+  {
+    "name": "Client Discovery",
+    "icon": "🔎",
+    "description": "Discovery workshops, requirements gathering, and translating business goals into delivery plans",
+    "category": "business"
+  },
+  {
+    "name": "Roadmap Prioritization",
+    "icon": "🗺️",
+    "description": "Prioritizing initiatives based on impact, effort, and strategic goals",
+    "category": "business"
+  },
+  {
+    "name": "Scope Management",
+    "icon": "📐",
+    "description": "Managing scope changes with clear trade-offs, constraints, and delivery outcomes",
+    "category": "business"
+  },
+  {
+    "name": "Commercial Awareness",
+    "icon": "💼",
+    "description": "Balancing technical decisions with ROI, budget constraints, and business value",
+    "category": "business"
+  },
+  {
+    "name": "Solution Proposals",
+    "icon": "🧾",
+    "description": "Crafting clear proposals and recommendations for technical and business stakeholders",
+    "category": "business"
+  },
+  {
+    "name": "Negotiation",
+    "icon": "🤝",
+    "description": "Aligning expectations across teams while resolving constraints and competing priorities",
+    "category": "business"
+  },
+  {
+    "name": "Cross-Functional Collaboration",
+    "icon": "👥",
+    "description": "Working effectively across product, design, engineering, and leadership teams",
+    "category": "business"
+  },
+  {
+    "name": "Risk Management",
+    "icon": "⚠️",
+    "description": "Identifying risks early and building mitigation plans to protect timelines and outcomes",
+    "category": "business"
   }
 ]

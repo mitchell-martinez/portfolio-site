@@ -40,6 +40,22 @@ const Footer = memo(() => {
               Budgeto
             </a>
             <a
+              href="/about"
+              className={styles.link}
+              rel="noopener noreferrer"
+              aria-label="Find out more about Mitchell on the About page"
+            >
+              About Me
+            </a>
+            <a
+              href="/skills"
+              className={styles.link}
+              rel="noopener noreferrer"
+              aria-label="View Mitchell's skills and expertise on the Skills page"
+            >
+              Skills
+            </a>
+            <a
               href="/blog"
               className={styles.link}
               rel="noopener noreferrer"
@@ -53,7 +69,7 @@ const Footer = memo(() => {
               rel="noopener noreferrer"
               aria-label="View all projects on the Projects page"
             >
-              View Projects
+              Projects
             </a>
             <a
               href="/contact"

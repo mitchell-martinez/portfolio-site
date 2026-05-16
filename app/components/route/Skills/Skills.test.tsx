@@ -7,14 +7,20 @@ describe('Skills', () => {
     expect(screen.getByRole('heading', { name: 'Skills & Expertise' })).toBeInTheDocument();
   });
 
-  it('renders skill cards', () => {
+  it('renders technical and business accordion headings', () => {
     render(<Skills />);
-    expect(screen.getByText('React')).toBeInTheDocument();
-    expect(screen.getByText('TypeScript')).toBeInTheDocument();
+    expect(screen.getByText('Technical Skills')).toBeInTheDocument();
+    expect(screen.getByText('Business Skills')).toBeInTheDocument();
   });
 
-  it('renders as a list', () => {
+  it('renders separate lists for technical and business skills', () => {
     render(<Skills />);
-    expect(screen.getByRole('list', { name: 'Skills list' })).toBeInTheDocument();
+    expect(screen.getByRole('list', { name: 'Technical skills list' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('list', {
+        name: 'Business skills list',
+        hidden: true,
+      }),
+    ).toBeInTheDocument();
   });
 });
