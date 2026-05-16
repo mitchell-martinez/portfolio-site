@@ -10,7 +10,7 @@ const Footer = memo(() => {
         <div className={styles.content}>
           <div className={styles.brand}>
             <span className={styles.logo}>MM</span>
-            <p className={styles.tagline}>Building beautiful digital experiences.</p>
+            <p className={styles.tagline}>Building beautiful digital experiences</p>
           </div>
 
           <nav className={styles.links} aria-label="Footer navigation">
@@ -68,9 +68,10 @@ const Footer = memo(() => {
 
         <div className={styles.bottom}>
           <p className={styles.copyright}>
-            © {currentYear} Mitchell Martinez. All rights reserved.
+            <p>
+            © {currentYear} Mitchell Martinez. All rights reserved.</p><p>
+            ABN 40 927 243 914</p>
           </p>
-          <p className={styles.madeWith}>Made with React & TypeScript</p>
         </div>
       </div>
     </footer>
