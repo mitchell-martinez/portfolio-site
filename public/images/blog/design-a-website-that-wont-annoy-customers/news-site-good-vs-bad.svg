@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">News site engagement: bad vs good UX</title>
+  <desc id="desc">Left side shows a cluttered news page with ad overload and disruptive prompts. Right side shows a clean editorial layout with clear hierarchy and easy findability.</desc>
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f7f8fb" />
+      <stop offset="100%" stop-color="#eef3fa" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="720" fill="url(#bg2)" />
+
+  <rect x="40" y="40" width="540" height="640" rx="22" fill="#fff4ee" stroke="#f1c4a4" />
+  <rect x="620" y="40" width="540" height="640" rx="22" fill="#eef6ff" stroke="#b8d3f5" />
+
+  <text x="70" y="92" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#8d3f12">Bad pattern: noisy news homepage</text>
+  <text x="650" y="92" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#17467a">Good pattern: clear editorial flow</text>
+
+  <rect x="70" y="126" width="480" height="64" rx="10" fill="#ffffff" stroke="#e6b997" />
+  <text x="92" y="167" font-family="Arial, sans-serif" font-size="20" fill="#6b3b1d">Top banner ad pushes headlines below fold</text>
+
+  <rect x="70" y="206" width="230" height="92" rx="10" fill="#ffffff" stroke="#e6b997" />
+  <rect x="320" y="206" width="230" height="92" rx="10" fill="#ffffff" stroke="#e6b997" />
+  <text x="92" y="247" font-family="Arial, sans-serif" font-size="18" fill="#6b3b1d">Clickbait card</text>
+  <text x="342" y="247" font-family="Arial, sans-serif" font-size="18" fill="#6b3b1d">Auto-refresh card</text>
+
+  <rect x="70" y="318" width="480" height="100" rx="10" fill="#fff0e5" stroke="#e28b4f" />
+  <text x="92" y="360" font-family="Arial, sans-serif" font-size="20" fill="#7b3a12">Newsletter popup appears before article starts</text>
+  <text x="92" y="388" font-family="Arial, sans-serif" font-size="18" fill="#7b3a12">Reader must dismiss to continue</text>
+
+  <rect x="70" y="438" width="480" height="92" rx="10" fill="#ffffff" stroke="#e6b997" />
+  <text x="92" y="480" font-family="Arial, sans-serif" font-size="20" fill="#6b3b1d">Navigation labels are vague (Explore, Discover)</text>
+
+  <rect x="70" y="548" width="480" height="94" rx="12" fill="#ffe4d4" stroke="#e28b4f" />
+  <text x="92" y="590" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#8a390f">Outcome: skim, quit, low loyalty</text>
+  <text x="92" y="620" font-family="Arial, sans-serif" font-size="18" fill="#6b3b1d">Users cannot find stories quickly, so they churn</text>
+
+  <rect x="650" y="126" width="480" height="64" rx="10" fill="#ffffff" stroke="#9fc0ea" />
+  <text x="672" y="167" font-family="Arial, sans-serif" font-size="20" fill="#1d4570">Top stories visible immediately with clear hierarchy</text>
+
+  <rect x="650" y="206" width="480" height="110" rx="10" fill="#ffffff" stroke="#9fc0ea" />
+  <text x="672" y="248" font-family="Arial, sans-serif" font-size="20" fill="#1d4570">Sections: Latest, Local, Business, Opinion</text>
+  <text x="672" y="276" font-family="Arial, sans-serif" font-size="18" fill="#1d4570">Users can predict where each story belongs</text>
+
+  <rect x="650" y="334" width="480" height="92" rx="10" fill="#ffffff" stroke="#9fc0ea" />
+  <text x="672" y="376" font-family="Arial, sans-serif" font-size="20" fill="#1d4570">Inline ad every few sections, clearly marked</text>
+
+  <rect x="650" y="442" width="480" height="92" rx="10" fill="#ffffff" stroke="#9fc0ea" />
+  <text x="672" y="484" font-family="Arial, sans-serif" font-size="20" fill="#1d4570">Optional signup shown after article completion</text>
+
+  <rect x="650" y="548" width="480" height="94" rx="12" fill="#deebff" stroke="#5d93d8" />
+  <text x="672" y="590" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#123f70">Outcome: longer reads, higher return rate</text>
+  <text x="672" y="620" font-family="Arial, sans-serif" font-size="18" fill="#1d4570">Readers reach content quickly and stay engaged</text>
+</svg>

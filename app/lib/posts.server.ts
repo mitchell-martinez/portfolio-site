@@ -1,3 +1,4 @@
+import rehypeShiki from '@shikijs/rehype';
 import matter from 'gray-matter';
 import readingTime from 'reading-time';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
@@ -6,7 +7,6 @@ import rehypeStringify from 'rehype-stringify';
 import remarkGfm from 'remark-gfm';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
-import rehypeShiki from '@shikijs/rehype';
 import { unified } from 'unified';
 
 export interface PostCover {
@@ -17,7 +17,6 @@ export interface PostCover {
 export interface PostFrontmatter {
   title: string;
   description: string;
-  frontPageDescription?: string;
   date: string;
   tags: string[];
   cover?: PostCover;
@@ -66,7 +65,6 @@ function parseAll(): ParsedPost[] {
       data: {
         title: fm.title,
         description: fm.description ?? '',
-        frontPageDescription: fm.frontPageDescription,
         date: new Date(fm.date).toISOString(),
         tags: fm.tags ?? [],
         cover: fm.cover,

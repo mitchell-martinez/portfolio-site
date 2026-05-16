@@ -1,8 +1,7 @@
 ---
 title: Why you should write blog posts for SEO and AI discovery
-description: Practical blogging improves SEO and helps AI assistants find and trust your site.
-frontPageDescription: Practical blogging improves SEO and helps AI assistants find and trust your site.
-date: 2025-01-15
+description: Practical blogging improves SEO and helps AI assistants find and trust your site
+date: 2026-05-16
 tags:
   - seo
   - content-strategy

@@ -6,7 +6,7 @@ export const meta: MetaFunction = () => [
   {
     name: 'description',
     content:
-      'Featured projects by Mitchell Martinez - Budgeto (personal finance app) and FOG SV (community conservation platform).',
+      'Featured projects by Mitchell Martinez - Budgeto, Studio Zanetti, FOG SV, and enterprise frontend work at Optus.',
   },
   { property: 'og:title', content: 'Projects - Mitchell Martinez' },
   {

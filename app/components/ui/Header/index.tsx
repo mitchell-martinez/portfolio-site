@@ -171,7 +171,7 @@ const Header = memo(() => {
                 className={styles.ctaButton}
                 aria-label="Go to the Contact page"
               >
-                Get in Touch
+                Get In Touch
               </ButtonLink>
             </div>
           </>

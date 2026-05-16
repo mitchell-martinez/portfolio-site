@@ -127,7 +127,7 @@ const Prices = memo(() => {
                   variant={tier.featured ? 'primary' : 'secondary'}
                   aria-label={`Get in touch about the ${tier.name} plan`}
                 >
-                  Get in Touch
+                  Get In Touch
                 </ButtonLink>
               </div>
             </article>

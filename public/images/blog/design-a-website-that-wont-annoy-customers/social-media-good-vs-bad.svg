@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Social media engagement: bad vs good UX</title>
+  <desc id="desc">Left side shows an interruption-heavy feed with popups and autoplay. Right side shows a user-controlled feed with clear actions and better engagement outcomes.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f4f6fb" />
+      <stop offset="100%" stop-color="#eef6f3" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="720" fill="url(#bg)" />
+
+  <rect x="40" y="40" width="540" height="640" rx="22" fill="#fff1f1" stroke="#f3b5b5" />
+  <rect x="620" y="40" width="540" height="640" rx="22" fill="#eefbf4" stroke="#a7dfbf" />
+
+  <text x="70" y="92" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#9f1f1f">Bad pattern: interruption-heavy feed</text>
+  <text x="650" y="92" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#17653a">Good pattern: user-controlled feed</text>
+
+  <rect x="70" y="130" width="480" height="86" rx="12" fill="#ffffff" stroke="#e4b3b3" />
+  <text x="92" y="176" font-family="Arial, sans-serif" font-size="20" fill="#6b2c2c">Post 1: autoplay video starts with sound</text>
+
+  <rect x="70" y="234" width="480" height="86" rx="12" fill="#ffffff" stroke="#e4b3b3" />
+  <text x="92" y="280" font-family="Arial, sans-serif" font-size="20" fill="#6b2c2c">Post 2: ad looks like primary action</text>
+
+  <rect x="70" y="338" width="480" height="86" rx="12" fill="#ffffff" stroke="#e4b3b3" />
+  <text x="92" y="384" font-family="Arial, sans-serif" font-size="20" fill="#6b2c2c">Post 3: CTA is hidden behind overlay</text>
+
+  <rect x="140" y="266" width="340" height="170" rx="14" fill="#ffe0e0" stroke="#dd6a6a" />
+  <text x="170" y="316" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#9f1f1f">Subscribe Now</text>
+  <text x="170" y="348" font-family="Arial, sans-serif" font-size="18" fill="#7f2a2a">Popup blocks feed before value</text>
+  <text x="170" y="374" font-family="Arial, sans-serif" font-size="18" fill="#7f2a2a">Close button is hard to spot</text>
+
+  <rect x="70" y="548" width="480" height="94" rx="12" fill="#ffd9d9" stroke="#dd6a6a" />
+  <text x="92" y="590" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#8d1f1f">Outcome: bounce up, trust down</text>
+  <text x="92" y="620" font-family="Arial, sans-serif" font-size="18" fill="#6b2c2c">Users leave before engaging with meaningful content</text>
+
+  <rect x="650" y="130" width="480" height="86" rx="12" fill="#ffffff" stroke="#9fd1b1" />
+  <text x="672" y="176" font-family="Arial, sans-serif" font-size="20" fill="#1f5f3d">Post 1: muted media, tap to play</text>
+
+  <rect x="650" y="234" width="480" height="86" rx="12" fill="#ffffff" stroke="#9fd1b1" />
+  <text x="672" y="280" font-family="Arial, sans-serif" font-size="20" fill="#1f5f3d">Post 2: sponsored label is explicit</text>
+
+  <rect x="650" y="338" width="480" height="86" rx="12" fill="#ffffff" stroke="#9fd1b1" />
+  <text x="672" y="384" font-family="Arial, sans-serif" font-size="20" fill="#1f5f3d">Post 3: comment and share are obvious</text>
+
+  <rect x="650" y="452" width="480" height="78" rx="12" fill="#dcf7e8" stroke="#57ae7d" />
+  <text x="672" y="498" font-family="Arial, sans-serif" font-size="20" fill="#205f3d">Prompt appears after engagement: "Want updates?"</text>
+
+  <rect x="650" y="548" width="480" height="94" rx="12" fill="#d9f6e5" stroke="#57ae7d" />
+  <text x="672" y="590" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#145533">Outcome: deeper sessions, repeat visits</text>
+  <text x="672" y="620" font-family="Arial, sans-serif" font-size="18" fill="#1f5f3d">Users stay longer because they stay in control</text>
+</svg>

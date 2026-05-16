@@ -83,12 +83,13 @@ const Hero = memo(() => {
               variant="primary"
               aria-label="Send Mitchell an email"
             >
-              Get in Touch
+              Get In Touch
             </ButtonLink>
             <ButtonLink
               href="https://linkedin.com/in/mitchellmartinezadl"
               variant="secondary"
               external
+              className={styles.heroLinkedInButton}
               aria-label="Visit Mitchell's LinkedIn profile (opens in new tab)"
             >
               LinkedIn
@@ -235,19 +236,19 @@ const Hero = memo(() => {
 
           <div className={styles.projectGrid}>
             <article className={styles.projectCard}>
-              <h3 className={styles.cardTitle}>FOGSV</h3>
+              <h3 className={styles.cardTitle}>Studio Zanetti</h3>
               <p className={styles.cardText}>
-                Led frontend improvements to simplify workflows, reduce onboarding friction, and
-                make key actions easier for users to complete.
+                Built a polished studio website with expressive visual design, responsive layouts,
+                and fast page performance to showcase creative work clearly.
               </p>
               <div className={styles.projectCardActions}>
                 <ButtonLink
-                  href="https://fogsv.org.au"
+                  href="https://studiozanetti.com.au"
                   variant="secondary"
                   external
-                  aria-label="Visit FOGSV website (opens in new tab)"
+                  aria-label="Visit Studio Zanetti website (opens in new tab)"
                 >
-                  Visit FOGSV
+                  Visit Studio Zanetti
                 </ButtonLink>
               </div>
             </article>

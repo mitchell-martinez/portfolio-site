@@ -42,15 +42,28 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => (
           ))}
         </ul>
 
-        <ButtonLink
-          href={project.url}
-          className={styles.projectLink}
-          variant="secondary"
-          external
-          aria-label={`Visit ${project.name} at ${project.highlight} (opens in new tab)`}
-        >
-          <span>{project.highlight}</span>
-        </ButtonLink>
+        <div className={styles.cardLinks}>
+          <ButtonLink
+            href={project.url}
+            className={styles.projectLink}
+            variant="secondary"
+            external
+            aria-label={`Visit ${project.name} at ${project.highlight} (opens in new tab)`}
+          >
+            <span>{project.highlight}</span>
+          </ButtonLink>
+
+          {project.storyPath && (
+            <ButtonLink
+              to={project.storyPath}
+              className={styles.storyLink}
+              variant="secondary"
+              aria-label={`Read the story behind ${project.name}`}
+            >
+              Read the story
+            </ButtonLink>
+          )}
+        </div>
       </div>
     </div>
 

@@ -27,8 +27,7 @@ Example frontmatter:
 ```md
 ---
 title: Building a Better React Architecture
-description: Full article summary shown on the article page and used for SEO fallback.
-frontPageDescription: Short teaser for the /articles page and SEO description.
+description: Article summary shown on the Articles page and used for SEO fallback
 date: 2026-05-16
 tags:
   - react
@@ -41,7 +40,5 @@ cover:
 
 Notes:
 
-- `frontPageDescription` is optional.
-- If `frontPageDescription` is omitted, `description` is used on the Blog page and SEO.
 - Blog list is at `/blog`.
 - Individual article URLs are `/blog/:slug`.

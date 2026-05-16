@@ -1,6 +1,7 @@
 import type { LoaderFunctionArgs, MetaFunction } from 'react-router';
-import { Link, data } from 'react-router';
+import { Link, data, isRouteErrorResponse, useRouteError } from 'react-router';
 import styles from '~/components/route/Blog/Post.module.scss';
+import { NotFound } from '~/components/route/NotFound/';
 import { getPostBySlug } from '~/lib/posts.server';
 
 export async function loader({ params }: LoaderFunctionArgs) {
@@ -21,7 +22,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   }
   const { post } = data;
   const title = `${post.title} - Mitchell Martinez`;
-  const description = post.frontPageDescription || post.description;
+  const description = post.description;
   return [
     { title },
     { name: 'description', content: description },
@@ -89,4 +90,14 @@ export default function BlogPostRoute({
       </div>
     </article>
   );
+}
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+
+  if (isRouteErrorResponse(error) && error.status === 404) {
+    return <NotFound />;
+  }
+
+  throw error;
 }

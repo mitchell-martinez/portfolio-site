@@ -1,6 +1,6 @@
+import { useState } from 'react';
 import type { MetaFunction } from 'react-router';
 import { Link } from 'react-router';
-import { useState } from 'react';
 import styles from '~/components/route/Blog/Blog.module.scss';
 import { getAllPosts } from '~/lib/posts.server';
 
@@ -49,8 +49,7 @@ export default function BlogIndexRoute({
             Articles
           </h1>
           <p className={styles.subtitle}>
-            Notes on frontend engineering, performance, and the craft of building
-            for the web.
+            Learn about the projects I've done, my business and engineering processes, and my thoughts on frontend development and design.
           </p>
         </header>
 
@@ -86,9 +85,9 @@ export default function BlogIndexRoute({
                       <span>{post.readingTime}</span>
                     </div>
                     <h2 className={styles.cardTitle}>{post.title}</h2>
-                    {(post.frontPageDescription || post.description) && (
+                    {post.description && (
                       <p className={styles.cardDescription}>
-                        {post.frontPageDescription || post.description}
+                        {post.description}
                       </p>
                     )}
                     {post.tags.length > 0 && (
