@@ -1,6 +1,7 @@
 ---
 title: Hello, world
 description: A first post to kick the tyres on the new blog — Markdown in, static HTML out.
+frontPageDescription: A quick hello from the new Articles section and how posts are generated.
 date: 2025-01-15
 tags:
   - meta

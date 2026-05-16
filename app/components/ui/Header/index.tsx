@@ -7,6 +7,7 @@ const navItems = [
   { label: 'About', href: '/about' },
   { label: 'Skills', href: '/skills' },
   { label: 'Projects', href: '/projects' },
+  { label: 'Articles', href: '/blog' },
   { label: 'Contact', href: '/contact' },
 ];
 
@@ -40,6 +41,13 @@ const MoonIcon = () => (
 );
 
 const DESKTOP_QUERY = '(min-width: 768px)';
+
+function isNavItemActive(currentPath: string, itemHref: string): boolean {
+  if (itemHref === '/') {
+    return currentPath === '/';
+  }
+  return currentPath === itemHref || currentPath.startsWith(`${itemHref}/`);
+}
 
 const Header = memo(() => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -110,7 +118,7 @@ const Header = memo(() => {
                   <li key={item.href}>
                     <Link
                       to={item.href}
-                      className={`${styles.navLink} ${location.pathname === item.href ? styles.navLinkActive : ''}`}
+                      className={`${styles.navLink} ${isNavItemActive(location.pathname, item.href) ? styles.navLinkActive : ''}`}
                       onClick={handleNavClick}
                     >
                       {item.label}
@@ -176,7 +184,7 @@ const Header = memo(() => {
                 <li key={item.href}>
                   <Link
                     to={item.href}
-                    className={`${styles.mobileNavLink} ${location.pathname === item.href ? styles.navLinkActive : ''}`}
+                    className={`${styles.mobileNavLink} ${isNavItemActive(location.pathname, item.href) ? styles.navLinkActive : ''}`}
                     onClick={handleNavClick}
                   >
                     {item.label}

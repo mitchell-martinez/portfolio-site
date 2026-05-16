@@ -17,6 +17,7 @@ export interface PostCover {
 export interface PostFrontmatter {
   title: string;
   description: string;
+  frontPageDescription?: string;
   date: string;
   tags: string[];
   cover?: PostCover;
@@ -65,6 +66,7 @@ function parseAll(): ParsedPost[] {
       data: {
         title: fm.title,
         description: fm.description ?? '',
+        frontPageDescription: fm.frontPageDescription,
         date: new Date(fm.date).toISOString(),
         tags: fm.tags ?? [],
         cover: fm.cover,

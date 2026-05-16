@@ -43,9 +43,9 @@ const Footer = memo(() => {
               href="/blog"
               className={styles.link}
               rel="noopener noreferrer"
-              aria-label="Blog page with articles on frontend development and design"
+              aria-label="Articles page with posts on frontend development and design"
             >
-              Blog
+              Articles
             </a>
             <a
               href="/projects"

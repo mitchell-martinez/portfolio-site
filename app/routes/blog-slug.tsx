@@ -21,11 +21,12 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   }
   const { post } = data;
   const title = `${post.title} - Mitchell Martinez`;
+  const description = post.frontPageDescription || post.description;
   return [
     { title },
-    { name: 'description', content: post.description },
+    { name: 'description', content: description },
     { property: 'og:title', content: title },
-    { property: 'og:description', content: post.description },
+    { property: 'og:description', content: description },
     { property: 'og:type', content: 'article' },
     ...(post.cover ? [{ property: 'og:image', content: post.cover.src }] : []),
   ];
@@ -48,7 +49,7 @@ export default function BlogPostRoute({
     <article className={styles.article}>
       <div className={styles.container}>
         <Link to="/blog" className={styles.backLink}>
-          ← All posts
+          ← All articles
         </Link>
 
         <header className={styles.header}>

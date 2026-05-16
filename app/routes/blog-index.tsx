@@ -1,16 +1,19 @@
 import type { MetaFunction } from 'react-router';
 import { Link } from 'react-router';
+import { useState } from 'react';
 import styles from '~/components/route/Blog/Blog.module.scss';
 import { getAllPosts } from '~/lib/posts.server';
 
+const POSTS_PER_BATCH = 6;
+
 export const meta: MetaFunction = () => [
-  { title: 'Blog - Mitchell Martinez' },
+  { title: 'Articles - Mitchell Martinez' },
   {
     name: 'description',
     content:
       'Articles on frontend engineering, performance, and design from Mitchell Martinez.',
   },
-  { property: 'og:title', content: 'Blog - Mitchell Martinez' },
+  { property: 'og:title', content: 'Articles - Mitchell Martinez' },
   {
     property: 'og:description',
     content: 'Articles on frontend engineering, performance, and design.',
@@ -33,13 +36,17 @@ export default function BlogIndexRoute({
   loaderData: { posts: ReturnType<typeof getAllPosts> };
 }) {
   const { posts } = loaderData;
+  const [visibleCount, setVisibleCount] = useState(POSTS_PER_BATCH);
+  const visiblePosts = posts.slice(0, visibleCount);
+  const hasMore = visibleCount < posts.length;
+  const visibleTotal = Math.min(visibleCount, posts.length);
 
   return (
     <section className={styles.section} aria-labelledby="blog-heading">
       <div className={styles.container}>
         <header className={styles.header}>
           <h1 id="blog-heading" className={styles.title}>
-            Blog
+            Articles
           </h1>
           <p className={styles.subtitle}>
             Notes on frontend engineering, performance, and the craft of building
@@ -50,8 +57,9 @@ export default function BlogIndexRoute({
         {posts.length === 0 ? (
           <p className={styles.empty}>No posts yet — check back soon.</p>
         ) : (
-          <ul className={styles.list}>
-            {posts.map((post) => (
+          <>
+            <ul className={styles.list}>
+            {visiblePosts.map((post) => (
               <li key={post.slug} className={styles.card}>
                 <Link
                   to={`/blog/${post.slug}`}
@@ -78,8 +86,10 @@ export default function BlogIndexRoute({
                       <span>{post.readingTime}</span>
                     </div>
                     <h2 className={styles.cardTitle}>{post.title}</h2>
-                    {post.description && (
-                      <p className={styles.cardDescription}>{post.description}</p>
+                    {(post.frontPageDescription || post.description) && (
+                      <p className={styles.cardDescription}>
+                        {post.frontPageDescription || post.description}
+                      </p>
                     )}
                     {post.tags.length > 0 && (
                       <div className={styles.tags}>
@@ -94,7 +104,31 @@ export default function BlogIndexRoute({
                 </Link>
               </li>
             ))}
-          </ul>
+            </ul>
+
+            <div className={styles.resultsMeta}>
+              Showing {visibleTotal} of {posts.length} articles
+            </div>
+
+            {hasMore && (
+              <div className={styles.loadMoreActions}>
+                <button
+                  type="button"
+                  className={styles.loadMoreButton}
+                  onClick={() => setVisibleCount((count) => count + POSTS_PER_BATCH)}
+                >
+                  Show 6 More
+                </button>
+                <button
+                  type="button"
+                  className={styles.showAllButton}
+                  onClick={() => setVisibleCount(posts.length)}
+                >
+                  Show All
+                </button>
+              </div>
+            )}
+          </>
         )}
       </div>
     </section>

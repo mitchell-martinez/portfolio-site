@@ -147,3 +147,46 @@
   color: var(--color-text-secondary);
   padding: 3rem 1rem;
 }
+
+.resultsMeta {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.loadMoreActions {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.loadMoreButton,
+.showAllButton {
+  border-radius: $border-radius-md;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  padding: 0.65rem 1rem;
+  font-weight: 550;
+  font-size: 0.9rem;
+  transition:
+    border-color $transition-fast,
+    background-color $transition-fast,
+    transform $transition-fast;
+  @include focus-ring;
+
+  &:hover {
+    border-color: var(--color-border-strong);
+    transform: translateY(-1px);
+  }
+}
+
+.loadMoreButton {
+  background: var(--color-bg-secondary);
+}
+
+.showAllButton {
+  background: var(--color-surface-subtle);
+}
