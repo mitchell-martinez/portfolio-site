@@ -40,7 +40,18 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
+            set -euo pipefail
+
+            IMAGE_REPO="ghcr.io/${{ github.repository }}"
+            IMAGE_SHA="$IMAGE_REPO:${{ github.sha }}"
+            IMAGE_LATEST="$IMAGE_REPO:latest"
+
+            # Pull the immutable image produced by this exact workflow run.
+            docker pull "$IMAGE_SHA"
+            # Keep :latest in sync for compose setups that reference it.
+            docker tag "$IMAGE_SHA" "$IMAGE_LATEST"
+
             cd ~/portfolio-site
-            docker compose pull portfolio-site
-            docker compose up -d portfolio-site
+            docker compose up -d --force-recreate --no-deps portfolio-site
+            docker compose ps portfolio-site
             docker image prune -f
