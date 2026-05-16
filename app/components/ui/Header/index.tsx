@@ -41,6 +41,30 @@ const MoonIcon = () => (
 
 const DESKTOP_QUERY = '(min-width: 768px)';
 
+function resolveTheme(): 'dark' | 'light' {
+  if (typeof document === 'undefined') return 'dark';
+
+  const htmlTheme = document.documentElement.getAttribute('data-theme');
+  if (htmlTheme === 'light' || htmlTheme === 'dark') {
+    return htmlTheme;
+  }
+
+  try {
+    const storedTheme = localStorage.getItem('portfolio-theme');
+    if (storedTheme === 'light' || storedTheme === 'dark') {
+      return storedTheme;
+    }
+  } catch {
+    // localStorage may be unavailable in some contexts
+  }
+
+  if (typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: light)').matches) {
+    return 'light';
+  }
+
+  return 'dark';
+}
+
 function isNavItemActive(currentPath: string, itemHref: string): boolean {
   if (itemHref === '/') {
     return currentPath === '/';
@@ -58,10 +82,7 @@ const Header = memo(() => {
   // Read the theme that the anti-FOUC inline script has already applied to
   // <html data-theme>. Using a lazy initializer avoids the wrong-icon flash
   // that would occur if we defaulted to 'dark' and corrected it in an effect.
-  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
-    if (typeof document === 'undefined') return 'dark';
-    return (document.documentElement.getAttribute('data-theme') as 'dark' | 'light') ?? 'dark';
-  });
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => resolveTheme());
   const location = useLocation();
 
   const handleScroll = useCallback(() => {
@@ -69,9 +90,16 @@ const Header = memo(() => {
   }, []);
 
   useEffect(() => {
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [handleScroll]);
+
+  useEffect(() => {
+    const resolvedTheme = resolveTheme();
+    setTheme(resolvedTheme);
+    document.documentElement.setAttribute('data-theme', resolvedTheme);
+  }, []);
 
   useEffect(() => {
     const mql = window.matchMedia(DESKTOP_QUERY);

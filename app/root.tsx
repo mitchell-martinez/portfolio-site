@@ -14,10 +14,10 @@ const themeScript = `(function(){try{var t=localStorage.getItem('portfolio-theme
 
 export default function App() {
   return (
-    // data-theme="dark" is the server-rendered default.
-    // suppressHydrationWarning prevents React hydration warnings when the
-    // inline script has already updated the attribute on the client.
-    <html lang="en" data-theme="dark" suppressHydrationWarning>
+    // Dark mode remains the CSS default via :root variables.
+    // suppressHydrationWarning prevents warnings when the inline script sets
+    // data-theme before hydration.
+    <html lang="en" suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

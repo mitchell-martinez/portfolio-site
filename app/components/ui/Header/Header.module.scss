@@ -68,7 +68,9 @@
   font-weight: 400;
   padding: 0.5rem 0.875rem;
   border-radius: $border-radius-sm;
-  transition: color $transition-fast;
+  transition:
+    color $transition-fast,
+    background-color $transition-fast;
   text-decoration: none;
   @include focus-ring;
 
@@ -80,6 +82,7 @@
 .navLinkActive {
   color: var(--color-text-primary);
   font-weight: 500;
+  background-color: var(--color-surface-subtle);
 }
 
 .actions {
@@ -196,12 +199,21 @@
   padding: 0.75rem 0;
   text-decoration: none;
   border-bottom: 1px solid var(--color-border);
-  transition: color $transition-fast;
+  transition:
+    color $transition-fast,
+    background-color $transition-fast;
   @include focus-ring;
 
   &:hover {
     color: var(--color-text-primary);
   }
+}
+
+.mobileNavLink.navLinkActive {
+  border-radius: $border-radius-sm;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  border-bottom-color: transparent;
 }
 
 li:last-child .mobileNavLink {
