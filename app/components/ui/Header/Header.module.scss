@@ -31,6 +31,10 @@
 
   @include respond-to('md') {
     padding: 0 2rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 1.5rem;
   }
 }
 
@@ -39,6 +43,11 @@
   align-items: center;
   text-decoration: none;
   @include focus-ring;
+
+  @include respond-to('md') {
+    grid-column: 1;
+    justify-self: start;
+  }
 }
 
 .logoText {
@@ -53,6 +62,8 @@
 
   @include respond-to('md') {
     display: flex;
+    grid-column: 2;
+    justify-self: center;
   }
 }
 
@@ -92,6 +103,8 @@
 
   @include respond-to('md') {
     display: flex;
+    grid-column: 3;
+    justify-self: end;
   }
 }
 

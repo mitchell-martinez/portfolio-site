@@ -162,6 +162,10 @@
 .secondaryCtaLink {
   flex: 1 1 220px;
   justify-content: center;
+
+  &:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  }
 }
 
 .emailModalBackdrop {
