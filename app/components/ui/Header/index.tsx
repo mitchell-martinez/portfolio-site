@@ -8,7 +8,6 @@ const navItems = [
   { label: 'Skills', href: '/skills' },
   { label: 'Projects', href: '/projects' },
   { label: 'Articles', href: '/blog' },
-  { label: 'Contact', href: '/contact' },
 ];
 
 const SunIcon = () => (
@@ -138,11 +137,11 @@ const Header = memo(() => {
               </button>
 
               <ButtonLink
-                href="mailto:info@mitchellmartinez.tech"
+                to="/contact"
                 variant="primary"
                 size="sm"
                 className={styles.ctaButton}
-                aria-label="Contact Mitchell via email"
+                aria-label="Go to the Contact page"
               >
                 Get in Touch
               </ButtonLink>
