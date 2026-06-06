@@ -34,6 +34,10 @@ export default defineConfig(({ mode }) => {
           // this means users always get fresh HTML when online, and fall back to
           // the most recently cached version when offline.
           globPatterns: ['**/*.{js,css,svg,png,ico,woff2,webmanifest}'],
+          // Workbox defaults to 2 MiB and will fail the build if a matched asset
+          // is larger. Increase the threshold so large portfolio images don't
+          // break CI Docker builds.
+          maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
         },
         manifest: {
           name: 'Mitchell Martinez',
