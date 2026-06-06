@@ -175,9 +175,14 @@
 }
 
 .ctaGroup .wideCtaButton {
+  width: 100%;
+  max-width: 100%;
+  justify-content: center;
   padding-inline: 1.5rem;
 
   @include respond-to('md') {
+    width: auto;
+    max-width: none;
     padding-inline: 3.5rem;
   }
 }

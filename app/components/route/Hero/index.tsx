@@ -290,8 +290,13 @@ const Hero = memo(() => {
             </article>
           </div>
         </div>
-        <div className={`${styles.ctaGroup} ${styles.equalWidthGroup}`} style={{ marginTop: '3.5rem' }}>
-          <ButtonLink to="/projects" variant="primary" aria-label="Go to project page">
+        <div className={styles.ctaGroup} style={{ marginTop: '3.5rem' }}>
+          <ButtonLink
+            to="/projects"
+            variant="primary"
+            aria-label="Go to project page"
+            className={styles.wideCtaButton}
+          >
             View all projects here
           </ButtonLink>
         </div>
@@ -312,7 +317,7 @@ const Hero = memo(() => {
             Let's work together to build your next great web experience!
           </p>
 
-          <div className={`${styles.ctaGroup} ${styles.equalWidthGroup}`} role="group" aria-label="Contact actions">
+          <div className={styles.ctaGroup} role="group" aria-label="Contact actions">
             <ButtonLink
               to="/contact"
               variant="primary"
