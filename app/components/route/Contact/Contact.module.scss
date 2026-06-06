@@ -122,6 +122,17 @@
   gap: 1rem;
 }
 
+.equalWidthGroup {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(max-content, 1fr));
+  gap: 1rem;
+
+  > * {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 .emailCtaButton {
   flex: 1 1 220px;
   display: inline-flex;
@@ -342,6 +353,10 @@
 @media (max-width: 420px) {
   .ctaGroup {
     flex-direction: column;
+  }
+
+  .equalWidthGroup {
+    grid-template-columns: 1fr;
   }
 
   .emailCtaButton,

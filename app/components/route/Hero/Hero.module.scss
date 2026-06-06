@@ -161,6 +161,19 @@
   margin-bottom: 3rem;
 }
 
+.equalWidthGroup {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(max-content, 1fr));
+  gap: 1rem;
+  width: min(100%, 34rem);
+  margin-inline: auto;
+
+  > * {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 .ctaGroup .wideCtaButton {
   padding-inline: 1.5rem;
 
@@ -389,6 +402,11 @@
   .ctaGroup {
     gap: 0.75rem;
     margin-bottom: 2.5rem;
+  }
+
+  .equalWidthGroup {
+    grid-template-columns: 1fr;
+    width: 100%;
   }
 
   .arrow {

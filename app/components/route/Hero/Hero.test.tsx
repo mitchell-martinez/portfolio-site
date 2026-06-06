@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { Hero } from './index';
 
@@ -39,5 +39,24 @@ describe('Hero', () => {
   it('has proper semantic structure', () => {
     renderHero();
     expect(screen.getByRole('region', { name: 'Hero section' })).toBeInTheDocument();
+  });
+
+  it('applies equal-width styling to two-button CTA groups', () => {
+    renderHero();
+    const ctaGroups = screen.getAllByRole('group', { name: 'Primary actions' });
+
+    expect(ctaGroups).toHaveLength(2);
+    ctaGroups.forEach(group => {
+      expect(group.className).toMatch(/equalWidthGroup/);
+      expect(within(group).getAllByRole('link')).toHaveLength(2);
+    });
+  });
+
+  it('keeps single-button CTA groups out of equal-width styling', () => {
+    renderHero();
+    const contactActionsGroup = screen.getByRole('group', { name: 'Contact actions' });
+
+    expect(within(contactActionsGroup).getAllByRole('link')).toHaveLength(1);
+    expect(contactActionsGroup.className).not.toMatch(/equalWidthGroup/);
   });
 });

@@ -196,7 +196,11 @@ const Contact = memo(({ actionData, formRenderedAt = '' }: ContactProps) => {
               <p className={styles.ctaDescription}>
                 Use one of these direct channels, or send a full brief with the form below.
               </p>
-              <div className={styles.ctaGroup} role="group" aria-label="Contact options">
+              <div
+                className={`${styles.ctaGroup} ${styles.equalWidthGroup}`}
+                role="group"
+                aria-label="Contact options"
+              >
                 <button
                   type="button"
                   className={styles.emailCtaButton}

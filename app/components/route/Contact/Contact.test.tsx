@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { RouterProvider, createMemoryRouter } from 'react-router';
 import { Contact } from './index';
@@ -45,6 +45,15 @@ describe('Contact', () => {
     const linkedinLink = screen.getByLabelText(/Connect with Mitchell on LinkedIn/i);
     expect(linkedinLink).toHaveAttribute('href', 'https://linkedin.com/in/mitchellmartinezadl');
     expect(linkedinLink).toHaveAttribute('target', '_blank');
+  });
+
+  it('renders two actions in the contact options CTA group with equal-width styling', () => {
+    renderContact();
+    const contactOptions = screen.getByRole('group', { name: 'Contact options' });
+
+    expect(contactOptions.className).toMatch(/equalWidthGroup/);
+    expect(within(contactOptions).getByRole('button', { name: /open email options for mitchell/i })).toBeInTheDocument();
+    expect(within(contactOptions).getByRole('link', { name: /connect with mitchell on linkedin/i })).toBeInTheDocument();
   });
 
   it('has proper section landmark', () => {

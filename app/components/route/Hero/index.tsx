@@ -77,7 +77,11 @@ const Hero = memo(() => {
             customer experiences that just work.
           </p>
 
-          <div className={styles.ctaGroup} role="group" aria-label="Primary actions">
+          <div
+            className={`${styles.ctaGroup} ${styles.equalWidthGroup}`}
+            role="group"
+            aria-label="Primary actions"
+          >
             <ButtonLink
               href="mailto:info@mitchellmartinez.tech"
               variant="primary"
@@ -113,7 +117,11 @@ const Hero = memo(() => {
             <br />
             Because if a customer is happy navigating your website, they might actually stay.
           </p>
-          <div className={styles.ctaGroup} role="group" aria-label="Primary actions">
+          <div
+            className={`${styles.ctaGroup} ${styles.equalWidthGroup}`}
+            role="group"
+            aria-label="Primary actions"
+          >
           <ButtonLink
               href="/articles"
               variant="primary"
