@@ -126,10 +126,7 @@ const Hero = memo(() => {
                 Track your spending and income like a pro with Budgeto
               </h3>
               <p className={styles.cardText}>
-                Adjust the income and expenditure amount to see how your balance changes in real
-                time. Swipe to switch between spent and leftover, and stay on top of your finances
-                with ease. In the full app, you can customise your preferences, track your savings
-                goals, and view a long term history of your budget across months. Neat!
+                Budgeting fails when we focus on overcomplicated. It succeeds when it's kept simple. Budgeto is built off my own budgeting methodology of being forced to acknowledge how much money I've spent in one place. It succeeds regardless of whether you've got credit cards, AfterPay, or any other modern spending habits. Don't be sucked in by available credit - know exactly how much you've got and how much you've spent with Budgeto. Try it out for free and see how it can change the way you manage your money.
               </p>
               <div className={styles.controls}>
                 <button

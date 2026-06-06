@@ -1,9 +1,11 @@
 import { useIntersectionObserver } from 'app/hooks/useIntersectionObserver';
 import type { RefObject } from 'react';
-import { memo } from 'react';
+import { memo, useEffect, useRef } from 'react';
 import { ProjectCard } from './ProjectCard';
 import styles from './Projects.module.scss';
 import type { Project } from './types';
+
+const LARGE_BREAKPOINT_QUERY = '(min-width: 1024px)';
 
 const projectsData: Project[] = [
   {
@@ -29,6 +31,7 @@ const projectsData: Project[] = [
       'A refined studio showcase site with a strong visual identity, streamlined navigation, and mobile-first responsiveness. Built to highlight portfolio work and drive direct enquiries.',
     tags: ['React', 'TypeScript', 'Design', 'Performance'],
     highlight: 'studiozanetti.com.au',
+    image: { src: '/images/studiozanetti.png', alt: 'Studio Zanetti website screenshot' },
   },
   {
     id: 'fogsv',
@@ -65,6 +68,143 @@ const projectsData: Project[] = [
 
 const Projects = memo(() => {
   const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.05, triggerOnce: true });
+  const gridRef = useRef<HTMLUListElement | null>(null);
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+      return;
+    }
+
+    const grid = gridRef.current;
+    if (!grid) {
+      return;
+    }
+
+    const mediaQuery = window.matchMedia(LARGE_BREAKPOINT_QUERY);
+    const copyBlocks = Array.from(
+      grid.querySelectorAll<HTMLElement>('[data-project-copy="true"]')
+    );
+    const images = Array.from(
+      grid.querySelectorAll<HTMLImageElement>('[data-project-image="true"]')
+    );
+
+    const resetRowSizing = () => {
+      copyBlocks.forEach(copyBlock => {
+        copyBlock.style.removeProperty('height');
+      });
+
+      images.forEach(image => {
+        image.style.removeProperty('height');
+        image.style.removeProperty('width');
+      });
+    };
+
+    const syncRowLayout = () => {
+      resetRowSizing();
+
+      if (!mediaQuery.matches) {
+        return;
+      }
+
+      const rows = new Map<number, HTMLLIElement[]>();
+
+      Array.from(grid.querySelectorAll('li')).forEach(card => {
+        if (!(card instanceof HTMLLIElement)) {
+          return;
+        }
+
+        const rowTop = Math.round(card.getBoundingClientRect().top);
+        const rowCards = rows.get(rowTop) ?? [];
+        rowCards.push(card);
+        rows.set(rowTop, rowCards);
+      });
+
+      rows.forEach(rowCards => {
+        if (rowCards.length < 2) {
+          return;
+        }
+
+        const rowCopyBlocks = rowCards
+          .map(card => card.querySelector<HTMLElement>('[data-project-copy="true"]'))
+          .filter((copyBlock): copyBlock is HTMLElement => copyBlock instanceof HTMLElement);
+
+        if (rowCopyBlocks.length > 1) {
+          const targetCopyHeight = Math.max(...rowCopyBlocks.map(copyBlock => copyBlock.offsetHeight));
+
+          rowCopyBlocks.forEach(copyBlock => {
+            copyBlock.style.height = `${targetCopyHeight}px`;
+          });
+        }
+
+        const rowImages = rowCards
+          .map(card => card.querySelector<HTMLImageElement>('[data-project-image="true"]'))
+          .filter(
+            (image): image is HTMLImageElement =>
+              image instanceof HTMLImageElement && Boolean(image.naturalWidth && image.naturalHeight)
+          );
+
+        if (rowImages.length < 2) {
+          return;
+        }
+
+        const targetImageHeight = Math.max(
+          ...rowImages.map(image => image.clientWidth * (image.naturalHeight / image.naturalWidth))
+        );
+
+        rowImages.forEach(image => {
+          image.style.height = `${targetImageHeight}px`;
+          image.style.width = 'auto';
+        });
+      });
+    };
+
+    const handleMediaChange = () => {
+      syncRowLayout();
+    };
+
+    const removeLoadListeners = images.map(image => {
+      const handleLoad = () => {
+        syncRowLayout();
+      };
+
+      image.addEventListener('load', handleLoad);
+      return () => {
+        image.removeEventListener('load', handleLoad);
+      };
+    });
+
+    let resizeObserver: ResizeObserver | null = null;
+
+    if (typeof ResizeObserver !== 'undefined') {
+      resizeObserver = new ResizeObserver(() => {
+        syncRowLayout();
+      });
+      resizeObserver.observe(grid);
+    }
+
+    if (typeof mediaQuery.addEventListener === 'function') {
+      mediaQuery.addEventListener('change', handleMediaChange);
+    } else {
+      mediaQuery.addListener(handleMediaChange);
+    }
+
+    syncRowLayout();
+
+    return () => {
+      resetRowSizing();
+      removeLoadListeners.forEach(removeListener => {
+        removeListener();
+      });
+
+      if (typeof mediaQuery.removeEventListener === 'function') {
+        mediaQuery.removeEventListener('change', handleMediaChange);
+      } else {
+        mediaQuery.removeListener(handleMediaChange);
+      }
+
+      resizeObserver?.disconnect();
+    };
+  }, []);
 
   return (
     <section
@@ -84,7 +224,7 @@ const Projects = memo(() => {
           </p>
         </div>
 
-        <ul className={styles.grid} role="list" aria-label="Featured projects">
+        <ul ref={gridRef} className={styles.grid} role="list" aria-label="Featured projects">
           {projectsData.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}

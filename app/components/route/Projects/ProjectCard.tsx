@@ -14,19 +14,22 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => (
   >
     <div className={styles.cardInner}>
       <div className={styles.cardTop}>
-        <div className={styles.projectMeta}>
-          <div className={styles.projectDot} aria-hidden="true" />
-          <span className={styles.projectType}>{project.description}</span>
-        </div>
+        <div className={styles.projectContent} data-project-copy="true">
+          <div className={styles.projectMeta}>
+            <div className={styles.projectDot} aria-hidden="true" />
+            <span className={styles.projectType}>{project.description}</span>
+          </div>
 
-        <h3 className={styles.projectName}>{project.name}</h3>
-        <p className={styles.projectDescription}>{project.longDescription}</p>
+          <h3 className={styles.projectName}>{project.name}</h3>
+          <p className={styles.projectDescription}>{project.longDescription}</p>
+        </div>
 
         {project.image && (
           <img
             src={project.image.src}
             alt={project.image.alt}
             className={styles.projectImage}
+            data-project-image="true"
             loading="lazy"
             decoding="async"
           />
