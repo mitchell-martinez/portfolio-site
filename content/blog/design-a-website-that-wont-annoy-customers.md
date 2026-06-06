@@ -7,6 +7,9 @@ tags:
   - webdesign
   - conversion
   - customerexperience
+cover:
+  src: /images/blog/design-a-website-that-wont-annoy-customers/cover.svg
+  alt: Red themed UX card showing a clean website wireframe and readable headline
 ---
 
 If your website frustrates people, they leave.
