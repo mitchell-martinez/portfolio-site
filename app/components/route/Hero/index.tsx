@@ -69,11 +69,11 @@ const Hero = memo(() => {
             <span className={styles.lastName}> Martínez</span>
           </h1>
           <p className={styles.tagline}>
-            Frontend Engineer.{' '}
+            Product Engineer.{' '}
             <span className={styles.taglineHighlight}>Building beautiful digital experiences.</span>
           </p>
           <p className={styles.description}>
-            Specializing in React, TypeScript, and modern web technologies to create amazing
+            Based in Sydney, Australia. Specializing in React, TypeScript, and modern web technologies to create amazing
             customer experiences that just work.
           </p>
 
