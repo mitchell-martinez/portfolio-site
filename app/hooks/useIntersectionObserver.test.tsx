@@ -1,4 +1,4 @@
-import { render, act } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import { useIntersectionObserver } from './useIntersectionObserver';
 
 const mockObserve = vi.fn();
@@ -26,24 +26,38 @@ describe('useIntersectionObserver', () => {
   it('should return initial state of not intersecting', () => {
     function TestComponent() {
       const { ref, isIntersecting } = useIntersectionObserver();
-      return <div ref={ref as React.RefObject<HTMLDivElement>} data-intersecting={String(isIntersecting)} />;
+
+      return (
+        <>
+          <div ref={ref as React.RefObject<HTMLDivElement>} />
+          <p role="status">{isIntersecting ? 'intersecting' : 'not intersecting'}</p>
+        </>
+      );
     }
-    const { container } = render(<TestComponent />);
-    expect(container.firstElementChild).toHaveAttribute('data-intersecting', 'false');
+
+    render(<TestComponent />);
+    expect(screen.getByRole('status')).toHaveTextContent('not intersecting');
   });
 
   it('should set isIntersecting to true when element intersects', () => {
     function TestComponent() {
       const { ref, isIntersecting } = useIntersectionObserver();
-      return <div ref={ref as React.RefObject<HTMLDivElement>} data-intersecting={String(isIntersecting)} />;
+
+      return (
+        <>
+          <div ref={ref as React.RefObject<HTMLDivElement>} />
+          <p role="status">{isIntersecting ? 'intersecting' : 'not intersecting'}</p>
+        </>
+      );
     }
-    const { container } = render(<TestComponent />);
+
+    render(<TestComponent />);
 
     act(() => {
       intersectionCallback([{ isIntersecting: true } as IntersectionObserverEntry]);
     });
 
-    expect(container.firstElementChild).toHaveAttribute('data-intersecting', 'true');
+    expect(screen.getByRole('status')).toHaveTextContent('intersecting');
   });
 
   it('should return a ref object', () => {
