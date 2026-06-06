@@ -3,7 +3,6 @@
 
 .skills {
   padding: 6rem 1.5rem;
-  background: var(--color-bg-secondary);
 
   @include respond-to('md') {
     padding: 8rem 2rem;
