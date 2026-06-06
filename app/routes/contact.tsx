@@ -1,11 +1,33 @@
 import type { Transporter } from 'nodemailer';
 import nodemailer from 'nodemailer';
-import type { ActionFunctionArgs, MetaFunction } from 'react-router';
-import { useActionData } from 'react-router';
+import type { ActionFunctionArgs, LoaderFunctionArgs, MetaFunction } from 'react-router';
+import { useActionData, useLoaderData } from 'react-router';
 import { Contact } from '~/components/route/Contact/';
 import { checkRateLimit } from '~/utils/rateLimit.server';
 
 let transporter: Transporter | undefined;
+const MIN_SUBMISSION_TIME_MS = 2500;
+const MAX_FORM_AGE_MS = 2 * 60 * 60 * 1000;
+
+function getClientIp(request: Request) {
+  return (
+    request.headers.get('cf-connecting-ip') ??
+    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
+    request.headers.get('x-real-ip') ??
+    'unknown'
+  );
+}
+
+function isSuspiciousSubmission(formRenderedAt: string) {
+  const renderedAt = Number(formRenderedAt);
+
+  if (!Number.isFinite(renderedAt) || renderedAt <= 0) {
+    return true;
+  }
+
+  const elapsedMs = Date.now() - renderedAt;
+  return elapsedMs < MIN_SUBMISSION_TIME_MS || elapsedMs > MAX_FORM_AGE_MS;
+}
 
 function getTransporter() {
   if (transporter) return transporter;
@@ -75,11 +97,12 @@ export type ContactActionData =
   | { success: true }
   | { success: false; error: string; fieldErrors?: Record<string, string> };
 
+export async function loader(_args: LoaderFunctionArgs) {
+  return Response.json({ formRenderedAt: Date.now().toString() });
+}
+
 export async function action({ request }: ActionFunctionArgs) {
-  const ip =
-    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
-    request.headers.get('x-real-ip') ??
-    'unknown';
+  const ip = getClientIp(request);
 
   const { allowed, retryAfterSeconds } = checkRateLimit(ip);
   if (!allowed) {
@@ -98,6 +121,7 @@ export async function action({ request }: ActionFunctionArgs) {
   const enquiryType = String(formData.get('enquiryType') ?? '').trim();
   const message = String(formData.get('message') ?? '').trim();
   const sendCopy = formData.get('sendCopy') === 'yes';
+  const formRenderedAt = String(formData.get('formRenderedAt') ?? '');
 
   const fieldErrors: Record<string, string> = {};
   if (!email) fieldErrors.email = 'Email is required.';
@@ -118,7 +142,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
   // Honeypot - hidden field that bots will fill
   const honeypot = String(formData.get('company_url') ?? '');
-  if (honeypot) {
+  if (honeypot || isSuspiciousSubmission(formRenderedAt)) {
     // Silently succeed so bots think it worked
     return Response.json({ success: true } satisfies ContactActionData);
   }
@@ -174,6 +198,7 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 
 export default function ContactRoute() {
+  const { formRenderedAt } = useLoaderData<typeof loader>();
   const actionData = useActionData<ContactActionData>();
-  return <Contact actionData={actionData} />;
+  return <Contact actionData={actionData} formRenderedAt={formRenderedAt} />;
 }

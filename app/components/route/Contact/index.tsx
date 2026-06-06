@@ -9,9 +9,10 @@ import styles from './Contact.module.scss';
 
 type ContactProps = {
   actionData?: ContactActionData;
+  formRenderedAt?: string;
 };
 
-const Contact = memo(({ actionData }: ContactProps) => {
+const Contact = memo(({ actionData, formRenderedAt = '' }: ContactProps) => {
   const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.1, triggerOnce: true });
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
@@ -271,6 +272,8 @@ const Contact = memo(({ actionData }: ContactProps) => {
                   autoComplete="off"
                 />
               </div>
+
+              <input type="hidden" name="formRenderedAt" value={formRenderedAt} />
 
               <div className={styles.field}>
                 <label htmlFor="contact-name" className={styles.label}>
