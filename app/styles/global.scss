@@ -65,6 +65,13 @@ body {
   background-color: var(--color-bg);
   color: var(--color-text-primary);
   overflow-x: hidden;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+#main-content {
+  flex: 1 0 auto;
 }
 
 // ─── Theme transition ─────────────────────────────────────────────────────────
