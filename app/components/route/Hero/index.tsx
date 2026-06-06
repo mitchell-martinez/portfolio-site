@@ -70,7 +70,7 @@ const Hero = memo(() => {
           </h1>
           <p className={styles.tagline}>
             Product Engineer.{' '}
-            <span className={styles.taglineHighlight}>Building beautiful digital experiences.</span>
+            <span className={styles.taglineHighlight}>Building excellent digital experiences.</span>
           </p>
           <p className={styles.description}>
             Based in Sydney, Australia. Specializing in React, TypeScript, and modern web technologies to create amazing
@@ -113,6 +113,24 @@ const Hero = memo(() => {
             <br />
             Because if a customer is happy navigating your website, they might actually stay.
           </p>
+          <div className={styles.ctaGroup} role="group" aria-label="Primary actions">
+          <ButtonLink
+              href="/articles"
+              variant="primary"
+              className={styles.heroLinkedInButton}
+              aria-label="Read Mitchell's articles"
+            >
+              Read my articles
+          </ButtonLink>
+          <ButtonLink
+              href="/about"
+              variant="secondary"
+              className={styles.heroLinkedInButton}
+              aria-label="Learn more about Mitchell"
+            >
+              About Me
+          </ButtonLink>
+          </div>
         </div>
       </section>
 

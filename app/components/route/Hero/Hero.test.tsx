@@ -1,27 +1,35 @@
 import { render, screen } from '@testing-library/react';
-import { Hero } from './Hero';
+import { MemoryRouter } from 'react-router';
+import { Hero } from './index';
+
+const renderHero = () =>
+  render(
+    <MemoryRouter>
+      <Hero />
+    </MemoryRouter>
+  );
 
 describe('Hero', () => {
   it('renders the name', () => {
-    render(<Hero />);
+    renderHero();
     expect(screen.getByText('Mitchell')).toBeInTheDocument();
     const heading = screen.getByRole('heading', { level: 1 });
-    expect(heading).toHaveTextContent('Martinez');
+    expect(heading).toHaveTextContent('Martínez');
   });
 
   it('renders the tagline', () => {
-    render(<Hero />);
-    expect(screen.getByText('Frontend Engineer.')).toBeInTheDocument();
+    renderHero();
+    expect(screen.getByText('Product Engineer.', { exact: false })).toBeInTheDocument();
   });
 
   it('renders the Get in Touch CTA', () => {
-    render(<Hero />);
+    renderHero();
     const emailLink = screen.getByLabelText('Send Mitchell an email');
     expect(emailLink).toHaveAttribute('href', 'mailto:info@mitchellmartinez.tech');
   });
 
   it('renders the LinkedIn CTA', () => {
-    render(<Hero />);
+    renderHero();
     const linkedinLink = screen.getByLabelText(
       "Visit Mitchell's LinkedIn profile (opens in new tab)"
     );
@@ -29,7 +37,7 @@ describe('Hero', () => {
   });
 
   it('has proper semantic structure', () => {
-    render(<Hero />);
+    renderHero();
     expect(screen.getByRole('region', { name: 'Hero section' })).toBeInTheDocument();
   });
 });

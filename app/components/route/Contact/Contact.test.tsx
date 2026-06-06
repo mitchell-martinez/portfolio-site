@@ -1,24 +1,32 @@
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router';
+import { RouterProvider, createMemoryRouter } from 'react-router';
 import { Contact } from './index';
 
-const renderContact = (formRenderedAt?: string) =>
-  render(
-    <MemoryRouter>
-      <Contact formRenderedAt={formRenderedAt} />
-    </MemoryRouter>
+const renderContact = (formRenderedAt?: string) => {
+  const router = createMemoryRouter(
+    [
+      {
+        path: '/',
+        element: <Contact formRenderedAt={formRenderedAt} />,
+      },
+    ],
+    { initialEntries: ['/'] }
   );
+
+  return render(<RouterProvider router={router} />);
+};
 
 describe('Contact', () => {
   it('renders the section heading', () => {
     renderContact();
-    expect(screen.getByRole('heading', { name: /let's build something/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: /let's build a great web experience together/i })
+    ).toBeInTheDocument();
   });
 
   it('renders email CTA', () => {
     renderContact();
-    const emailLink = screen.getByLabelText(/Send Mitchell an email/i);
-    expect(emailLink).toHaveAttribute('href', 'mailto:info@mitchellmartinez.tech');
+    expect(screen.getByLabelText(/Open email options for Mitchell/i)).toBeInTheDocument();
   });
 
   it('renders LinkedIn CTA', () => {
@@ -30,7 +38,9 @@ describe('Contact', () => {
 
   it('has proper section landmark', () => {
     renderContact();
-    expect(screen.getByRole('region', { name: /let's build something/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole('region', { name: /let's build a great web experience together/i })
+    ).toBeInTheDocument();
   });
 
   it('renders the hidden anti-bot timestamp field', () => {

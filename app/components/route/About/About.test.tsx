@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { About } from './About';
+import { About } from './index';
 
 describe('About', () => {
   it('renders the section heading', () => {

@@ -1,7 +1,25 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router';
-import { Header } from './Header';
+import { Header } from './index';
+
+function mockMatchMedia(matches = true) {
+  const listener = vi.fn();
+
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    value: vi.fn().mockImplementation(() => ({
+      matches,
+      media: '(min-width: 768px)',
+      onchange: null,
+      addEventListener: listener,
+      removeEventListener: listener,
+      addListener: listener,
+      removeListener: listener,
+      dispatchEvent: vi.fn(),
+    })),
+  });
+}
 
 const renderHeader = (initialPath = '/') =>
   render(
@@ -9,6 +27,11 @@ const renderHeader = (initialPath = '/') =>
       <Header />
     </MemoryRouter>
   );
+
+beforeEach(() => {
+  mockMatchMedia();
+  document.documentElement.setAttribute('data-theme', 'dark');
+});
 
 describe('Header', () => {
   it('renders the logo', () => {
@@ -21,7 +44,7 @@ describe('Header', () => {
     expect(screen.getAllByText('About').length).toBeGreaterThan(0);
     expect(screen.getAllByText('Skills').length).toBeGreaterThan(0);
     expect(screen.getAllByText('Projects').length).toBeGreaterThan(0);
-    expect(screen.getAllByText('Contact').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Articles').length).toBeGreaterThan(0);
   });
 
   it('nav links point to the correct routes', () => {
@@ -32,8 +55,8 @@ describe('Header', () => {
     expect(skillsLinks[0]).toHaveAttribute('href', '/skills');
     const projectsLinks = screen.getAllByRole('link', { name: 'Projects' });
     expect(projectsLinks[0]).toHaveAttribute('href', '/projects');
-    const contactLinks = screen.getAllByRole('link', { name: 'Contact' });
-    expect(contactLinks[0]).toHaveAttribute('href', '/contact');
+    const articleLinks = screen.getAllByRole('link', { name: 'Articles' });
+    expect(articleLinks[0]).toHaveAttribute('href', '/blog');
   });
 
   it('applies active class to nav link matching current route', () => {
@@ -48,11 +71,12 @@ describe('Header', () => {
 
   it('renders the CTA button', () => {
     renderHeader();
-    expect(screen.getByLabelText('Contact Mitchell via email')).toBeInTheDocument();
+    expect(screen.getByLabelText('Go to the Contact page')).toBeInTheDocument();
   });
 
   it('toggles mobile menu on button click', async () => {
     const user = userEvent.setup();
+    mockMatchMedia(false);
     renderHeader();
     const menuButton = screen.getByLabelText('Open menu');
     await user.click(menuButton);
