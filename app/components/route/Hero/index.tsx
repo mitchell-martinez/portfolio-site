@@ -106,16 +106,18 @@ const Hero = memo(() => {
         <div className={styles.sectionInner}>
           <h2 className={styles.sectionTitle}>Navigating the web shouldn&apos;t suck</h2>
           <p className={styles.sectionText}>
-            Websites should make things easier for your customers. Too many websites nowadays are
-            confusing, slow, and full of friction that costs businesses real money.
+            The web should make things easier for customers. Too many digital experiences
+            nowadays are confusing, slow, or outright annoying.
             <br />
             <br />
-            I design and build websites that are clear, quick, and genuinely useful. Better user
-            flows, cleaner interfaces, and thoughtful frontend engineering that helps people get
-            what they need without getting stuck.
+            This costs businesses money.
             <br />
             <br />
-            Because if a customer is happy navigating your website, they might actually stay.
+            I design and build web applications that are clear, quick, and genuinely useful. Better user flows, cleaner interfaces,
+            and thoughtful frontend engineering that helps people get what they need without getting stuck.
+            <br />
+            <br />
+            Because no matter whether you run a simple WordPress site or a complex SaaS product, if your customer is happy, they stay.
           </p>
           <div
             className={`${styles.ctaGroup} ${styles.equalWidthGroup}`}

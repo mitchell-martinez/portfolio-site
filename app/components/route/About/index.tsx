@@ -1,5 +1,5 @@
-import { memo } from 'react';
 import type { RefObject } from 'react';
+import { memo } from 'react';
 import { useIntersectionObserver } from '~/hooks/useIntersectionObserver';
 import styles from './About.module.scss';
 
@@ -16,13 +16,7 @@ const About = memo(() => {
       <div className={styles.container}>
         <div className={styles.grid}>
           <div className={styles.imageWrapper}>
-            <div
-              className={styles.avatar}
-              aria-label="Mitchell Martinez initials avatar"
-              role="img"
-            >
-              <span className={styles.initials}>MM</span>
-            </div>
+            <img src="/images/mitchmartinez.jpg" alt="Mitchell Martinez sitting on a blue couch smiling in front of a white background wearing a blue suit jacket and black shirt" className={styles.avatar} />
             <div className={styles.avatarDecoration} aria-hidden="true" />
           </div>
 
