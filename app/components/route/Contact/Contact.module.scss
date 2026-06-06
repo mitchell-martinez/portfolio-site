@@ -409,6 +409,7 @@
   margin-top: 0.1875rem;
   accent-color: var(--color-checkbox-accent);
   flex-shrink: 0;
+  @include focus-ring;
 }
 
 .checkboxLabel {
@@ -436,6 +437,7 @@
   color: var(--color-text-primary);
   font-size: 1rem;
   font-family: inherit;
+  @include focus-ring;
   transition:
     border-color $transition-fast,
     box-shadow $transition-fast;
@@ -455,10 +457,8 @@
     transition: background-color 9999s ease-in-out 0s;
   }
 
-  &:focus {
-    outline: none;
+  &:focus-visible {
     border-color: var(--color-cta-bg);
-    box-shadow: 0 0 0 3px rgba(var(--color-cta-bg), 0.15);
   }
 
   &[aria-invalid='true'] {
