@@ -7,7 +7,6 @@ export default [
     route('skills', 'routes/skills.tsx'),
     route('projects', 'routes/projects.tsx'),
     route('contact', 'routes/contact.tsx'),
-    route('prices', 'routes/prices.tsx'),
     route('blog', 'routes/blog-index.tsx'),
     route('blog/:slug', 'routes/blog-slug.tsx'),
     route('*', 'routes/$.tsx'),

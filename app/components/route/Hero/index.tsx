@@ -291,20 +291,12 @@ const Hero = memo(() => {
 
           <div className={styles.ctaGroup} role="group" aria-label="Contact actions">
             <ButtonLink
-              to="/prices"
+              to="/contact"
               variant="primary"
-              aria-label="View pricing"
+              aria-label="Contact Mitchell Martinez"
               className={styles.wideCtaButton}
             >
-              Prices
-            </ButtonLink>
-            <ButtonLink
-              to="/resume"
-              variant="secondary"
-              aria-label="View resume"
-              className={styles.wideCtaButton}
-            >
-              Resume
+              Get In Touch
             </ButtonLink>
           </div>
         </div>
