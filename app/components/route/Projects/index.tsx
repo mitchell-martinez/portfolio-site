@@ -12,7 +12,6 @@ const projectsData: Project[] = [
     id: 'budgeto',
     name: 'Budgeto',
     url: 'https://budgeto.app/dashboard',
-    storyPath: '/blog/budgeto-story',
     description: 'Personal finance management app',
     longDescription:
       'A beautifully designed personal finance management application that helps users track spending, set budgets, and achieve financial goals. Built with a focus on simplicity and delightful UX.',
@@ -25,7 +24,6 @@ const projectsData: Project[] = [
     id: 'studio-zanetti',
     name: 'Studio Zanetti',
     url: 'https://studiozanetti.com.au',
-    storyPath: '/blog/studio-zanetti-story',
     description: 'Creative studio website',
     longDescription:
       'A refined studio showcase site with a strong visual identity, streamlined navigation, and mobile-first responsiveness. Built to highlight portfolio work and drive direct enquiries.',
