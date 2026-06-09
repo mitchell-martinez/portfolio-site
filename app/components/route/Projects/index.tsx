@@ -29,6 +29,7 @@ const projectsData: Project[] = [
       'A refined studio showcase site with a strong visual identity, streamlined navigation, and mobile-first responsiveness. Built to highlight portfolio work and drive direct enquiries.',
     tags: ['React', 'TypeScript', 'Design', 'Performance'],
     highlight: 'studiozanetti.com.au',
+    storyPath: '/blog/studio-zanetti-story',
     image: { src: '/images/studiozanetti.png', alt: 'Studio Zanetti website screenshot' },
   },
   {

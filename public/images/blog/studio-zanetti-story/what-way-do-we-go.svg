@@ -1,0 +1,27 @@
+<svg viewBox="0 0 760 280" role="img" aria-label="What way do we go?" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffd0d0" />
+      <stop offset="100%" stop-color="#f3a1a1" />
+    </linearGradient>
+  </defs>
+
+  <rect x="8" y="8" width="744" height="264" rx="24" fill="url(#bg)" stroke="#3a2020" stroke-width="4" />
+
+  <text x="380" y="152" text-anchor="middle" font-size="44" font-family="'Trebuchet MS', 'Avenir Next', sans-serif" fill="#3a2020">What way do we go?</text>
+
+  <text x="72" y="62" font-size="44" font-family="'Trebuchet MS', 'Avenir Next', sans-serif" fill="#7a2d2d">?</text>
+  <text x="140" y="108" font-size="30" font-family="'Trebuchet MS', 'Avenir Next', sans-serif" fill="#8f3939">?</text>
+  <text x="84" y="202" font-size="38" font-family="'Trebuchet MS', 'Avenir Next', sans-serif" fill="#7a2d2d">?</text>
+  <text x="168" y="248" font-size="28" font-family="'Trebuchet MS', 'Avenir Next', sans-serif" fill="#8f3939">?</text>
+
+  <text x="688" y="70" font-size="42" font-family="'Trebuchet MS', 'Avenir Next', sans-serif" fill="#7a2d2d">?</text>
+  <text x="618" y="116" font-size="28" font-family="'Trebuchet MS', 'Avenir Next', sans-serif" fill="#8f3939">?</text>
+  <text x="676" y="206" font-size="40" font-family="'Trebuchet MS', 'Avenir Next', sans-serif" fill="#7a2d2d">?</text>
+  <text x="596" y="246" font-size="30" font-family="'Trebuchet MS', 'Avenir Next', sans-serif" fill="#8f3939">?</text>
+
+  <text x="302" y="76" font-size="26" font-family="'Trebuchet MS', 'Avenir Next', sans-serif" fill="#9c4545">?</text>
+  <text x="436" y="74" font-size="26" font-family="'Trebuchet MS', 'Avenir Next', sans-serif" fill="#9c4545">?</text>
+  <text x="302" y="236" font-size="26" font-family="'Trebuchet MS', 'Avenir Next', sans-serif" fill="#9c4545">?</text>
+  <text x="438" y="236" font-size="26" font-family="'Trebuchet MS', 'Avenir Next', sans-serif" fill="#9c4545">?</text>
+</svg>
