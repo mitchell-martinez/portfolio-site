@@ -42,7 +42,7 @@ export default defineConfig(({ mode }) => {
         manifest: {
           name: 'Mitchell Martinez',
           short_name: 'MitchellM',
-          description: 'Frontend Engineer - Building beautiful digital experiences.',
+          description: 'Frontend Engineer - Building beautiful, functional digital experiences.',
           theme_color: '#0d1117',
           background_color: '#0d1117',
           display: 'standalone',

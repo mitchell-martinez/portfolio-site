@@ -10,7 +10,7 @@ const Footer = memo(() => {
         <div className={styles.content}>
           <div className={styles.brand}>
             <span className={styles.logo}>MM</span>
-            <p className={styles.tagline}>Building beautiful digital experiences</p>
+            <p className={styles.tagline}>Building beautiful, functional digital experiences</p>
           </div>
 
           <nav className={styles.links} aria-label="Footer navigation">
