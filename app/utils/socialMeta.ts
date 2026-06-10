@@ -26,6 +26,17 @@ type MetaTag = {
   content?: string;
 };
 
+function toCanonicalUrl(url: string): string {
+  const parsed = new URL(url, DEFAULT_SITE_URL);
+  const hasExtension = /\.[a-z0-9]+$/i.test(parsed.pathname);
+
+  if (!hasExtension && !parsed.pathname.endsWith('/')) {
+    parsed.pathname = `${parsed.pathname}/`;
+  }
+
+  return parsed.toString();
+}
+
 export function buildSocialMeta({
   title,
   description,
@@ -37,7 +48,7 @@ export function buildSocialMeta({
 }: SocialMetaOptions): MetaTag[] {
   const resolvedImage = new URL(image ?? DEFAULT_SOCIAL_IMAGE, DEFAULT_SITE_URL).toString();
   const resolvedImageAlt = imageAlt ?? DEFAULT_SOCIAL_IMAGE_ALT;
-  const resolvedUrl = url ? new URL(url, DEFAULT_SITE_URL).toString() : undefined;
+  const resolvedUrl = url ? toCanonicalUrl(url) : undefined;
   const resolvedFbAppId = fbAppId ?? DEFAULT_FB_APP_ID;
 
   return [
@@ -48,6 +59,7 @@ export function buildSocialMeta({
     { property: 'og:type', content: type },
     ...(resolvedUrl ? [{ property: 'og:url', content: resolvedUrl }] : []),
     { property: 'fb:app_id', content: resolvedFbAppId },
+    { name: 'fb:app_id', content: resolvedFbAppId },
     { property: 'og:image', content: resolvedImage },
     { property: 'og:image:alt', content: resolvedImageAlt },
     { name: 'twitter:card', content: 'summary_large_image' },
