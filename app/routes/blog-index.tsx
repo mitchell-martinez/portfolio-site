@@ -3,22 +3,15 @@ import type { MetaFunction } from 'react-router';
 import { Link } from 'react-router';
 import styles from '~/components/route/Blog/Blog.module.scss';
 import { getAllPosts } from '~/lib/posts.server';
+import { buildSocialMeta } from '~/utils/socialMeta';
 
 const POSTS_PER_BATCH = 6;
 
-export const meta: MetaFunction = () => [
-  { title: 'Articles - Mitchell Martinez' },
-  {
-    name: 'description',
-    content:
-      'Articles on frontend engineering, performance, and design from Mitchell Martinez.',
-  },
-  { property: 'og:title', content: 'Articles - Mitchell Martinez' },
-  {
-    property: 'og:description',
-    content: 'Articles on frontend engineering, performance, and design.',
-  },
-];
+export const meta: MetaFunction = () =>
+  buildSocialMeta({
+    title: 'Articles - Mitchell Martinez',
+    description: 'Articles on frontend engineering, performance, and design.',
+  });
 
 export function loader() {
   return { posts: getAllPosts() };

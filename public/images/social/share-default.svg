@@ -1,0 +1,11 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Building beautiful, functional digital experiences</title>
+  <desc id="desc">Social share image with black background and white text.</desc>
+  <rect width="1200" height="630" fill="#000000"/>
+  <text x="600" y="286" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif" font-size="78" font-weight="700" text-anchor="middle" letter-spacing="0.01em">
+    Building beautiful,
+  </text>
+  <text x="600" y="388" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif" font-size="78" font-weight="700" text-anchor="middle" letter-spacing="0.01em">
+    functional digital experiences
+  </text>
+</svg>

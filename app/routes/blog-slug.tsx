@@ -4,6 +4,7 @@ import { useEffect, useState, type MouseEvent } from 'react';
 import styles from '~/components/route/Blog/Post.module.scss';
 import { NotFound } from '~/components/route/NotFound/';
 import { getPostBySlug } from '~/lib/posts.server';
+import { buildSocialMeta } from '~/utils/socialMeta';
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const slug = params.slug;
@@ -19,19 +20,24 @@ export async function loader({ params }: LoaderFunctionArgs) {
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   if (!data) {
-    return [{ title: 'Post not found - Mitchell Martinez' }];
+    return buildSocialMeta({
+      title: 'Post not found - Mitchell Martinez',
+      description: 'This article could not be found.',
+    });
   }
+
   const { post } = data;
   const title = `${post.title} - Mitchell Martinez`;
   const description = post.description;
-  return [
-    { title },
-    { name: 'description', content: description },
-    { property: 'og:title', content: title },
-    { property: 'og:description', content: description },
-    { property: 'og:type', content: 'article' },
-    ...(post.cover ? [{ property: 'og:image', content: post.cover.src }] : []),
-  ];
+
+  return buildSocialMeta({
+    title,
+    description,
+    type: 'article',
+    url: `/blog/${post.slug}`,
+    image: post.cover?.src,
+    imageAlt: post.cover?.alt,
+  });
 };
 
 const dateFormatter = new Intl.DateTimeFormat('en-AU', {

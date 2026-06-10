@@ -1,19 +1,12 @@
 import type { MetaFunction } from 'react-router';
 import { Hero } from '~/components/route/Hero/';
+import { buildSocialMeta } from '~/utils/socialMeta';
 
-export const meta: MetaFunction = () => [
-  { title: 'Mitchell Martinez - Frontend Engineer' },
-  {
-    name: 'description',
-    content:
-      'Frontend Engineer specializing in beautiful digital experiences. Building modern web applications with React, TypeScript, and cutting-edge technologies.',
-  },
-  { property: 'og:title', content: 'Mitchell Martinez - Frontend Engineer' },
-  {
-    property: 'og:description',
-    content: 'Frontend Engineer specializing in beautiful digital experiences.',
-  },
-];
+export const meta: MetaFunction = () =>
+  buildSocialMeta({
+    title: 'Mitchell Martinez - Frontend Engineer',
+    description: 'Frontend Engineer specializing in beautiful digital experiences.',
+  });
 
 export default function Index() {
   return <Hero />;

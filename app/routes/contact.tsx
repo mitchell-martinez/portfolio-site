@@ -3,6 +3,7 @@ import nodemailer from 'nodemailer';
 import type { ActionFunctionArgs, LoaderFunctionArgs, MetaFunction } from 'react-router';
 import { useActionData, useLoaderData } from 'react-router';
 import { Contact } from '~/components/route/Contact/';
+import { buildSocialMeta } from '~/utils/socialMeta';
 import { checkRateLimit } from '~/utils/rateLimit.server';
 
 let transporter: Transporter | undefined;
@@ -80,18 +81,11 @@ function getTransporter() {
   return transporter;
 }
 
-export const meta: MetaFunction = () => [
-  { title: 'Contact - Mitchell Martinez' },
-  {
-    name: 'description',
-    content: 'Get in touch with Mitchell Martinez - send an email or connect on LinkedIn.',
-  },
-  { property: 'og:title', content: 'Contact - Mitchell Martinez' },
-  {
-    property: 'og:description',
-    content: 'Reach out to discuss projects, collaborations, or just to say hello.',
-  },
-];
+export const meta: MetaFunction = () =>
+  buildSocialMeta({
+    title: 'Contact - Mitchell Martinez',
+    description: 'Reach out to discuss projects, collaborations, or just to say hello.',
+  });
 
 export type ContactActionData =
   | { success: true }
