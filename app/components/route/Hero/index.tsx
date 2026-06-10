@@ -73,7 +73,7 @@ const Hero = memo(() => {
             <span className={styles.taglineHighlight}>Building excellent digital experiences.</span>
           </p>
           <p className={styles.description}>
-            Based in Sydney, Australia. Specializing in React, TypeScript, and modern web technologies to create amazing
+            Based in Sydney, Australia. Specialising in React, TypeScript, and modern web technologies to create amazing
             customer experiences that just work.
           </p>
 

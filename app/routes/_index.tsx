@@ -4,8 +4,8 @@ import { buildSocialMeta } from '~/utils/socialMeta';
 
 export const meta: MetaFunction = () =>
   buildSocialMeta({
-    title: 'Mitchell Martinez - Frontend Engineer',
-    description: 'Frontend Engineer specializing in beautiful digital experiences.',
+    title: 'Mitchell Martinez - Product Engineer',
+    description: 'Frontend Engineer specialising in beautiful, functional digital experiences.',
   });
 
 export default function Index() {
