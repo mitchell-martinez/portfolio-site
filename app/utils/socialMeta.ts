@@ -35,7 +35,7 @@ export function buildSocialMeta({
   url,
   fbAppId,
 }: SocialMetaOptions): MetaTag[] {
-  const resolvedImage = image ?? DEFAULT_SOCIAL_IMAGE;
+  const resolvedImage = new URL(image ?? DEFAULT_SOCIAL_IMAGE, DEFAULT_SITE_URL).toString();
   const resolvedImageAlt = imageAlt ?? DEFAULT_SOCIAL_IMAGE_ALT;
   const resolvedUrl = url ? new URL(url, DEFAULT_SITE_URL).toString() : undefined;
   const resolvedFbAppId = fbAppId ?? DEFAULT_FB_APP_ID;
