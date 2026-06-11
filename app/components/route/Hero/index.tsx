@@ -83,9 +83,9 @@ const Hero = memo(() => {
             aria-label="Primary actions"
           >
             <ButtonLink
-              href="mailto:info@mitchellmartinez.tech"
+              href="/contact"
               variant="primary"
-              aria-label="Send Mitchell an email"
+              aria-label="Send Mitchell an enquiry"
             >
               Get In Touch
             </ButtonLink>
