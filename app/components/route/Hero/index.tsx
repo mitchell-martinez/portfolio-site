@@ -307,7 +307,7 @@ const Hero = memo(() => {
       <section className={styles.sectionBlock} aria-label="Work with me">
         <div className={styles.sectionInner}>
           <h2 className={styles.sectionTitle}>Interested in working with me?</h2>
-          <p className={styles.sectionText}>
+          <p className={`${styles.sectionText} ${styles.sectionTextCentered}`}>
             Get in touch to see how I can help with your next project.
             <br />
             <br />
