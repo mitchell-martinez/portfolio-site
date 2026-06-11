@@ -26,6 +26,16 @@ type MetaTag = {
   content?: string;
 };
 
+function inferImageMimeType(imageUrl: string): string | undefined {
+  const path = imageUrl.split('?')[0]?.toLowerCase() ?? '';
+  if (path.endsWith('.png')) return 'image/png';
+  if (path.endsWith('.jpg') || path.endsWith('.jpeg')) return 'image/jpeg';
+  if (path.endsWith('.webp')) return 'image/webp';
+  if (path.endsWith('.gif')) return 'image/gif';
+  if (path.endsWith('.svg')) return 'image/svg+xml';
+  return undefined;
+}
+
 function toCanonicalUrl(url: string): string {
   const parsed = new URL(url, DEFAULT_SITE_URL);
   const hasExtension = /\.[a-z0-9]+$/i.test(parsed.pathname);
@@ -50,6 +60,7 @@ export function buildSocialMeta({
   const resolvedImageAlt = imageAlt ?? DEFAULT_SOCIAL_IMAGE_ALT;
   const resolvedUrl = url ? toCanonicalUrl(url) : undefined;
   const resolvedFbAppId = fbAppId ?? DEFAULT_FB_APP_ID;
+  const resolvedImageType = inferImageMimeType(resolvedImage);
 
   return [
     { title },
@@ -60,7 +71,10 @@ export function buildSocialMeta({
     ...(resolvedUrl ? [{ property: 'og:url', content: resolvedUrl }] : []),
     { property: 'fb:app_id', content: resolvedFbAppId },
     { name: 'fb:app_id', content: resolvedFbAppId },
+    { property: 'og:image:url', content: resolvedImage },
+    { property: 'og:image:secure_url', content: resolvedImage },
     { property: 'og:image', content: resolvedImage },
+    ...(resolvedImageType ? [{ property: 'og:image:type', content: resolvedImageType }] : []),
     { property: 'og:image:alt', content: resolvedImageAlt },
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:title', content: title },

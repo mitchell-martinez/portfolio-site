@@ -187,8 +187,8 @@ const Contact = memo(({ actionData, formRenderedAt = '' }: ContactProps) => {
               together
             </h2>
             <p className={styles.description}>
-              Whether you have a project in mind, want to collaborate, or just want to say hello -
-              my inbox is always open.
+                Whether you want to see me write a new article on something, collaborate on a project,
+                or just want to say hello - my inbox is always open.
             </p>
 
             <div className={styles.ctaPanel}>

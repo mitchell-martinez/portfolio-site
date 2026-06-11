@@ -308,15 +308,10 @@ const Hero = memo(() => {
         <div className={styles.sectionInner}>
           <h2 className={styles.sectionTitle}>Interested in working with me?</h2>
           <p className={styles.sectionText}>
-            I&apos;m currently taking on new clients and am always open to new opportunities.
+            Get in touch to see how I can help with your next project.
             <br />
             <br />
-            Whether you&apos;re looking for a custom website built for your business, help expanding
-            or improving your online service, or are after a dedicated new employee for a project,
-            my inbox is always open.
-            <br />
-            <br />
-            Let's work together to build your next great web experience!
+            Let's work together to build the next great web experience!
           </p>
 
           <div className={styles.ctaGroup} role="group" aria-label="Contact actions">
