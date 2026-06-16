@@ -33,12 +33,6 @@ describe('Projects', () => {
     expect(screen.getByText('studiozanetti.com.au')).toBeInTheDocument();
   });
 
-  it('renders the Optus project', () => {
-    renderProjects();
-    expect(screen.getByText('Optus')).toBeInTheDocument();
-    expect(screen.getByText('optus.com.au')).toBeInTheDocument();
-  });
-
   it('renders project links with correct hrefs', () => {
     renderProjects();
     const budgetoLink = screen.getByLabelText(/Visit Budgeto/i);
@@ -63,7 +57,6 @@ describe('Projects', () => {
     expect(
       screen.getByRole('img', { name: /Friends of Gulf St Vincent website screenshot/i })
     ).toBeInTheDocument();
-    expect(screen.getByRole('img', { name: /Optus website screenshot/i })).toBeInTheDocument();
   });
 
   it('does not render story buttons when no story paths are configured', () => {

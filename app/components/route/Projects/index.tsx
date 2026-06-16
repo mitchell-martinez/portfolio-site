@@ -43,26 +43,6 @@ const projectsData: Project[] = [
     highlight: 'fogsv.org.au',
     image: { src: '/images/fogsv.png', alt: 'Friends of Gulf St Vincent website screenshot' },
   },
-  {
-    id: 'optus',
-    name: 'Optus',
-    url: 'https://optus.com.au',
-    description: 'Optus website',
-    longDescription:
-      "The official website for Optus, a leading telecommunications company in Australia. Built with a focus on user experience, accessibility, and responsive design. I contributed to many projects including the home page's Recently Viewed component, simplified sales checkout experiences, major accessibility overhauls, and various other small bug fixes and minor changes.",
-    tags: [
-      'React',
-      'AEM',
-      'Accessibility',
-      'Performance',
-      'Telecommunications',
-      'eCommerce',
-      'Enterprise',
-    ],
-    highlight: 'optus.com.au',
-    fullWidth: true,
-    image: { src: '/images/optus.png', alt: 'Optus website screenshot' },
-  },
 ];
 
 const Projects = memo(() => {

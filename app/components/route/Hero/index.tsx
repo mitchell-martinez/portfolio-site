@@ -277,19 +277,6 @@ const Hero = memo(() => {
                 </ButtonLink>
               </div>
             </article>
-
-            <article className={styles.projectCard}>
-              <h3 className={styles.cardTitle}>Optus</h3>
-              <p className={styles.cardText}>
-                Delivered robust UI enhancements with a focus on accessibility, responsiveness, and
-                maintainable component architecture.
-              </p>
-              <div className={styles.projectCardActions}>
-                <ButtonLink to="/projects" variant="secondary" aria-label="Go to project page">
-                  View project work
-                </ButtonLink>
-              </div>
-            </article>
           </div>
         </div>
         <div className={styles.ctaGroup} style={{ marginTop: '3.5rem' }}>
