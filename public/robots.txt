@@ -1,0 +1,6 @@
+# Allow indexing, AI answer grounding, and training for maximal discovery.
+User-agent: *
+Content-Signal: search=yes,ai-input=yes,ai-train=yes
+Allow: /
+
+Sitemap: https://mitchellmartinez.tech/sitemap.xml

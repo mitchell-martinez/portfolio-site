@@ -20,6 +20,9 @@ export const DEFAULT_FB_APP_ID =
   '000000000000000';
 
 type MetaTag = {
+  tagName?: string;
+  rel?: string;
+  href?: string;
   title?: string;
   name?: string;
   property?: string;
@@ -65,7 +68,12 @@ export function buildSocialMeta({
   return [
     { title },
     { name: 'description', content: description },
+    { name: 'robots', content: 'index,follow,max-image-preview:large' },
+    ...(resolvedUrl
+      ? [{ tagName: 'link', rel: 'canonical', href: resolvedUrl }]
+      : []),
     { property: 'og:title', content: title },
+    { property: 'og:site_name', content: 'Mitchell Martinez' },
     { property: 'og:description', content: description },
     { property: 'og:type', content: type },
     ...(resolvedUrl ? [{ property: 'og:url', content: resolvedUrl }] : []),

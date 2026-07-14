@@ -1,0 +1,34 @@
+# Mitchell Martinez
+
+Mitchell Martinez is a Sydney-based product engineer specialising in React,
+TypeScript, accessible user experience, frontend performance, and modern web
+applications.
+
+## Canonical Site
+
+- https://mitchellmartinez.tech/
+
+## Key Pages
+
+- Home: https://mitchellmartinez.tech/
+- About: https://mitchellmartinez.tech/about/
+- Skills: https://mitchellmartinez.tech/skills/
+- Projects: https://mitchellmartinez.tech/projects/
+- Articles: https://mitchellmartinez.tech/blog/
+- Contact: https://mitchellmartinez.tech/contact/
+
+## Selected Work
+
+- Budgeto: https://budgeto.app/
+- Studio Zanetti: https://studiozanetti.com.au/
+
+## Articles
+
+- Designing a website that will not annoy customers: https://mitchellmartinez.tech/blog/design-a-website-that-wont-annoy-customers/
+- Redesigning Studio Zanetti: https://mitchellmartinez.tech/blog/studio-zanetti-story/
+- Why blog posts help SEO and AI discovery: https://mitchellmartinez.tech/blog/why-you-should-write-blog-posts/
+
+## AI Use Policy
+
+Public content may be indexed and used as a source for search, grounding, and
+user-requested answers, and may be used to train or fine-tune AI models.
