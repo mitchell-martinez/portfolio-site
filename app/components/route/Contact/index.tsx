@@ -9,7 +9,6 @@ import
     {
         budgetOptions,
         launchWindowOptions,
-        packageInterestOptions,
         projectTypeOptions,
         referralSourceOptions,
     } from '~/utils/contactForm';
@@ -21,42 +20,30 @@ type ContactProps = {
   selectedPackage?: PackageSlug;
 };
 
-const packageGuidance: Record<string, { name: string; investment: string; timeline: string; note: string }> = {
+const packageGuidance: Record<string, { name: string; note: string }> = {
   launch: {
     name: 'Launch',
-    investment: 'From A$3,000',
-    timeline: 'Typically 3–4 weeks',
-    note: 'A focused first website for a clear service, offer, or independent business.',
+    note: 'That is only a starting point, and we can change it after talking.',
   },
   grow: {
     name: 'Grow',
-    investment: 'From A$5,000',
-    timeline: 'Typically 6–8 weeks',
-    note: 'A larger, editable platform for an established business with more to communicate.',
+    note: 'That is only a starting point, and we can change it after talking.',
   },
   custom: {
     name: 'Custom',
-    investment: 'From A$7,500',
-    timeline: 'Typically 10–16+ weeks',
-    note: 'Advanced content, integrations, custom workflows, or product functionality.',
+    note: 'I will help separate what is essential now from what can come later.',
   },
   care: {
     name: 'Care',
-    investment: 'From A$99/month',
-    timeline: 'Ongoing after launch',
-    note: 'Routine maintenance, monitoring, and small content changes for an existing site.',
+    note: 'Tell me what you already have and where support would be most useful.',
   },
   'not-sure': {
     name: 'Not sure yet',
-    investment: 'We will define the right scope',
-    timeline: 'Confirmed after discovery',
-    note: 'Bring the goal and the constraints. I will help work out the most useful starting point.',
+    note: 'Bring the goal and constraints, and I will help shape the right approach.',
   },
   '': {
-    name: 'Choose a starting point',
-    investment: 'Packages start from A$3,000',
-    timeline: 'Most projects take 3–16 weeks',
-    note: 'Select a package in the brief and this summary will update with the likely shape of the work.',
+    name: 'No package selected',
+    note: 'You do not need to diagnose the solution before getting in touch.',
   },
 };
 
@@ -67,10 +54,8 @@ const Contact = memo(({ actionData, formRenderedAt = '', selectedPackage }: Cont
   const submittedValues = failedAction?.values;
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
   const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed'>('idle');
-  const [packageInterest, setPackageInterest] = useState(
-    submittedValues?.packageInterest ?? selectedPackage ?? ''
-  );
-  const selectedGuidance = packageGuidance[packageInterest] ?? packageGuidance[''];
+  const packageInterest = submittedValues?.packageInterest ?? selectedPackage ?? 'not-sure';
+  const selectedGuidance = selectedPackage ? packageGuidance[selectedPackage] : undefined;
   const contactEmail = 'info@mitchellmartinez.tech';
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -227,43 +212,45 @@ const Contact = memo(({ actionData, formRenderedAt = '', selectedPackage }: Cont
     <>
       <main className={styles.page} id="contact">
         <section className={styles.hero} aria-labelledby="contact-heading">
-          <div className={styles.heroMedia} aria-hidden="true">
-            <img src="/images/studiozanetti.png" alt="" />
-            <div className={styles.heroScrim} />
-          </div>
           <div className={styles.heroInner}>
             <div className={styles.heroCopy}>
-              <p className={styles.eyebrow}>Start a project</p>
+              <p className={styles.eyebrow}>A conversation, not a sales process</p>
               <h1 id="contact-heading" className={styles.heading}>
-                Tell me what needs to <span>work better.</span>
+                Let&apos;s talk about what you&apos;re <span>building.</span>
               </h1>
               <p className={styles.description}>
-                Bring the rough idea, the frustrating current site, or the ambitious product
-                brief. You do not need to solve the project before getting in touch.
+                Send the rough idea, the frustrating current site, or the ambitious product
+                brief. I&apos;ll read it personally and reply with a useful next step.
               </p>
+              <p className={styles.heroReassurance}>No polished brief required. No obligation to proceed.</p>
             </div>
-            <div className={styles.heroAside}>
-              <span>Typical reply</span>
-              <strong>Within two business days</strong>
-              <p>No hard sell. No obligation to proceed.</p>
-            </div>
+            <figure className={styles.heroPortrait}>
+              <img
+                src="/images/mitchmartinez.jpg"
+                alt="Mitchell Martinez, the developer who will reply to your enquiry"
+              />
+              <figcaption>
+                <span>You&apos;re speaking directly with</span>
+                <strong>Mitchell Martinez</strong>
+              </figcaption>
+            </figure>
           </div>
         </section>
 
-        <ScrollReveal as="section" className={styles.expectationBand} aria-label="What to expect">
-          <ol>
-            <li><span>01</span><strong>Send the useful context</strong><p>Goals, timing, budget, and what is currently getting in the way.</p></li>
-            <li><span>02</span><strong>Get a direct response</strong><p>I will reply personally with useful questions and a likely path forward.</p></li>
-            <li><span>03</span><strong>Decide without pressure</strong><p>If the fit is right, I will turn the conversation into a clear written proposal.</p></li>
-          </ol>
+        <ScrollReveal as="section" className={styles.contactBand} aria-label="Contact details">
+          <dl>
+            <div><dt>Based in</dt><dd>Sydney, working across Australia</dd></div>
+            <div><dt>Typical reply</dt><dd>Within two business days</dd></div>
+            <div><dt>You&apos;ll hear from</dt><dd>Me, not an account manager</dd></div>
+          </dl>
         </ScrollReveal>
 
         <section className={styles.briefSection} aria-labelledby="brief-heading">
           <ScrollReveal className={styles.formColumn}>
             <div className={styles.formHeader}>
-              <p className={styles.eyebrow}>Project brief</p>
-              <h2 id="brief-heading">Give me enough to think with.</h2>
-              <p>Required fields are marked with an asterisk. Plain language is perfect.</p>
+              <p className={styles.eyebrow}>Your note</p>
+              <h2 id="brief-heading">Start wherever makes sense.</h2>
+              <p>Plain language is perfect. Required fields are marked with an asterisk.</p>
             </div>
 
             {actionData && 'success' in actionData && actionData.success && (
@@ -292,9 +279,173 @@ const Contact = memo(({ actionData, formRenderedAt = '', selectedPackage }: Cont
               </div>
 
               <input type="hidden" name="formRenderedAt" value={formRenderedAt} />
+              <input type="hidden" name="packageInterest" value={packageInterest} />
+
+              <fieldset className={`${styles.formStage} ${styles.openingStage}`}>
+                <legend>Begin with the idea</legend>
+                <p className={styles.stageIntroduction}>
+                  What should change for your business or customers? What is getting in the way now?
+                </p>
+
+                <div className={styles.field}>
+                  <label htmlFor="contact-message" className={styles.label}>
+                    What are you hoping to change? <span className={styles.required}>*</span>
+                  </label>
+                  <textarea
+                    id="contact-message"
+                    name="message"
+                    required
+                    rows={7}
+                    maxLength={5000}
+                    autoComplete="on"
+                    className={`${styles.input} ${styles.textarea}`}
+                    placeholder="A rough explanation is enough. Tell me about the business, the current experience, and what a better result would look like."
+                    defaultValue={submittedValues?.message}
+                    aria-invalid={failedAction?.fieldErrors?.message ? true : undefined}
+                    aria-describedby={failedAction?.fieldErrors?.message ? 'message-error' : undefined}
+                  />
+                  {failedAction?.fieldErrors?.message && (
+                    <p id="message-error" className={styles.fieldError}>
+                      {failedAction.fieldErrors.message}
+                    </p>
+                  )}
+                </div>
+              </fieldset>
 
               <fieldset className={styles.formStage}>
-                <legend><span>01</span> Who should I reply to?</legend>
+                <legend>Add any useful context</legend>
+                <p className={styles.stageIntroduction}>
+                  Best estimates are fine. These answers help me respond usefully, not lock you into a scope.
+                </p>
+
+              {selectedGuidance && (
+                <p className={styles.packageNote}>
+                  <strong>You came here from the {selectedGuidance.name} package.</strong>{' '}
+                  {selectedGuidance.note}
+                </p>
+              )}
+
+              <div className={styles.fieldGrid}>
+                <div className={styles.field}>
+                  <label htmlFor="contact-project-type" className={styles.label}>
+                    Project type <span className={styles.required}>*</span>
+                  </label>
+                  <select
+                    id="contact-project-type"
+                    name="projectType"
+                    required
+                    className={styles.input}
+                    defaultValue={submittedValues?.projectType ?? ''}
+                    aria-invalid={failedAction?.fieldErrors?.projectType ? true : undefined}
+                    aria-describedby={
+                      failedAction?.fieldErrors?.projectType ? 'project-type-error' : undefined
+                    }
+                  >
+                    <option value="">Select a project type</option>
+                    {projectTypeOptions.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                  {failedAction?.fieldErrors?.projectType && (
+                    <p id="project-type-error" className={styles.fieldError}>
+                      {failedAction.fieldErrors.projectType}
+                    </p>
+                  )}
+                </div>
+
+                <div className={styles.field}>
+                  <label htmlFor="contact-budget" className={styles.label}>
+                    Approximate budget <span className={styles.required}>*</span>
+                  </label>
+                  <select
+                    id="contact-budget"
+                    name="budget"
+                    required
+                    className={styles.input}
+                    defaultValue={submittedValues?.budget ?? ''}
+                    aria-invalid={failedAction?.fieldErrors?.budget ? true : undefined}
+                    aria-describedby={failedAction?.fieldErrors?.budget ? 'budget-error' : undefined}
+                  >
+                    <option value="">Select a budget range</option>
+                    {budgetOptions.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                  {failedAction?.fieldErrors?.budget && (
+                    <p id="budget-error" className={styles.fieldError}>
+                      {failedAction.fieldErrors.budget}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className={styles.fieldGrid}>
+                <div className={styles.field}>
+                  <label htmlFor="contact-launch-window" className={styles.label}>
+                    Desired launch <span className={styles.required}>*</span>
+                  </label>
+                  <select
+                    id="contact-launch-window"
+                    name="launchWindow"
+                    required
+                    className={styles.input}
+                    defaultValue={submittedValues?.launchWindow ?? ''}
+                    aria-invalid={failedAction?.fieldErrors?.launchWindow ? true : undefined}
+                    aria-describedby={
+                      failedAction?.fieldErrors?.launchWindow ? 'launch-window-error' : undefined
+                    }
+                  >
+                    <option value="">Select a timeframe</option>
+                    {launchWindowOptions.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                  {failedAction?.fieldErrors?.launchWindow && (
+                    <p id="launch-window-error" className={styles.fieldError}>
+                      {failedAction.fieldErrors.launchWindow}
+                    </p>
+                  )}
+                </div>
+
+                <div className={styles.field}>
+                  <label htmlFor="contact-current-website" className={styles.label}>
+                    Current website
+                  </label>
+                  <input
+                    id="contact-current-website"
+                    name="currentWebsite"
+                    type="url"
+                    inputMode="url"
+                    autoComplete="url"
+                    placeholder="https://example.com"
+                    maxLength={500}
+                    className={styles.input}
+                    defaultValue={submittedValues?.currentWebsite}
+                    aria-invalid={failedAction?.fieldErrors?.currentWebsite ? true : undefined}
+                    aria-describedby={
+                      failedAction?.fieldErrors?.currentWebsite ? 'current-website-error' : undefined
+                    }
+                  />
+                  {failedAction?.fieldErrors?.currentWebsite && (
+                    <p id="current-website-error" className={styles.fieldError}>
+                      {failedAction.fieldErrors.currentWebsite}
+                    </p>
+                  )}
+                </div>
+              </div>
+              </fieldset>
+
+              <fieldset className={styles.formStage}>
+                <legend>Where should I reply?</legend>
+                <p className={styles.stageIntroduction}>
+                  You&apos;ll hear directly from me, usually within two business days.
+                </p>
 
               <div className={styles.fieldGrid}>
               <div className={styles.field}>
@@ -366,159 +517,6 @@ const Contact = memo(({ actionData, formRenderedAt = '', selectedPackage }: Cont
                   </p>
                 )}
               </div>
-              </fieldset>
-
-              <fieldset className={styles.formStage}>
-                <legend><span>02</span> What are we shaping?</legend>
-
-              <div className={styles.fieldGrid}>
-                <div className={styles.field}>
-                  <label htmlFor="contact-project-type" className={styles.label}>
-                    Project type <span className={styles.required}>*</span>
-                  </label>
-                  <select
-                    id="contact-project-type"
-                    name="projectType"
-                    required
-                    className={styles.input}
-                    defaultValue={submittedValues?.projectType ?? ''}
-                    aria-invalid={failedAction?.fieldErrors?.projectType ? true : undefined}
-                    aria-describedby={
-                      failedAction?.fieldErrors?.projectType ? 'project-type-error' : undefined
-                    }
-                  >
-                    <option value="">Select a project type</option>
-                    {projectTypeOptions.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
-                  {failedAction?.fieldErrors?.projectType && (
-                    <p id="project-type-error" className={styles.fieldError}>
-                      {failedAction.fieldErrors.projectType}
-                    </p>
-                  )}
-                </div>
-
-                <div className={styles.field}>
-                  <label htmlFor="contact-package" className={styles.label}>
-                    Package interest <span className={styles.required}>*</span>
-                  </label>
-                  <select
-                    id="contact-package"
-                    name="packageInterest"
-                    required
-                    className={styles.input}
-                    value={packageInterest}
-                    onChange={(event) => setPackageInterest(event.target.value)}
-                    aria-invalid={failedAction?.fieldErrors?.packageInterest ? true : undefined}
-                    aria-describedby={
-                      failedAction?.fieldErrors?.packageInterest ? 'package-error' : undefined
-                    }
-                  >
-                    <option value="">Select a package</option>
-                    {packageInterestOptions.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
-                  {failedAction?.fieldErrors?.packageInterest && (
-                    <p id="package-error" className={styles.fieldError}>
-                      {failedAction.fieldErrors.packageInterest}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              <div className={styles.fieldGrid}>
-                <div className={styles.field}>
-                  <label htmlFor="contact-budget" className={styles.label}>
-                    Approximate budget <span className={styles.required}>*</span>
-                  </label>
-                  <select
-                    id="contact-budget"
-                    name="budget"
-                    required
-                    className={styles.input}
-                    defaultValue={submittedValues?.budget ?? ''}
-                    aria-invalid={failedAction?.fieldErrors?.budget ? true : undefined}
-                    aria-describedby={failedAction?.fieldErrors?.budget ? 'budget-error' : undefined}
-                  >
-                    <option value="">Select a budget range</option>
-                    {budgetOptions.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
-                  {failedAction?.fieldErrors?.budget && (
-                    <p id="budget-error" className={styles.fieldError}>
-                      {failedAction.fieldErrors.budget}
-                    </p>
-                  )}
-                </div>
-
-                <div className={styles.field}>
-                  <label htmlFor="contact-launch-window" className={styles.label}>
-                    Desired launch <span className={styles.required}>*</span>
-                  </label>
-                  <select
-                    id="contact-launch-window"
-                    name="launchWindow"
-                    required
-                    className={styles.input}
-                    defaultValue={submittedValues?.launchWindow ?? ''}
-                    aria-invalid={failedAction?.fieldErrors?.launchWindow ? true : undefined}
-                    aria-describedby={
-                      failedAction?.fieldErrors?.launchWindow ? 'launch-window-error' : undefined
-                    }
-                  >
-                    <option value="">Select a timeframe</option>
-                    {launchWindowOptions.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
-                  {failedAction?.fieldErrors?.launchWindow && (
-                    <p id="launch-window-error" className={styles.fieldError}>
-                      {failedAction.fieldErrors.launchWindow}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              <div className={styles.field}>
-                <label htmlFor="contact-current-website" className={styles.label}>
-                  Current website
-                </label>
-                <input
-                  id="contact-current-website"
-                  name="currentWebsite"
-                  type="url"
-                  inputMode="url"
-                  autoComplete="url"
-                  placeholder="https://example.com"
-                  maxLength={500}
-                  className={styles.input}
-                  defaultValue={submittedValues?.currentWebsite}
-                  aria-invalid={failedAction?.fieldErrors?.currentWebsite ? true : undefined}
-                  aria-describedby={
-                    failedAction?.fieldErrors?.currentWebsite ? 'current-website-error' : undefined
-                  }
-                />
-                {failedAction?.fieldErrors?.currentWebsite && (
-                  <p id="current-website-error" className={styles.fieldError}>
-                    {failedAction.fieldErrors.currentWebsite}
-                  </p>
-                )}
-              </div>
-              </fieldset>
-
-              <fieldset className={styles.formStage}>
-                <legend><span>03</span> What would success look like?</legend>
 
               <div className={styles.field}>
                 <label htmlFor="contact-referral-source" className={styles.label}>
@@ -548,30 +546,6 @@ const Contact = memo(({ actionData, formRenderedAt = '', selectedPackage }: Cont
                 )}
               </div>
 
-              <div className={styles.field}>
-                <label htmlFor="contact-message" className={styles.label}>
-                  Project goals and details <span className={styles.required}>*</span>
-                </label>
-                <textarea
-                  id="contact-message"
-                  name="message"
-                  required
-                  rows={5}
-                  maxLength={5000}
-                  autoComplete="on"
-                  className={`${styles.input} ${styles.textarea}`}
-                  placeholder="What should the new experience help your customers understand or do? What is not working today?"
-                  defaultValue={submittedValues?.message}
-                  aria-invalid={failedAction?.fieldErrors?.message ? true : undefined}
-                  aria-describedby={failedAction?.fieldErrors?.message ? 'message-error' : undefined}
-                />
-                {failedAction?.fieldErrors?.message && (
-                  <p id="message-error" className={styles.fieldError}>
-                    {failedAction.fieldErrors.message}
-                  </p>
-                )}
-              </div>
-
               <div className={styles.checkboxField}>
                 <input
                   id="contact-send-copy"
@@ -588,7 +562,7 @@ const Contact = memo(({ actionData, formRenderedAt = '', selectedPackage }: Cont
               </fieldset>
 
               <button type="submit" className={styles.submitButton} disabled={isSubmitting}>
-                {isSubmitting ? 'Sending…' : 'Send project brief'}
+                {isSubmitting ? 'Sending…' : 'Send your note'}
               </button>
               <p className={styles.privacyNote}>
                 Your details are used only to respond to this enquiry. No mailing list, no spam.
@@ -596,30 +570,28 @@ const Contact = memo(({ actionData, formRenderedAt = '', selectedPackage }: Cont
             </Form>
           </ScrollReveal>
 
-          <ScrollReveal as="aside" className={styles.contextColumn} aria-label="Project context and direct contact">
-            <div className={styles.packageSummary} aria-live="polite">
-              <p className={styles.summaryLabel}>Your selected starting point</p>
-              <span className={styles.summaryIndex}>↳</span>
-              <h2>{selectedGuidance.name}</h2>
-              <p>{selectedGuidance.note}</p>
-              <dl>
-                <div><dt>Investment</dt><dd>{selectedGuidance.investment}</dd></div>
-                <div><dt>Indicative timing</dt><dd>{selectedGuidance.timeline}</dd></div>
-              </dl>
-              <ButtonLink to="/pricing" variant="secondary">Compare package details</ButtonLink>
+          <ScrollReveal as="aside" className={styles.contextColumn} aria-label="Helpful context and direct contact">
+            <div className={styles.conversationNote}>
+              <p className={styles.summaryLabel}>A good first message</p>
+              <h2>Rough is completely fine.</h2>
+              <p>
+                You are not placing an order or committing to a package. This form simply gives me
+                enough context to think before I reply.
+              </p>
             </div>
 
-            <div className={styles.nextSteps}>
-              <p className={styles.summaryLabel}>After you press send</p>
-              <ol>
-                <li><span>1</span>I read the brief personally.</li>
-                <li><span>2</span>I reply with questions or a suggested next step.</li>
-                <li><span>3</span>If useful, we arrange a short discovery conversation.</li>
-              </ol>
+            <div className={styles.usefulContext}>
+              <p className={styles.summaryLabel}>Useful things to mention</p>
+              <ul>
+                <li>What the business does and who it serves</li>
+                <li>What is frustrating about the current experience</li>
+                <li>Any real deadline or constraint I should know about</li>
+              </ul>
             </div>
 
             <div className={styles.directContact}>
-              <p className={styles.summaryLabel}>Prefer a direct channel?</p>
+              <p className={styles.summaryLabel}>Prefer to keep it even simpler?</p>
+              <p>Send an email or connect on LinkedIn instead.</p>
               <div className={styles.ctaGroup} role="group" aria-label="Contact options">
                 <button
                   type="button"

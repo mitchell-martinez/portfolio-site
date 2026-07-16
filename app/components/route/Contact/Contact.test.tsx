@@ -32,7 +32,7 @@ describe('Contact', () => {
   it('renders the section heading', () => {
     renderContact();
     expect(
-      screen.getByRole('heading', { level: 1, name: /tell me what needs to work better/i })
+      screen.getByRole('heading', { level: 1, name: /let's talk about what you're building/i })
     ).toBeInTheDocument();
   });
 
@@ -59,21 +59,23 @@ describe('Contact', () => {
   it('has proper section landmark', () => {
     renderContact();
     expect(
-      screen.getByRole('region', { name: /tell me what needs to work better/i })
+      screen.getByRole('region', { name: /let's talk about what you're building/i })
     ).toBeInTheDocument();
   });
 
-  it('shows and updates the selected package context', async () => {
-    const user = userEvent.setup();
+  it('preserves package context from pricing without asking for it again', () => {
     renderContact(undefined, 'grow');
 
-    expect(screen.getByLabelText(/package interest/i)).toHaveValue('grow');
-    expect(screen.getByRole('heading', { name: 'Grow' })).toBeInTheDocument();
+    expect(screen.queryByLabelText(/package interest/i)).not.toBeInTheDocument();
+    expect(screen.getByDisplayValue('grow')).toHaveAttribute('name', 'packageInterest');
+    expect(screen.getByText(/You came here from the Grow package/i)).toBeInTheDocument();
+  });
 
-    await user.selectOptions(screen.getByLabelText(/package interest/i), 'custom');
+  it('uses a neutral package value for direct enquiries', () => {
+    renderContact();
 
-    expect(screen.getByRole('heading', { name: 'Custom' })).toBeInTheDocument();
-    expect(screen.getByText('From A$7,500')).toBeInTheDocument();
+    expect(screen.queryByText(/You came here from the/i)).not.toBeInTheDocument();
+    expect(screen.getByDisplayValue('not-sure')).toHaveAttribute('name', 'packageInterest');
   });
 
   it('renders the hidden anti-bot timestamp field', () => {
