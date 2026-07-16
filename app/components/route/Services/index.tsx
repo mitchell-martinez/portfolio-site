@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { ButtonLink } from '~/components/ui/ButtonLink/';
 import { FaqList } from '~/components/ui/FaqList/';
 import { ScrollReveal } from '~/components/ui/ScrollReveal/';
@@ -25,7 +26,63 @@ const processSteps = [
   },
 ];
 
-const Services = () => (
+const serviceContext = [
+  {
+    label: 'Build type',
+    value: 'Focused custom website',
+    proof: 'Strategy, design, development, launch',
+    image: '/images/studiozanetti.png',
+    imageAlt: 'Studio Zanetti website shown as an example of a custom business website',
+    packageSlug: 'launch',
+  },
+  {
+    label: 'Build type',
+    value: 'Strategic redesign',
+    proof: 'Keep the equity. Remove the friction.',
+    image: '/images/studiozanetti.png',
+    imageAlt: 'Studio Zanetti website shown after a strategic redesign',
+    packageSlug: 'grow',
+  },
+  {
+    label: 'Build type',
+    value: 'Flexible content platform',
+    proof: 'Custom editing without the template feel',
+    image: '/images/fogsv.png',
+    imageAlt: 'Friends of Gulf St Vincent custom WordPress content platform',
+    packageSlug: 'custom',
+  },
+  {
+    label: 'Build type',
+    value: 'Purpose-built product',
+    proof: 'Complex workflows made calm and legible',
+    image: '/images/budgeto_donut.png',
+    imageAlt: 'Budgeto web application interface',
+    packageSlug: 'custom',
+  },
+  {
+    label: 'Build type',
+    value: 'Discovery-ready foundation',
+    proof: 'Useful structure for people, search, and AI',
+    image: '/images/studiozanetti.png',
+    imageAlt: 'Structured service content on the Studio Zanetti website',
+    packageSlug: 'grow',
+  },
+  {
+    label: 'Build type',
+    value: 'Embedded delivery support',
+    proof: 'Senior implementation without extra layers',
+    image: '/images/fogsv.png',
+    imageAlt: 'Custom development work shown on the Friends of Gulf St Vincent website',
+    packageSlug: 'custom',
+  },
+] as const;
+
+const Services = () => {
+  const [activeServiceIndex, setActiveServiceIndex] = useState(0);
+  const activeService = serviceOfferings[activeServiceIndex];
+  const activeContext = serviceContext[activeServiceIndex];
+
+  return (
   <div className={styles.page}>
     <section className={styles.hero} aria-labelledby="services-heading">
       <div className={styles.heroMedia} aria-hidden="true">
@@ -76,27 +133,62 @@ const Services = () => (
         </p>
       </div>
 
-      <ul className={styles.serviceGrid} role="list">
-        {serviceOfferings.map((service, index) => (
-          <ScrollReveal
-            as="li"
-            key={service.id}
-            className={styles.serviceItem}
-            delay={index * 90}
-          >
-            <span className={styles.serviceNumber} aria-hidden="true">
-              {String(index + 1).padStart(2, '0')}
-            </span>
-            <h3 className={styles.serviceName}>{service.name}</h3>
-            <p className={styles.serviceSummary}>{service.summary}</p>
-            <ul className={styles.outcomeList} aria-label={`${service.name} outcomes`}>
-              {service.outcomes.map((outcome) => (
-                <li key={outcome}>{outcome}</li>
-              ))}
+      <div className={styles.serviceExplorer}>
+        <div className={styles.serviceTabs} role="tablist" aria-label="Website services">
+          {serviceOfferings.map((service, index) => (
+            <button
+              key={service.id}
+              id={`service-tab-${service.id}`}
+              type="button"
+              role="tab"
+              aria-selected={activeServiceIndex === index}
+              aria-controls={`service-panel-${service.id}`}
+              onClick={() => setActiveServiceIndex(index)}
+              onFocus={() => setActiveServiceIndex(index)}
+            >
+              <span className={styles.serviceNumber} aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <span>
+                <strong>{service.name}</strong>
+                <small>{service.summary}</small>
+              </span>
+              <span className={styles.tabArrow} aria-hidden="true">↗</span>
+            </button>
+          ))}
+        </div>
+
+        <div
+          id={`service-panel-${activeService.id}`}
+          className={styles.servicePanel}
+          role="tabpanel"
+          aria-labelledby={`service-tab-${activeService.id}`}
+          tabIndex={0}
+        >
+          <div className={styles.panelMedia}>
+            <img src={activeContext.image} alt={activeContext.imageAlt} />
+            <span>{activeContext.proof}</span>
+          </div>
+          <div className={styles.panelContent}>
+            <p className={styles.panelLabel}>{activeContext.label}</p>
+            <h3>{activeContext.value}</h3>
+            <p>{activeService.summary}</p>
+            <ul className={styles.outcomeList} aria-label={`${activeService.name} outcomes`}>
+              {activeService.outcomes.map(outcome => <li key={outcome}>{outcome}</li>)}
             </ul>
-          </ScrollReveal>
-        ))}
-      </ul>
+            <div className={styles.panelActions}>
+              <ButtonLink
+                to={`/contact?package=${activeContext.packageSlug}`}
+                variant="primary"
+                aria-label={`Discuss ${activeService.name}`}
+              >
+                Discuss this service
+              </ButtonLink>
+              <ButtonLink to="/pricing" variant="secondary">See likely investment</ButtonLink>
+            </div>
+          </div>
+        </div>
+      </div>
     </ScrollReveal>
 
     <ScrollReveal as="section" className={styles.proofSection} aria-labelledby="proof-heading">
@@ -188,6 +280,7 @@ const Services = () => (
       </div>
     </ScrollReveal>
   </div>
-);
+  );
+};
 
 export { Services };

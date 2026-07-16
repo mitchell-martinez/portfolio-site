@@ -52,6 +52,14 @@ const technologyExperience = [
   'Schema.org',
 ];
 
+const projectOutcomes = [
+  'Get remembered',
+  'Earn trust faster',
+  'Make the next step obvious',
+  'Stay fast under pressure',
+  'Grow without a rebuild',
+];
+
 const Home = () => {
   const [income, setIncome] = useState(3200);
   const [spending, setSpending] = useState(1880);
@@ -152,22 +160,20 @@ const Home = () => {
         <div className={styles.introInner}>
           <p className={styles.sectionEyebrow}>Not another interchangeable website</p>
           <h2 id="value-heading" className={styles.statementHeading}>
-            Your business has a point of view. Its website should have one too.
+            You've invested time and money in your business. Let your website reflect that.
           </h2>
           <div className={styles.introGrid}>
             <p className={styles.introLead}>
-              I combine product thinking, expressive design, and serious engineering to make
-              digital experiences that are clear enough to use and distinctive enough to recall.
+              From the beginning, I focus on your business. What you need, who your customers are, and what they expect. Product comes first, then technology.
             </p>
             <div className={styles.introCopy}>
               <p>
-                That can mean a focused service website, a flexible headless WordPress platform,
-                or a custom application with complex workflows behind a simple interface.
+                Regardless of whether you're an eCommerce business, a creative agency, a startup, or anything in between, I focus on understanding your business and your needs before we even touch a single line of code.
               </p>
               <p>
-                The technology follows the problem. Accessibility, performance, maintainability,
-                and discoverability are part of the build rather than extras added at the end.
+                I then build you a digital presence that reflects the calibre of your business. Quick, snappy websites that work well, make sense, and don't piss off your customers.
               </p>
+              <p>So you can focus more on delivering to your customers, not running a website.</p>
               <ButtonLink to="/services" variant="secondary">
                 See how I can help
               </ButtonLink>
@@ -176,16 +182,26 @@ const Home = () => {
         </div>
       </ScrollReveal>
 
+      <section className={styles.outcomeRail} aria-label="What the work is built to do">
+        <div className={styles.outcomeTrack}>
+          {[...projectOutcomes, ...projectOutcomes].map((outcome, index) => (
+            <span key={`${outcome}-${index}`} aria-hidden={index >= projectOutcomes.length}>
+              {outcome}<b aria-hidden="true">↗</b>
+            </span>
+          ))}
+        </div>
+      </section>
+
       <section id="selected-work" className={styles.workSection} aria-labelledby="work-heading">
         <div className={styles.workHeader}>
           <div>
             <p className={styles.sectionEyebrow}>Selected work</p>
             <h2 id="work-heading" className={styles.sectionHeading}>
-              Built to do more than look polished
+              Building incredible experiences, not just ticking boxes.
             </h2>
           </div>
           <p>
-            Real products and client platforms, each shaped around a different audience,
+            Explore some of the real products and client platforms that I've built, each shaped around a different audience,
             technical problem, and business outcome.
           </p>
         </div>
@@ -383,8 +399,13 @@ const Home = () => {
             </h2>
           </div>
           <p>
-            The best interface is only as good as the decisions, systems, and code holding it up.
+            <p>
+              Marketing agencies focus on the look and feel. Tech agencies sacrifice it for speed.</p><br />
+            <p>I don't believe in compromising. I built websites that look fantastic, work exceptionally well, and help connect your customers to the information or products they need.</p><br />
+            <p>I build powerful serverside rendered digital experiences and applications, designed for speed and searchability. All my projects are built with SEO and AI optimisation front of mind, so your customers can find you easier than ever.
+            </p>
           </p>
+          
         </div>
         <div className={styles.capabilityExperience}>
           <ol className={styles.capabilityList}>
@@ -436,9 +457,9 @@ const Home = () => {
           />
         </div>
         <div className={styles.expertContent}>
-          <p className={styles.sectionEyebrow}>The person doing the work</p>
+          <p className={`${styles.sectionEyebrow} ${styles.expertEyebrow}`}>The person doing the work</p>
           <h2 id="expert-heading" className={styles.sectionHeading}>
-            One senior developer, from first question to final handover
+            One expert, from first question to final handover
           </h2>
           <p className={styles.expertLead}>
             I&apos;m Mitchell, a Sydney-based product engineer and website developer with more than
@@ -456,11 +477,7 @@ const Home = () => {
           </ul>
           <div className={styles.showcaseActions}>
             <ButtonLink to="/about" variant="primary">More about Mitchell</ButtonLink>
-            <ButtonLink
-              href="https://linkedin.com/in/mitchellmartinezadl"
-              variant="secondary"
-              external
-            >
+            <ButtonLink href="https://linkedin.com/in/mitchellmartinezadl" variant="secondary" external>
               LinkedIn
             </ButtonLink>
           </div>
@@ -491,6 +508,14 @@ const Home = () => {
                 <strong>{websitePackage.priceLabel}</strong>
                 <span>{websitePackage.timeline.replace('Typically ', '')}</span>
               </div>
+              <ButtonLink
+                to={`/contact?package=${websitePackage.slug}`}
+                variant="secondary"
+                className={styles.packageAction}
+                aria-label={`Discuss the ${websitePackage.name} package`}
+              >
+                ↗
+              </ButtonLink>
             </li>
           ))}
         </ol>

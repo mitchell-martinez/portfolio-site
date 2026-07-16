@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router';
 import { Services } from './index';
 
@@ -16,12 +17,27 @@ describe('Services', () => {
     expect(
       screen.getByRole('heading', { name: 'A better website for the business you are building' })
     ).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'New business websites' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Web applications and SaaS' })).toBeInTheDocument();
+    expect(screen.getByRole('tab', { name: /New business websites/i })).toBeInTheDocument();
+    expect(screen.getByRole('tab', { name: /Web applications and SaaS/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'View packages' })).toHaveAttribute('href', '/pricing');
     expect(screen.getByRole('link', { name: 'Read the case study' })).toHaveAttribute(
       'href',
       '/blog/studio-zanetti-story'
+    );
+  });
+
+  it('lets visitors explore a service and its likely next step', async () => {
+    const user = userEvent.setup();
+    renderServices();
+
+    const webAppsTab = screen.getByRole('tab', { name: /Web applications and SaaS/i });
+    await user.click(webAppsTab);
+
+    expect(webAppsTab).toHaveAttribute('aria-selected', 'true');
+    expect(screen.getByRole('heading', { name: 'Purpose-built product' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Discuss Web applications and SaaS' })).toHaveAttribute(
+      'href',
+      '/contact?package=custom'
     );
   });
 
