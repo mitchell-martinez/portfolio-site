@@ -56,6 +56,7 @@ const Home = () => {
   const [income, setIncome] = useState(3200);
   const [spending, setSpending] = useState(1880);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [activeCapability, setActiveCapability] = useState(0);
   const swiperRef = useRef<HTMLDivElement | null>(null);
   const leftover = Math.max(0, income - spending);
 
@@ -385,15 +386,40 @@ const Home = () => {
             The best interface is only as good as the decisions, systems, and code holding it up.
           </p>
         </div>
-        <ol className={styles.capabilityList}>
-          {capabilities.map(capability => (
-            <li key={capability.number}>
-              <span className={styles.capabilityNumber}>{capability.number}</span>
-              <h3>{capability.title}</h3>
-              <p>{capability.description}</p>
-            </li>
-          ))}
-        </ol>
+        <div className={styles.capabilityExperience}>
+          <ol className={styles.capabilityList}>
+            {capabilities.map((capability, index) => (
+              <li key={capability.number}>
+                <button
+                  type="button"
+                  aria-pressed={activeCapability === index}
+                  onClick={() => setActiveCapability(index)}
+                  onFocus={() => setActiveCapability(index)}
+                  onPointerEnter={() => setActiveCapability(index)}
+                >
+                  <span className={styles.capabilityNumber}>{capability.number}</span>
+                  <h3>{capability.title}</h3>
+                  <p>{capability.description}</p>
+                  <span className={styles.capabilityArrow} aria-hidden="true">↗</span>
+                </button>
+              </li>
+            ))}
+          </ol>
+
+          <div className={styles.capabilityMap} aria-live="polite">
+            <div className={styles.mapGrid} aria-hidden="true">
+              <span /><span /><span />
+              <div className={styles.mapCore}>
+                <span>{capabilities[activeCapability].number}</span>
+              </div>
+            </div>
+            <div className={styles.mapCaption}>
+              <span>Active discipline</span>
+              <strong>{capabilities[activeCapability].title}</strong>
+              <p>{capabilities[activeCapability].description}</p>
+            </div>
+          </div>
+        </div>
         <div className={styles.stackRail} aria-label="Technology experience">
           {technologyExperience.map(item => <span key={item}>{item}</span>)}
         </div>

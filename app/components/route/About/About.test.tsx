@@ -1,27 +1,32 @@
+import { MemoryRouter } from 'react-router';
 import { render, screen } from '@testing-library/react';
 import { About } from './index';
 
-describe('About', () => {
-  it('renders the section heading', () => {
-    render(<About />);
-    expect(screen.getByRole('heading', { name: /crafting digital experiences/i })).toBeInTheDocument();
-  });
+const renderAbout = () =>
+  render(
+    <MemoryRouter>
+      <About />
+    </MemoryRouter>
+  );
 
-  it('renders the avatar with initials', () => {
-    render(<About />);
+describe('About', () => {
+  it('renders a page-level introduction', () => {
+    renderAbout();
     expect(
-      screen.getByRole('img', { name: /Mitchell Martinez sitting on a blue couch/i })
+      screen.getByRole('heading', { level: 1, name: /make the complicated feel obvious/i })
     ).toBeInTheDocument();
   });
 
   it('renders career stats', () => {
-    render(<About />);
+    renderAbout();
     expect(screen.getByText('5+')).toBeInTheDocument();
-    expect(screen.getByText('Years Experience')).toBeInTheDocument();
+    expect(screen.getByText(/years building digital products/i)).toBeInTheDocument();
   });
 
-  it('has proper section landmark', () => {
-    render(<About />);
-    expect(screen.getByRole('region', { name: /crafting digital experiences/i })).toBeInTheDocument();
+  it('explains working principles and links to contact', () => {
+    renderAbout();
+    expect(screen.getByRole('heading', { name: /point of view behind every pixel/i })).toBeInTheDocument();
+    expect(screen.getByText(/make the hard thing feel simple/i)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /start a project/i })).toHaveAttribute('href', '/contact');
   });
 });

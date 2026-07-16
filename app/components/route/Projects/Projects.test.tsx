@@ -17,20 +17,22 @@ describe('Projects', () => {
 
   it('renders the Budgeto project', () => {
     renderProjects();
-    expect(screen.getByText('Budgeto')).toBeInTheDocument();
-    expect(screen.getByText('budgeto.app')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 3, name: 'Budgeto' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /visit budgeto at budgeto.app/i })).toBeInTheDocument();
   });
 
   it('renders the FOGSV project', () => {
     renderProjects();
-    expect(screen.getByText('Friends of Gulf St Vincent')).toBeInTheDocument();
-    expect(screen.getByText('fogsv.org.au')).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { level: 3, name: 'Friends of Gulf St Vincent' })
+    ).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /visit friends of gulf st vincent/i })).toBeInTheDocument();
   });
 
   it('renders the Studio Zanetti project', () => {
     renderProjects();
-    expect(screen.getByText('Studio Zanetti')).toBeInTheDocument();
-    expect(screen.getByText('studiozanetti.com.au')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 3, name: 'Studio Zanetti' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /visit studio zanetti/i })).toBeInTheDocument();
   });
 
   it('renders project links with correct hrefs', () => {

@@ -1,4 +1,5 @@
 import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router';
 import { Home } from './index';
 
@@ -30,6 +31,21 @@ describe('Home', () => {
     expect(screen.getByText('From A$3,000')).toBeInTheDocument();
     expect(screen.getByText('From A$5,000')).toBeInTheDocument();
     expect(screen.getByText('From A$7,500')).toBeInTheDocument();
+  });
+
+  it('lets visitors explore the disciplines behind the work', async () => {
+    const user = userEvent.setup();
+    renderHome();
+
+    const wordpressButton = screen.getByRole('button', { name: /wordpress without the drag/i });
+    expect(wordpressButton).toHaveAttribute('aria-pressed', 'false');
+
+    await user.click(wordpressButton);
+
+    expect(wordpressButton).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByText('Active discipline').nextElementSibling).toHaveTextContent(
+      'WordPress without the drag'
+    );
   });
 
   it('provides two clear closing actions', () => {
