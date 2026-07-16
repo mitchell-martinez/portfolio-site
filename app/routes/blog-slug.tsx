@@ -1,6 +1,6 @@
+import { useEffect, useState, type MouseEvent } from 'react';
 import type { LoaderFunctionArgs, MetaFunction } from 'react-router';
 import { Link, data, isRouteErrorResponse, useRouteError } from 'react-router';
-import { useEffect, useState, type MouseEvent } from 'react';
 import styles from '~/components/route/Blog/Post.module.scss';
 import { NotFound } from '~/components/route/NotFound/';
 import { getPostBySlug } from '~/lib/posts.server';
@@ -31,14 +31,19 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   const title = `${post.title} - Mitchell Martinez`;
   const description = post.description;
 
-  return buildSocialMeta({
+  return [
+    ...buildSocialMeta({
     title,
     description,
     type: 'article',
     url: `/blog/${post.slug}`,
     image: post.cover?.src,
     imageAlt: post.cover?.alt,
-  });
+    }),
+    { property: 'article:published_time', content: post.date },
+    { property: 'article:author', content: 'Mitchell Martinez' },
+    ...post.tags.map(tag => ({ property: 'article:tag', content: tag })),
+  ];
 };
 
 const dateFormatter = new Intl.DateTimeFormat('en-AU', {

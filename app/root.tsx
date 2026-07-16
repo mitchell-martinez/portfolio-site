@@ -8,6 +8,8 @@ export const links: LinksFunction = () => [
   { rel: 'icon', type: 'image/svg+xml', href: '/icons/icon-192.svg' },
   { rel: 'shortcut icon', href: '/icons/icon-192.svg' },
   { rel: 'apple-touch-icon', href: '/icons/icon-192.svg' },
+  { rel: 'author', href: '/about' },
+  { rel: 'alternate', type: 'text/plain', href: '/llms.txt', title: 'AI-readable site information' },
 ];
 
 // Inline script that runs synchronously before any CSS is applied.

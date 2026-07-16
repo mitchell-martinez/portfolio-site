@@ -76,12 +76,14 @@ export function buildSocialMeta({
   return [
     { title },
     { name: 'description', content: description },
+    { name: 'author', content: 'Mitchell Martinez' },
     { name: 'robots', content: 'index,follow,max-image-preview:large' },
     ...(resolvedUrl
       ? [{ tagName: 'link', rel: 'canonical', href: resolvedUrl }]
       : []),
     { property: 'og:title', content: title },
     { property: 'og:site_name', content: 'Mitchell Martinez' },
+    { property: 'og:locale', content: 'en_AU' },
     { property: 'og:description', content: description },
     { property: 'og:type', content: type },
     ...(resolvedUrl ? [{ property: 'og:url', content: resolvedUrl }] : []),
@@ -96,5 +98,6 @@ export function buildSocialMeta({
     { name: 'twitter:title', content: title },
     { name: 'twitter:description', content: description },
     { name: 'twitter:image', content: resolvedImage },
+    { name: 'twitter:image:alt', content: resolvedImageAlt },
   ];
 }
