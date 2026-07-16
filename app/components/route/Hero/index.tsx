@@ -56,25 +56,23 @@ const Hero = memo(() => {
         id="hero"
       >
         <div className={styles.background} aria-hidden="true">
-          <div className={styles.gradientOrb1} />
-          <div className={styles.gradientOrb2} />
-          <div className={styles.gradientOrb3} />
           <div className={styles.grid} />
         </div>
 
         <div className={styles.content}>
-          <p className={styles.eyebrow}>Hello, I'm</p>
+          <p className={styles.eyebrow}>Sydney website designer and developer</p>
           <h1 className={styles.name}>
             <span className={styles.firstName}>Mitchell</span>
             <span className={styles.lastName}> Martínez</span>
           </h1>
           <p className={styles.tagline}>
-            Product Engineer.{' '}
-            <span className={styles.taglineHighlight}>Building excellent digital experiences.</span>
+            Websites that help good businesses{' '}
+            <span className={styles.taglineHighlight}>get chosen.</span>
           </p>
           <p className={styles.description}>
-            Based in Sydney, Australia. Specialising in React, TypeScript, and modern web technologies to create amazing
-            customer experiences that just work.
+            I plan, design, and build fast, accessible websites for Australian small businesses and
+            creative professionals. You work with one person from the first conversation through
+            launch and handover.
           </p>
 
           <div
@@ -83,20 +81,19 @@ const Hero = memo(() => {
             aria-label="Primary actions"
           >
             <ButtonLink
-              href="/contact"
+              to="/services"
               variant="primary"
-              aria-label="Send Mitchell an enquiry"
+              aria-label="Explore Mitchell's website services"
             >
-              Get In Touch
+              Explore services
             </ButtonLink>
             <ButtonLink
-              href="https://linkedin.com/in/mitchellmartinezadl"
+              to="/pricing"
               variant="secondary"
-              external
               className={styles.heroLinkedInButton}
-              aria-label="Visit Mitchell's LinkedIn profile (opens in new tab)"
+              aria-label="View website packages and pricing"
             >
-              LinkedIn
+              View pricing
             </ButtonLink>
           </div>
         </div>
@@ -104,49 +101,48 @@ const Hero = memo(() => {
 
       <section id="value-prop" className={styles.sectionBlock} aria-label="Value proposition">
         <div className={styles.sectionInner}>
-          <h2 className={styles.sectionTitle}>Navigating the web shouldn&apos;t suck</h2>
+          <h2 className={styles.sectionTitle}>A clearer path from idea to launch</h2>
           <p className={styles.sectionText}>
-            The web should make things easier for customers. Too many digital experiences
-            nowadays are confusing, slow, or outright annoying.
+            Your website should make it easy for the right customer to understand what you do,
+            trust the business, and take the next step.
             <br />
             <br />
-            This costs businesses money.
+            I bring the planning, interface design, development, search foundations, and launch
+            work together. That means fewer handovers, practical advice, and a site built around
+            the customer journey rather than a technology checklist.
             <br />
             <br />
-            I design and build web applications that are clear, quick, and genuinely useful. Better user flows, cleaner interfaces,
-            and thoughtful frontend engineering that helps people get what they need without getting stuck.
-            <br />
-            <br />
-            Because no matter whether you run a simple WordPress site or a complex SaaS product, if your customer is happy, they stay.
+            Projects can range from focused business websites and redesigns to WordPress builds,
+            content platforms, and custom web applications.
           </p>
           <div
             className={`${styles.ctaGroup} ${styles.equalWidthGroup}`}
             role="group"
             aria-label="Primary actions"
           >
-          <ButtonLink
-              href="/articles"
+            <ButtonLink
+              to="/projects"
               variant="primary"
               className={styles.heroLinkedInButton}
-              aria-label="Read Mitchell's articles"
+              aria-label="View Mitchell's client and product work"
             >
-              Read my articles
-          </ButtonLink>
-          <ButtonLink
+              See selected work
+            </ButtonLink>
+            <ButtonLink
               href="/about"
               variant="secondary"
               className={styles.heroLinkedInButton}
               aria-label="Learn more about Mitchell"
             >
-              About Me
-          </ButtonLink>
+              About Mitchell
+            </ButtonLink>
           </div>
         </div>
       </section>
 
       <section className={styles.sectionBlock} aria-label="Featured projects">
         <div className={styles.sectionInner}>
-          <h2 className={styles.sectionTitle}>Check out some projects I&apos;ve worked on</h2>
+          <h2 className={styles.sectionTitle}>Selected work, built for real users</h2>
 
           <div className={styles.budgetoCard}>
             <div>
@@ -261,19 +257,26 @@ const Hero = memo(() => {
 
           <div className={styles.projectGrid}>
             <article className={styles.projectCard}>
+              <img
+                src="/images/studiozanetti.png"
+                alt="Studio Zanetti website after its redesign"
+                className={styles.projectImage}
+                loading="lazy"
+                decoding="async"
+              />
               <h3 className={styles.cardTitle}>Studio Zanetti</h3>
               <p className={styles.cardText}>
-                Built a polished studio website with expressive visual design, responsive layouts,
-                and fast page performance to showcase creative work clearly.
+                Redesigned and rebuilt a Sydney photography studio&apos;s website around clearer
+                customer journeys, flexible WordPress content, accessible galleries, and enquiry
+                flows for multiple audiences.
               </p>
               <div className={styles.projectCardActions}>
                 <ButtonLink
-                  href="https://studiozanetti.com.au"
+                  to="/blog/studio-zanetti-story"
                   variant="secondary"
-                  external
-                  aria-label="Visit Studio Zanetti website (opens in new tab)"
+                  aria-label="Read the Studio Zanetti case study"
                 >
-                  Visit Studio Zanetti
+                  Read the case study
                 </ButtonLink>
               </div>
             </article>
@@ -286,19 +289,17 @@ const Hero = memo(() => {
             aria-label="Go to project page"
             className={styles.wideCtaButton}
           >
-            View all projects here
+            View all work
           </ButtonLink>
         </div>
       </section>
 
       <section className={styles.sectionBlock} aria-label="Work with me">
         <div className={styles.sectionInner}>
-          <h2 className={styles.sectionTitle}>Interested in working with me?</h2>
+          <h2 className={styles.sectionTitle}>Have a website project in mind?</h2>
           <p className={`${styles.sectionText} ${styles.sectionTextCentered}`}>
-            Get in touch to see how I can help with your next project.
-            <br />
-            <br />
-            Let's work together to build the next great web experience!
+            Tell me about the business, what the current experience is missing, and when you would
+            like to launch. You do not need a finished brief before getting in touch.
           </p>
 
           <div className={styles.ctaGroup} role="group" aria-label="Contact actions">
@@ -308,7 +309,7 @@ const Hero = memo(() => {
               aria-label="Contact Mitchell Martinez"
               className={styles.wideCtaButton}
             >
-              Get In Touch
+              Start a project
             </ButtonLink>
           </div>
         </div>

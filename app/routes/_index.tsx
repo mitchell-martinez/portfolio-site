@@ -1,11 +1,13 @@
 import type { MetaFunction } from 'react-router';
 import { Hero } from '~/components/route/Hero/';
 import { buildSocialMeta } from '~/utils/socialMeta';
+import { serializeStructuredData } from '~/utils/structuredData';
 
 export const meta: MetaFunction = () =>
   buildSocialMeta({
-    title: 'Mitchell Martinez - Product Engineer',
-    description: 'Frontend Engineer specialising in beautiful, functional digital experiences.',
+    title: 'Website Designer & Developer Australia - Mitchell Martinez',
+    description:
+      'Website design and development for Australian small businesses and creative professionals, including redesigns, WordPress, web apps and search foundations.',
     url: '/',
   });
 
@@ -17,12 +19,14 @@ const structuredData = {
       '@id': 'https://mitchellmartinez.tech/#person',
       name: 'Mitchell Martinez',
       url: 'https://mitchellmartinez.tech/',
-      jobTitle: 'Product Engineer',
+      jobTitle: 'Website Designer and Developer',
       sameAs: ['https://linkedin.com/in/mitchellmartinezadl'],
       knowsAbout: [
         'React',
         'TypeScript',
-        'Frontend engineering',
+        'Website design and development',
+        'WordPress development',
+        'Technical SEO',
         'Web accessibility',
         'User experience design',
         'Web performance',
@@ -44,7 +48,7 @@ export default function Index() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        dangerouslySetInnerHTML={{ __html: serializeStructuredData(structuredData) }}
       />
       <Hero />
     </>

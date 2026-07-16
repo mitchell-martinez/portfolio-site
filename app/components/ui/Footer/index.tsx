@@ -10,7 +10,9 @@ const Footer = memo(() => {
         <div className={styles.content}>
           <div className={styles.brand}>
             <span className={styles.logo}>MM</span>
-            <p className={styles.tagline}>Building beautiful, functional digital experiences</p>
+            <p className={styles.tagline}>
+              Website design and development for Australian businesses
+            </p>
           </div>
 
           <nav className={styles.links} aria-label="Footer navigation">
@@ -40,9 +42,22 @@ const Footer = memo(() => {
               Budgeto
             </a>
             <a
+              href="/services"
+              className={styles.link}
+              aria-label="Explore Mitchell's website design and development services"
+            >
+              Services
+            </a>
+            <a
+              href="/pricing"
+              className={styles.link}
+              aria-label="Compare Mitchell's website packages and pricing"
+            >
+              Pricing
+            </a>
+            <a
               href="/about"
               className={styles.link}
-              rel="noopener noreferrer"
               aria-label="Find out more about Mitchell on the About page"
             >
               About Me
@@ -50,7 +65,6 @@ const Footer = memo(() => {
             <a
               href="/skills"
               className={styles.link}
-              rel="noopener noreferrer"
               aria-label="View Mitchell's skills and expertise on the Skills page"
             >
               Skills
@@ -58,7 +72,6 @@ const Footer = memo(() => {
             <a
               href="/blog"
               className={styles.link}
-              rel="noopener noreferrer"
               aria-label="Articles page with posts on frontend development and design"
             >
               Articles
@@ -66,7 +79,6 @@ const Footer = memo(() => {
             <a
               href="/projects"
               className={styles.link}
-              rel="noopener noreferrer"
               aria-label="View all projects on the Projects page"
             >
               Projects
@@ -74,7 +86,6 @@ const Footer = memo(() => {
             <a
               href="/contact"
               className={styles.link}
-              rel="noopener noreferrer"
               aria-label="Contact Mitchell via the Contact page"
             >
               Contact Me
@@ -83,11 +94,10 @@ const Footer = memo(() => {
         </div>
 
         <div className={styles.bottom}>
-          <p className={styles.copyright}>
-            <p>
-            © {currentYear} Mitchell Martinez. All rights reserved.</p><p>
-            ABN 40 927 243 914</p>
-          </p>
+          <div className={styles.copyright}>
+            <p>© {currentYear} Mitchell Martinez. All rights reserved.</p>
+            <p>ABN 40 927 243 914</p>
+          </div>
         </div>
       </div>
     </footer>

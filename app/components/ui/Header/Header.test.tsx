@@ -10,7 +10,7 @@ function mockMatchMedia(matches = true) {
     writable: true,
     value: vi.fn().mockImplementation(() => ({
       matches,
-      media: '(min-width: 768px)',
+      media: '(min-width: 1024px)',
       onchange: null,
       addEventListener: listener,
       removeEventListener: listener,
@@ -41,20 +41,23 @@ describe('Header', () => {
 
   it('renders navigation links', () => {
     renderHeader();
+    expect(screen.getAllByText('Services').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Work').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Pricing').length).toBeGreaterThan(0);
     expect(screen.getAllByText('About').length).toBeGreaterThan(0);
-    expect(screen.getAllByText('Skills').length).toBeGreaterThan(0);
-    expect(screen.getAllByText('Projects').length).toBeGreaterThan(0);
     expect(screen.getAllByText('Articles').length).toBeGreaterThan(0);
   });
 
   it('nav links point to the correct routes', () => {
     renderHeader();
+    const serviceLinks = screen.getAllByRole('link', { name: 'Services' });
+    expect(serviceLinks[0]).toHaveAttribute('href', '/services');
+    const workLinks = screen.getAllByRole('link', { name: 'Work' });
+    expect(workLinks[0]).toHaveAttribute('href', '/projects');
+    const pricingLinks = screen.getAllByRole('link', { name: 'Pricing' });
+    expect(pricingLinks[0]).toHaveAttribute('href', '/pricing');
     const aboutLinks = screen.getAllByRole('link', { name: 'About' });
     expect(aboutLinks[0]).toHaveAttribute('href', '/about');
-    const skillsLinks = screen.getAllByRole('link', { name: 'Skills' });
-    expect(skillsLinks[0]).toHaveAttribute('href', '/skills');
-    const projectsLinks = screen.getAllByRole('link', { name: 'Projects' });
-    expect(projectsLinks[0]).toHaveAttribute('href', '/projects');
     const articleLinks = screen.getAllByRole('link', { name: 'Articles' });
     expect(articleLinks[0]).toHaveAttribute('href', '/blog');
   });
@@ -65,8 +68,8 @@ describe('Header', () => {
     // The first nav link (desktop) should have the active class
     expect(aboutLinks[0].className).toMatch(/navLinkActive/);
     // Other links should not be active
-    const skillsLinks = screen.getAllByRole('link', { name: 'Skills' });
-    expect(skillsLinks[0].className).not.toMatch(/navLinkActive/);
+    const serviceLinks = screen.getAllByRole('link', { name: 'Services' });
+    expect(serviceLinks[0].className).not.toMatch(/navLinkActive/);
   });
 
   it('renders the CTA button', () => {
@@ -85,14 +88,14 @@ describe('Header', () => {
 
   it('renders the theme toggle button defaulting to dark mode', () => {
     renderHeader();
-    expect(screen.getByRole('button', { name: /switch to light mode/i })).toBeInTheDocument();
+    expect(screen.getAllByRole('button', { name: /switch to light mode/i })).toHaveLength(2);
   });
 
   it('switches the theme toggle label after click', async () => {
     const user = userEvent.setup();
     renderHeader();
-    const toggleButton = screen.getByRole('button', { name: /switch to light mode/i });
+    const [toggleButton] = screen.getAllByRole('button', { name: /switch to light mode/i });
     await user.click(toggleButton);
-    expect(screen.getByRole('button', { name: /switch to dark mode/i })).toBeInTheDocument();
+    expect(screen.getAllByRole('button', { name: /switch to dark mode/i })).toHaveLength(2);
   });
 });

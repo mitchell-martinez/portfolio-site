@@ -5,6 +5,7 @@ import styles from '~/components/route/Blog/Post.module.scss';
 import { NotFound } from '~/components/route/NotFound/';
 import { getPostBySlug } from '~/lib/posts.server';
 import { buildSocialMeta } from '~/utils/socialMeta';
+import { serializeStructuredData } from '~/utils/structuredData';
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const slug = params.slug;
@@ -53,6 +54,46 @@ export default function BlogPostRoute({
 }) {
   const { post } = loaderData;
   const cover = post.cover;
+  const canonicalUrl = `https://mitchellmartinez.tech/blog/${post.slug}/`;
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'BlogPosting',
+        '@id': `${canonicalUrl}#article`,
+        headline: post.title,
+        description: post.description,
+        datePublished: post.date,
+        image: cover ? `https://mitchellmartinez.tech${cover.src}` : undefined,
+        author: { '@id': 'https://mitchellmartinez.tech/#person' },
+        mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl },
+        inLanguage: 'en-AU',
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: 'https://mitchellmartinez.tech/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Articles',
+            item: 'https://mitchellmartinez.tech/blog/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: post.title,
+            item: canonicalUrl,
+          },
+        ],
+      },
+    ],
+  };
   const [expandedImage, setExpandedImage] = useState<{
     src: string;
     alt: string;
@@ -90,8 +131,13 @@ export default function BlogPostRoute({
   };
 
   return (
-    <article className={styles.article}>
-      <div className={styles.container}>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeStructuredData(structuredData) }}
+      />
+      <article className={styles.article}>
+        <div className={styles.container}>
         <Link to="/blog" className={styles.backLink}>
           ← All articles
         </Link>
@@ -149,8 +195,9 @@ export default function BlogPostRoute({
             />
           </button>
         )}
-      </div>
-    </article>
+        </div>
+      </article>
+    </>
   );
 }
 

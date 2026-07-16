@@ -11,12 +11,20 @@ interface SocialMetaOptions {
 export const DEFAULT_SOCIAL_IMAGE = '/images/social/share-default.svg';
 export const DEFAULT_SOCIAL_IMAGE_ALT =
   'Building beautiful, functional digital experiences';
+
+const serverEnvironment = typeof process === 'undefined' ? undefined : process.env;
+
 export const DEFAULT_SITE_URL =
-  process.env.SITE_URL ?? process.env.PUBLIC_SITE_URL ?? process.env.VITE_SITE_URL ?? 'https://mitchellmartinez.tech';
+  serverEnvironment?.SITE_URL ??
+  serverEnvironment?.PUBLIC_SITE_URL ??
+  serverEnvironment?.VITE_SITE_URL ??
+  import.meta.env.VITE_SITE_URL ??
+  'https://mitchellmartinez.tech';
 export const DEFAULT_FB_APP_ID =
-  process.env.FB_APP_ID ??
-  process.env.PUBLIC_FB_APP_ID ??
-  process.env.VITE_FB_APP_ID ??
+  serverEnvironment?.FB_APP_ID ??
+  serverEnvironment?.PUBLIC_FB_APP_ID ??
+  serverEnvironment?.VITE_FB_APP_ID ??
+  import.meta.env.VITE_FB_APP_ID ??
   '000000000000000';
 
 type MetaTag = {

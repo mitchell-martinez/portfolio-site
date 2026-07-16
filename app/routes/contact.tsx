@@ -3,8 +3,16 @@ import nodemailer from 'nodemailer';
 import type { ActionFunctionArgs, LoaderFunctionArgs, MetaFunction } from 'react-router';
 import { useActionData, useLoaderData } from 'react-router';
 import { Contact } from '~/components/route/Contact/';
-import { buildSocialMeta } from '~/utils/socialMeta';
+import
+    {
+        formatContactEmail,
+        getProjectTypeLabel,
+        parseContactFormData,
+        parsePackageInterest,
+        type ContactFormValues,
+    } from '~/utils/contactForm';
 import { checkRateLimit } from '~/utils/rateLimit.server';
+import { buildSocialMeta } from '~/utils/socialMeta';
 
 let transporter: Transporter | undefined;
 const MIN_SUBMISSION_TIME_MS = 2500;
@@ -83,16 +91,27 @@ function getTransporter() {
 
 export const meta: MetaFunction = () =>
   buildSocialMeta({
-    title: 'Contact - Mitchell Martinez',
-    description: 'Reach out to discuss projects, collaborations, or just to say hello.',
+    title: 'Start a Website Project - Mitchell Martinez',
+    description:
+      'Tell me about your website, redesign, CMS or web app project, including your goals, budget and preferred launch window.',
+    url: '/contact',
   });
 
 export type ContactActionData =
   | { success: true }
-  | { success: false; error: string; fieldErrors?: Record<string, string> };
+  | {
+      success: false;
+      error: string;
+      fieldErrors?: Record<string, string>;
+      values?: ContactFormValues;
+    };
 
-export async function loader(_args: LoaderFunctionArgs) {
-  return Response.json({ formRenderedAt: Date.now().toString() });
+export async function loader({ request }: LoaderFunctionArgs) {
+  const url = new URL(request.url);
+  return Response.json({
+    formRenderedAt: Date.now().toString(),
+    selectedPackage: parsePackageInterest(url.searchParams.get('package')),
+  });
 }
 
 export async function action({ request }: ActionFunctionArgs) {
@@ -110,18 +129,8 @@ export async function action({ request }: ActionFunctionArgs) {
   }
 
   const formData = await request.formData();
-  const name = String(formData.get('name') ?? '').trim();
-  const email = String(formData.get('email') ?? '').trim();
-  const enquiryType = String(formData.get('enquiryType') ?? '').trim();
-  const message = String(formData.get('message') ?? '').trim();
-  const sendCopy = formData.get('sendCopy') === 'yes';
+  const { values, fieldErrors } = parseContactFormData(formData);
   const formRenderedAt = String(formData.get('formRenderedAt') ?? '');
-
-  const fieldErrors: Record<string, string> = {};
-  if (!email) fieldErrors.email = 'Email is required.';
-  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) fieldErrors.email = 'Invalid email address.';
-  if (!message) fieldErrors.message = 'Message is required.';
-  else if (message.length > 5000) fieldErrors.message = 'Message must be under 5,000 characters.';
 
   if (Object.keys(fieldErrors).length > 0) {
     return Response.json(
@@ -129,6 +138,7 @@ export async function action({ request }: ActionFunctionArgs) {
         success: false,
         error: 'Please fix the errors below.',
         fieldErrors,
+        values,
       } satisfies ContactActionData,
       { status: 400 }
     );
@@ -144,9 +154,9 @@ export async function action({ request }: ActionFunctionArgs) {
   const fromEmail = process.env.CONTACT_FROM_EMAIL || process.env.SMTP_USER;
   const fromName = process.env.CONTACT_FROM_NAME || 'Portfolio Contact Form';
   const toEmail = process.env.CONTACT_TO_EMAIL || 'info@mitchellmartinez.tech';
-  const senderName = name || 'Anonymous';
-  const enquiryLabel = enquiryType || 'Enquiry';
-  const enquiryText = `Name: ${senderName}\nEmail: ${email}\nEnquiry Type: ${enquiryType || 'Not specified'}\n\n${message}`;
+  const senderName = values.name.replace(/[\r\n]+/g, ' ');
+  const enquiryLabel = getProjectTypeLabel(values.projectType);
+  const enquiryText = formatContactEmail(values);
 
   try {
     const transporter = getTransporter();
@@ -155,21 +165,21 @@ export async function action({ request }: ActionFunctionArgs) {
       transporter.sendMail({
         from: fromEmail ? `${fromName} <${fromEmail}>` : fromName,
         to: toEmail,
-        replyTo: email,
+        replyTo: values.email,
         subject: `[${enquiryLabel}] New enquiry from ${senderName}`,
         text: enquiryText,
       }),
     ];
 
-    if (sendCopy) {
+    if (values.sendCopy) {
       mailJobs.push(
         transporter.sendMail({
           from: fromEmail ? `${fromName} <${fromEmail}>` : fromName,
-          to: email,
+          to: values.email,
           replyTo: toEmail,
           subject: `Copy of your enquiry to Mitchell Martinez`,
           text:
-            `Hi ${name || 'there'},\n\n` +
+            `Hi ${senderName},\n\n` +
             `Thanks for getting in touch. This is a copy of the enquiry you submitted through the website.\n\n` +
             `${enquiryText}\n\n` +
             `Mitchell will reply as soon as possible.`,
@@ -192,7 +202,13 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 
 export default function ContactRoute() {
-  const { formRenderedAt } = useLoaderData<typeof loader>();
+  const { formRenderedAt, selectedPackage } = useLoaderData<typeof loader>();
   const actionData = useActionData<ContactActionData>();
-  return <Contact actionData={actionData} formRenderedAt={formRenderedAt} />;
+  return (
+    <Contact
+      actionData={actionData}
+      formRenderedAt={formRenderedAt}
+      selectedPackage={selectedPackage ?? undefined}
+    />
+  );
 }

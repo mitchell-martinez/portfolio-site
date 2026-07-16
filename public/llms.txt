@@ -1,8 +1,9 @@
 # Mitchell Martinez
 
-Mitchell Martinez is a Sydney-based product engineer specialising in React,
-TypeScript, accessible user experience, frontend performance, and modern web
-applications.
+Mitchell Martinez is a Sydney-based website designer and developer working with
+Australian small businesses and creative professionals. Services include new
+business websites, redesigns, WordPress and headless CMS development, custom web
+applications, technical SEO foundations, and agency development support.
 
 ## Canonical Site
 
@@ -11,16 +12,30 @@ applications.
 ## Key Pages
 
 - Home: https://mitchellmartinez.tech/
+- Services: https://mitchellmartinez.tech/services/
+- Website packages and pricing: https://mitchellmartinez.tech/pricing/
+- Start a project: https://mitchellmartinez.tech/contact/
+- Selected work: https://mitchellmartinez.tech/projects/
 - About: https://mitchellmartinez.tech/about/
 - Skills: https://mitchellmartinez.tech/skills/
-- Projects: https://mitchellmartinez.tech/projects/
 - Articles: https://mitchellmartinez.tech/blog/
-- Contact: https://mitchellmartinez.tech/contact/
+
+## Website Packages
+
+- Launch: from A$3,000, typically 3–4 weeks
+- Grow: from A$5,000, typically 6–8 weeks
+- Custom: from A$7,500, typically 10–16+ weeks
+- Care: from A$99 per month
+
+Prices are starting points in Australian dollars. Final scope, timing, and price
+are confirmed in a written proposal. Projects are normally 50% to book and 50%
+before launch, with payment plans available by agreement.
 
 ## Selected Work
 
 - Budgeto: https://budgeto.app/
 - Studio Zanetti: https://studiozanetti.com.au/
+- Studio Zanetti case study: https://mitchellmartinez.tech/blog/studio-zanetti-story/
 
 ## Articles
 

@@ -4,9 +4,10 @@ import { ButtonLink } from '~/components/ui/ButtonLink/';
 import styles from './Header.module.scss';
 
 const navItems = [
+  { label: 'Services', href: '/services' },
+  { label: 'Work', href: '/projects' },
+  { label: 'Pricing', href: '/pricing' },
   { label: 'About', href: '/about' },
-  { label: 'Skills', href: '/skills' },
-  { label: 'Projects', href: '/projects' },
   { label: 'Articles', href: '/blog' },
 ];
 
@@ -39,7 +40,7 @@ const MoonIcon = () => (
   </svg>
 );
 
-const DESKTOP_QUERY = '(min-width: 768px)';
+const DESKTOP_QUERY = '(min-width: 1024px)';
 
 function resolveTheme(): 'dark' | 'light' {
   if (typeof document === 'undefined') return 'dark';
@@ -75,14 +76,7 @@ function isNavItemActive(currentPath: string, itemHref: string): boolean {
 const Header = memo(() => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(() => {
-    if (typeof window === 'undefined') return true;
-    return window.matchMedia(DESKTOP_QUERY).matches;
-  });
-  // Read the theme that the anti-FOUC inline script has already applied to
-  // <html data-theme>. Using a lazy initializer avoids the wrong-icon flash
-  // that would occur if we defaulted to 'dark' and corrected it in an effect.
-  const [theme, setTheme] = useState<'dark' | 'light'>(() => resolveTheme());
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
   const location = useLocation();
 
   const handleScroll = useCallback(() => {
@@ -104,7 +98,6 @@ const Header = memo(() => {
   useEffect(() => {
     const mql = window.matchMedia(DESKTOP_QUERY);
     const onChange = (e: MediaQueryListEvent) => {
-      setIsDesktop(e.matches);
       if (e.matches) setIsMobileMenuOpen(false);
     };
     mql.addEventListener('change', onChange);
@@ -137,73 +130,65 @@ const Header = memo(() => {
           <span className={styles.logoText}>MM</span>
         </Link>
 
-        {isDesktop && (
-          <>
-            <nav className={styles.nav} aria-label="Main navigation">
-              <ul className={styles.navList} role="list">
-                {navItems.map(item => (
-                  <li key={item.href}>
-                    <Link
-                      to={item.href}
-                      className={`${styles.navLink} ${isNavItemActive(location.pathname, item.href) ? styles.navLinkActive : ''}`}
-                      onClick={handleNavClick}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+        <nav className={styles.nav} aria-label="Main navigation">
+          <ul className={styles.navList} role="list">
+            {navItems.map(item => (
+              <li key={item.href}>
+                <Link
+                  to={item.href}
+                  className={`${styles.navLink} ${isNavItemActive(location.pathname, item.href) ? styles.navLinkActive : ''}`}
+                  onClick={handleNavClick}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
-            <div className={styles.actions}>
-              <button
-                className={styles.themeToggle}
-                onClick={toggleTheme}
-                aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-              >
-                {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
-              </button>
+        <div className={styles.actions}>
+          <button
+            className={styles.themeToggle}
+            onClick={toggleTheme}
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+          </button>
 
-              <ButtonLink
-                to="/contact"
-                variant="primary"
-                size="sm"
-                className={styles.ctaButton}
-                aria-label="Go to the Contact page"
-              >
-                Get In Touch
-              </ButtonLink>
-            </div>
-          </>
-        )}
+          <ButtonLink
+            to="/contact"
+            variant="primary"
+            size="sm"
+            className={styles.ctaButton}
+            aria-label="Go to the Contact page"
+          >
+            Get In Touch
+          </ButtonLink>
+        </div>
 
-        {!isDesktop && (
-          <>
-            <button
-              className={styles.themeToggle}
-              onClick={toggleTheme}
-              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-            >
-              {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
-            </button>
+        <button
+          className={`${styles.themeToggle} ${styles.mobileThemeToggle}`}
+          onClick={toggleTheme}
+          aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+        >
+          {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+        </button>
 
-            <button
-              className={styles.mobileMenuButton}
-              onClick={toggleMobileMenu}
-              aria-expanded={isMobileMenuOpen}
-              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-              aria-controls="mobile-menu"
-            >
-              <span
-                className={`${styles.hamburger} ${isMobileMenuOpen ? styles.open : ''}`}
-                aria-hidden="true"
-              />
-            </button>
-          </>
-        )}
+        <button
+          className={styles.mobileMenuButton}
+          onClick={toggleMobileMenu}
+          aria-expanded={isMobileMenuOpen}
+          aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-controls="mobile-menu"
+        >
+          <span
+            className={`${styles.hamburger} ${isMobileMenuOpen ? styles.open : ''}`}
+            aria-hidden="true"
+          />
+        </button>
       </div>
 
-      {!isDesktop && isMobileMenuOpen && (
+      {isMobileMenuOpen && (
         <div id="mobile-menu" className={`${styles.mobileMenu} ${styles.mobileMenuOpen}`}>
           <nav aria-label="Mobile navigation">
             <ul className={styles.mobileNavList} role="list">

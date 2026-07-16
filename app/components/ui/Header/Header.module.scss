@@ -29,7 +29,7 @@
   justify-content: space-between;
   gap: 2rem;
 
-  @include respond-to('md') {
+  @include respond-to('lg') {
     padding: 0 2rem;
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
@@ -44,7 +44,7 @@
   text-decoration: none;
   @include focus-ring;
 
-  @include respond-to('md') {
+  @include respond-to('lg') {
     grid-column: 1;
     justify-self: start;
   }
@@ -60,7 +60,7 @@
 .nav {
   display: none;
 
-  @include respond-to('md') {
+  @include respond-to('lg') {
     display: flex;
     grid-column: 2;
     justify-self: center;
@@ -101,7 +101,7 @@
   align-items: center;
   gap: 0.5rem;
 
-  @include respond-to('md') {
+  @include respond-to('lg') {
     display: flex;
     grid-column: 3;
     justify-self: end;
@@ -127,6 +127,12 @@
   }
 }
 
+.mobileThemeToggle {
+  @include respond-to('lg') {
+    display: none;
+  }
+}
+
 .ctaButton {
   white-space: nowrap;
 }
@@ -140,7 +146,7 @@
   border-radius: $border-radius-sm;
   @include focus-ring;
 
-  @include respond-to('md') {
+  @include respond-to('lg') {
     display: none;
   }
 }
@@ -194,6 +200,10 @@
   &.mobileMenuOpen {
     max-height: 400px;
     border-color: var(--color-border);
+  }
+
+  @include respond-to('lg') {
+    display: none;
   }
 }
 

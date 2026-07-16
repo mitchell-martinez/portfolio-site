@@ -17,23 +17,22 @@ describe('Hero', () => {
     expect(heading).toHaveTextContent('Martínez');
   });
 
-  it('renders the tagline', () => {
+  it('renders the website offer', () => {
     renderHero();
-    expect(screen.getByText('Product Engineer.', { exact: false })).toBeInTheDocument();
+    expect(screen.getByText('Websites that help good businesses', { exact: false })).toBeInTheDocument();
+    expect(screen.getByText(/Australian small businesses and creative professionals/)).toBeInTheDocument();
   });
 
-  it('renders the Get in Touch CTA', () => {
+  it('links to services and pricing from the hero', () => {
     renderHero();
-    const emailLink = screen.getByLabelText('Send Mitchell an email');
-    expect(emailLink).toHaveAttribute('href', 'mailto:info@mitchellmartinez.tech');
-  });
-
-  it('renders the LinkedIn CTA', () => {
-    renderHero();
-    const linkedinLink = screen.getByLabelText(
-      "Visit Mitchell's LinkedIn profile (opens in new tab)"
+    expect(screen.getByRole('link', { name: "Explore Mitchell's website services" })).toHaveAttribute(
+      'href',
+      '/services'
     );
-    expect(linkedinLink).toHaveAttribute('href', 'https://linkedin.com/in/mitchellmartinezadl');
+    expect(screen.getByRole('link', { name: 'View website packages and pricing' })).toHaveAttribute(
+      'href',
+      '/pricing'
+    );
   });
 
   it('has proper semantic structure', () => {
@@ -58,5 +57,13 @@ describe('Hero', () => {
 
     expect(within(contactActionsGroup).getAllByRole('link')).toHaveLength(1);
     expect(contactActionsGroup.className).not.toMatch(/equalWidthGroup/);
+  });
+
+  it('links Studio Zanetti to its case study', () => {
+    renderHero();
+    expect(screen.getByRole('link', { name: 'Read the Studio Zanetti case study' })).toHaveAttribute(
+      'href',
+      '/blog/studio-zanetti-story'
+    );
   });
 });

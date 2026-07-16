@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const contentDir = resolve(__dirname, 'content/blog');
 
-const staticPaths = ['/', '/about', '/skills', '/projects', '/blog'];
+const staticPaths = ['/', '/about', '/skills', '/services', '/pricing', '/projects', '/blog'];
 
 function getBlogSlugs(): string[] {
   try {

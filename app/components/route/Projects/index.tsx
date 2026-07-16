@@ -39,7 +39,7 @@ const projectsData: Project[] = [
     description: 'Friends of Gulf St Vincent community platform',
     longDescription:
       'A community website for Friends of Gulf St Vincent, based in Adelaide. Built in WordPress with custom theming and plugins to support conservation efforts, events, and educational resources about the local marine environment.',
-    tags: ['React', 'TypeScript', 'Community', 'Conservation'],
+    tags: ['WordPress', 'Custom Theme', 'Custom Plugins', 'Non-profit'],
     highlight: 'fogsv.org.au',
     image: { src: '/images/fogsv.png', alt: 'Friends of Gulf St Vincent website screenshot' },
   },

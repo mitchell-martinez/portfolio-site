@@ -9,7 +9,9 @@ describe('About', () => {
 
   it('renders the avatar with initials', () => {
     render(<About />);
-    expect(screen.getByRole('img', { name: /Mitchell Martinez initials avatar/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole('img', { name: /Mitchell Martinez sitting on a blue couch/i })
+    ).toBeInTheDocument();
   });
 
   it('renders career stats', () => {

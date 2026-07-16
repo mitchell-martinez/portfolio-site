@@ -21,42 +21,6 @@
   z-index: 0;
 }
 
-.gradientOrb1,
-.gradientOrb2,
-.gradientOrb3 {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  animation: float 8s ease-in-out infinite;
-}
-
-.gradientOrb1 {
-  width: min(600px, 80vw);
-  height: min(600px, 80vw);
-  background: radial-gradient(circle, var(--color-glow), transparent 70%);
-  top: -20%;
-  right: -10%;
-  animation-delay: 0s;
-}
-
-.gradientOrb2 {
-  width: min(400px, 60vw);
-  height: min(400px, 60vw);
-  background: radial-gradient(circle, var(--color-glow), transparent 70%);
-  bottom: 10%;
-  left: -5%;
-  animation-delay: -3s;
-}
-
-.gradientOrb3 {
-  width: min(300px, 50vw);
-  height: min(300px, 50vw);
-  background: radial-gradient(circle, var(--color-glow), transparent 70%);
-  top: 40%;
-  left: 40%;
-  animation-delay: -6s;
-}
-
 .grid {
   position: absolute;
   inset: 0;
@@ -65,19 +29,6 @@
     linear-gradient(90deg, var(--color-grid-line) 1px, transparent 1px);
   background-size: 60px 60px;
   mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0) scale(1);
-  }
-  33% {
-    transform: translateY(-30px) scale(1.05);
-  }
-  66% {
-    transform: translateY(20px) scale(0.95);
-  }
 }
 
 .content {
@@ -440,6 +391,15 @@
   padding: 1.25rem;
   display: flex;
   flex-direction: column;
+}
+
+.projectImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: $border-radius-sm;
 }
 
 .projectCardActions {

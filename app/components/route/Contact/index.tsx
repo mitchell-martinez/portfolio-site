@@ -3,19 +3,31 @@ import { memo, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Form, useNavigation } from 'react-router';
 import { ButtonLink } from '~/components/ui/ButtonLink';
+import type { PackageSlug } from '~/data/freelanceServices';
 import { useIntersectionObserver } from '~/hooks/useIntersectionObserver';
 import type { ContactActionData } from '~/routes/contact';
+import
+    {
+        budgetOptions,
+        launchWindowOptions,
+        packageInterestOptions,
+        projectTypeOptions,
+        referralSourceOptions,
+    } from '~/utils/contactForm';
 import styles from './Contact.module.scss';
 
 type ContactProps = {
   actionData?: ContactActionData;
   formRenderedAt?: string;
+  selectedPackage?: PackageSlug;
 };
 
-const Contact = memo(({ actionData, formRenderedAt = '' }: ContactProps) => {
+const Contact = memo(({ actionData, formRenderedAt = '', selectedPackage }: ContactProps) => {
   const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.1, triggerOnce: true });
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
+  const failedAction = actionData && !actionData.success ? actionData : undefined;
+  const submittedValues = failedAction?.values;
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
   const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed'>('idle');
   const contactEmail = 'info@mitchellmartinez.tech';
@@ -187,8 +199,8 @@ const Contact = memo(({ actionData, formRenderedAt = '' }: ContactProps) => {
               together
             </h2>
             <p className={styles.description}>
-                Whether you want to see me write a new article on something, collaborate on a project,
-                or just want to say hello - my inbox is always open.
+                Tell me what you are building, what is getting in the way, and when you would like
+                to launch. You do not need a finished brief before getting in touch.
             </p>
 
             <div className={styles.ctaPanel}>
@@ -290,7 +302,15 @@ const Contact = memo(({ actionData, formRenderedAt = '' }: ContactProps) => {
                   required
                   autoComplete="name"
                   className={styles.input}
+                  defaultValue={submittedValues?.name}
+                  aria-invalid={failedAction?.fieldErrors?.name ? true : undefined}
+                  aria-describedby={failedAction?.fieldErrors?.name ? 'name-error' : undefined}
                 />
+                {failedAction?.fieldErrors?.name && (
+                  <p id="name-error" className={styles.fieldError}>
+                    {failedAction.fieldErrors.name}
+                  </p>
+                )}
               </div>
 
               <div className={styles.field}>
@@ -305,49 +325,216 @@ const Contact = memo(({ actionData, formRenderedAt = '' }: ContactProps) => {
                   autoComplete="email"
                   inputMode="email"
                   className={styles.input}
-                  aria-invalid={
-                    actionData && !actionData.success && actionData.fieldErrors?.email
-                      ? true
-                      : undefined
-                  }
-                  aria-describedby={
-                    actionData && !actionData.success && actionData.fieldErrors?.email
-                      ? 'email-error'
-                      : undefined
-                  }
+                  defaultValue={submittedValues?.email}
+                  aria-invalid={failedAction?.fieldErrors?.email ? true : undefined}
+                  aria-describedby={failedAction?.fieldErrors?.email ? 'email-error' : undefined}
                 />
-                {actionData && !actionData.success && actionData.fieldErrors?.email && (
+                {failedAction?.fieldErrors?.email && (
                   <p id="email-error" className={styles.fieldError}>
-                    {actionData.fieldErrors.email}
+                    {failedAction.fieldErrors.email}
                   </p>
                 )}
               </div>
 
               <div className={styles.field}>
-                <label htmlFor="contact-enquiry-type" className={styles.label}>
-                  Enquiry Type
+                <label htmlFor="contact-organisation" className={styles.label}>
+                  Business or organisation
+                </label>
+                <input
+                  id="contact-organisation"
+                  name="organisation"
+                  type="text"
+                  autoComplete="organization"
+                  maxLength={120}
+                  className={styles.input}
+                  defaultValue={submittedValues?.organisation}
+                  aria-invalid={failedAction?.fieldErrors?.organisation ? true : undefined}
+                  aria-describedby={
+                    failedAction?.fieldErrors?.organisation ? 'organisation-error' : undefined
+                  }
+                />
+                {failedAction?.fieldErrors?.organisation && (
+                  <p id="organisation-error" className={styles.fieldError}>
+                    {failedAction.fieldErrors.organisation}
+                  </p>
+                )}
+              </div>
+
+              <div className={styles.fieldGrid}>
+                <div className={styles.field}>
+                  <label htmlFor="contact-project-type" className={styles.label}>
+                    Project type <span className={styles.required}>*</span>
+                  </label>
+                  <select
+                    id="contact-project-type"
+                    name="projectType"
+                    required
+                    className={styles.input}
+                    defaultValue={submittedValues?.projectType ?? ''}
+                    aria-invalid={failedAction?.fieldErrors?.projectType ? true : undefined}
+                    aria-describedby={
+                      failedAction?.fieldErrors?.projectType ? 'project-type-error' : undefined
+                    }
+                  >
+                    <option value="">Select a project type</option>
+                    {projectTypeOptions.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                  {failedAction?.fieldErrors?.projectType && (
+                    <p id="project-type-error" className={styles.fieldError}>
+                      {failedAction.fieldErrors.projectType}
+                    </p>
+                  )}
+                </div>
+
+                <div className={styles.field}>
+                  <label htmlFor="contact-package" className={styles.label}>
+                    Package interest <span className={styles.required}>*</span>
+                  </label>
+                  <select
+                    id="contact-package"
+                    name="packageInterest"
+                    required
+                    className={styles.input}
+                    defaultValue={submittedValues?.packageInterest ?? selectedPackage ?? ''}
+                    aria-invalid={failedAction?.fieldErrors?.packageInterest ? true : undefined}
+                    aria-describedby={
+                      failedAction?.fieldErrors?.packageInterest ? 'package-error' : undefined
+                    }
+                  >
+                    <option value="">Select a package</option>
+                    {packageInterestOptions.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                  {failedAction?.fieldErrors?.packageInterest && (
+                    <p id="package-error" className={styles.fieldError}>
+                      {failedAction.fieldErrors.packageInterest}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className={styles.fieldGrid}>
+                <div className={styles.field}>
+                  <label htmlFor="contact-budget" className={styles.label}>
+                    Approximate budget <span className={styles.required}>*</span>
+                  </label>
+                  <select
+                    id="contact-budget"
+                    name="budget"
+                    required
+                    className={styles.input}
+                    defaultValue={submittedValues?.budget ?? ''}
+                    aria-invalid={failedAction?.fieldErrors?.budget ? true : undefined}
+                    aria-describedby={failedAction?.fieldErrors?.budget ? 'budget-error' : undefined}
+                  >
+                    <option value="">Select a budget range</option>
+                    {budgetOptions.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                  {failedAction?.fieldErrors?.budget && (
+                    <p id="budget-error" className={styles.fieldError}>
+                      {failedAction.fieldErrors.budget}
+                    </p>
+                  )}
+                </div>
+
+                <div className={styles.field}>
+                  <label htmlFor="contact-launch-window" className={styles.label}>
+                    Desired launch <span className={styles.required}>*</span>
+                  </label>
+                  <select
+                    id="contact-launch-window"
+                    name="launchWindow"
+                    required
+                    className={styles.input}
+                    defaultValue={submittedValues?.launchWindow ?? ''}
+                    aria-invalid={failedAction?.fieldErrors?.launchWindow ? true : undefined}
+                    aria-describedby={
+                      failedAction?.fieldErrors?.launchWindow ? 'launch-window-error' : undefined
+                    }
+                  >
+                    <option value="">Select a timeframe</option>
+                    {launchWindowOptions.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                  {failedAction?.fieldErrors?.launchWindow && (
+                    <p id="launch-window-error" className={styles.fieldError}>
+                      {failedAction.fieldErrors.launchWindow}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className={styles.field}>
+                <label htmlFor="contact-current-website" className={styles.label}>
+                  Current website
+                </label>
+                <input
+                  id="contact-current-website"
+                  name="currentWebsite"
+                  type="url"
+                  inputMode="url"
+                  autoComplete="url"
+                  placeholder="https://example.com"
+                  maxLength={500}
+                  className={styles.input}
+                  defaultValue={submittedValues?.currentWebsite}
+                  aria-invalid={failedAction?.fieldErrors?.currentWebsite ? true : undefined}
+                  aria-describedby={
+                    failedAction?.fieldErrors?.currentWebsite ? 'current-website-error' : undefined
+                  }
+                />
+                {failedAction?.fieldErrors?.currentWebsite && (
+                  <p id="current-website-error" className={styles.fieldError}>
+                    {failedAction.fieldErrors.currentWebsite}
+                  </p>
+                )}
+              </div>
+
+              <div className={styles.field}>
+                <label htmlFor="contact-referral-source" className={styles.label}>
+                  How did you find me?
                 </label>
                 <select
-                  id="contact-enquiry-type"
-                  name="enquiryType"
+                  id="contact-referral-source"
+                  name="referralSource"
                   className={styles.input}
-                  defaultValue=""
+                  defaultValue={submittedValues?.referralSource ?? ''}
+                  aria-invalid={failedAction?.fieldErrors?.referralSource ? true : undefined}
+                  aria-describedby={
+                    failedAction?.fieldErrors?.referralSource ? 'referral-source-error' : undefined
+                  }
                 >
-                  <option value="">Select an enquiry type (optional)</option>
-                  <option value="Website Development">Website Development</option>
-                  <option value="Mobile App Development">Mobile App Development</option>
-                  <option value="Design & Marketing">Design & Marketing</option>
-                  <option value="Employment Offer">Employment Offer</option>
-                  <option value="Collaboration">Collaboration</option>
-                  <option value="Speaking Engagement">Speaking Engagement</option>
-                  <option value="General Consulting">General Consulting</option>
-                  <option value="General Enquiry">General Enquiry</option>
+                  <option value="">Select an option (optional)</option>
+                  {referralSourceOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
                 </select>
+                {failedAction?.fieldErrors?.referralSource && (
+                  <p id="referral-source-error" className={styles.fieldError}>
+                    {failedAction.fieldErrors.referralSource}
+                  </p>
+                )}
               </div>
 
               <div className={styles.field}>
                 <label htmlFor="contact-message" className={styles.label}>
-                  Message <span className={styles.required}>*</span>
+                  Project goals and details <span className={styles.required}>*</span>
                 </label>
                 <textarea
                   id="contact-message"
@@ -357,20 +544,13 @@ const Contact = memo(({ actionData, formRenderedAt = '' }: ContactProps) => {
                   maxLength={5000}
                   autoComplete="on"
                   className={`${styles.input} ${styles.textarea}`}
-                  aria-invalid={
-                    actionData && !actionData.success && actionData.fieldErrors?.message
-                      ? true
-                      : undefined
-                  }
-                  aria-describedby={
-                    actionData && !actionData.success && actionData.fieldErrors?.message
-                      ? 'message-error'
-                      : undefined
-                  }
+                  defaultValue={submittedValues?.message}
+                  aria-invalid={failedAction?.fieldErrors?.message ? true : undefined}
+                  aria-describedby={failedAction?.fieldErrors?.message ? 'message-error' : undefined}
                 />
-                {actionData && !actionData.success && actionData.fieldErrors?.message && (
+                {failedAction?.fieldErrors?.message && (
                   <p id="message-error" className={styles.fieldError}>
-                    {actionData.fieldErrors.message}
+                    {failedAction.fieldErrors.message}
                   </p>
                 )}
               </div>
@@ -382,6 +562,7 @@ const Contact = memo(({ actionData, formRenderedAt = '' }: ContactProps) => {
                   type="checkbox"
                   value="yes"
                   className={styles.checkbox}
+                  defaultChecked={submittedValues?.sendCopy}
                 />
                 <label htmlFor="contact-send-copy" className={styles.checkboxLabel}>
                   Send me a copy of this enquiry by email

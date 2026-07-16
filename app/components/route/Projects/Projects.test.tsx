@@ -47,10 +47,10 @@ describe('Projects', () => {
     expect(reactTags.length).toBeGreaterThan(0);
   });
 
-  it('renders four featured project cards with screenshots', () => {
+  it('renders three featured project cards with screenshots', () => {
     renderProjects();
     const projectsList = screen.getByRole('list', { name: 'Featured projects' });
-    expect(within(projectsList).getAllByRole('heading', { level: 3 })).toHaveLength(4);
+    expect(within(projectsList).getAllByRole('heading', { level: 3 })).toHaveLength(3);
 
     expect(screen.getByRole('img', { name: /Budgeto app dashboard screenshot/i })).toBeInTheDocument();
     expect(screen.getByRole('img', { name: /Studio Zanetti website screenshot/i })).toBeInTheDocument();
@@ -59,8 +59,18 @@ describe('Projects', () => {
     ).toBeInTheDocument();
   });
 
-  it('does not render story buttons when no story paths are configured', () => {
+  it('links Studio Zanetti to its case study', () => {
     renderProjects();
-    expect(screen.queryByRole('link', { name: /read the story behind/i })).not.toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /read the story behind studio zanetti/i })).toHaveAttribute(
+      'href',
+      '/blog/studio-zanetti-story'
+    );
+  });
+
+  it('describes the FoGSV implementation accurately', () => {
+    renderProjects();
+    expect(screen.getByText('WordPress')).toBeInTheDocument();
+    expect(screen.getByText('Custom Theme')).toBeInTheDocument();
+    expect(screen.getByText('Custom Plugins')).toBeInTheDocument();
   });
 });

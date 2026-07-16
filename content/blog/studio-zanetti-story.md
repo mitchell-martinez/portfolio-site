@@ -19,6 +19,8 @@ cover:
 
 I met Michael from Studio Zanetti at my best friends' wedding in June 2025. We exchanged contact information, and kept in touch following the wedding. When I viewed his website https://studiozanetti.com.au/ later in 2025, I offered to redesign it for him, as I noticed a number of design issues. He said yes.
 
+This project brought together the same planning, design, WordPress, performance, accessibility, and search foundations covered in my [website development services](/services).
+
 ## Identifying the requirements
 Over the first few months of 2026, I worked with him to understand the issues that he faced with his website. He was very conscious of how SEO worked, as well as emerging trends in how people are increasingly using AI tools such as ChatGPT to find vendors. He wanted a website that would:
 
@@ -153,6 +155,8 @@ We added to his primary navigation menu a "What We Do" section, which if clicked
 
 The site went live on the 8th of June 2026, after months of work focused on design, performance, and usability. But the job's not done yet! The new site gives fantastic business-critical capabilities to optimise for AI searchability using metadata, JSON schemas, and structured page data. Now that handover is completed, Michael and I will work together to make sure his fantastic new website is able to reach as many people as possible. A smooth handover process is included as part of all of my packages to make sure not only that your site works as expected, but that you're equipped with the necessary skills to maintain it for years to come.
 
+A post-launch Lighthouse lab snapshot returned scores of 100 for performance, 93 for accessibility, and 100 for SEO. Lighthouse scores can vary by page, device, and test conditions, but the snapshot provides a useful check against the technical goals of the rebuild.
+
 &nbsp;
 
 All content was copied directly from the old website to minimise handover time, but now that handover is completed Michael is taking the opportunity to update his content to reflect more recent amazing work he's done, such as various weddings, and photographing the ACAMS 2026 conference - which you can read all about on his Instagram [@studiozanetti](https://instagram.com/studiozanetti)
@@ -167,4 +171,4 @@ Oh, and if you're in need of a photographer in Sydney, no matter what the occasi
 *The end result of months of hard work. The results speak for themselves.*
 
 ## Feeling inspired?
-Are you in a similar situation like Michael where you're looking for help improving the look and feel of your website, its performance and usability, and its ranking in AI and search engines? [Contact me today](/contact) for a free, no-obligations quote. Let's work together to improve your digital presence!
+Are you in a similar situation to Michael, looking for help with your website's design, performance, usability, and search foundations? Explore my [website services](/services), compare [packages and starting prices](/pricing), or [tell me about your project](/contact). There is no obligation to proceed after the initial conversation.

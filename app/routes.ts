@@ -5,6 +5,8 @@ export default [
     index('routes/_index.tsx'),
     route('about', 'routes/about.tsx'),
     route('skills', 'routes/skills.tsx'),
+    route('services', 'routes/services.tsx'),
+    route('pricing', 'routes/pricing.tsx'),
     route('projects', 'routes/projects.tsx'),
     route('contact', 'routes/contact.tsx'),
     route('blog', 'routes/blog-index.tsx'),
