@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { ButtonLink } from '~/components/ui/ButtonLink/';
 import { FaqList } from '~/components/ui/FaqList/';
+import { ScrollReveal } from '~/components/ui/ScrollReveal/';
 import
     {
         carePlan,
@@ -10,18 +12,61 @@ import
     } from '~/data/freelanceServices';
 import styles from './Pricing.module.scss';
 
-const Pricing = () => (
+const fitOptions = [
+  { label: 'A focused first site', packageIndex: 0 },
+  { label: 'A serious redesign', packageIndex: 1 },
+  { label: 'A custom digital product', packageIndex: 2 },
+];
+
+const Pricing = () => {
+  const [selectedPackageIndex, setSelectedPackageIndex] = useState(1);
+  const selectedPackage = websitePackages[selectedPackageIndex];
+
+  return (
   <div className={styles.page}>
     <section className={styles.hero} aria-labelledby="pricing-heading">
-      <p className={styles.eyebrow}>Website packages and pricing</p>
-      <h1 id="pricing-heading" className={styles.heroHeading}>
-        Clear starting points, scoped around your project
-      </h1>
-      <p className={styles.heroText}>
-        These packages cover the most common ways I help Australian businesses. The final price
-        is confirmed in a written proposal after we discuss your goals, content, and technical
-        requirements.
-      </p>
+      <div className={styles.heroInner}>
+        <div className={styles.heroCopy}>
+          <p className={styles.eyebrow}>Website packages and pricing</p>
+          <h1 id="pricing-heading" className={styles.heroHeading}>
+            Clear starting points, scoped around your project
+          </h1>
+          <p className={styles.heroText}>
+            These packages cover the most common ways I help Australian businesses. The final price
+            is confirmed in a written proposal after we discuss your goals, content, and technical
+            requirements.
+          </p>
+        </div>
+
+        <div className={styles.fitFinder} aria-labelledby="fit-finder-heading">
+          <p className={styles.fitFinderLabel} id="fit-finder-heading">What are you building?</p>
+          <div className={styles.fitOptions} role="group" aria-label="Choose a project type">
+            {fitOptions.map(option => (
+              <button
+                key={option.label}
+                type="button"
+                aria-pressed={selectedPackageIndex === option.packageIndex}
+                onClick={() => setSelectedPackageIndex(option.packageIndex)}
+              >
+                <span>{String(option.packageIndex + 1).padStart(2, '0')}</span>
+                {option.label}
+              </button>
+            ))}
+          </div>
+          <div className={styles.fitResult} aria-live="polite">
+            <span>Your clearest starting point</span>
+            <strong>{selectedPackage.name}</strong>
+            <p>{selectedPackage.priceLabel} · {selectedPackage.timeline}</p>
+            <ButtonLink
+              to={`/contact?package=${selectedPackage.slug}`}
+              variant="primary"
+              aria-label={`Discuss the recommended ${selectedPackage.name} package`}
+            >
+              Discuss {selectedPackage.name}
+            </ButtonLink>
+          </div>
+        </div>
+      </div>
       <div className={styles.heroNotes} aria-label="Pricing summary">
         <p>Prices shown in Australian dollars</p>
         <p>Payment plans available by agreement</p>
@@ -29,7 +74,7 @@ const Pricing = () => (
       </div>
     </section>
 
-    <section className={styles.packagesSection} aria-labelledby="packages-heading">
+    <ScrollReveal as="section" className={styles.packagesSection} aria-labelledby="packages-heading">
       <div className={styles.sectionHeader}>
         <p className={styles.eyebrow}>Choose a starting point</p>
         <h2 id="packages-heading" className={styles.sectionHeading}>
@@ -39,9 +84,11 @@ const Pricing = () => (
 
       <div className={styles.packageGrid}>
         {websitePackages.map((websitePackage, index) => (
-          <article
+          <ScrollReveal
+            as="article"
             key={websitePackage.slug}
-            className={`${styles.package}${index === 1 ? ` ${styles.featuredPackage}` : ''}`}
+            delay={index * 110}
+            className={`${styles.package}${index === 1 ? ` ${styles.featuredPackage}` : ''}${selectedPackageIndex === index ? ` ${styles.recommendedPackage}` : ''}`}
           >
             <div className={styles.packageHeader}>
               <div>
@@ -75,12 +122,12 @@ const Pricing = () => (
             >
               Enquire about {websitePackage.name}
             </ButtonLink>
-          </article>
+          </ScrollReveal>
         ))}
       </div>
-    </section>
+    </ScrollReveal>
 
-    <section className={styles.sharedSection} aria-labelledby="included-heading">
+    <ScrollReveal as="section" className={styles.sharedSection} aria-labelledby="included-heading">
       <div className={styles.sharedCopy}>
         <p className={styles.eyebrow}>Included as standard</p>
         <h2 id="included-heading" className={styles.sectionHeading}>
@@ -99,9 +146,9 @@ const Pricing = () => (
           </li>
         ))}
       </ul>
-    </section>
+    </ScrollReveal>
 
-    <section className={styles.careSection} aria-labelledby="care-heading">
+    <ScrollReveal as="section" className={styles.careSection} aria-labelledby="care-heading">
       <div className={styles.careHeader}>
         <p className={styles.eyebrow}>After launch</p>
         <h2 id="care-heading" className={styles.sectionHeading}>
@@ -125,9 +172,9 @@ const Pricing = () => (
           Ask about ongoing care
         </ButtonLink>
       </div>
-    </section>
+    </ScrollReveal>
 
-    <section className={styles.boundariesSection} aria-labelledby="boundaries-heading">
+    <ScrollReveal as="section" className={styles.boundariesSection} aria-labelledby="boundaries-heading">
       <div>
         <p className={styles.eyebrow}>Before we begin</p>
         <h2 id="boundaries-heading" className={styles.sectionHeading}>
@@ -139,18 +186,18 @@ const Pricing = () => (
           <li key={exclusion}>{exclusion}</li>
         ))}
       </ul>
-    </section>
+    </ScrollReveal>
 
-    <div className={styles.faqSection}>
+    <ScrollReveal className={styles.faqSection}>
       <FaqList
         id="pricing-faq"
         faqs={pricingFaqs}
         eyebrow="Pricing questions"
         introduction="The practical details behind estimates, payment, content, and ongoing costs."
       />
-    </div>
+    </ScrollReveal>
 
-    <section className={styles.closingSection} aria-labelledby="pricing-closing-heading">
+    <ScrollReveal as="section" className={styles.closingSection} aria-labelledby="pricing-closing-heading">
       <p className={styles.eyebrow}>Not sure which package fits?</p>
       <h2 id="pricing-closing-heading" className={styles.sectionHeading}>
         Describe the problem and I will help size the work
@@ -167,8 +214,9 @@ const Pricing = () => (
           Explore services
         </ButtonLink>
       </div>
-    </section>
+    </ScrollReveal>
   </div>
-);
+  );
+};
 
 export { Pricing };

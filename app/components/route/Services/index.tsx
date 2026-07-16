@@ -1,5 +1,6 @@
 import { ButtonLink } from '~/components/ui/ButtonLink/';
 import { FaqList } from '~/components/ui/FaqList/';
+import { ScrollReveal } from '~/components/ui/ScrollReveal/';
 import { serviceOfferings, servicesFaqs } from '~/data/freelanceServices';
 import styles from './Services.module.scss';
 
@@ -27,37 +28,43 @@ const processSteps = [
 const Services = () => (
   <div className={styles.page}>
     <section className={styles.hero} aria-labelledby="services-heading">
-      <div className={styles.heroInner}>
-        <p className={styles.eyebrow}>Website design and development</p>
-        <h1 id="services-heading" className={styles.heroHeading}>
-          A better website for the business you are building
-        </h1>
-        <p className={styles.heroText}>
-          I help Australian small businesses and creative professionals turn complicated ideas
-          into clear, fast, useful websites. You get one person across planning, design,
-          development, launch, and handover.
-        </p>
-        <div className={styles.actions} aria-label="Services actions">
-          <ButtonLink to="/pricing" variant="primary">
-            View packages
-          </ButtonLink>
-          <ButtonLink to="/contact" variant="secondary">
-            Discuss your project
-          </ButtonLink>
-        </div>
+      <div className={styles.heroMedia} aria-hidden="true">
+        <img src="/images/studiozanetti.png" alt="" />
+        <div className={styles.heroScrim} />
       </div>
-      <div className={styles.heroAside} aria-label="What every project prioritises">
-        <p className={styles.asideLabel}>Built around what matters</p>
-        <ul className={styles.priorityList} role="list">
-          <li>Clear customer journeys</li>
-          <li>Responsive, accessible interfaces</li>
-          <li>Fast, maintainable technology</li>
-          <li>Search-friendly content structure</li>
-        </ul>
+      <div className={styles.heroShell}>
+        <div className={styles.heroInner}>
+          <p className={styles.eyebrow}>Website design and development</p>
+          <h1 id="services-heading" className={styles.heroHeading}>
+            A better website for the business you are building
+          </h1>
+          <p className={styles.heroText}>
+            I help Australian small businesses and creative professionals turn complicated ideas
+            into clear, fast, useful websites. You get one person across planning, design,
+            development, launch, and handover.
+          </p>
+          <div className={styles.actions} aria-label="Services actions">
+            <ButtonLink to="/pricing" variant="primary">
+              View packages
+            </ButtonLink>
+            <ButtonLink to="/contact" variant="secondary" className={styles.heroSecondaryAction}>
+              Discuss your project
+            </ButtonLink>
+          </div>
+        </div>
+        <div className={styles.heroAside} aria-label="What every project prioritises">
+          <p className={styles.asideLabel}>Every build is shaped around</p>
+          <ul className={styles.priorityList} role="list">
+            <li><span>01</span> Clear customer journeys</li>
+            <li><span>02</span> Responsive, accessible interfaces</li>
+            <li><span>03</span> Fast, maintainable technology</li>
+            <li><span>04</span> Search-friendly content structure</li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <section className={styles.servicesSection} aria-labelledby="offerings-heading">
+    <ScrollReveal as="section" className={styles.servicesSection} aria-labelledby="offerings-heading">
       <div className={styles.sectionHeader}>
         <p className={styles.eyebrow}>Ways I can help</p>
         <h2 id="offerings-heading" className={styles.sectionHeading}>
@@ -71,7 +78,12 @@ const Services = () => (
 
       <ul className={styles.serviceGrid} role="list">
         {serviceOfferings.map((service, index) => (
-          <li key={service.id} className={styles.serviceItem}>
+          <ScrollReveal
+            as="li"
+            key={service.id}
+            className={styles.serviceItem}
+            delay={index * 90}
+          >
             <span className={styles.serviceNumber} aria-hidden="true">
               {String(index + 1).padStart(2, '0')}
             </span>
@@ -82,12 +94,12 @@ const Services = () => (
                 <li key={outcome}>{outcome}</li>
               ))}
             </ul>
-          </li>
+          </ScrollReveal>
         ))}
       </ul>
-    </section>
+    </ScrollReveal>
 
-    <section className={styles.proofSection} aria-labelledby="proof-heading">
+    <ScrollReveal as="section" className={styles.proofSection} aria-labelledby="proof-heading">
       <div className={styles.proofImageWrap}>
         <img
           src="/images/studiozanetti.png"
@@ -130,9 +142,9 @@ const Services = () => (
           Read the case study
         </ButtonLink>
       </div>
-    </section>
+    </ScrollReveal>
 
-    <section className={styles.processSection} aria-labelledby="process-heading">
+    <ScrollReveal as="section" className={styles.processSection} aria-labelledby="process-heading">
       <div className={styles.sectionHeader}>
         <p className={styles.eyebrow}>How we get there</p>
         <h2 id="process-heading" className={styles.sectionHeading}>
@@ -140,25 +152,25 @@ const Services = () => (
         </h2>
       </div>
       <ol className={styles.processList}>
-        {processSteps.map((step) => (
-          <li key={step.number} className={styles.processItem}>
+        {processSteps.map((step, index) => (
+          <ScrollReveal as="li" key={step.number} className={styles.processItem} delay={index * 110}>
             <span className={styles.processNumber}>{step.number}</span>
             <h3>{step.name}</h3>
             <p>{step.description}</p>
-          </li>
+          </ScrollReveal>
         ))}
       </ol>
-    </section>
+    </ScrollReveal>
 
-    <div className={styles.faqSection}>
+    <ScrollReveal className={styles.faqSection}>
       <FaqList
         id="services-faq"
         faqs={servicesFaqs}
         introduction="Straight answers about fit, content management, and discoverability before you make an enquiry."
       />
-    </div>
+    </ScrollReveal>
 
-    <section className={styles.closingSection} aria-labelledby="services-closing-heading">
+    <ScrollReveal as="section" className={styles.closingSection} aria-labelledby="services-closing-heading">
       <p className={styles.eyebrow}>Have a project in mind?</p>
       <h2 id="services-closing-heading" className={styles.sectionHeading}>
         Start with the outcome, not a technology checklist
@@ -174,7 +186,7 @@ const Services = () => (
           Compare packages
         </ButtonLink>
       </div>
-    </section>
+    </ScrollReveal>
   </div>
 );
 

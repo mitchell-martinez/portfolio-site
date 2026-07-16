@@ -1,5 +1,6 @@
 import { useCallback, useRef, useState } from 'react';
 import { ButtonLink } from '~/components/ui/ButtonLink/';
+import { ScrollReveal } from '~/components/ui/ScrollReveal/';
 import { websitePackages } from '~/data/freelanceServices';
 import { BudgetoDonut } from '../Hero/Donut/';
 import styles from './Home.module.scss';
@@ -135,7 +136,7 @@ const Home = () => {
         </a>
       </section>
 
-      <section className={styles.trustBand} aria-label="Experience and trust signals">
+      <ScrollReveal as="section" className={styles.trustBand} aria-label="Experience and trust signals">
         <dl className={styles.trustGrid}>
           {trustSignals.map(signal => (
             <div key={signal.label} className={styles.trustItem}>
@@ -144,9 +145,9 @@ const Home = () => {
             </div>
           ))}
         </dl>
-      </section>
+      </ScrollReveal>
 
-      <section className={styles.introSection} aria-labelledby="value-heading">
+      <ScrollReveal as="section" className={styles.introSection} aria-labelledby="value-heading">
         <div className={styles.introInner}>
           <p className={styles.sectionEyebrow}>Not another interchangeable website</p>
           <h2 id="value-heading" className={styles.statementHeading}>
@@ -172,7 +173,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </ScrollReveal>
 
       <section id="selected-work" className={styles.workSection} aria-labelledby="work-heading">
         <div className={styles.workHeader}>
@@ -188,7 +189,7 @@ const Home = () => {
           </p>
         </div>
 
-        <article className={styles.showcase}>
+        <ScrollReveal as="article" className={styles.showcase}>
           <div className={styles.showcaseMedia}>
             <img
               src="/images/studiozanetti.png"
@@ -229,9 +230,9 @@ const Home = () => {
               </ButtonLink>
             </div>
           </div>
-        </article>
+        </ScrollReveal>
 
-        <article className={`${styles.showcase} ${styles.budgetoShowcase}`}>
+        <ScrollReveal as="article" className={`${styles.showcase} ${styles.budgetoShowcase}`}>
           <div className={styles.budgetoContent}>
             <div className={styles.showcaseIndex}>02 / Product engineering</div>
             <p className={styles.projectType}>Product strategy · Full-stack application · PWA</p>
@@ -337,14 +338,14 @@ const Home = () => {
             </div>
             <p className={styles.swipeHint}>Swipe to compare leftover and spent</p>
           </div>
-        </article>
+        </ScrollReveal>
 
-        <article className={`${styles.showcase} ${styles.fogsvShowcase}`}>
+        <ScrollReveal as="article" className={`${styles.showcase} ${styles.fogsvShowcase}`}>
           <div className={styles.showcaseMedia}>
             <img
               src="/images/fogsv.png"
               alt="Friends of Gulf St Vincent website home page"
-              loading="lazy"
+              loading="eager"
               decoding="async"
             />
             <span className={styles.mediaLabel}>Community platform · South Australia</span>
@@ -369,10 +370,10 @@ const Home = () => {
               </ButtonLink>
             </div>
           </div>
-        </article>
+        </ScrollReveal>
       </section>
 
-      <section className={styles.capabilitySection} aria-labelledby="capability-heading">
+      <ScrollReveal as="section" className={styles.capabilitySection} aria-labelledby="capability-heading">
         <div className={styles.capabilityHeader}>
           <div>
             <p className={styles.sectionEyebrow}>Under the surface</p>
@@ -396,15 +397,15 @@ const Home = () => {
         <div className={styles.stackRail} aria-label="Technology experience">
           {technologyExperience.map(item => <span key={item}>{item}</span>)}
         </div>
-      </section>
+      </ScrollReveal>
 
-      <section className={styles.expertSection} aria-labelledby="expert-heading">
+      <ScrollReveal as="section" className={styles.expertSection} aria-labelledby="expert-heading">
         <div className={styles.expertImageWrap}>
           <img
             src="/images/mitchmartinez.jpg"
             alt="Mitchell Martinez, Sydney website designer and developer"
             className={styles.expertImage}
-            loading="lazy"
+            loading="eager"
             decoding="async"
           />
         </div>
@@ -438,9 +439,9 @@ const Home = () => {
             </ButtonLink>
           </div>
         </div>
-      </section>
+      </ScrollReveal>
 
-      <section className={styles.pricingPreview} aria-labelledby="pricing-preview-heading">
+      <ScrollReveal as="section" className={styles.pricingPreview} aria-labelledby="pricing-preview-heading">
         <div className={styles.pricingIntro}>
           <p className={styles.sectionEyebrow}>Clear starting points</p>
           <h2 id="pricing-preview-heading" className={styles.sectionHeading}>
@@ -467,9 +468,9 @@ const Home = () => {
             </li>
           ))}
         </ol>
-      </section>
+      </ScrollReveal>
 
-      <section className={styles.closingSection} aria-labelledby="closing-heading">
+      <ScrollReveal as="section" className={styles.closingSection} aria-labelledby="closing-heading">
         <p className={styles.sectionEyebrow}>Your next digital chapter</p>
         <h2 id="closing-heading">Bring the difficult idea. I&apos;ll help make it clear.</h2>
         <p>
@@ -482,7 +483,7 @@ const Home = () => {
           </ButtonLink>
           <ButtonLink to="/services" variant="secondary">Explore services</ButtonLink>
         </div>
-      </section>
+      </ScrollReveal>
     </div>
   );
 };
