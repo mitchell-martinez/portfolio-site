@@ -3,7 +3,7 @@ import { createElement, useEffect, useState } from 'react';
 import { useIntersectionObserver } from '~/hooks/useIntersectionObserver';
 import styles from './ScrollReveal.module.scss';
 
-type RevealElement = 'article' | 'div' | 'li' | 'section';
+type RevealElement = 'article' | 'aside' | 'div' | 'li' | 'section';
 
 interface ScrollRevealProps extends HTMLAttributes<HTMLElement> {
   as?: RevealElement;

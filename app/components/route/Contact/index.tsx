@@ -1,10 +1,9 @@
-import type { RefObject } from 'react';
 import { memo, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Form, useNavigation } from 'react-router';
 import { ButtonLink } from '~/components/ui/ButtonLink';
 import type { PackageSlug } from '~/data/freelanceServices';
-import { useIntersectionObserver } from '~/hooks/useIntersectionObserver';
+import { ScrollReveal } from '~/components/ui/ScrollReveal/';
 import type { ContactActionData } from '~/routes/contact';
 import
     {
@@ -22,14 +21,56 @@ type ContactProps = {
   selectedPackage?: PackageSlug;
 };
 
+const packageGuidance: Record<string, { name: string; investment: string; timeline: string; note: string }> = {
+  launch: {
+    name: 'Launch',
+    investment: 'From A$3,000',
+    timeline: 'Typically 3–4 weeks',
+    note: 'A focused first website for a clear service, offer, or independent business.',
+  },
+  grow: {
+    name: 'Grow',
+    investment: 'From A$5,000',
+    timeline: 'Typically 6–8 weeks',
+    note: 'A larger, editable platform for an established business with more to communicate.',
+  },
+  custom: {
+    name: 'Custom',
+    investment: 'From A$7,500',
+    timeline: 'Typically 10–16+ weeks',
+    note: 'Advanced content, integrations, custom workflows, or product functionality.',
+  },
+  care: {
+    name: 'Care',
+    investment: 'From A$99/month',
+    timeline: 'Ongoing after launch',
+    note: 'Routine maintenance, monitoring, and small content changes for an existing site.',
+  },
+  'not-sure': {
+    name: 'Not sure yet',
+    investment: 'We will define the right scope',
+    timeline: 'Confirmed after discovery',
+    note: 'Bring the goal and the constraints. I will help work out the most useful starting point.',
+  },
+  '': {
+    name: 'Choose a starting point',
+    investment: 'Packages start from A$3,000',
+    timeline: 'Most projects take 3–16 weeks',
+    note: 'Select a package in the brief and this summary will update with the likely shape of the work.',
+  },
+};
+
 const Contact = memo(({ actionData, formRenderedAt = '', selectedPackage }: ContactProps) => {
-  const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.1, triggerOnce: true });
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
   const failedAction = actionData && !actionData.success ? actionData : undefined;
   const submittedValues = failedAction?.values;
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
   const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed'>('idle');
+  const [packageInterest, setPackageInterest] = useState(
+    submittedValues?.packageInterest ?? selectedPackage ?? ''
+  );
+  const selectedGuidance = packageGuidance[packageInterest] ?? packageGuidance[''];
   const contactEmail = 'info@mitchellmartinez.tech';
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -184,85 +225,46 @@ const Contact = memo(({ actionData, formRenderedAt = '', selectedPackage }: Cont
 
   return (
     <>
-      <section
-        ref={ref as RefObject<HTMLElement>}
-        className={`${styles.contact} ${isIntersecting ? styles.visible : ''}`}
-        id="contact"
-        aria-labelledby="contact-heading"
-      >
-        <div className={styles.container}>
-          <div className={styles.card}>
-            <div className={styles.content}>
-            <p className={styles.eyebrow}>Get In Touch</p>
-            <h2 id="contact-heading" className={styles.heading}>
-              Let's build a <span className={styles.headingAccent}>great</span> web experience
-              together
-            </h2>
-            <p className={styles.description}>
-                Tell me what you are building, what is getting in the way, and when you would like
-                to launch. You do not need a finished brief before getting in touch.
-            </p>
-
-            <div className={styles.ctaPanel}>
-              <p className={styles.ctaTitle}>Prefer a quick chat?</p>
-              <p className={styles.ctaDescription}>
-                Use one of these direct channels, or send a full brief with the form below.
+      <main className={styles.page} id="contact">
+        <section className={styles.hero} aria-labelledby="contact-heading">
+          <div className={styles.heroMedia} aria-hidden="true">
+            <img src="/images/studiozanetti.png" alt="" />
+            <div className={styles.heroScrim} />
+          </div>
+          <div className={styles.heroInner}>
+            <div className={styles.heroCopy}>
+              <p className={styles.eyebrow}>Start a project</p>
+              <h1 id="contact-heading" className={styles.heading}>
+                Tell me what needs to <span>work better.</span>
+              </h1>
+              <p className={styles.description}>
+                Bring the rough idea, the frustrating current site, or the ambitious product
+                brief. You do not need to solve the project before getting in touch.
               </p>
-              <div
-                className={`${styles.ctaGroup} ${styles.equalWidthGroup}`}
-                role="group"
-                aria-label="Contact options"
-              >
-                <button
-                  type="button"
-                  className={styles.emailCtaButton}
-                  onClick={() => {
-                    setCopyState('idle');
-                    setIsEmailModalOpen(true);
-                  }}
-                  aria-label="Open email options for Mitchell"
-                >
-                  <span className={styles.ctaIconBadge} aria-hidden="true">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      aria-hidden="true"
-                    >
-                      <rect width="20" height="16" x="2" y="4" rx="2" />
-                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                    </svg>
-                  </span>
-                  Email Options
-                </button>
-                <ButtonLink
-                  href="https://linkedin.com/in/mitchellmartinezadl"
-                  variant="secondary"
-                  external
-                  className={styles.secondaryCtaLink}
-                  aria-label="Connect with Mitchell on LinkedIn (opens in new tab)"
-                >
-                  <span className={styles.ctaIconBadge} aria-hidden="true">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" />
-                      <circle cx="4" cy="4" r="2" />
-                    </svg>
-                  </span>
-                  LinkedIn
-                </ButtonLink>
-              </div>
             </div>
+            <div className={styles.heroAside}>
+              <span>Typical reply</span>
+              <strong>Within two business days</strong>
+              <p>No hard sell. No obligation to proceed.</p>
+            </div>
+          </div>
+        </section>
 
-            <div className={styles.formDivider} aria-hidden="true" />
+        <ScrollReveal as="section" className={styles.expectationBand} aria-label="What to expect">
+          <ol>
+            <li><span>01</span><strong>Send the useful context</strong><p>Goals, timing, budget, and what is currently getting in the way.</p></li>
+            <li><span>02</span><strong>Get a direct response</strong><p>I will reply personally with useful questions and a likely path forward.</p></li>
+            <li><span>03</span><strong>Decide without pressure</strong><p>If the fit is right, I will turn the conversation into a clear written proposal.</p></li>
+          </ol>
+        </ScrollReveal>
+
+        <section className={styles.briefSection} aria-labelledby="brief-heading">
+          <ScrollReveal className={styles.formColumn}>
+            <div className={styles.formHeader}>
+              <p className={styles.eyebrow}>Project brief</p>
+              <h2 id="brief-heading">Give me enough to think with.</h2>
+              <p>Required fields are marked with an asterisk. Plain language is perfect.</p>
+            </div>
 
             {actionData && 'success' in actionData && actionData.success && (
               <div className={styles.successBanner} role="status">
@@ -291,6 +293,10 @@ const Contact = memo(({ actionData, formRenderedAt = '', selectedPackage }: Cont
 
               <input type="hidden" name="formRenderedAt" value={formRenderedAt} />
 
+              <fieldset className={styles.formStage}>
+                <legend><span>01</span> Who should I reply to?</legend>
+
+              <div className={styles.fieldGrid}>
               <div className={styles.field}>
                 <label htmlFor="contact-name" className={styles.label}>
                   Name <span className={styles.required}>*</span>
@@ -335,6 +341,7 @@ const Contact = memo(({ actionData, formRenderedAt = '', selectedPackage }: Cont
                   </p>
                 )}
               </div>
+              </div>
 
               <div className={styles.field}>
                 <label htmlFor="contact-organisation" className={styles.label}>
@@ -359,6 +366,10 @@ const Contact = memo(({ actionData, formRenderedAt = '', selectedPackage }: Cont
                   </p>
                 )}
               </div>
+              </fieldset>
+
+              <fieldset className={styles.formStage}>
+                <legend><span>02</span> What are we shaping?</legend>
 
               <div className={styles.fieldGrid}>
                 <div className={styles.field}>
@@ -399,7 +410,8 @@ const Contact = memo(({ actionData, formRenderedAt = '', selectedPackage }: Cont
                     name="packageInterest"
                     required
                     className={styles.input}
-                    defaultValue={submittedValues?.packageInterest ?? selectedPackage ?? ''}
+                    value={packageInterest}
+                    onChange={(event) => setPackageInterest(event.target.value)}
                     aria-invalid={failedAction?.fieldErrors?.packageInterest ? true : undefined}
                     aria-describedby={
                       failedAction?.fieldErrors?.packageInterest ? 'package-error' : undefined
@@ -503,6 +515,10 @@ const Contact = memo(({ actionData, formRenderedAt = '', selectedPackage }: Cont
                   </p>
                 )}
               </div>
+              </fieldset>
+
+              <fieldset className={styles.formStage}>
+                <legend><span>03</span> What would success look like?</legend>
 
               <div className={styles.field}>
                 <label htmlFor="contact-referral-source" className={styles.label}>
@@ -544,6 +560,7 @@ const Contact = memo(({ actionData, formRenderedAt = '', selectedPackage }: Cont
                   maxLength={5000}
                   autoComplete="on"
                   className={`${styles.input} ${styles.textarea}`}
+                  placeholder="What should the new experience help your customers understand or do? What is not working today?"
                   defaultValue={submittedValues?.message}
                   aria-invalid={failedAction?.fieldErrors?.message ? true : undefined}
                   aria-describedby={failedAction?.fieldErrors?.message ? 'message-error' : undefined}
@@ -568,20 +585,67 @@ const Contact = memo(({ actionData, formRenderedAt = '', selectedPackage }: Cont
                   Send me a copy of this enquiry by email
                 </label>
               </div>
+              </fieldset>
 
               <button type="submit" className={styles.submitButton} disabled={isSubmitting}>
-                {isSubmitting ? 'Sending…' : 'Send Message'}
+                {isSubmitting ? 'Sending…' : 'Send project brief'}
               </button>
+              <p className={styles.privacyNote}>
+                Your details are used only to respond to this enquiry. No mailing list, no spam.
+              </p>
             </Form>
+          </ScrollReveal>
+
+          <ScrollReveal as="aside" className={styles.contextColumn} aria-label="Project context and direct contact">
+            <div className={styles.packageSummary} aria-live="polite">
+              <p className={styles.summaryLabel}>Your selected starting point</p>
+              <span className={styles.summaryIndex}>↳</span>
+              <h2>{selectedGuidance.name}</h2>
+              <p>{selectedGuidance.note}</p>
+              <dl>
+                <div><dt>Investment</dt><dd>{selectedGuidance.investment}</dd></div>
+                <div><dt>Indicative timing</dt><dd>{selectedGuidance.timeline}</dd></div>
+              </dl>
+              <ButtonLink to="/pricing" variant="secondary">Compare package details</ButtonLink>
             </div>
 
-            <div className={styles.decoration} aria-hidden="true">
-              <div className={styles.decorCircle1} />
-              <div className={styles.decorCircle2} />
+            <div className={styles.nextSteps}>
+              <p className={styles.summaryLabel}>After you press send</p>
+              <ol>
+                <li><span>1</span>I read the brief personally.</li>
+                <li><span>2</span>I reply with questions or a suggested next step.</li>
+                <li><span>3</span>If useful, we arrange a short discovery conversation.</li>
+              </ol>
             </div>
-          </div>
-        </div>
-      </section>
+
+            <div className={styles.directContact}>
+              <p className={styles.summaryLabel}>Prefer a direct channel?</p>
+              <div className={styles.ctaGroup} role="group" aria-label="Contact options">
+                <button
+                  type="button"
+                  className={styles.emailCtaButton}
+                  onClick={() => {
+                    setCopyState('idle');
+                    setIsEmailModalOpen(true);
+                  }}
+                  aria-label="Open email options for Mitchell"
+                >
+                  Email Mitchell
+                </button>
+                <ButtonLink
+                  href="https://linkedin.com/in/mitchellmartinezadl"
+                  variant="secondary"
+                  external
+                  className={styles.secondaryCtaLink}
+                  aria-label="Connect with Mitchell on LinkedIn (opens in new tab)"
+                >
+                  LinkedIn
+                </ButtonLink>
+              </div>
+            </div>
+          </ScrollReveal>
+        </section>
+      </main>
       {emailModal}
     </>
   );

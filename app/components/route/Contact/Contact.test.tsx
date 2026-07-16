@@ -1,16 +1,17 @@
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { RouterProvider, createMemoryRouter } from 'react-router';
+import type { PackageSlug } from '~/data/freelanceServices';
 import { Contact } from './index';
 
 const writeTextMock = vi.fn().mockResolvedValue(undefined);
 
-const renderContact = (formRenderedAt?: string) => {
+const renderContact = (formRenderedAt?: string, selectedPackage?: PackageSlug) => {
   const router = createMemoryRouter(
     [
       {
         path: '/',
-        element: <Contact formRenderedAt={formRenderedAt} />,
+        element: <Contact formRenderedAt={formRenderedAt} selectedPackage={selectedPackage} />,
       },
     ],
     { initialEntries: ['/'] }
@@ -31,7 +32,7 @@ describe('Contact', () => {
   it('renders the section heading', () => {
     renderContact();
     expect(
-      screen.getByRole('heading', { name: /let's build a great web experience together/i })
+      screen.getByRole('heading', { level: 1, name: /tell me what needs to work better/i })
     ).toBeInTheDocument();
   });
 
@@ -47,11 +48,10 @@ describe('Contact', () => {
     expect(linkedinLink).toHaveAttribute('target', '_blank');
   });
 
-  it('renders two actions in the contact options CTA group with equal-width styling', () => {
+  it('renders two direct contact actions', () => {
     renderContact();
     const contactOptions = screen.getByRole('group', { name: 'Contact options' });
 
-    expect(contactOptions.className).toMatch(/equalWidthGroup/);
     expect(within(contactOptions).getByRole('button', { name: /open email options for mitchell/i })).toBeInTheDocument();
     expect(within(contactOptions).getByRole('link', { name: /connect with mitchell on linkedin/i })).toBeInTheDocument();
   });
@@ -59,8 +59,21 @@ describe('Contact', () => {
   it('has proper section landmark', () => {
     renderContact();
     expect(
-      screen.getByRole('region', { name: /let's build a great web experience together/i })
+      screen.getByRole('region', { name: /tell me what needs to work better/i })
     ).toBeInTheDocument();
+  });
+
+  it('shows and updates the selected package context', async () => {
+    const user = userEvent.setup();
+    renderContact(undefined, 'grow');
+
+    expect(screen.getByLabelText(/package interest/i)).toHaveValue('grow');
+    expect(screen.getByRole('heading', { name: 'Grow' })).toBeInTheDocument();
+
+    await user.selectOptions(screen.getByLabelText(/package interest/i), 'custom');
+
+    expect(screen.getByRole('heading', { name: 'Custom' })).toBeInTheDocument();
+    expect(screen.getByText('From A$7,500')).toBeInTheDocument();
   });
 
   it('renders the hidden anti-bot timestamp field', () => {
