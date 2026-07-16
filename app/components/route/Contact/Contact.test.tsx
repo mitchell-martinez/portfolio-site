@@ -78,6 +78,21 @@ describe('Contact', () => {
     expect(screen.getByDisplayValue('not-sure')).toHaveAttribute('name', 'packageInterest');
   });
 
+  it('preselects ongoing website care from the Care plan', () => {
+    renderContact(undefined, 'care');
+
+    expect(screen.getByLabelText(/project type/i)).toHaveValue('care');
+    expect(screen.getByText(/You came here from the Care package/i)).toBeInTheDocument();
+  });
+
+  it('offers a concise flexible budget path without policy footnotes', () => {
+    renderContact();
+
+    expect(screen.getByRole('option', { name: /I need a flexible arrangement/i })).toBeInTheDocument();
+    expect(screen.queryByText(/Non-profits, independent creatives under pressure/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/AI-native, human accountable/i)).not.toBeInTheDocument();
+  });
+
   it('renders the hidden anti-bot timestamp field', () => {
     renderContact('1234567890');
     expect(screen.getByDisplayValue('1234567890')).toHaveAttribute('name', 'formRenderedAt');

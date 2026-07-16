@@ -8,7 +8,7 @@ export const meta: MetaFunction = () =>
   buildSocialMeta({
     title: 'Website Design & Development Services - Mitchell Martinez',
     description:
-      'Custom websites, redesigns, WordPress, web apps and technical SEO foundations for Australian small businesses and creative professionals.',
+      'AI-assisted custom websites, redesigns, WordPress, web apps and search foundations for Australian small businesses and creative professionals.',
     url: '/services',
   });
 

@@ -34,7 +34,8 @@ const Pricing = () => {
           <p className={styles.heroText}>
             These packages cover the most common ways I help Australian businesses. The final price
             is confirmed in a written proposal after we discuss your goals, content, and technical
-            requirements.
+            requirements. AI-assisted workflows reduce repetitive effort so more of your budget
+            goes into judgment, craft, and the parts of the project specific to you.
           </p>
         </div>
 
@@ -100,31 +101,50 @@ const Pricing = () => {
 
             <p className={styles.price}>{websitePackage.priceLabel}</p>
             <p className={styles.timeline}>{websitePackage.timeline}</p>
-            <p className={styles.packageSummary}>{websitePackage.summary}</p>
+            <div className={styles.packageBody}>
+              <p className={styles.packageSummary}>{websitePackage.summary}</p>
 
-            <div className={styles.bestFor}>
-              <span>Best for</span>
-              <p>{websitePackage.bestFor}</p>
+              <div className={styles.bestFor}>
+                <span>Best for</span>
+                <p>{websitePackage.bestFor}</p>
+              </div>
+
+              <h4 className={styles.listHeading}>Package-specific scope</h4>
+              <ul className={styles.inclusionList}>
+                {websitePackage.inclusions.map((inclusion) => (
+                  <li key={inclusion}>{inclusion}</li>
+                ))}
+              </ul>
             </div>
 
-            <h4 className={styles.listHeading}>Package-specific scope</h4>
-            <ul className={styles.inclusionList}>
-              {websitePackage.inclusions.map((inclusion) => (
-                <li key={inclusion}>{inclusion}</li>
-              ))}
-            </ul>
-
-            <ButtonLink
-              to={`/contact?package=${websitePackage.slug}`}
-              variant={index === 1 ? 'primary' : 'secondary'}
-              className={styles.packageCta}
-              aria-label={`Enquire about the ${websitePackage.name} package`}
-            >
-              Enquire about {websitePackage.name}
-            </ButtonLink>
+            <div className={styles.packageFooter}>
+              <ButtonLink
+                to={`/contact?package=${websitePackage.slug}`}
+                variant={index === 1 ? 'primary' : 'secondary'}
+                className={styles.packageCta}
+                aria-label={`Enquire about the ${websitePackage.name} package`}
+              >
+                Enquire about {websitePackage.name}
+              </ButtonLink>
+            </div>
           </ScrollReveal>
         ))}
       </div>
+
+      <aside className={styles.accessPricing} aria-labelledby="access-pricing-heading">
+        <p className={styles.eyebrow}>A practical conversation about budget</p>
+        <div>
+          <h3 id="access-pricing-heading">Good work should not be reserved for well-funded organisations.</h3>
+          <p>
+            I have some flexibility for non-profits, independent creatives doing it tough, and
+            bootstrapped startups. Tell me what is realistic. Where capacity allows, I can adjust
+            scope, stage delivery, arrange payments, or consider a reduced rate.
+          </p>
+        </div>
+        <ButtonLink to="/contact" variant="secondary">
+          Talk through the constraints
+        </ButtonLink>
+      </aside>
     </ScrollReveal>
 
     <ScrollReveal as="section" className={styles.sharedSection} aria-labelledby="included-heading">
@@ -135,7 +155,9 @@ const Pricing = () => {
         </h2>
         <p>
           Every package includes the planning, implementation, launch support, and handover needed
-          to put a dependable website into the world.
+          to put a dependable website into the world. I use AI as an engineering and research tool
+          to move faster, probe for issues, review findability, and cross-check public competitor
+          experiences. I review the output and remain accountable for every recommendation.
         </p>
       </div>
       <ul className={styles.sharedList} role="list">

@@ -6,27 +6,27 @@ import styles from './About.module.scss';
 const principles = [
   {
     number: '01',
-    title: 'Make the hard thing feel simple',
+    title: 'Explain the tech stuff in a simple way to anyone',
     description:
-      'Complexity can live in the system, but it should never leak into the customer experience.',
+      "I don't assume you're going to understand all the technical mumbo-jumbo. I talk to you from the perspective of problems, outcomes, and benefits. If there's anything technical you want to know, I don't just explain it - I translate it for you into something you can understand.",
   },
   {
     number: '02',
     title: 'Design and engineering belong together',
     description:
-      'The strongest outcomes come from making visual, technical, and business decisions as one connected process.',
+      "You don't need to compromise between a beautiful design and a well-built digital presence. I make use of the latest technologies and industry best practices to give you fast, beautiful websites you'll love for years to come.",
   },
   {
     number: '03',
     title: 'Build for the person taking over',
     description:
-      'Clear systems, maintainable code, useful documentation, and a confident handover are part of the product.',
+      "From the start, I'll be asking both you and myself how the website will be maintained after launch. I make sure the website is easy for you to update, and if you need any ongoing support, I can provide a care plan to keep your website up to date.",
   },
   {
     number: '04',
     title: 'Say what the trade-off is',
     description:
-      'I explain decisions plainly, challenge weak assumptions, and keep scope connected to the outcome.',
+      "I might be a web developer, but I fall a little bit short of being a magician. Whenever we discuss your website, I'll explain what the benefits and disadvantages may be, and where appropriate, I'll suggest alternatives to try and meet happy middles if necessary.",
   },
 ];
 
@@ -53,10 +53,9 @@ const About = memo(() => (
       <div className={styles.heroInner}>
         <div className={styles.heroContent}>
           <p className={styles.eyebrow}>Mitchell Martinez · Product engineer</p>
-          <h1 id="about-heading">I make the complicated feel obvious.</h1>
+          <h1 id="about-heading">I make the complicated feel simple.</h1>
           <p className={styles.heroLead}>
-            I&apos;m a Sydney-based website developer and product engineer combining customer
-            thinking, expressive interface design, and serious front-end engineering.
+            I'm not just a code monkey. I'll speak your language. I focus on the experience, the people, and the business outcome. You don't need to be a tech wizard to have a fantastic digital presence with me.
           </p>
           <div className={styles.actions}>
             <ButtonLink to="/projects" variant="primary">See what I&apos;ve built</ButtonLink>
@@ -95,16 +94,22 @@ const About = memo(() => (
         <p>
           I started in front-end engineering and have spent more than five years building
           responsive applications, content platforms, and websites in React, TypeScript, Node.js,
-          and WordPress. The deeper I went technically, the clearer it became that code is only
-          valuable when it serves a real human outcome.
+          and WordPress. The deeper I went technically, the clearer it became that code can only
+          come after you've figured out the real business outcome you're trying to solve.
         </p>
         <p>
           That is why I stay close to the entire problem: audience, content, interaction,
           accessibility, performance, search, deployment, and the editing experience after
-          launch. I do not hand important decisions between layers of account management.
+          launch. I never let the tech supercede the problem we're trying to solve with it.
+        </p>
+        <p>
+          I am AI-native in the practical sense: I use it to accelerate research and development,
+          challenge implementation, look for issues, assess search and AI findability, and compare
+          public competitor experiences. It expands the ground I can cover, but it does not replace
+          evidence, client context, or my responsibility for the result.
         </p>
         <blockquote>
-          “Beautiful is useful. Fast is useful. Clear is useful. The good work does all three.”
+          If your customer is happy navigating your website, they're more likely to stay.
         </blockquote>
       </div>
     </ScrollReveal>
@@ -135,9 +140,10 @@ const About = memo(() => (
           I can talk strategy in the morning and ship the component in the afternoon.
         </h2>
         <p>
-          I work across the product surface rather than treating design, development, and
-          discovery as disconnected hand-offs. That gives clients fewer translation gaps and
-          gives the final experience a more coherent point of view.
+          Unlike agencies where you might be dealing with different people working in different domains, I work across the product surface rather than treating design, development, and
+          discovery as disconnected hand-offs. </p><p>That gives clients fewer translation gaps and
+          gives the final experience a more coherent point of view. </p><p>I also carefully use AI to removes
+          repetitive effort, so your budget buys more considered work rather than administration, allowing me to give you proof of concepts rapidly and deliver value faster.
         </p>
         <ButtonLink to="/skills" variant="secondary">Explore technical capabilities</ButtonLink>
       </div>

@@ -37,6 +37,12 @@ const capabilities = [
     description:
       'Fast delivery, semantic HTML, metadata, structured data, and content foundations for search and AI answers.',
   },
+  {
+    number: '05',
+    title: 'AI-assisted delivery',
+    description:
+      'AI accelerates research, implementation, testing, and findability reviews; I verify the evidence and own every decision.',
+  },
 ];
 
 const technologyExperience = [
@@ -398,13 +404,18 @@ const Home = () => {
               Design instinct, engineering depth
             </h2>
           </div>
-          <p>
+          <div className={styles.capabilityCopy}>
             <p>
-              Marketing agencies focus on the look and feel. Tech agencies sacrifice it for speed.</p><br />
-            <p>I don't believe in compromising. I built websites that look fantastic, work exceptionally well, and help connect your customers to the information or products they need.</p><br />
-            <p>I build powerful serverside rendered digital experiences and applications, designed for speed and searchability. All my projects are built with SEO and AI optimisation front of mind, so your customers can find you easier than ever.
+              Marketing agencies can prioritise appearance. Technical agencies can sacrifice it
+              for speed. I do not believe the work should compromise either.
             </p>
-          </p>
+            <p>
+              I build server-rendered digital experiences designed for speed, accessibility, and
+              discovery. AI-assisted workflows help me implement and test faster, inspect likely
+              issues, review how search and AI systems interpret the site, and cross-check public
+              competitor experiences. Human judgment stays in charge.
+            </p>
+          </div>
           
         </div>
         <div className={styles.capabilityExperience}>

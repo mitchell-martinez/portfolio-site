@@ -57,6 +57,8 @@ const structuredData = {
         'Website design and development',
         'WordPress development',
         'Technical SEO',
+        'AI-assisted software development',
+        'AI search optimisation',
         'Web accessibility',
         'User experience design',
         'Web performance',

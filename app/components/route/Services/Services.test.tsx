@@ -49,4 +49,12 @@ describe('Services', () => {
     expect(screen.getByText('SEO').nextElementSibling).toHaveTextContent('100');
     expect(screen.getByText('Can you guarantee a first-page Google or AI search ranking?')).toBeInTheDocument();
   });
+
+  it('explains where AI supports delivery without replacing judgment', () => {
+    renderServices();
+
+    expect(screen.getByText(/AI-assisted research and quality checks/i)).toBeInTheDocument();
+    expect(screen.getByText(/verify what is actually relevant to your project/i)).toBeInTheDocument();
+    expect(screen.getByText(/search, and AI findability before launch/i)).toBeInTheDocument();
+  });
 });

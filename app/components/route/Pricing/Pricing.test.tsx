@@ -36,4 +36,12 @@ describe('Pricing', () => {
       screen.getByText('Domains, hosting, premium tools, and third-party fees are not included')
     ).toBeInTheDocument();
   });
+
+  it('explains flexible pricing and AI-assisted project checks', () => {
+    renderPricing();
+
+    expect(screen.getByText(/flexibility for non-profits/i)).toBeInTheDocument();
+    expect(screen.getByText(/AI-assisted quality, findability, and competitor checks/i)).toBeInTheDocument();
+    expect(screen.getByText(/remain accountable for every recommendation/i)).toBeInTheDocument();
+  });
 });

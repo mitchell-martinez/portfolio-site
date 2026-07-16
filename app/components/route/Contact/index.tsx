@@ -335,7 +335,7 @@ const Contact = memo(({ actionData, formRenderedAt = '', selectedPackage }: Cont
                     name="projectType"
                     required
                     className={styles.input}
-                    defaultValue={submittedValues?.projectType ?? ''}
+                    defaultValue={submittedValues?.projectType ?? (selectedPackage === 'care' ? 'care' : '')}
                     aria-invalid={failedAction?.fieldErrors?.projectType ? true : undefined}
                     aria-describedby={
                       failedAction?.fieldErrors?.projectType ? 'project-type-error' : undefined

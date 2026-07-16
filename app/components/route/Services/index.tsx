@@ -10,19 +10,19 @@ const processSteps = [
     number: '01',
     name: 'Discover',
     description:
-      'We clarify the audience, business goals, content, constraints, and what a successful launch needs to achieve.',
+      'We clarify the audience, business goals, content, and constraints. I use AI-assisted research to cross-check public competitor experiences and findability patterns, then verify what is actually relevant to your project.',
   },
   {
     number: '02',
     name: 'Design and build',
     description:
-      'I turn the agreed direction into a responsive, accessible website and share progress at clear feedback points.',
+      'I turn the agreed direction into a responsive, accessible website. AI speeds up repetitive implementation and review work, leaving more time for the decisions and details unique to your business.',
   },
   {
     number: '03',
     name: 'Launch and hand over',
     description:
-      'After final checks, I deploy the site, explain how it works, and give you the tools to manage it confidently.',
+      'I combine automated and AI-assisted checks with hands-on review across accessibility, performance, site issues, search, and AI findability before launch and handover.',
   },
 ];
 
@@ -116,6 +116,7 @@ const Services = () => {
             <li><span>02</span> Responsive, accessible interfaces</li>
             <li><span>03</span> Fast, maintainable technology</li>
             <li><span>04</span> Search-friendly content structure</li>
+            <li><span>05</span> AI-assisted research and quality checks</li>
           </ul>
         </div>
       </div>

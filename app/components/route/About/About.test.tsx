@@ -13,7 +13,7 @@ describe('About', () => {
   it('renders a page-level introduction', () => {
     renderAbout();
     expect(
-      screen.getByRole('heading', { level: 1, name: /make the complicated feel obvious/i })
+      screen.getByRole('heading', { level: 1, name: /make the complicated feel simple/i })
     ).toBeInTheDocument();
   });
 

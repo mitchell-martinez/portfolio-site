@@ -6,7 +6,7 @@ export const projectTypeOptions = [
   { value: 'cms', label: 'WordPress or CMS development' },
   { value: 'web-app', label: 'Web application or SaaS' },
   { value: 'agency-support', label: 'Agency development support' },
-  { value: 'care', label: 'Ongoing website care' },
+  { value: 'care', label: 'Ongoing care for an existing website' },
   { value: 'other', label: 'Other enquiry' },
 ] as const;
 
@@ -24,6 +24,7 @@ export const budgetOptions = [
   { value: '5000-7500', label: 'A$5,000–A$7,500' },
   { value: '7500-15000', label: 'A$7,500–A$15,000' },
   { value: '15000-plus', label: 'A$15,000+' },
+  { value: 'flexible-arrangement', label: 'I need a flexible arrangement' },
   { value: 'not-sure', label: 'Not sure yet' },
 ] as const;
 

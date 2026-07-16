@@ -96,6 +96,7 @@ export const sharedPackageInclusions = [
   'Discovery and project planning',
   'Responsive custom design and development',
   'Technical SEO and metadata foundations',
+  'AI-assisted quality, findability, and competitor checks',
   'Accessibility and performance checks',
   'Two rounds of consolidated feedback',
   'Deployment, handover, and training',
@@ -196,7 +197,7 @@ export const pricingFaqs: FrequentlyAskedQuestion[] = [
   {
     question: 'Are these fixed prices?',
     answer:
-      'They are starting points for the scope described. After a short discovery conversation, I provide a written proposal with the exact deliverables, timing, and project price.',
+      'They are starting points for the scope described. After a short discovery conversation, I provide a written proposal with the exact deliverables, timing, and project price. If you are a non-profit, an independent creative under pressure, or a bootstrapped startup, tell me what is realistic. Where capacity allows, I may be able to adjust scope, stage the work, or offer a reduced rate.',
   },
   {
     question: 'How are projects paid for?',

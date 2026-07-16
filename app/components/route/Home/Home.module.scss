@@ -370,6 +370,17 @@
   }
 }
 
+.capabilityCopy {
+  display: grid;
+  gap: 1rem;
+
+  p {
+    max-width: 600px;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+  }
+}
+
 .sectionHeading { max-width: 780px; font-size: clamp(2.25rem, 5vw, 4.25rem); line-height: 1.07; }
 
 .showcase {
