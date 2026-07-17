@@ -2,21 +2,8 @@
 @use '../../../styles/mixins' as *;
 
 .page {
-  padding-bottom: 8rem;
-  background:
-    radial-gradient(ellipse 68% 20% at 0% 20%, var(--color-wash-cyan), transparent 66%),
-    radial-gradient(ellipse 64% 18% at 100% 48%, var(--color-wash-green), transparent 66%),
-    radial-gradient(ellipse 68% 18% at 0% 76%, var(--color-wash-gold), transparent 68%),
-    radial-gradient(ellipse 58% 14% at 100% 94%, var(--color-wash-coral), transparent 66%),
-    linear-gradient(
-      180deg,
-      var(--color-bg-cyan) 0 30%,
-      var(--color-bg-black) 30% 42%,
-      var(--color-bg-green) 42% 64%,
-      var(--color-bg-gold) 64% 83%,
-      var(--color-bg-black) 83% 91%,
-      var(--color-bg-coral) 91% 100%
-    );
+  overflow: hidden;
+  background: var(--color-bg-black);
 }
 
 .hero,
@@ -28,6 +15,52 @@
   max-width: 1200px;
   margin-right: auto;
   margin-left: auto;
+}
+
+.servicesSection,
+.proofSection,
+.processSection,
+.faqSection,
+.closingSection {
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    position: absolute;
+    inset: 0 auto 0 50%;
+    z-index: -1;
+    width: 100vw;
+    content: '';
+    transform: translateX(-50%);
+  }
+}
+
+.servicesSection::before {
+  background:
+    radial-gradient(ellipse 58% 62% at -8% 16%, rgba(74, 183, 220, 0.82), transparent 62%),
+    radial-gradient(ellipse 52% 56% at 108% 84%, rgba(117, 227, 141, 0.7), transparent 62%),
+    var(--color-bg-cyan);
+}
+
+.proofSection::before {
+  background:
+    radial-gradient(ellipse 52% 70% at -8% 76%, rgba(255, 118, 94, 0.72), transparent 62%),
+    radial-gradient(ellipse 48% 62% at 108% 20%, rgba(242, 198, 109, 0.68), transparent 62%),
+    var(--color-bg-black);
+}
+
+.processSection::before {
+  background:
+    radial-gradient(ellipse 56% 72% at -8% 22%, rgba(117, 227, 141, 0.76), transparent 62%),
+    radial-gradient(ellipse 50% 64% at 108% 78%, rgba(74, 183, 220, 0.7), transparent 62%),
+    var(--color-bg-green);
+}
+
+.faqSection::before {
+  background:
+    radial-gradient(ellipse 54% 70% at -8% 78%, rgba(242, 198, 109, 0.76), transparent 62%),
+    radial-gradient(ellipse 50% 62% at 108% 18%, rgba(255, 118, 94, 0.7), transparent 62%),
+    var(--color-bg-gold);
 }
 
 .hero {
@@ -187,6 +220,21 @@
   margin-bottom: 3.5rem;
 }
 
+.servicesSection {
+  @include respond-to('lg') {
+    display: grid;
+    grid-template-columns: minmax(0, 0.86fr) minmax(440px, 1.14fr);
+    align-items: start;
+    gap: 3.5rem 4rem;
+
+    .sectionHeader {
+      grid-column: 1;
+      grid-row: 1;
+      margin-bottom: 0;
+    }
+  }
+}
+
 .sectionHeading {
   margin-bottom: 1rem;
   color: var(--color-text-primary);
@@ -200,14 +248,17 @@
   gap: 2rem;
 
   @include respond-to('lg') {
-    grid-template-columns: minmax(0, 0.86fr) minmax(440px, 1.14fr);
-    align-items: start;
-    gap: 4rem;
+    display: contents;
   }
 }
 
 .serviceTabs {
   border-top: 1px solid var(--color-border);
+
+  @include respond-to('lg') {
+    grid-column: 1;
+    grid-row: 2;
+  }
 
   button {
     position: relative;
@@ -286,6 +337,8 @@
 
   @include respond-to('lg') {
     position: sticky;
+    grid-column: 2;
+    grid-row: 1 / span 2;
     top: 7rem;
   }
 }
@@ -551,12 +604,15 @@
 
 .closingSection {
   max-width: 900px;
-  padding-bottom: 2rem;
-  background:
-    radial-gradient(ellipse 64% 84% at 0% 50%, var(--color-wash-coral), transparent 66%),
-    radial-gradient(ellipse 64% 84% at 100% 50%, var(--color-wash-cyan), transparent 66%),
-    var(--color-bg-black);
+  padding-bottom: 6rem;
   text-align: center;
+
+  &::before {
+    background:
+      radial-gradient(ellipse 58% 82% at -8% 72%, rgba(255, 118, 94, 0.76), transparent 62%),
+      radial-gradient(ellipse 54% 78% at 108% 22%, rgba(74, 183, 220, 0.72), transparent 62%),
+      var(--color-bg-black);
+  }
 
   > p:not(.eyebrow) {
     max-width: 650px;
@@ -566,4 +622,8 @@
   .actions {
     justify-content: center;
   }
+}
+
+@include respond-to('md') {
+  .closingSection { padding-bottom: 9rem; }
 }

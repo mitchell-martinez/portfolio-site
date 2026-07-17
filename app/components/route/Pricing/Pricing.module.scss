@@ -2,21 +2,8 @@
 @use '../../../styles/mixins' as *;
 
 .page {
-  padding-bottom: 8rem;
-  background:
-    radial-gradient(ellipse 68% 18% at 0% 20%, var(--color-wash-cyan), transparent 66%),
-    radial-gradient(ellipse 66% 18% at 100% 45%, var(--color-wash-gold), transparent 66%),
-    radial-gradient(ellipse 68% 18% at 0% 70%, var(--color-wash-green), transparent 66%),
-    radial-gradient(ellipse 62% 15% at 100% 94%, var(--color-wash-coral), transparent 66%),
-    linear-gradient(
-      180deg,
-      var(--color-bg-cyan) 0 26%,
-      var(--color-bg-black) 26% 35%,
-      var(--color-bg-gold) 35% 56%,
-      var(--color-bg-green) 56% 78%,
-      var(--color-bg-black) 78% 87%,
-      var(--color-bg-coral) 87% 100%
-    );
+  overflow: hidden;
+  background: var(--color-bg-black);
 }
 
 .hero,
@@ -29,6 +16,56 @@
   max-width: 1200px;
   margin-right: auto;
   margin-left: auto;
+}
+
+.packagesSection,
+.sharedSection,
+.boundariesSection,
+.faqSection,
+.closingSection {
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    position: absolute;
+    inset: 0 auto 0 50%;
+    z-index: -1;
+    width: 100vw;
+    content: '';
+    transform: translateX(-50%);
+  }
+}
+
+.packagesSection::before {
+  background:
+    radial-gradient(ellipse 58% 58% at -8% 18%, rgba(74, 183, 220, 0.82), transparent 62%),
+    radial-gradient(ellipse 52% 50% at 108% 82%, rgba(255, 118, 94, 0.68), transparent 62%),
+    var(--color-bg-cyan);
+}
+
+.sharedSection::before {
+  background:
+    radial-gradient(ellipse 52% 66% at -8% 72%, rgba(242, 198, 109, 0.72), transparent 64%),
+    radial-gradient(ellipse 48% 58% at 108% 18%, rgba(255, 118, 94, 0.66), transparent 62%),
+    var(--color-bg-black);
+}
+
+.boundariesSection::before {
+  background:
+    radial-gradient(ellipse 56% 70% at -8% 22%, rgba(242, 198, 109, 0.76), transparent 62%),
+    radial-gradient(ellipse 50% 62% at 108% 82%, rgba(74, 183, 220, 0.7), transparent 62%),
+    var(--color-bg-gold);
+}
+
+.faqSection::before {
+  background:
+    radial-gradient(ellipse 54% 68% at -8% 78%, rgba(117, 227, 141, 0.76), transparent 62%),
+    radial-gradient(ellipse 50% 60% at 108% 18%, rgba(74, 183, 220, 0.7), transparent 62%),
+    var(--color-bg-green);
+}
+
+.faqSection {
+  padding-bottom: 6rem;
 }
 
 .hero {
@@ -156,7 +193,6 @@
 
 .packagesSection,
 .sharedSection,
-.careSection,
 .boundariesSection,
 .faqSection,
 .closingSection {
@@ -404,6 +440,7 @@
 .boundariesSection {
   display: grid;
   gap: 3rem;
+  padding-bottom: 6rem;
 
   @include respond-to('lg') {
     grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.2fr);
@@ -433,15 +470,22 @@
 .careSection {
   display: grid;
   gap: 3rem;
-  padding-bottom: 3rem;
-  border-bottom: 1px solid var(--color-border);
+  width: calc(100% - 2.5rem);
+  margin-top: 6rem;
+  padding: 3rem 1.5rem;
+  border: 1px solid var(--color-card-border);
   border-radius: 6px;
-  padding-right: 1.5rem;
-  padding-left: 1.5rem;
   background:
-    linear-gradient(122deg, var(--color-wash-green), transparent 42%),
-    linear-gradient(302deg, var(--color-wash-cyan), transparent 46%),
-    var(--color-bg-green);
+    radial-gradient(ellipse 72% 100% at -6% 100%, rgba(117, 227, 141, 0.58), transparent 62%),
+    radial-gradient(ellipse 66% 92% at 106% 0%, rgba(74, 183, 220, 0.5), transparent 64%),
+    var(--color-card-contrast);
+  box-shadow: 0 28px 80px var(--color-card-shadow);
+
+  @include respond-to('md') {
+    width: calc(100% - 4rem);
+    margin-top: 9rem;
+    padding: 4rem;
+  }
 
   @include respond-to('lg') {
     grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
@@ -486,17 +530,24 @@
 
 .closingSection {
   max-width: 900px;
-  padding-bottom: 2rem;
-  background:
-    radial-gradient(ellipse 64% 84% at 0% 50%, var(--color-wash-gold), transparent 66%),
-    radial-gradient(ellipse 64% 84% at 100% 50%, var(--color-wash-coral), transparent 66%),
-    var(--color-bg-black);
+  padding-bottom: 6rem;
   text-align: center;
+
+  &::before {
+    background:
+      radial-gradient(ellipse 58% 82% at -8% 70%, rgba(242, 198, 109, 0.76), transparent 62%),
+      radial-gradient(ellipse 54% 78% at 108% 24%, rgba(255, 118, 94, 0.72), transparent 62%),
+      var(--color-bg-black);
+  }
 
   > p:not(.eyebrow) {
     max-width: 680px;
     margin: 0 auto;
   }
+}
+
+@include respond-to('md') {
+  .closingSection { padding-bottom: 9rem; }
 }
 
 .actions {
