@@ -4,6 +4,10 @@
 .section {
   padding: 6rem 0 5rem;
   min-height: 70vh;
+  background:
+    linear-gradient(126deg, var(--color-wash-cyan), transparent 34%) 0 0 / 100% 38rem no-repeat,
+    linear-gradient(306deg, var(--color-wash-gold), transparent 36%) 0 100% / 100% 34rem no-repeat,
+    linear-gradient(180deg, var(--color-bg-cyan), var(--color-bg-gold));
 }
 
 .container {
@@ -50,7 +54,9 @@
 }
 
 .card {
-  background: var(--color-bg-secondary);
+  background:
+    linear-gradient(142deg, var(--color-surface-subtle), transparent 42%),
+    var(--color-bg-secondary);
   border: 1px solid var(--color-border);
   border-radius: $border-radius-lg;
   overflow: hidden;

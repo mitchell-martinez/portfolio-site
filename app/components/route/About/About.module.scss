@@ -4,6 +4,20 @@
 .page {
   --about-coral: #ff765e;
   --about-green: #75e38d;
+  background:
+    radial-gradient(ellipse 68% 18% at 0% 23%, var(--color-wash-coral), transparent 68%),
+    radial-gradient(ellipse 64% 18% at 100% 48%, var(--color-wash-gold), transparent 66%),
+    radial-gradient(ellipse 70% 18% at 0% 72%, var(--color-wash-cyan), transparent 68%),
+    radial-gradient(ellipse 62% 16% at 100% 92%, var(--color-wash-green), transparent 66%),
+    linear-gradient(
+      180deg,
+      var(--color-bg-coral) 0 25%,
+      var(--color-bg-black) 25% 43%,
+      var(--color-bg-gold) 43% 62%,
+      var(--color-bg-cyan) 62% 82%,
+      var(--color-bg-black) 82% 90%,
+      var(--color-bg-green) 90% 100%
+    );
 }
 
 .hero {
@@ -139,7 +153,9 @@
 .statsBand {
   padding: 0 1.25rem;
   border-bottom: 1px solid var(--color-border);
-  background: var(--color-bg-secondary);
+  background:
+    linear-gradient(100deg, var(--color-wash-coral), transparent 34%),
+    var(--color-bg-coral);
 }
 
 .stats {
@@ -233,6 +249,7 @@
   overflow: hidden;
   border: 1px solid var(--color-border-strong);
   background: #111217;
+  box-shadow: 0 30px 90px var(--color-card-shadow);
   color: #fff;
 
   &[data-active='1'] { --principle-accent: #ffcf4a; }
@@ -496,7 +513,10 @@
 
 .closingSection {
   max-width: none;
-  background: var(--color-bg-secondary);
+  background:
+    radial-gradient(ellipse 62% 80% at 0% 50%, var(--color-wash-green), transparent 66%),
+    radial-gradient(ellipse 62% 80% at 100% 50%, var(--color-wash-coral), transparent 66%),
+    var(--color-bg-black);
   text-align: center;
 
   h2 { max-width: 900px; margin: 0 auto; }

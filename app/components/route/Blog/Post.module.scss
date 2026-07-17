@@ -3,6 +3,11 @@
 
 .article {
   padding: 5rem 0 5rem;
+  background:
+    linear-gradient(126deg, var(--color-wash-cyan), transparent 34%) 0 0 / 100% 38rem no-repeat,
+    linear-gradient(306deg, var(--color-wash-coral), transparent 36%) 0 58% / 100% 42rem no-repeat,
+    linear-gradient(128deg, var(--color-wash-gold), transparent 36%) 0 100% / 100% 34rem no-repeat,
+    linear-gradient(180deg, var(--color-bg-cyan), var(--color-bg-coral) 58%, var(--color-bg-gold));
 }
 
 .container {

@@ -25,6 +25,18 @@
   // Decorative (hero grid, faint orbs)
   --color-grid-line: rgba(255, 255, 255, 0.025);
   --color-glow: rgba(255, 255, 255, 0.04);
+  --color-wash-cyan: rgba(74, 183, 220, 0.26);
+  --color-wash-green: rgba(117, 227, 141, 0.23);
+  --color-wash-coral: rgba(255, 118, 94, 0.25);
+  --color-wash-gold: rgba(242, 198, 109, 0.22);
+  --color-bg-cyan: #101a20;
+  --color-bg-green: #101c18;
+  --color-bg-coral: #1e1616;
+  --color-bg-gold: #1e1b14;
+  --color-bg-black: #090c11;
+  --color-card-contrast: #10151c;
+  --color-card-border: rgba(240, 246, 252, 0.22);
+  --color-card-shadow: rgba(0, 0, 0, 0.42);
   // Selection
   --color-selection: rgba(230, 237, 243, 0.2);
   --font-system: #{$font-system};
@@ -50,6 +62,18 @@
   --color-surface-hover: rgba(31, 35, 40, 0.1);
   --color-grid-line: rgba(0, 0, 0, 0.04);
   --color-glow: rgba(0, 0, 0, 0.03);
+  --color-wash-cyan: rgba(49, 161, 201, 0.22);
+  --color-wash-green: rgba(45, 164, 78, 0.19);
+  --color-wash-coral: rgba(225, 83, 61, 0.2);
+  --color-wash-gold: rgba(190, 134, 26, 0.18);
+  --color-bg-cyan: #f0f8fb;
+  --color-bg-green: #f1f9f3;
+  --color-bg-coral: #fff3f1;
+  --color-bg-gold: #fbf7ec;
+  --color-bg-black: #eef0f3;
+  --color-card-contrast: #ffffff;
+  --color-card-border: rgba(31, 35, 40, 0.24);
+  --color-card-shadow: rgba(31, 35, 40, 0.16);
   --color-selection: rgba(31, 35, 40, 0.1);
 }
 

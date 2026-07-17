@@ -597,7 +597,16 @@
 .page {
   --contact-green: #75e38d;
   padding-bottom: 8rem;
-  background: var(--color-bg);
+  background:
+    linear-gradient(126deg, var(--color-wash-green), transparent 34%) 0 44% / 100% 42rem no-repeat,
+    linear-gradient(306deg, var(--color-wash-cyan), transparent 36%) 0 68% / 100% 46rem no-repeat,
+    linear-gradient(128deg, var(--color-wash-gold), transparent 36%) 0 92% / 100% 36rem no-repeat,
+    linear-gradient(
+      180deg,
+      var(--color-bg-green) 0 46%,
+      var(--color-bg-cyan) 46% 76%,
+      var(--color-bg-gold) 76% 100%
+    );
 }
 
 .hero {
@@ -707,7 +716,10 @@
 .contactBand {
   padding: 0 1.25rem;
   border-bottom: 1px solid var(--color-border);
-  background: var(--color-bg-secondary);
+  background:
+    linear-gradient(104deg, var(--color-wash-green), transparent 38%),
+    linear-gradient(284deg, var(--color-wash-cyan), transparent 42%),
+    var(--color-bg-green);
 
   > dl {
     display: grid;

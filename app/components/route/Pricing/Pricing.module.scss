@@ -3,6 +3,20 @@
 
 .page {
   padding-bottom: 8rem;
+  background:
+    radial-gradient(ellipse 68% 18% at 0% 20%, var(--color-wash-cyan), transparent 66%),
+    radial-gradient(ellipse 66% 18% at 100% 45%, var(--color-wash-gold), transparent 66%),
+    radial-gradient(ellipse 68% 18% at 0% 70%, var(--color-wash-green), transparent 66%),
+    radial-gradient(ellipse 62% 15% at 100% 94%, var(--color-wash-coral), transparent 66%),
+    linear-gradient(
+      180deg,
+      var(--color-bg-cyan) 0 26%,
+      var(--color-bg-black) 26% 35%,
+      var(--color-bg-gold) 35% 56%,
+      var(--color-bg-green) 56% 78%,
+      var(--color-bg-black) 78% 87%,
+      var(--color-bg-coral) 87% 100%
+    );
 }
 
 .hero,
@@ -187,12 +201,12 @@
   min-width: 0;
   overflow: hidden;
   padding: 1.5rem;
-  border: 1px solid var(--color-border-strong);
+  border: 1px solid var(--color-card-border);
   border-radius: $border-radius-sm;
   background:
     linear-gradient(145deg, rgba(255, 255, 255, 0.055), transparent 38%),
-    var(--color-bg-secondary);
-  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.16);
+    var(--color-card-contrast);
+  box-shadow: 0 22px 60px var(--color-card-shadow);
   transition: transform $transition-medium, border-color $transition-medium, box-shadow $transition-medium;
 
   &::before {
@@ -221,7 +235,7 @@
 .featuredPackage {
   background:
     linear-gradient(145deg, rgba(117, 227, 141, 0.1), transparent 42%),
-    var(--color-bg-secondary);
+    var(--color-card-contrast);
 }
 
 .recommendedPackage {
@@ -424,7 +438,10 @@
   border-radius: 6px;
   padding-right: 1.5rem;
   padding-left: 1.5rem;
-  background: var(--color-bg-secondary);
+  background:
+    linear-gradient(122deg, var(--color-wash-green), transparent 42%),
+    linear-gradient(302deg, var(--color-wash-cyan), transparent 46%),
+    var(--color-bg-green);
 
   @include respond-to('lg') {
     grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
@@ -470,6 +487,10 @@
 .closingSection {
   max-width: 900px;
   padding-bottom: 2rem;
+  background:
+    radial-gradient(ellipse 64% 84% at 0% 50%, var(--color-wash-gold), transparent 66%),
+    radial-gradient(ellipse 64% 84% at 100% 50%, var(--color-wash-coral), transparent 66%),
+    var(--color-bg-black);
   text-align: center;
 
   > p:not(.eyebrow) {

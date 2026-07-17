@@ -3,6 +3,11 @@
 
 .skills {
   padding: 6rem 1.5rem;
+  background:
+    linear-gradient(126deg, var(--color-wash-green), transparent 34%) 0 0 / 100% 40rem no-repeat,
+    linear-gradient(306deg, var(--color-wash-cyan), transparent 36%) 0 52% / 100% 42rem no-repeat,
+    linear-gradient(128deg, var(--color-wash-coral), transparent 36%) 0 100% / 100% 34rem no-repeat,
+    linear-gradient(180deg, var(--color-bg-green), var(--color-bg-cyan) 52%, var(--color-bg-coral));
 
   @include respond-to('md') {
     padding: 8rem 2rem;

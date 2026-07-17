@@ -214,6 +214,17 @@
 .page {
   --work-coral: #ff765e;
   --work-green: #75e38d;
+  overflow-x: clip;
+  background: var(--color-bg-cyan);
+  background:
+    linear-gradient(
+      180deg,
+      var(--color-bg-cyan) 0%,
+      var(--color-bg-green) 24%,
+      var(--color-bg-coral) 52%,
+      var(--color-bg-cyan) 76%,
+      var(--color-bg-gold) 100%
+    );
 }
 
 .hero {
@@ -221,7 +232,10 @@
   min-height: min(940px, 100svh);
   overflow: hidden;
   padding: 8rem 1.25rem 3rem;
-  background: #090b0f;
+  background:
+    linear-gradient(124deg, rgba(117, 227, 141, 0.16), transparent 38%),
+    linear-gradient(304deg, rgba(255, 118, 94, 0.15), transparent 40%),
+    #090b0f;
   color: #fff;
   isolation: isolate;
 
@@ -352,6 +366,10 @@
   display: grid;
   gap: 1.5rem;
   border-top: 1px solid var(--color-border);
+  background:
+    linear-gradient(120deg, var(--color-wash-cyan), transparent 38%),
+    linear-gradient(300deg, var(--color-wash-gold), transparent 42%),
+    var(--color-bg-cyan);
 
   h2 {
     color: var(--color-text-primary);
@@ -376,11 +394,24 @@
 .projectList { overflow: hidden; }
 
 .project {
+  --project-backdrop: var(--color-bg-secondary);
   display: grid;
-  max-width: 1440px;
+  position: relative;
+  max-width: 1600px;
   margin: 0 auto;
   scroll-margin-top: 6rem;
   background: var(--color-bg-secondary);
+  isolation: isolate;
+
+  &::before {
+    position: absolute;
+    inset: 0 auto 0 50%;
+    z-index: -1;
+    width: 100vw;
+    background: var(--project-backdrop);
+    content: '';
+    transform: translateX(-50%);
+  }
 
   @include respond-to('lg') {
     min-height: 760px;
@@ -530,6 +561,8 @@
 .budgetoEvidence {
   color: #fff;
   background:
+    linear-gradient(128deg, rgba(117, 227, 141, 0.13), transparent 42%),
+    linear-gradient(308deg, rgba(255, 118, 94, 0.1), transparent 46%),
     linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
     #111319;
@@ -666,11 +699,23 @@
 }
 
 .darkProject {
-  background: #101218;
+  --project-backdrop:
+    radial-gradient(ellipse 58% 86% at 0% 30%, rgba(117, 227, 141, 0.24), transparent 68%),
+    radial-gradient(ellipse 56% 82% at 100% 74%, rgba(255, 118, 94, 0.22), transparent 66%),
+    #090c11;
+  background:
+    linear-gradient(126deg, rgba(117, 227, 141, 0.18), transparent 44%),
+    linear-gradient(306deg, rgba(255, 118, 94, 0.15), transparent 48%),
+    #101218;
   color: #fff;
 
-  .projectMedia { background: #1b1e25; }
-  .browserBar { border-color: rgba(255, 255, 255, 0.1); background: #171a20; }
+  .projectMedia { background: #17211f; }
+  .browserBar {
+    border-color: rgba(117, 227, 141, 0.18);
+    background:
+      linear-gradient(90deg, rgba(117, 227, 141, 0.1), rgba(255, 118, 94, 0.08)),
+      #171a20;
+  }
   .browserBar > span { background: rgba(255, 255, 255, 0.25); }
   .browserBar > div { color: rgba(255, 255, 255, 0.44); }
   .projectKicker,
@@ -685,6 +730,10 @@
 }
 
 .lightProject {
+  --project-backdrop:
+    radial-gradient(ellipse 58% 86% at 0% 28%, rgba(213, 173, 121, 0.28), transparent 66%),
+    radial-gradient(ellipse 56% 82% at 100% 76%, rgba(255, 118, 94, 0.22), transparent 66%),
+    #090c11;
   --color-text-primary: #f5f0e8;
   --color-text-secondary: #bcb7ae;
   --color-border: rgba(245, 240, 232, 0.14);
@@ -694,12 +743,24 @@
   --color-cta-bg-hover: #ded6cb;
   --color-surface-subtle: rgba(245, 240, 232, 0.07);
   --color-surface-hover: rgba(245, 240, 232, 0.13);
-  background: #191918;
+  background:
+    linear-gradient(124deg, rgba(213, 173, 121, 0.22), transparent 43%),
+    linear-gradient(304deg, rgba(255, 118, 94, 0.13), transparent 48%),
+    #191918;
 
   .projectKicker { color: #d5ad79; }
+  .browserBar {
+    background:
+      linear-gradient(90deg, rgba(213, 173, 121, 0.14), rgba(255, 118, 94, 0.07)),
+      #f5f3ef;
+  }
 }
 
 .marineProject {
+  --project-backdrop:
+    radial-gradient(ellipse 58% 86% at 0% 28%, rgba(133, 224, 207, 0.28), transparent 66%),
+    radial-gradient(ellipse 56% 82% at 100% 76%, rgba(74, 183, 220, 0.24), transparent 66%),
+    #081215;
   --color-text-primary: #effaf7;
   --color-text-secondary: #a9cbc5;
   --color-border: rgba(167, 224, 213, 0.16);
@@ -709,10 +770,19 @@
   --color-cta-bg-hover: #83cabe;
   --color-surface-subtle: rgba(167, 224, 213, 0.08);
   --color-surface-hover: rgba(167, 224, 213, 0.15);
-  background: #0c3032;
+  background:
+    linear-gradient(126deg, rgba(133, 224, 207, 0.2), transparent 44%),
+    linear-gradient(306deg, rgba(74, 183, 220, 0.15), transparent 48%),
+    #0c3032;
 
   .projectMedia { background: #0b3538; }
   .evidenceViewport { background: #0b3538; }
+  .browserBar {
+    border-color: rgba(133, 224, 207, 0.2);
+    background:
+      linear-gradient(90deg, rgba(133, 224, 207, 0.13), rgba(74, 183, 220, 0.1)),
+      #0a2d30;
+  }
   .evidenceCaption span { color: #85e0cf; }
   .projectKicker { color: #85e0cf; }
   .projectFacts,
@@ -721,6 +791,8 @@
 }
 
 :global([data-theme='light']) .lightProject {
+  --project-backdrop:
+    linear-gradient(110deg, #f3e5c9, #f5f0e7 54%, #f7ddd7);
   --color-text-primary: #1f2328;
   --color-text-secondary: #656d76;
   --color-border: #d0d7de;
@@ -730,12 +802,17 @@
   --color-cta-bg-hover: #3d444d;
   --color-surface-subtle: rgba(31, 35, 40, 0.05);
   --color-surface-hover: rgba(31, 35, 40, 0.1);
-  background: #f5f3ef;
+  background:
+    linear-gradient(124deg, rgba(190, 134, 26, 0.18), transparent 43%),
+    linear-gradient(304deg, rgba(225, 83, 61, 0.11), transparent 48%),
+    #f5f3ef;
 
   .projectKicker { color: #656d76; }
 }
 
 :global([data-theme='light']) .marineProject {
+  --project-backdrop:
+    linear-gradient(110deg, #cbe8df, #dcece8 52%, #d4e9ef);
   --color-text-primary: #1f2328;
   --color-text-secondary: #556d69;
   --color-border: rgba(11, 53, 56, 0.18);
@@ -745,7 +822,10 @@
   --color-cta-bg-hover: #3d444d;
   --color-surface-subtle: rgba(11, 53, 56, 0.06);
   --color-surface-hover: rgba(11, 53, 56, 0.12);
-  background: #dcece8;
+  background:
+    linear-gradient(126deg, rgba(45, 164, 143, 0.2), transparent 44%),
+    linear-gradient(306deg, rgba(49, 161, 201, 0.15), transparent 48%),
+    #dcece8;
 
   .projectKicker { color: #29635e; }
   .projectFacts,
@@ -757,6 +837,10 @@
   display: grid;
   gap: 3rem;
   border-top: 1px solid var(--color-border);
+  background:
+    radial-gradient(ellipse 66% 84% at 0% 50%, var(--color-wash-gold), transparent 66%),
+    radial-gradient(ellipse 66% 84% at 100% 50%, var(--color-wash-cyan), transparent 66%),
+    var(--color-bg-gold);
 
   h2 {
     max-width: 650px;
@@ -782,7 +866,10 @@
 .closingSection {
   max-width: none;
   border-top: 1px solid var(--color-border);
-  background: var(--color-bg-secondary);
+  background:
+    linear-gradient(110deg, var(--color-wash-green), transparent 38%),
+    linear-gradient(290deg, var(--color-wash-coral), transparent 38%),
+    var(--color-bg-green);
   text-align: center;
 
   h2 {
