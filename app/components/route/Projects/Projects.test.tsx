@@ -1,4 +1,5 @@
 import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router';
 import { Projects } from './index';
 
@@ -49,16 +50,39 @@ describe('Projects', () => {
     expect(reactTags.length).toBeGreaterThan(0);
   });
 
-  it('renders three featured project cards with screenshots', () => {
+  it('renders three featured projects with visual evidence', () => {
     renderProjects();
     const projectsList = screen.getByRole('list', { name: 'Featured projects' });
     expect(within(projectsList).getAllByRole('heading', { level: 3 })).toHaveLength(3);
 
-    expect(screen.getByRole('img', { name: /Budgeto app dashboard screenshot/i })).toBeInTheDocument();
+    expect(screen.getByLabelText('Interactive Budgeto model')).toBeInTheDocument();
     expect(screen.getByRole('img', { name: /Studio Zanetti website screenshot/i })).toBeInTheDocument();
     expect(
       screen.getByRole('img', { name: /Friends of Gulf St Vincent website screenshot/i })
     ).toBeInTheDocument();
+  });
+
+  it('lets visitors manipulate the Budgeto product model', async () => {
+    const user = userEvent.setup();
+    renderProjects();
+
+    expect(screen.getByText('A$3,600')).toBeInTheDocument();
+    expect(screen.getByText('$1,350')).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: 'Increase demo income' }));
+
+    expect(screen.getByText('A$3,700')).toBeInTheDocument();
+    expect(screen.getByText('$1,450')).toBeInTheDocument();
+  });
+
+  it('lets visitors inspect Studio Zanetti evidence', async () => {
+    const user = userEvent.setup();
+    renderProjects();
+
+    await user.click(screen.getByRole('button', { name: /03 enquiries/i }));
+
+    expect(screen.getByRole('img', { name: /redesigned enquiry form/i })).toBeInTheDocument();
+    expect(screen.getByText('Less friction between interest and action')).toBeInTheDocument();
   });
 
   it('links Studio Zanetti to its case study', () => {

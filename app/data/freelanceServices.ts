@@ -189,7 +189,7 @@ export const servicesFaqs: FrequentlyAskedQuestion[] = [
   {
     question: 'Can you guarantee a first-page Google or AI search ranking?',
     answer:
-      'No reputable developer can guarantee rankings. I provide strong technical, structural, and content foundations, then explain the ongoing work that may improve discoverability over time.',
+      'Nobody can guarantee a first-page ranking. What I can do is help build your website in a way that makes it easy for Google and AI to understand it, as well as helping you create a marketing plan that will help make it easier for your customers to find you.',
   },
 ];
 
@@ -197,7 +197,7 @@ export const pricingFaqs: FrequentlyAskedQuestion[] = [
   {
     question: 'Are these fixed prices?',
     answer:
-      'They are starting points for the scope described. After a short discovery conversation, I provide a written proposal with the exact deliverables, timing, and project price. If you are a non-profit, an independent creative under pressure, or a bootstrapped startup, tell me what is realistic. Where capacity allows, I may be able to adjust scope, stage the work, or offer a reduced rate.',
+      'Most businesses fit within these packages, however they are starting points for the scope described. After a short discovery conversation, I provide a written proposal with the exact deliverables, timing, and project price; where additional features or services may be added, these will be at an additional agreed price. If you are a non-profit, an independent creative with limited budget, or a bootstrapped startup, tell me what is realistic. Where capacity allows, I may be able to adjust scope, stage the work, or offer a reduced rate.',
   },
   {
     question: 'How are projects paid for?',

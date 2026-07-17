@@ -44,6 +44,7 @@
 
 .ring {
   stroke-width: 20;
+  transition: stroke-dasharray 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .donutLabel {
@@ -64,4 +65,9 @@
 
 .clickable:hover {
   transform: scale(1.03);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ring,
+  .clickable { transition: none; }
 }

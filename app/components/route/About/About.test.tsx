@@ -1,5 +1,6 @@
 import { MemoryRouter } from 'react-router';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { About } from './index';
 
 const renderAbout = () =>
@@ -23,10 +24,15 @@ describe('About', () => {
     expect(screen.getByText(/years building digital products/i)).toBeInTheDocument();
   });
 
-  it('explains working principles and links to contact', () => {
+  it('explains working principles and links to contact', async () => {
+    const user = userEvent.setup();
     renderAbout();
     expect(screen.getByRole('heading', { name: /point of view behind every pixel/i })).toBeInTheDocument();
-    expect(screen.getByText(/make the hard thing feel simple/i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 3, name: /make the hard thing feel simple/i })).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: /design and engineering move together/i }));
+    expect(screen.getByRole('heading', { level: 3, name: /design and engineering move together/i })).toBeInTheDocument();
+    expect(screen.getByText(/useful beauty/i)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /start a project/i })).toHaveAttribute('href', '/contact');
   });
 });

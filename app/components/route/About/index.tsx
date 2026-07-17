@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { ButtonLink } from '~/components/ui/ButtonLink/';
 import { ScrollReveal } from '~/components/ui/ScrollReveal/';
 import styles from './About.module.scss';
@@ -6,27 +6,31 @@ import styles from './About.module.scss';
 const principles = [
   {
     number: '01',
-    title: 'Explain the tech stuff in a simple way to anyone',
+    title: 'Make the hard thing feel simple',
     description:
-      "I don't assume you're going to understand all the technical mumbo-jumbo. I talk to you from the perspective of problems, outcomes, and benefits. If there's anything technical you want to know, I don't just explain it - I translate it for you into something you can understand.",
+      'Technical decisions become clear choices about outcomes, benefits, and trade-offs. You always know what is being recommended and why.',
+    signals: ['Plain language', 'Clear choices', 'Shared understanding'],
   },
   {
     number: '02',
-    title: 'Design and engineering belong together',
+    title: 'Design and engineering move together',
     description:
-      "You don't need to compromise between a beautiful design and a well-built digital presence. I make use of the latest technologies and industry best practices to give you fast, beautiful websites you'll love for years to come.",
+      'The interface is shaped by how it needs to perform, scale, and be maintained. That creates experiences that feel considered all the way through.',
+    signals: ['Useful beauty', 'Fast by default', 'Built to last'],
   },
   {
     number: '03',
     title: 'Build for the person taking over',
     description:
-      "From the start, I'll be asking both you and myself how the website will be maintained after launch. I make sure the website is easy for you to update, and if you need any ongoing support, I can provide a care plan to keep your website up to date.",
+      'A successful launch should not create a dependency. Editing, documentation, and ongoing care are considered from the start.',
+    signals: ['Easy editing', 'Clean handover', 'Care when needed'],
   },
   {
     number: '04',
     title: 'Say what the trade-off is',
     description:
-      "I might be a web developer, but I fall a little bit short of being a magician. Whenever we discuss your website, I'll explain what the benefits and disadvantages may be, and where appropriate, I'll suggest alternatives to try and meet happy middles if necessary.",
+      'There is no magic option that wins on every dimension. I make the constraints visible, suggest alternatives, and help choose the right compromise.',
+    signals: ['Honest constraints', 'Useful options', 'Sound decisions'],
   },
 ];
 
@@ -43,8 +47,12 @@ const technologyExperience = [
   'Schema.org',
 ];
 
-const About = memo(() => (
-  <div className={styles.page}>
+const About = memo(() => {
+  const [activePrincipleIndex, setActivePrincipleIndex] = useState(0);
+  const activePrinciple = principles[activePrincipleIndex];
+
+  return (
+    <div className={styles.page}>
     <section className={styles.hero} aria-labelledby="about-heading">
       <div className={styles.heroMedia} aria-hidden="true">
         <img src="/images/mitchmartinez.jpg" alt="" />
@@ -87,26 +95,13 @@ const About = memo(() => (
       </div>
       <div className={styles.storyCopy}>
         <p className={styles.storyLead}>
-          My work sits where design judgment, product thinking, and engineering meet. I care
-          about the moment a person understands what to do next, and all the invisible decisions
-          required to make that moment feel effortless.
+          My work sits where design judgment, product thinking, and engineering meet. I care about
+          the moment a person understands what to do next, and the decisions that make it feel effortless.
         </p>
         <p>
-          I started in front-end engineering and have spent more than five years building
-          responsive applications, content platforms, and websites in React, TypeScript, Node.js,
-          and WordPress. The deeper I went technically, the clearer it became that code can only
-          come after you've figured out the real business outcome you're trying to solve.
-        </p>
-        <p>
-          That is why I stay close to the entire problem: audience, content, interaction,
-          accessibility, performance, search, deployment, and the editing experience after
-          launch. I never let the tech supercede the problem we're trying to solve with it.
-        </p>
-        <p>
-          I am AI-native in the practical sense: I use it to accelerate research and development,
-          challenge implementation, look for issues, assess search and AI findability, and compare
-          public competitor experiences. It expands the ground I can cover, but it does not replace
-          evidence, client context, or my responsibility for the result.
+          Five years across applications, content platforms, and websites taught me to stay close
+          to the whole problem: audience, content, interaction, accessibility, performance, search,
+          and what happens after launch. The technology serves that outcome, never the reverse.
         </p>
         <blockquote>
           If your customer is happy navigating your website, they're more likely to stay.
@@ -118,19 +113,38 @@ const About = memo(() => (
       <ScrollReveal className={styles.sectionHeader}>
         <p className={styles.eyebrow}>How I think</p>
         <h2 id="principles-heading">A point of view behind every pixel</h2>
-        <p>
-          These are the standards I bring to client websites, product teams, and my own software.
-        </p>
       </ScrollReveal>
-      <ol className={styles.principlesList}>
-        {principles.map((principle, index) => (
-          <ScrollReveal as="li" key={principle.number} delay={index * 90}>
-            <span>{principle.number}</span>
-            <h3>{principle.title}</h3>
-            <p>{principle.description}</p>
-          </ScrollReveal>
-        ))}
-      </ol>
+      <div className={styles.principlesWorkbench} data-active={activePrincipleIndex}>
+        <div className={styles.principleTabs} role="group" aria-label="Working principles">
+          {principles.map((principle, index) => (
+            <button
+              key={principle.number}
+              type="button"
+              aria-pressed={activePrincipleIndex === index}
+              onClick={() => setActivePrincipleIndex(index)}
+            >
+              <span>{principle.number}</span>
+              {principle.title}
+            </button>
+          ))}
+        </div>
+        <div className={styles.principlePanel} aria-live="polite">
+          <div className={styles.principleGraphic} aria-hidden="true">
+            <span>{activePrinciple.number}</span>
+            <i />
+            <i />
+            <i />
+          </div>
+          <div className={styles.principleDetail} key={activePrinciple.number}>
+            <p className={styles.eyebrow}>Working principle {activePrinciple.number}</p>
+            <h3>{activePrinciple.title}</h3>
+            <p>{activePrinciple.description}</p>
+            <ul className={styles.principleSignals} aria-label="What this creates">
+              {activePrinciple.signals.map(signal => <li key={signal}>{signal}</li>)}
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
 
     <ScrollReveal as="section" className={styles.craftSection} aria-labelledby="craft-heading">
@@ -140,10 +154,9 @@ const About = memo(() => (
           I can talk strategy in the morning and ship the component in the afternoon.
         </h2>
         <p>
-          Unlike agencies where you might be dealing with different people working in different domains, I work across the product surface rather than treating design, development, and
-          discovery as disconnected hand-offs. </p><p>That gives clients fewer translation gaps and
-          gives the final experience a more coherent point of view. </p><p>I also carefully use AI to removes
-          repetitive effort, so your budget buys more considered work rather than administration, allowing me to give you proof of concepts rapidly and deliver value faster.
+          I work across discovery, design, and development, which means fewer hand-offs and a more
+          coherent result. AI accelerates research and repetitive work; evidence, judgment, and
+          responsibility for the result remain mine.
         </p>
         <ButtonLink to="/skills" variant="secondary">Explore technical capabilities</ButtonLink>
       </div>
@@ -182,8 +195,9 @@ const About = memo(() => (
         <ButtonLink to="/services" variant="secondary">See how I can help</ButtonLink>
       </div>
     </ScrollReveal>
-  </div>
-));
+    </div>
+  );
+});
 
 About.displayName = 'About';
 

@@ -56,9 +56,9 @@ const BudgetoDonut = ({ value, total, color, label, onClick }: BudgetoDonutProps
             transform={`rotate(-90 ${radius} ${radius})`}
           />
         </svg>
-        <h3 className={styles.valueHeading} aria-live="polite">
+        <p className={styles.valueHeading} aria-live="polite">
           ${value.toLocaleString()}
-        </h3>
+        </p>
       </div>
       <div className={styles.donutLabel}>{label}</div>
     </div>

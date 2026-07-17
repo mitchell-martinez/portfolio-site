@@ -1,7 +1,15 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { ButtonLink } from '~/components/ui/ButtonLink/';
 import { ScrollReveal } from '~/components/ui/ScrollReveal/';
+import { BudgetoDonut } from '../Hero/Donut/';
 import styles from './Projects.module.scss';
+
+interface ProjectEvidence {
+  label: string;
+  title: string;
+  caption: string;
+  image: { src: string; alt: string };
+}
 
 interface WorkProject {
   id: string;
@@ -18,6 +26,7 @@ interface WorkProject {
   challenge: string;
   outcome: string;
   tone: 'dark' | 'light' | 'marine';
+  evidence?: readonly ProjectEvidence[];
 }
 
 const projectsData: WorkProject[] = [
@@ -28,7 +37,7 @@ const projectsData: WorkProject[] = [
     url: 'https://budgeto.app/dashboard',
     description: 'Personal finance product',
     longDescription:
-      'A personal finance application built around one legible question: how much money is left before payday? I shaped the method, product strategy, interface system, recurring workflows, offline support, and production application.',
+      'A budgeting product built around one calm question: how much is left before payday?',
     tags: ['React', 'TypeScript', 'Node.js', 'Finance'],
     highlight: 'budgeto.app',
     image: { src: '/images/budgeto_donut.png', alt: 'Budgeto app dashboard screenshot' },
@@ -44,7 +53,7 @@ const projectsData: WorkProject[] = [
     url: 'https://studiozanetti.com.au',
     description: 'Photography studio platform',
     longDescription:
-      'A ground-up redesign for a Sydney photography studio serving wedding, corporate, and event audiences. I clarified the customer journeys, built reusable ACF-powered content, integrated enquiries with the studio CRM, and trained the client to run it independently.',
+      'One fast, flexible platform for three distinct photography audiences.',
     tags: ['React', 'TypeScript', 'Design', 'Performance'],
     highlight: 'studiozanetti.com.au',
     storyPath: '/blog/studio-zanetti-story',
@@ -53,6 +62,44 @@ const projectsData: WorkProject[] = [
     challenge: 'Unify three distinct customer journeys without flattening the studio’s personality.',
     outcome: 'A fast, flexible lead-generation platform with 100 Lighthouse performance and SEO snapshots after launch.',
     tone: 'light',
+    evidence: [
+      {
+        label: 'Navigation',
+        title: 'Three audiences, one clear way in',
+        caption: 'A shared service layer connects the main studio, weddings, and corporate work without erasing their distinct journeys.',
+        image: {
+          src: '/images/blog/studio-zanetti-story/primary-navigation.png',
+          alt: 'Studio Zanetti website screenshot showing the redesigned primary navigation',
+        },
+      },
+      {
+        label: 'Mobile pricing',
+        title: 'Packages made easy to compare',
+        caption: 'Dense service details become a legible mobile decision flow instead of a wall of inclusions.',
+        image: {
+          src: '/images/blog/studio-zanetti-story/mobile-prices.png',
+          alt: 'Studio Zanetti mobile pricing interface',
+        },
+      },
+      {
+        label: 'Enquiries',
+        title: 'Less friction between interest and action',
+        caption: 'The enquiry experience gathers useful context while staying approachable for prospective clients.',
+        image: {
+          src: '/images/blog/studio-zanetti-story/new-form.png',
+          alt: 'Studio Zanetti redesigned enquiry form',
+        },
+      },
+      {
+        label: 'Quality',
+        title: 'The invisible work is measurable',
+        caption: 'A post-launch lab snapshot checks the performance, accessibility, and search foundations behind the interface.',
+        image: {
+          src: '/images/blog/studio-zanetti-story/lighthouse-scores.png',
+          alt: 'Studio Zanetti Lighthouse quality scores',
+        },
+      },
+    ],
   },
   {
     id: 'fogsv',
@@ -61,7 +108,7 @@ const projectsData: WorkProject[] = [
     url: 'https://fogsv.org.au',
     description: 'Conservation community platform',
     longDescription:
-      'A purpose-built WordPress presence for a South Australian conservation organisation. Custom theming and plugins support education, events, community updates, and marine stewardship without forcing volunteers into a rigid publishing workflow.',
+      'A purpose-built publishing system that volunteers can run without wrestling a template.',
     tags: ['WordPress', 'Custom Theme', 'Custom Plugins', 'Non-profit'],
     highlight: 'fogsv.org.au',
     image: { src: '/images/fogsv.png', alt: 'Friends of Gulf St Vincent website screenshot' },
@@ -69,8 +116,134 @@ const projectsData: WorkProject[] = [
     challenge: 'Make a broad archive approachable for both community readers and volunteer editors.',
     outcome: 'A maintainable publishing system tailored to the organisation rather than an off-the-shelf template.',
     tone: 'marine',
+    evidence: [
+      {
+        label: 'Publishing system',
+        title: 'The coast leads the visual language',
+        caption: 'Education, events, news, and marine stewardship share one flexible WordPress system shaped around volunteer editors.',
+        image: {
+          src: '/images/fogsv.png',
+          alt: 'Friends of Gulf St Vincent website screenshot',
+        },
+      },
+    ],
   },
 ];
+
+const BrowserBar = ({ label }: { label: string }) => (
+  <div className={styles.browserBar} aria-hidden="true">
+    <span /><span /><span />
+    <div>{label}</div>
+  </div>
+);
+
+const BudgetoEvidence = ({ project }: { project: WorkProject }) => {
+  const [income, setIncome] = useState(3600);
+  const [spending, setSpending] = useState(2250);
+  const leftover = Math.max(0, income - spending);
+
+  return (
+    <div className={`${styles.projectMedia} ${styles.budgetoEvidence}`}>
+      <BrowserBar label={project.highlight} />
+      <div className={styles.budgetoStage}>
+        <div className={styles.budgetoStageIntro}>
+          <span>Live product model</span>
+          <strong>Change the numbers. Watch the picture react.</strong>
+        </div>
+        <BudgetoDonut
+          value={leftover}
+          total={income || 1}
+          color="#75e38d"
+          label="Left before payday"
+        />
+        <div className={styles.budgetoControls} aria-label="Interactive Budgeto model">
+          <div className={styles.budgetControl}>
+            <div><span>Income</span><output aria-live="polite">A${income.toLocaleString()}</output></div>
+            <div className={styles.stepper}>
+              <button
+                type="button"
+                aria-label="Decrease demo income"
+                onClick={() => setIncome(value => Math.max(500, value - 100))}
+              >−</button>
+              <span aria-hidden="true">Adjust</span>
+              <button
+                type="button"
+                aria-label="Increase demo income"
+                onClick={() => setIncome(value => value + 100)}
+              >+</button>
+            </div>
+          </div>
+          <div className={styles.budgetControl}>
+            <div><span>Spending</span><output aria-live="polite">A${spending.toLocaleString()}</output></div>
+            <div className={styles.stepper}>
+              <button
+                type="button"
+                aria-label="Decrease demo spending"
+                onClick={() => setSpending(value => Math.max(0, value - 100))}
+              >−</button>
+              <span aria-hidden="true">Adjust</span>
+              <button
+                type="button"
+                aria-label="Increase demo spending"
+                onClick={() => setSpending(value => value + 100)}
+              >+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const EvidenceStage = ({ project }: { project: WorkProject }) => {
+  const evidence = project.evidence ?? [];
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeEvidence = evidence[activeIndex];
+
+  if (!activeEvidence) {
+    return null;
+  }
+
+  return (
+    <div className={styles.projectMedia}>
+      <BrowserBar label={project.highlight} />
+      <div className={styles.evidenceViewport}>
+        <img
+          key={activeEvidence.image.src}
+          src={activeEvidence.image.src}
+          alt={activeEvidence.image.alt}
+          loading="lazy"
+          decoding="async"
+        />
+        <div className={styles.evidenceCaption} key={activeEvidence.title} aria-live="polite">
+          <span>{activeEvidence.label}</span>
+          <strong>{activeEvidence.title}</strong>
+          <p>{activeEvidence.caption}</p>
+        </div>
+      </div>
+      {evidence.length > 1 && (
+        <div className={styles.evidenceControls} role="group" aria-label={`Inspect ${project.name}`}>
+          {evidence.map((item, index) => (
+            <button
+              key={item.label}
+              type="button"
+              aria-pressed={activeIndex === index}
+              onClick={() => setActiveIndex(index)}
+            >
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              {item.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+const ProjectMedia = ({ project }: { project: WorkProject }) =>
+  project.id === 'budgeto'
+    ? <BudgetoEvidence project={project} />
+    : <EvidenceStage project={project} />;
 
 const Projects = memo(() => (
   <div className={styles.page}>
@@ -109,32 +282,20 @@ const Projects = memo(() => (
         Not style pasted over a template. A response to the business underneath it.
       </h2>
       <p>
-        My role changes with the problem: product strategy, customer journeys, visual systems,
-        application architecture, content modelling, custom WordPress, performance, or all of it.
-        The constant is a useful result that feels considered from every angle.
+        Each project gets its own system, interaction model, and visual point of view. Explore the
+        evidence below rather than taking my word for it.
       </p>
     </ScrollReveal>
 
     <ul className={styles.projectList} role="list" aria-label="Featured projects">
-      {projectsData.map((project, index) => (
+      {projectsData.map(project => (
         <ScrollReveal
           as="li"
           key={project.id}
           id={project.id}
           className={`${styles.project} ${styles[`${project.tone}Project`]}`}
         >
-          <div className={styles.projectMedia}>
-            <div className={styles.browserBar} aria-hidden="true">
-              <span /><span /><span />
-              <div>{project.highlight}</div>
-            </div>
-            <img
-              src={project.image.src}
-              alt={project.image.alt}
-              loading={index === 0 ? 'eager' : 'lazy'}
-              decoding="async"
-            />
-          </div>
+          <ProjectMedia project={project} />
 
           <div className={styles.projectContent}>
             <div className={styles.projectIdentity}>
