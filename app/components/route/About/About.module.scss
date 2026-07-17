@@ -4,20 +4,8 @@
 .page {
   --about-coral: #ff765e;
   --about-green: #75e38d;
-  background:
-    radial-gradient(ellipse 68% 18% at 0% 23%, var(--color-wash-coral), transparent 68%),
-    radial-gradient(ellipse 64% 18% at 100% 48%, var(--color-wash-gold), transparent 66%),
-    radial-gradient(ellipse 70% 18% at 0% 72%, var(--color-wash-cyan), transparent 68%),
-    radial-gradient(ellipse 62% 16% at 100% 92%, var(--color-wash-green), transparent 66%),
-    linear-gradient(
-      180deg,
-      var(--color-bg-coral) 0 25%,
-      var(--color-bg-black) 25% 43%,
-      var(--color-bg-gold) 43% 62%,
-      var(--color-bg-cyan) 62% 82%,
-      var(--color-bg-black) 82% 90%,
-      var(--color-bg-green) 90% 100%
-    );
+  overflow: hidden;
+  background: var(--color-bg-black);
 }
 
 .hero {
@@ -154,8 +142,8 @@
   padding: 0 1.25rem;
   border-bottom: 1px solid var(--color-border);
   background:
-    linear-gradient(100deg, var(--color-wash-coral), transparent 34%),
-    var(--color-bg-coral);
+    radial-gradient(ellipse 68% 180% at 0% 10%, rgba(255, 118, 94, 0.48), transparent 68%),
+    linear-gradient(180deg, var(--color-bg-black), var(--color-bg-coral));
 }
 
 .stats {
@@ -188,6 +176,50 @@
   border-top: 1px solid var(--color-border);
 
   @include respond-to('md') { padding: 9rem 2rem; }
+}
+
+.storySection,
+.principlesSection,
+.craftSection,
+.personalSection {
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    position: absolute;
+    inset: 0 auto 0 50%;
+    z-index: -1;
+    width: 100vw;
+    content: '';
+    transform: translateX(-50%);
+  }
+}
+
+.storySection::before {
+  background:
+    radial-gradient(ellipse 62% 70% at -8% 12%, rgba(255, 118, 94, 0.52), transparent 64%),
+    radial-gradient(ellipse 50% 58% at 108% 76%, rgba(242, 198, 109, 0.28), transparent 66%),
+    linear-gradient(180deg, var(--color-bg-coral), var(--color-bg-black));
+}
+
+.principlesSection::before {
+  background:
+    radial-gradient(ellipse 58% 64% at 108% 18%, rgba(242, 198, 109, 0.58), transparent 64%),
+    radial-gradient(ellipse 52% 58% at -8% 82%, rgba(255, 118, 94, 0.38), transparent 66%),
+    linear-gradient(180deg, var(--color-bg-black), var(--color-bg-gold) 52%, var(--color-card-contrast));
+}
+
+.craftSection::before {
+  background:
+    radial-gradient(ellipse 62% 66% at -8% 18%, rgba(74, 183, 220, 0.64), transparent 64%),
+    radial-gradient(ellipse 54% 58% at 108% 82%, rgba(117, 227, 141, 0.44), transparent 66%),
+    linear-gradient(180deg, var(--color-card-contrast), var(--color-bg-cyan) 32%);
+}
+
+.personalSection::before {
+  background:
+    radial-gradient(ellipse 58% 88% at 104% 42%, rgba(117, 227, 141, 0.4), transparent 68%),
+    var(--color-bg-cyan);
 }
 
 .storySection {
@@ -514,9 +546,9 @@
 .closingSection {
   max-width: none;
   background:
-    radial-gradient(ellipse 62% 80% at 0% 50%, var(--color-wash-green), transparent 66%),
-    radial-gradient(ellipse 62% 80% at 100% 50%, var(--color-wash-coral), transparent 66%),
-    var(--color-bg-black);
+    radial-gradient(ellipse 62% 72% at 0% 66%, rgba(117, 227, 141, 0.52), transparent 66%),
+    radial-gradient(ellipse 62% 72% at 100% 66%, rgba(255, 118, 94, 0.5), transparent 66%),
+    linear-gradient(180deg, var(--color-bg-cyan), var(--color-bg-black) 28%);
   text-align: center;
 
   h2 { max-width: 900px; margin: 0 auto; }
