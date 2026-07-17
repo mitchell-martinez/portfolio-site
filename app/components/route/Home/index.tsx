@@ -1,8 +1,9 @@
-import type { RefObject } from 'react';
+import type { ReactNode, RefObject } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ButtonLink } from '~/components/ui/ButtonLink/';
 import { ScrollReveal } from '~/components/ui/ScrollReveal/';
 import { websitePackages } from '~/data/freelanceServices';
+import { useCountUp } from '~/hooks/useCountUp';
 import { useIntersectionObserver } from '~/hooks/useIntersectionObserver';
 import { BudgetoDonut } from '../Hero/Donut/';
 import styles from './Home.module.scss';
@@ -80,6 +81,40 @@ const projectOutcomes = [
 
 const introStatement =
   "You've invested time and money in your business. Let your website reflect that.";
+
+type ProjectRevealProps = {
+  children: (isVisible: boolean) => ReactNode;
+  className?: string;
+  direction: 'left' | 'right' | 'top';
+};
+
+const ProjectReveal = ({ children, className = '', direction }: ProjectRevealProps) => {
+  const { ref, isIntersecting } = useIntersectionObserver({
+    threshold: 0.05,
+    rootMargin: '0px 0px -5% 0px',
+    triggerOnce: true,
+  });
+  const directionClass = {
+    left: styles.projectRevealLeft,
+    right: styles.projectRevealRight,
+    top: styles.projectRevealTop,
+  }[direction];
+
+  return (
+    <article
+      ref={ref as RefObject<HTMLElement>}
+      className={`${styles.showcase} ${styles.projectReveal} ${directionClass}${isIntersecting ? ` ${styles.projectRevealVisible}` : ''}${className ? ` ${className}` : ''}`}
+      data-reveal-direction={direction}
+    >
+      {children(isIntersecting)}
+    </article>
+  );
+};
+
+const AnimatedScore = ({ active, value }: { active: boolean; value: number }) => {
+  const displayValue = useCountUp(value, active);
+  return <dd aria-label={value.toString()}>{displayValue}</dd>;
+};
 
 const Home = () => {
   const [income, setIncome] = useState(3200);
@@ -292,7 +327,9 @@ const Home = () => {
           </p>
         </div>
 
-        <ScrollReveal as="article" className={styles.showcase}>
+        <ProjectReveal direction="left">
+          {isVisible => (
+            <>
           <div className={styles.showcaseMedia}>
             <img
               src="/images/studiozanetti.png"
@@ -316,9 +353,9 @@ const Home = () => {
             </div>
             <div className={styles.proofColumn}>
               <dl className={styles.scoreGrid} aria-label="Studio Zanetti Lighthouse snapshot">
-                <div><dt>Performance</dt><dd>100</dd></div>
-                <div><dt>Accessibility</dt><dd>93</dd></div>
-                <div><dt>SEO</dt><dd>100</dd></div>
+                <div><dt>Performance</dt><AnimatedScore active={isVisible} value={100} /></div>
+                <div><dt>Accessibility</dt><AnimatedScore active={isVisible} value={93} /></div>
+                <div><dt>SEO</dt><AnimatedScore active={isVisible} value={100} /></div>
               </dl>
               <p className={styles.scoreNote}>
                 Lighthouse lab snapshot after launch. Scores vary by page and test conditions.
@@ -333,15 +370,19 @@ const Home = () => {
               </ButtonLink>
             </div>
           </div>
-        </ScrollReveal>
+            </>
+          )}
+        </ProjectReveal>
 
-        <ScrollReveal as="article" className={`${styles.showcase} ${styles.budgetoShowcase}`}>
+        <ProjectReveal direction="right" className={styles.budgetoShowcase}>
+          {isVisible => (
+            <>
           <div className={styles.budgetoContent}>
             <div className={styles.showcaseIndex}>02 / Product engineering</div>
             <p className={styles.projectType}>Product strategy · Full-stack application · PWA</p>
             <h3 className={styles.showcaseTitle}>Budgeto</h3>
             <p className={styles.showcaseText}>
-              Designed around my own budgeting methodology of tracking how much I've spent and how much I've got leftover from my paycheque. Created fully independent, from concept all the way through to a full-scale production budgeting app with real users, subscriptions, mobile app store deployment, and a comprehensive marketing website. Try it today and seeh ow Budgeto can help you take back control of your finances.
+              Designed around my own budgeting methodology of tracking how much I've spent and how much I've got leftover from my paycheque. Created fully independently, from concept all the way through to a full-scale production budgeting app with real users, subscriptions, mobile app store deployment, and a comprehensive marketing website. Try it today and seeh ow Budgeto can help you take back control of your finances.
             </p>
 
             <div className={styles.budgetControls} aria-label="Interactive Budgeto preview">
@@ -416,6 +457,7 @@ const Home = () => {
                     total={income || 1}
                     color="#75e38d"
                     label="Leftover"
+                    animate={isVisible}
                   />
                 </section>
                 <section className={styles.swipeCol} aria-label="Spent">
@@ -424,6 +466,7 @@ const Home = () => {
                     total={income || 1}
                     color="#ff7b62"
                     label="Spent"
+                    animate={isVisible}
                   />
                 </section>
               </div>
@@ -439,9 +482,13 @@ const Home = () => {
             </div>
             <p className={styles.swipeHint}>Swipe to compare leftover and spent</p>
           </div>
-        </ScrollReveal>
+            </>
+          )}
+        </ProjectReveal>
 
-        <ScrollReveal as="article" className={`${styles.showcase} ${styles.fogsvShowcase}`}>
+        <ProjectReveal direction="top" className={styles.fogsvShowcase}>
+          {() => (
+            <>
           <div className={styles.showcaseMedia}>
             <img
               src="/images/fogsv.png"
@@ -471,8 +518,49 @@ const Home = () => {
               </ButtonLink>
             </div>
           </div>
-        </ScrollReveal>
+            </>
+          )}
+        </ProjectReveal>
       </section>
+
+      <ScrollReveal as="section" className={styles.expertSection} aria-labelledby="expert-heading">
+        <div className={styles.expertImageWrap}>
+          <img
+            src="/images/mitchmartinez.jpg"
+            alt="Mitchell Martinez, Sydney website designer and developer"
+            className={styles.expertImage}
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+        <div className={styles.expertContent}>
+          <p className={`${styles.sectionEyebrow} ${styles.expertEyebrow}`}>Meet Mitch</p>
+          <h2 id="expert-heading" className={styles.sectionHeading}>
+            One expert, from first question to final handover
+          </h2>
+          <p className={styles.expertLead}>
+            I&apos;m Mitch, a Sydney-based product engineer and website developer with more than
+            five years of experience turning complex requirements into useful digital products.
+          </p>
+          <p>
+            You speak directly with the person planning, designing, and building the work. I'll work with you to
+            challenge weak assumptions, explain trade-offs plainly, and leave you with a platform
+            you understand rather than a nightmare you're scared to touch.
+          </p>
+          <ul className={styles.expertFacts}>
+            <li>Registered Aussie sole trader · ABN 40 927 243 914</li>
+            <li>Qualified software engineer with a degree form The Unviersity of Adelaide</li>
+            <li>Direct collaboration and documented handover</li>
+            <li>Accessibility, performance, and maintainability built in</li>
+          </ul>
+          <div className={styles.showcaseActions}>
+            <ButtonLink to="/about" variant="primary">More about Mitch</ButtonLink>
+            <ButtonLink href="https://linkedin.com/in/mitchellmartinezadl" variant="secondary" external>
+              LinkedIn
+            </ButtonLink>
+          </div>
+        </div>
+      </ScrollReveal>
 
       <ScrollReveal as="section" className={styles.capabilitySection} aria-labelledby="capability-heading">
         <div className={styles.capabilityHeader}>
@@ -569,44 +657,6 @@ const Home = () => {
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-      </ScrollReveal>
-
-      <ScrollReveal as="section" className={styles.expertSection} aria-labelledby="expert-heading">
-        <div className={styles.expertImageWrap}>
-          <img
-            src="/images/mitchmartinez.jpg"
-            alt="Mitchell Martinez, Sydney website designer and developer"
-            className={styles.expertImage}
-            loading="eager"
-            decoding="async"
-          />
-        </div>
-        <div className={styles.expertContent}>
-          <p className={`${styles.sectionEyebrow} ${styles.expertEyebrow}`}>Meet Mitch</p>
-          <h2 id="expert-heading" className={styles.sectionHeading}>
-            One expert, from first question to final handover
-          </h2>
-          <p className={styles.expertLead}>
-            I&apos;m Mitch, a Sydney-based product engineer and website developer with more than
-            five years of experience turning complex requirements into useful digital products.
-          </p>
-          <p>
-            You speak directly with the person planning, designing, and building the work. I'll work with you to
-            challenge weak assumptions, explain trade-offs plainly, and leave you with a platform
-            you understand rather than a nightmare you're scared to touch.
-          </p>
-          <ul className={styles.expertFacts}>
-            <li>Registered Aussie sole trader · ABN 40 927 243 914</li>
-            <li>Direct collaboration and documented handover</li>
-            <li>Accessibility, performance, and maintainability built in</li>
-          </ul>
-          <div className={styles.showcaseActions}>
-            <ButtonLink to="/about" variant="primary">More about Mitch</ButtonLink>
-            <ButtonLink href="https://linkedin.com/in/mitchellmartinezadl" variant="secondary" external>
-              LinkedIn
-            </ButtonLink>
           </div>
         </div>
       </ScrollReveal>
