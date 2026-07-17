@@ -107,8 +107,8 @@ export const websitePackages: WebsitePackage[] = [
   {
     slug: 'launch',
     name: 'Launch',
-    price: 3000,
-    priceLabel: 'From A$3,000',
+    price: 2000,
+    priceLabel: 'From A$2,000',
     timeline: 'Typically 3–4 weeks',
     summary: 'A focused, professional website that makes it easy for customers to understand your business and get in touch.',
     bestFor: 'New businesses, independent professionals, and focused service offers who need a simple web presence for marketing',
@@ -183,23 +183,45 @@ export const servicesFaqs: FrequentlyAskedQuestion[] = [
   {
     question: 'Do you work with businesses outside Sydney?',
     answer:
-      'Yes. I am based in Sydney and work remotely with businesses and organisations across Australia.',
+      'I certainly do - while I am based in Sydney, I work with individuals and businesses across Australia and the European Union. Although my focus is working on local businesses and retaining that personal touch, as a software engineer, I am not restricted by borders or physical presence.',
   },
   {
     question: 'Can you work with an existing website?',
     answer:
-      'Yes. I can review and redesign an existing site, retain useful content, and recommend whether an incremental improvement or a rebuild is the better investment.',
+      "Usually yes! I can review your existing site and recommend whether an incremental improvement or a rebuild is the better investment. The scope of my ability depends on how much access you have to your website and how it's currently been built. If you've been locked out of your current website and have lost access, I can help you regain control of your digital presence and move forward with a new build.",
   },
   {
     question: 'Will I be able to update the website myself?',
     answer:
-      'When editing is part of the brief, I build around an appropriate content management system and include training and handover so you are not dependent on me for routine updates.',
+      "Absolutely! From the beginning, we'll discuss what your long-term needs will be for your website. If you want to be able to update it yourself, I'll make sure it's built in a way that makes you easy to do so, and provide full handover and upskilling so you can make basic changes yourself.",
   },
   {
     question: 'Can you guarantee a first-page Google or AI search ranking?',
     answer:
-      'Nobody can guarantee a first-page ranking. What I can do is help build your website in a way that makes it easy for Google and AI to understand it, as well as helping you create a marketing plan that will help make it easier for your customers to find you.',
+      'No. Nobody can guarantee a first-page ranking, and you should be skeptical of people that claim to do so. What I can do is help build your website in a way that makes it easy for Google and AI to understand it, as well as helping you create a marketing plan that will help make it easier for your customers to find you. Google indexes websites based on many factors, and AI assistants use a variety of sources to answer questions. I can help you optimise your website for both and make suggestions to increase your visibility, but I cannot control how they rank or present your business.',
   },
+  {
+    question: 'What growth will my business have after the website is built?',
+    answer:
+      "I can't guarantee you growth, but I can work with you on a plan to help your new website be more effective at reaching and converting customers. The growth of your business after the website is built depends on various factors including your marketing efforts, industry trends, and customer engagement; as well as factors outside our control such as location, scalability, and the current state of the economy. What I can do is help set up you and your website for success through strategies that help attract and retain customers.",
+  },
+  {
+    question: 'Can you take care of my website long term?',
+    answer:
+      'Of course! I offer ongoing care and maintenance for websites starting from $99 a month, including updates, backups, and minor content changes. The Care plan is designed to provide peace of mind and ensure your website remains secure and up-to-date without the need for a long-term commitment.',
+  },
+  {
+    question: 'What if I need a website that is more complex than the packages offered?',
+    answer:
+      'If your project requires more complex functionality, integrations, or custom workflows, I can provide a tailored solution. We can discuss your specific needs and create a custom proposal that fits your requirements and budget.',
+  },
+  {question: 'How do you use AI in your website development process?', answer: 'I use AI tools to assist with research, content optimisation, and quality checks. AI can help identify relevant keywords, improve content readability, and ensure that your website is structured in a way that is easily understood by search engines and AI assistants. However, I always apply human judgment and expertise to ensure that the final output aligns with your business goals and provides a great user experience.'},
+  {question: 'Do you offer any discounts for non-profits or bootstrapped creatives?', answer: "I'll work with you to understand what your needs and circumstances are before we discuss price. I understand that non-profits, creatives and startups often have limited budgets. I am open to discussing flexible arrangements, deferred payments or reduced rates based on the scope of work and your specific situation. Where appropriate, I can also recommend grants, contacts, and other ways to make your project more affordable. Please reach out to discuss your project and we can explore options together."},
+  {
+    question: 'How do I get started?',
+    answer:
+      'You can get started by reaching out through the contact form on my website. Please provide details about your project, including your goals, timeline, and any specific requirements. I will review your information and get back to you to discuss the next steps.',
+  }
 ];
 
 export const pricingFaqs: FrequentlyAskedQuestion[] = [

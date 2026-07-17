@@ -204,9 +204,7 @@
 .processSection,
 .faqSection,
 .closingSection {
-  padding-top: 6rem;
-  padding-right: 1.25rem;
-  padding-left: 1.25rem;
+  padding: 6rem 1.25rem;
 
   @include respond-to('md') {
     padding-top: 9rem;
@@ -300,6 +298,16 @@
       .serviceNumber { color: var(--color-success-text); }
       .tabArrow { opacity: 1; transform: translate(0, 0); }
     }
+
+    @include respond-to('lg') {
+      height: 5.5rem;
+      padding-right: 0.75rem;
+      padding-left: 0.75rem;
+
+      small {
+        display: none;
+      }
+    }
   }
 }
 
@@ -366,6 +374,13 @@
     animation: panelReveal 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
+  @include respond-to('lg') {
+    height: 25.625rem;
+    min-height: 0;
+
+    img { min-height: 0; }
+  }
+
   > span {
     position: absolute;
     right: 1rem;
@@ -387,6 +402,12 @@
   padding: 1.5rem;
 
   @include respond-to('md') { padding: 2rem; }
+
+  @include respond-to('lg') {
+    display: flex;
+    min-height: 30.8125rem;
+    flex-direction: column;
+  }
 
   > h3 {
     color: #fff;
@@ -447,6 +468,8 @@
   flex-wrap: wrap;
   gap: 0.75rem;
   margin-top: 1.75rem;
+
+  @include respond-to('lg') { margin-top: auto; padding-top: 1.75rem; }
 
   a:last-child {
     border-color: rgba(255, 255, 255, 0.35);
@@ -593,6 +616,12 @@
 }
 
 @media (max-width: 767px) {
+  .heroMedia img { opacity: 0.32; }
+  .heroScrim {
+    background:
+      linear-gradient(180deg, rgba(9, 11, 15, 0.74), rgba(9, 11, 15, 0.78) 48%, #090b0f 100%),
+      linear-gradient(90deg, rgba(9, 11, 15, 0.94), rgba(9, 11, 15, 0.7));
+  }
   .panelActions,
   .closingSection .actions {
     display: grid;

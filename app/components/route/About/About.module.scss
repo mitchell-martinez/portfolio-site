@@ -558,6 +558,12 @@
 }
 
 @media (max-width: 767px) {
+  .heroMedia img { opacity: 0.34; }
+  .heroScrim {
+    background:
+      linear-gradient(180deg, rgba(9, 11, 15, 0.72), rgba(9, 11, 15, 0.76) 46%, #090b0f 100%),
+      linear-gradient(90deg, rgba(9, 11, 15, 0.94), rgba(9, 11, 15, 0.68));
+  }
   .heroContent h1 { font-size: clamp(3.15rem, 17vw, 5rem); }
   .actions { display: grid; grid-template-columns: 1fr; > * { width: 100%; justify-content: center; } }
 }

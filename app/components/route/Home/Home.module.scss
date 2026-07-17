@@ -1116,6 +1116,12 @@
 .closingActions { justify-content: center; margin-top: 2rem; }
 
 @media (max-width: 767px) {
+  .heroProjectStudio { opacity: 0.34; }
+  .heroScrim {
+    background:
+      linear-gradient(180deg, rgba(9, 11, 15, 0.76), rgba(9, 11, 15, 0.7) 42%, #090b0f 92%),
+      linear-gradient(90deg, rgba(9, 11, 15, 0.94), rgba(9, 11, 15, 0.7));
+  }
   .name { font-size: clamp(3.1rem, 18vw, 5.2rem); }
   .heroActions,
   .showcaseActions,
@@ -1125,6 +1131,7 @@
   .showcaseContent { grid-template-columns: minmax(0, 1fr); }
   .arrow { display: none; }
   .expertImageWrap { aspect-ratio: 5 / 4; }
+  .expertImage { object-position: 68% top; }
 }
 
 @media (prefers-reduced-motion: reduce) {

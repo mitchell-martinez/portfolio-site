@@ -8,7 +8,7 @@ export const meta: MetaFunction = () =>
   buildSocialMeta({
     title: 'Website Packages & Pricing - Mitchell Martinez',
     description:
-      'Website packages from A$3,000 for Australian small businesses, with clear scope, timelines and optional ongoing care.',
+      'Website packages from A$2,000 for Australian small businesses, with clear scope, timelines and optional ongoing care.',
     url: '/pricing',
   });
 

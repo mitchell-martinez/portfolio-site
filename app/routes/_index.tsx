@@ -83,7 +83,7 @@ const structuredData = {
         addressCountry: 'AU',
       },
       areaServed: { '@type': 'Country', name: 'Australia' },
-      priceRange: 'A$3,000–A$7,500+',
+      priceRange: 'A$2,000–A$7,500+',
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
         name: 'Website design and development packages',

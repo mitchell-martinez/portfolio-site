@@ -373,10 +373,7 @@ const Home = () => {
               <p className={styles.projectType}>Headless WordPress · React · Experience design</p>
               <h3 className={styles.showcaseTitle}>Studio Zanetti</h3>
               <p className={styles.showcaseText}>
-                A ground-up redesign for a photography studio serving wedding, corporate, and
-                event audiences. I designed the customer journeys, built reusable ACF-powered
-                components, integrated enquiries with the studio&apos;s CRM, and trained the client
-                to run the platform independently.
+                I worked with Sydney's leading wedding and corporate photographer Michael Zanetti to completely redesign the Studio Zanetti website with a focus on design, customer experience, and ease of use.
               </p>
             </div>
             <div className={styles.proofColumn}>
@@ -410,7 +407,7 @@ const Home = () => {
             <p className={styles.projectType}>Product strategy · Full-stack application · PWA</p>
             <h3 className={styles.showcaseTitle}>Budgeto</h3>
             <p className={styles.showcaseText}>
-              Designed around my own budgeting methodology of tracking how much I've spent and how much I've got leftover from my paycheque. Created fully independently, from concept all the way through to a full-scale production budgeting app with real users, subscriptions, mobile app store deployment, and a comprehensive marketing website. Try it today and seeh ow Budgeto can help you take back control of your finances.
+              Designed around my own budgeting methodology of tracking how much I've spent and how much I've got leftover from my paycheque. Created fully independently, from concept all the way through to a full-scale production budgeting app with real users, subscriptions, mobile app store deployment, and a comprehensive marketing website. Try it today and see how Budgeto can help you take back control of your finances.
             </p>
 
             <div className={styles.budgetControls} aria-label="Interactive Budgeto preview">
@@ -455,11 +452,16 @@ const Home = () => {
                 </div>
               </div>
             </div>
-
+            <br />
+            <div className={styles.showcaseActions}>
             <ButtonLink href="https://budgeto.app" variant="primary" external>
               Try Budgeto live
             </ButtonLink>
+            <ButtonLink href="https://budgeto.app/register" variant="secondary" external>
+              Sign up today
+            </ButtonLink></div>
           </div>
+          
 
           <div className={styles.donutExperience}>
             <div className={styles.swipeWrap} aria-label="Budget swiper controls">

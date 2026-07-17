@@ -13,7 +13,7 @@ describe('Pricing', () => {
   it('renders package prices, timelines, and prefilled enquiry links', () => {
     renderPricing();
 
-    expect(screen.getByText('From A$3,000')).toBeInTheDocument();
+    expect(screen.getByText('From A$2,000')).toBeInTheDocument();
     expect(screen.getByText('From A$5,000')).toBeInTheDocument();
     expect(screen.getByText('From A$7,500')).toBeInTheDocument();
     expect(screen.getByText('Typically 3–4 weeks')).toBeInTheDocument();

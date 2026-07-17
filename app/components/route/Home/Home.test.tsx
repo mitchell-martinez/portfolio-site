@@ -28,7 +28,7 @@ describe('Home', () => {
     renderHome();
     expect(screen.getByRole('button', { name: 'Increase income' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Decrease expenditure' })).toBeInTheDocument();
-    expect(screen.getByText('From A$3,000')).toBeInTheDocument();
+    expect(screen.getByText('From A$2,000')).toBeInTheDocument();
     expect(screen.getByText('From A$5,000')).toBeInTheDocument();
     expect(screen.getByText('From A$7,500')).toBeInTheDocument();
   });

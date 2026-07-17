@@ -11,18 +11,18 @@ export const projectTypeOptions = [
 ] as const;
 
 export const packageInterestOptions = [
-  { value: 'launch', label: 'Launch — from A$3,000' },
-  { value: 'grow', label: 'Grow — from A$5,000' },
-  { value: 'custom', label: 'Custom — from A$7,500' },
-  { value: 'care', label: 'Care — from A$99/month' },
+  { value: 'launch', label: 'Launch - from A$2,000' },
+  { value: 'grow', label: 'Grow - from A$5,000' },
+  { value: 'custom', label: 'Custom - from A$7,500' },
+  { value: 'care', label: 'Care - from A$99/month' },
   { value: 'not-sure', label: 'Not sure yet' },
 ] as const;
 
 export const budgetOptions = [
-  { value: 'under-3000', label: 'Under A$3,000' },
-  { value: '3000-5000', label: 'A$3,000–A$5,000' },
-  { value: '5000-7500', label: 'A$5,000–A$7,500' },
-  { value: '7500-15000', label: 'A$7,500–A$15,000' },
+  { value: 'under-2000', label: 'Under A$2,000' },
+  { value: '2000-4999', label: 'A$2,000–A$4,999' },
+  { value: '5000-7499', label: 'A$5,000–A$7,499' },
+  { value: '7500-14999', label: 'A$7,500–A$14,999' },
   { value: '15000-plus', label: 'A$15,000+' },
   { value: 'flexible-arrangement', label: 'I need a flexible arrangement' },
   { value: 'not-sure', label: 'Not sure yet' },
