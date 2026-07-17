@@ -17,6 +17,7 @@ const clientValues = [
     number: '01',
     title: 'More of the right enquiries',
     summary: 'Help qualified visitors understand the offer and take the next step without hunting.',
+    core: 'Clearer enquiries',
     outcome: 'A customer journey with fewer dead ends',
     detail:
       'I structure services, navigation, content, and forms around the questions customers ask before they commit. The route from landing page to relevant service to enquiry stays obvious on mobile and desktop.',
@@ -29,6 +30,7 @@ const clientValues = [
     number: '02',
     title: 'Trust wherever clients find you',
     summary: 'Make the business clear to customers, search engines, and AI assistants.',
+    core: 'Visible and trusted',
     outcome: 'A credible presence that can be understood before the first call',
     detail:
       'Server-rendered pages, semantic structure, descriptive metadata, and accurate structured data give people and discovery systems the same clear account of what you do and who it is for.',
@@ -41,6 +43,7 @@ const clientValues = [
     number: '03',
     title: 'A site your team can run',
     summary: 'Keep routine publishing in-house without making the interface fragile.',
+    core: 'Independent ownership',
     outcome: 'Publish without needing a developer for every change',
     detail:
       'I shape reusable CMS fields and editing guardrails around the content your team actually manages. Training and documented handover make ownership practical after launch.',
@@ -53,6 +56,7 @@ const clientValues = [
     number: '04',
     title: 'Fewer surprises at launch',
     summary: 'Catch expensive friction before customers or your team have to report it.',
+    core: 'A confident launch',
     outcome: 'A tested platform with a clear path beyond launch day',
     detail:
       'I review responsive behaviour, accessibility, performance, forms, metadata, and deployment before handover. You receive practical support after launch rather than an unexplained codebase and a goodbye.',
@@ -456,29 +460,53 @@ const Home = () => {
             data-visual={clientValues[activeValue].visual}
             aria-live="polite"
           >
-            <div className={styles.valueDiagram} aria-hidden="true">
+            <div
+              className={styles.valueDiagram}
+              key={`diagram-${clientValues[activeValue].number}`}
+              aria-hidden="true"
+            >
               <span className={styles.diagramLabel}>Your customer&apos;s path</span>
-              <div className={styles.diagramFlow}>
+              <div className={styles.valueOrbit}>
+                <span className={styles.orbitRing} />
+                <span className={styles.orbitRing} />
+                <span className={styles.orbitRing} />
+                <div className={styles.valueOrbitCore}>
+                  <span>Client outcome</span>
+                  <strong>{clientValues[activeValue].core}</strong>
+                </div>
                 {clientValues[activeValue].flow.map((step, index) => (
-                  <div className={styles.diagramNode} key={step}>
-                    <span>{String(index + 1).padStart(2, '0')}</span>
-                    <strong>{step}</strong>
+                  <div
+                    className={`${styles.orbitPath} ${styles[`orbitPath${index + 1}`]}`}
+                    key={step}
+                  >
+                    <div className={styles.orbitNode}>
+                      <span>{String(index + 1).padStart(2, '0')}</span>
+                      <strong>{step}</strong>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
-            <div className={styles.valueEvidence} key={clientValues[activeValue].number}>
-              <span>What changes for you</span>
-              <h3>{clientValues[activeValue].outcome}</h3>
-              <p>{clientValues[activeValue].detail}</p>
-              <ul aria-label="Included value">
-                {clientValues[activeValue].deliverables.map(deliverable => (
-                  <li key={deliverable}>{deliverable}</li>
-                ))}
-              </ul>
-              <ButtonLink to={clientValues[activeValue].action.to} variant="secondary" size="sm">
-                {clientValues[activeValue].action.label}
-              </ButtonLink>
+            <div className={styles.valueEvidenceStack}>
+              {clientValues.map((value, index) => (
+                <div
+                  className={`${styles.valueEvidence} ${activeValue === index ? styles.valueEvidenceActive : ''}`}
+                  key={value.number}
+                  aria-hidden={activeValue !== index}
+                >
+                  <span>What changes for you</span>
+                  <h3>{value.outcome}</h3>
+                  <p>{value.detail}</p>
+                  <ul aria-label="Included value">
+                    {value.deliverables.map(deliverable => (
+                      <li key={deliverable}>{deliverable}</li>
+                    ))}
+                  </ul>
+                  <ButtonLink to={value.action.to} variant="secondary" size="sm">
+                    {value.action.label}
+                  </ButtonLink>
+                </div>
+              ))}
             </div>
           </div>
         </div>

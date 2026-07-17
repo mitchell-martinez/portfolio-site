@@ -562,7 +562,7 @@
   gap: 2.5rem;
 
   @include respond-to('lg') {
-    grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.28fr);
+    grid-template-columns: minmax(310px, 0.66fr) minmax(0, 1.34fr);
     align-items: stretch;
     gap: 0;
     border: 1px solid var(--color-border-strong);
@@ -601,8 +601,12 @@
   }
 
   @include respond-to('lg') {
+    display: grid;
+    grid-template-rows: repeat(4, minmax(0, 1fr));
     border-top: 0;
     border-right: 1px solid var(--color-border-strong);
+    li,
+    button { height: 100%; }
     li:last-child { border-bottom: 0; }
   }
 }
@@ -618,7 +622,6 @@
 .valuePanel {
   --value-accent: #75e38d;
   display: grid;
-  min-height: 610px;
   overflow: hidden;
   background: #101218;
   color: #fff;
@@ -627,14 +630,16 @@
   &[data-visual='ownership'] { --value-accent: #f2c66d; }
   &[data-visual='assurance'] { --value-accent: #ff765e; }
 
-  @include respond-to('md') { grid-template-rows: minmax(330px, 0.95fr) auto; }
+  @include respond-to('md') { grid-template-rows: 37rem auto; }
 }
 
 .valueDiagram {
   position: relative;
-  min-height: 360px;
+  display: grid;
+  min-height: 32rem;
   overflow: hidden;
-  padding: 1.5rem;
+  padding: 2rem;
+  place-items: center;
   background:
     linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
@@ -647,80 +652,141 @@
     content: '';
     pointer-events: none;
   }
+
+  animation: valueDiagramEnter 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .diagramLabel {
-  position: relative;
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
   z-index: 2;
   color: rgba(255, 255, 255, 0.44);
   font-size: 0.68rem;
   text-transform: uppercase;
 }
 
-.diagramFlow {
+.valueOrbit {
   position: relative;
   z-index: 1;
-  display: grid;
-  min-height: 285px;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 1rem;
-
-  &::before {
-    position: absolute;
-    top: 50%;
-    right: 12%;
-    left: 12%;
-    height: 1px;
-    background: color-mix(in srgb, var(--value-accent) 45%, transparent);
-    content: '';
-  }
-
-  @include respond-to('sm') { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  width: min(100%, 33rem);
+  aspect-ratio: 1;
+  margin: 0 auto;
 }
 
-.diagramNode {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  min-height: 7.5rem;
-  align-content: space-between;
-  padding: 1rem;
-  border: 1px solid color-mix(in srgb, var(--value-accent) 54%, #2a2e36);
-  border-radius: 4px;
-  background: #151820;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.24);
-  transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1), border-color $transition-medium;
+.orbitRing {
+  position: absolute;
+  inset: 4%;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
 
-  span { color: var(--value-accent); font-size: 0.65rem; }
-  strong { max-width: 13ch; color: #fff; font-size: 0.88rem; line-height: 1.35; }
+  &:nth-child(2) { inset: 19%; border-color: color-mix(in srgb, var(--value-accent) 28%, transparent); }
+  &:nth-child(3) { inset: 34%; border-color: color-mix(in srgb, var(--value-accent) 46%, transparent); }
+}
+
+.valueOrbitCore {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 4;
+  display: grid;
+  width: clamp(7.5rem, 24vw, 9.5rem);
+  aspect-ratio: 1;
+  place-content: center;
+  padding: 1rem;
+  border: 1px solid var(--value-accent);
+  border-radius: 50%;
+  background: #151820;
+  box-shadow: 0 0 0 0.7rem color-mix(in srgb, var(--value-accent) 8%, transparent), 0 24px 50px rgba(0, 0, 0, 0.35);
+  text-align: center;
+  transform: translate(-50%, -50%);
+
+  span { color: var(--value-accent); font-size: 0.56rem; text-transform: uppercase; }
+  strong { display: block; max-width: 10ch; margin-top: 0.35rem; color: #fff; font-size: clamp(0.9rem, 2vw, 1.2rem); line-height: 1.1; }
+}
+
+.orbitPath {
+  --orbit-size: 90%;
+  --orbit-start: -38deg;
+  --orbit-turn: 360deg;
+  --orbit-duration: 24s;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--orbit-size);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%) rotate(var(--orbit-start));
+  animation: valueOrbitSpin var(--orbit-duration) linear infinite;
+}
+
+.orbitPath1 { --orbit-size: 76%; --orbit-start: -38deg; --orbit-duration: 24s; }
+.orbitPath2 { --orbit-size: 76%; --orbit-start: 82deg; --orbit-duration: 24s; }
+.orbitPath3 { --orbit-size: 76%; --orbit-start: 202deg; --orbit-duration: 24s; }
+
+.orbitNode {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  z-index: 3;
+  width: clamp(6.4rem, 17vw, 8rem);
+  padding: 0.65rem 0.7rem;
+  border: 1px solid color-mix(in srgb, var(--value-accent) 58%, #313640);
+  border-radius: 4px;
+  background: rgba(21, 24, 32, 0.95);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
+  transform: translate(50%, -50%) rotate(calc(var(--orbit-start) * -1));
+  animation: valueOrbitCounterSpin var(--orbit-duration) linear infinite;
+
+  span { display: block; color: var(--value-accent); font-size: 0.56rem; }
+  strong { display: block; margin-top: 0.25rem; color: #fff; font-size: clamp(0.64rem, 1.5vw, 0.76rem); line-height: 1.25; }
 }
 
 .valuePanel[data-visual='discovery'] {
-  .diagramNode:first-child { transform: translateY(3.5rem); }
-  .diagramNode:nth-child(2) { transform: translateY(-2rem); }
-  .diagramNode:last-child { transform: translateY(3.5rem); }
+  .orbitPath1 { --orbit-start: 44deg; --orbit-turn: -360deg; --orbit-duration: 20s; }
+  .orbitPath2 { --orbit-start: 164deg; --orbit-turn: -360deg; --orbit-duration: 20s; }
+  .orbitPath3 { --orbit-start: 284deg; --orbit-turn: -360deg; --orbit-duration: 20s; }
 }
 
 .valuePanel[data-visual='ownership'] {
-  .diagramFlow { grid-template-columns: minmax(0, 1fr); align-content: center; }
-  .diagramFlow::before { top: 14%; bottom: 14%; left: 50%; width: 1px; height: auto; }
-  .diagramNode { width: min(76%, 19rem); min-height: 4.5rem; }
-  .diagramNode:nth-child(2) { margin-left: auto; }
+  .orbitPath1 { --orbit-start: 92deg; --orbit-duration: 28s; }
+  .orbitPath2 { --orbit-start: 212deg; --orbit-duration: 28s; }
+  .orbitPath3 { --orbit-start: 332deg; --orbit-duration: 28s; }
 }
 
 .valuePanel[data-visual='assurance'] {
-  .diagramNode:first-child { transform: rotate(-4deg) translateY(1.5rem); }
-  .diagramNode:nth-child(2) { transform: translateY(-1.25rem); }
-  .diagramNode:last-child { transform: rotate(4deg) translateY(1.5rem); }
+  .orbitPath1 { --orbit-start: 142deg; --orbit-turn: -360deg; --orbit-duration: 18s; }
+  .orbitPath2 { --orbit-start: 262deg; --orbit-turn: -360deg; --orbit-duration: 18s; }
+  .orbitPath3 { --orbit-start: 22deg; --orbit-turn: -360deg; --orbit-duration: 18s; }
+}
+
+@keyframes valueOrbitSpin {
+  from { transform: translate(-50%, -50%) rotate(var(--orbit-start)); }
+  to { transform: translate(-50%, -50%) rotate(calc(var(--orbit-start) + var(--orbit-turn))); }
+}
+
+@keyframes valueOrbitCounterSpin {
+  from { transform: translate(50%, -50%) rotate(calc(var(--orbit-start) * -1)); }
+  to { transform: translate(50%, -50%) rotate(calc((var(--orbit-start) + var(--orbit-turn)) * -1)); }
+}
+
+@keyframes valueDiagramEnter {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.valueEvidenceStack {
+  display: grid;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .valueEvidence {
   position: relative;
   z-index: 2;
+  grid-area: 1 / 1;
   padding: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  animation: valueEvidenceEnter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
 
   > span { color: rgba(255, 255, 255, 0.45); font-size: 0.68rem; text-transform: uppercase; }
   h3 { max-width: 24ch; margin-top: 0.5rem; color: #fff; font-size: clamp(1.55rem, 3vw, 2.25rem); line-height: 1.08; }
@@ -728,6 +794,19 @@
   ul { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.1rem; }
   li { padding: 0.4rem 0.55rem; border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 3px; color: rgba(255, 255, 255, 0.72); font-size: 0.68rem; }
   a { margin-top: 1.25rem; border-color: color-mix(in srgb, var(--value-accent) 58%, transparent); background: transparent; color: #fff; }
+}
+
+.valueEvidenceActive {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  animation: valueEvidenceEnter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (max-width: 767px) {
+  .valueDiagram { min-height: 28rem; padding: 1rem; }
+  .valueOrbitCore { width: 6.75rem; padding: 0.7rem; }
+  .orbitNode { width: 5.8rem; padding: 0.55rem; }
 }
 
 @keyframes valueEvidenceEnter {
@@ -860,10 +939,12 @@
   .showcase,
   .showcaseMedia img,
   .valueList button,
-  .diagramNode,
   .expertImage,
   .packageList li { transition: none; }
-  .valueEvidence { animation: none; }
+  .valueDiagram,
+  .valueEvidence,
+  .orbitPath,
+  .orbitNode { animation: none; }
   .showcase:hover .showcaseMedia img,
   .expertSection:hover .expertImage { transform: none; }
 }

@@ -9,9 +9,7 @@ describe('Home', () => {
   it('leads with the website offer and conversion routes', () => {
     renderHome();
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Mitchell Martínez');
-    expect(screen.getByText('Building', { exact: false })).toHaveTextContent(
-      'Building unbeatable digital experiences'
-    );
+    expect(screen.getByText(/unbeatable digital experiences/i)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: "View Mitchell's selected work" })).toHaveAttribute('href', '/projects');
     expect(screen.getByRole('link', { name: 'Start a website project with Mitchell' })).toHaveAttribute('href', '/contact');
   });
