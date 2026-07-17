@@ -12,65 +12,71 @@ const trustSignals = [
   { value: 'Direct', label: 'one expert from brief to launch' },
 ];
 
-const capabilities = [
+const clientValues = [
   {
     number: '01',
-    title: 'Product thinking',
-    description:
-      'Customer journeys, content structure, scope, and the business case behind every screen.',
+    title: 'More of the right enquiries',
+    summary: 'Help qualified visitors understand the offer and take the next step without hunting.',
+    outcome: 'A customer journey with fewer dead ends',
+    detail:
+      'I structure services, navigation, content, and forms around the questions customers ask before they commit. The route from landing page to relevant service to enquiry stays obvious on mobile and desktop.',
+    flow: ['Find the right service', 'Understand the value', 'Enquire with confidence'],
+    deliverables: ['Audience and service journeys', 'Calls to action at decision points', 'Accessible enquiry flows'],
+    action: { label: 'See client transformations', to: '/projects' },
+    visual: 'enquiries',
   },
   {
     number: '02',
-    title: 'Interface systems',
-    description:
-      'Responsive React and TypeScript interfaces with accessible, reusable component architecture.',
+    title: 'Trust wherever clients find you',
+    summary: 'Make the business clear to customers, search engines, and AI assistants.',
+    outcome: 'A credible presence that can be understood before the first call',
+    detail:
+      'Server-rendered pages, semantic structure, descriptive metadata, and accurate structured data give people and discovery systems the same clear account of what you do and who it is for.',
+    flow: ['Discover the business', 'Verify the offer', 'Choose with confidence'],
+    deliverables: ['Server-rendered public pages', 'Search and AI-readable structure', 'Accessible trust signals'],
+    action: { label: 'Explore discovery foundations', to: '/services' },
+    visual: 'discovery',
   },
   {
     number: '03',
-    title: 'WordPress without the drag',
-    description:
-      'Custom themes, plugins, ACF blocks, and headless builds shaped around practical editing workflows.',
+    title: 'A site your team can run',
+    summary: 'Keep routine publishing in-house without making the interface fragile.',
+    outcome: 'Publish without needing a developer for every change',
+    detail:
+      'I shape reusable CMS fields and editing guardrails around the content your team actually manages. Training and documented handover make ownership practical after launch.',
+    flow: ['Edit familiar fields', 'Preview safely', 'Publish consistently'],
+    deliverables: ['Reusable CMS blocks', 'Editing guardrails', 'Training and handover'],
+    action: { label: 'See the publishing work', to: '/projects#fogsv' },
+    visual: 'ownership',
   },
   {
     number: '04',
-    title: 'Performance and discovery',
-    description:
-      'Fast delivery, semantic HTML, metadata, structured data, and content foundations for search and AI answers.',
+    title: 'Fewer surprises at launch',
+    summary: 'Catch expensive friction before customers or your team have to report it.',
+    outcome: 'A tested platform with a clear path beyond launch day',
+    detail:
+      'I review responsive behaviour, accessibility, performance, forms, metadata, and deployment before handover. You receive practical support after launch rather than an unexplained codebase and a goodbye.',
+    flow: ['Test the experience', 'Launch deliberately', 'Improve with evidence'],
+    deliverables: ['Cross-device quality checks', 'Performance and accessibility review', 'Post-launch defect support'],
+    action: { label: 'Review project packages', to: '/pricing' },
+    visual: 'assurance',
   },
-  {
-    number: '05',
-    title: 'AI-assisted delivery',
-    description:
-      'AI accelerates research, implementation, testing, and findability reviews; I verify the evidence and own every decision.',
-  },
-];
-
-const technologyExperience = [
-  'React',
-  'TypeScript',
-  'React Router',
-  'Node.js',
-  'WordPress',
-  'ACF',
-  'Sass',
-  'PWA',
-  'SSR',
-  'Schema.org',
 ];
 
 const projectOutcomes = [
-  'Get remembered',
-  'Earn trust faster',
-  'Make the next step obvious',
-  'Stay fast under pressure',
-  'Grow without a rebuild',
+  'Fantastic customer experiences',
+  'AI and SEO optimisations',
+  'Beautiful designs',
+  'Thoughtful handover',
+  'Care and consideration at every step',
+  'Accessibility and performance',
 ];
 
 const Home = () => {
   const [income, setIncome] = useState(3200);
   const [spending, setSpending] = useState(1880);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [activeCapability, setActiveCapability] = useState(0);
+  const [activeValue, setActiveValue] = useState(0);
   const swiperRef = useRef<HTMLDivElement | null>(null);
   const leftover = Math.max(0, income - spending);
 
@@ -114,11 +120,10 @@ const Home = () => {
               <span>Martínez</span>
             </h1>
             <p className={styles.tagline}>
-              I design and build websites <strong>people remember.</strong>
+              Building <strong>unbeatable digital experiences</strong>
             </p>
             <p className={styles.description}>
-              Strategy, interface design, development, search foundations, and launch in one pair
-              of hands. Built for Australian businesses that have outgrown ordinary.
+              Design, development and delivery. One person from start to finish. Built for Aussie businesses looking for better.
             </p>
 
             <div className={styles.heroActions} role="group" aria-label="Primary actions">
@@ -170,14 +175,24 @@ const Home = () => {
           </h2>
           <div className={styles.introGrid}>
             <p className={styles.introLead}>
-              From the beginning, I focus on your business. What you need, who your customers are, and what they expect. Product comes first, then technology.
+              <p>
+                From the very start, I focus on your business. What you do, who your customers are, and what you need.
+              </p>
+              <br />
+              <p>
+                The business outcome is my focus.
+              </p>
+              <br />
+              <p>
+                Code is just a tool to get there.
+              </p>
             </p>
             <div className={styles.introCopy}>
               <p>
-                Regardless of whether you're an eCommerce business, a creative agency, a startup, or anything in between, I focus on understanding your business and your needs before we even touch a single line of code.
+                Unlike other engineers, I don't just build websites. I build experiences. Regardless of whether you're an eCommerce business, a creative agency, a startup, or anything in between, I focus on understanding your business and your needs first.
               </p>
               <p>
-                I then build you a digital presence that reflects the calibre of your business. Quick, snappy websites that work well, make sense, and don't piss off your customers.
+                I then build you a digital presence that reflects the calibre of your business, using my technical expertise to take it further than a standard marketing site could ever go. The result? Quick, snappy websites that work well, make sense, and don't piss off your customers.
               </p>
               <p>So you can focus more on delivering to your customers, not running a website.</p>
               <ButtonLink to="/services" variant="secondary">
@@ -261,9 +276,7 @@ const Home = () => {
             <p className={styles.projectType}>Product strategy · Full-stack application · PWA</p>
             <h3 className={styles.showcaseTitle}>Budgeto</h3>
             <p className={styles.showcaseText}>
-              My own budgeting product, designed around one legible question: how much money is
-              left before payday? I took it from method and interface system through responsive
-              application, recurring workflows, offline support, and production launch.
+              Designed around my own budgeting methodology of tracking how much I've spent and how much I've got leftover from my paycheque. Created fully independent, from concept all the way through to a full-scale production budgeting app with real users, subscriptions, mobile app store deployment, and a comprehensive marketing website. Try it today and seeh ow Budgeto can help you take back control of your finances.
             </p>
 
             <div className={styles.budgetControls} aria-label="Interactive Budgeto preview">
@@ -407,53 +420,67 @@ const Home = () => {
           <div className={styles.capabilityCopy}>
             <p>
               Marketing agencies can prioritise appearance. Technical agencies can sacrifice it
-              for speed. I do not believe the work should compromise either.
+              for speed. I build server-rendered digital experiences designed for both, with a focus on accessibility,
+              discovery, and customer experience.
             </p>
-            <p>
-              I build server-rendered digital experiences designed for speed, accessibility, and
-              discovery. AI-assisted workflows help me implement and test faster, inspect likely
+            <p> AI-assisted workflows help me implement and test faster, inspect likely
               issues, review how search and AI systems interpret the site, and cross-check public
               competitor experiences. Human judgment stays in charge.
             </p>
           </div>
           
         </div>
-        <div className={styles.capabilityExperience}>
-          <ol className={styles.capabilityList}>
-            {capabilities.map((capability, index) => (
-              <li key={capability.number}>
+        <div className={styles.valueExperience}>
+          <ol className={styles.valueList} aria-label="Choose the outcome that matters most">
+            {clientValues.map((value, index) => (
+              <li key={value.number}>
                 <button
                   type="button"
-                  aria-pressed={activeCapability === index}
-                  onClick={() => setActiveCapability(index)}
-                  onFocus={() => setActiveCapability(index)}
-                  onPointerEnter={() => setActiveCapability(index)}
+                  aria-pressed={activeValue === index}
+                  onClick={() => setActiveValue(index)}
+                  onFocus={() => setActiveValue(index)}
                 >
-                  <span className={styles.capabilityNumber}>{capability.number}</span>
-                  <h3>{capability.title}</h3>
-                  <p>{capability.description}</p>
-                  <span className={styles.capabilityArrow} aria-hidden="true">↗</span>
+                  <span className={styles.valueNumber}>{value.number}</span>
+                  <span>
+                    <strong>{value.title}</strong>
+                    <small>{value.summary}</small>
+                  </span>
+                  <span className={styles.valueArrow} aria-hidden="true">→</span>
                 </button>
               </li>
             ))}
           </ol>
 
-          <div className={styles.capabilityMap} aria-live="polite">
-            <div className={styles.mapGrid} aria-hidden="true">
-              <span /><span /><span />
-              <div className={styles.mapCore}>
-                <span>{capabilities[activeCapability].number}</span>
+          <div
+            className={styles.valuePanel}
+            data-visual={clientValues[activeValue].visual}
+            aria-live="polite"
+          >
+            <div className={styles.valueDiagram} aria-hidden="true">
+              <span className={styles.diagramLabel}>Your customer&apos;s path</span>
+              <div className={styles.diagramFlow}>
+                {clientValues[activeValue].flow.map((step, index) => (
+                  <div className={styles.diagramNode} key={step}>
+                    <span>{String(index + 1).padStart(2, '0')}</span>
+                    <strong>{step}</strong>
+                  </div>
+                ))}
               </div>
             </div>
-            <div className={styles.mapCaption}>
-              <span>Active discipline</span>
-              <strong>{capabilities[activeCapability].title}</strong>
-              <p>{capabilities[activeCapability].description}</p>
+            <div className={styles.valueEvidence} key={clientValues[activeValue].number}>
+              <span>What changes for you</span>
+              <h3>{clientValues[activeValue].outcome}</h3>
+              <p>{clientValues[activeValue].detail}</p>
+              <ul aria-label="Included value">
+                {clientValues[activeValue].deliverables.map(deliverable => (
+                  <li key={deliverable}>{deliverable}</li>
+                ))}
+              </ul>
+              <ButtonLink to={clientValues[activeValue].action.to} variant="secondary" size="sm">
+                {clientValues[activeValue].action.label}
+              </ButtonLink>
             </div>
           </div>
-        </div>
-        <div className={styles.stackRail} aria-label="Technology experience">
-          {technologyExperience.map(item => <span key={item}>{item}</span>)}
         </div>
       </ScrollReveal>
 
@@ -534,10 +561,9 @@ const Home = () => {
 
       <ScrollReveal as="section" className={styles.closingSection} aria-labelledby="closing-heading">
         <p className={styles.sectionEyebrow}>Your next digital chapter</p>
-        <h2 id="closing-heading">Bring the difficult idea. I&apos;ll help make it clear.</h2>
+        <h2 id="closing-heading">A better digital experience starts here</h2>
         <p>
-          Tell me what the business needs to change, what is getting in the way, and when you want
-          to launch. You do not need a polished brief to begin.
+          Tell me what you're looking for, what you need help with and what your organisation is about. Even if all you have is an idea, we'll work together to help you get there.
         </p>
         <div className={styles.closingActions} role="group" aria-label="Contact actions">
           <ButtonLink to="/contact" variant="primary" aria-label="Contact Mitchell Martinez">

@@ -6,30 +6,30 @@ import styles from './About.module.scss';
 const principles = [
   {
     number: '01',
-    title: 'Make the hard thing feel simple',
+    title: 'Explain the tech stuff in a simple way to anyone',
     description:
-      'Technical decisions become clear choices about outcomes, benefits, and trade-offs. You always know what is being recommended and why.',
+      "I don't assume you're going to understand all the technical mumbo-jumbo. I talk to you from the perspective of problems, outcomes, and benefits. If there's anything technical you want to know, I don't just explain it - I translate it for you into something you can understand.",
     signals: ['Plain language', 'Clear choices', 'Shared understanding'],
   },
   {
     number: '02',
     title: 'Design and engineering move together',
     description:
-      'The interface is shaped by how it needs to perform, scale, and be maintained. That creates experiences that feel considered all the way through.',
+      "You don't need to compromise between a beautiful design and a well-built digital presence. I make use of the latest technologies and industry best practices to give you fast, beautiful websites you'll love for years to come.",
     signals: ['Useful beauty', 'Fast by default', 'Built to last'],
   },
   {
     number: '03',
     title: 'Build for the person taking over',
     description:
-      'A successful launch should not create a dependency. Editing, documentation, and ongoing care are considered from the start.',
+      "From the start, I'll be asking both you and myself how the website will be maintained after launch. I make sure the website is easy for you to update, and if you need any ongoing support, I can provide a care plan to keep your website up to date.",
     signals: ['Easy editing', 'Clean handover', 'Care when needed'],
   },
   {
     number: '04',
-    title: 'Say what the trade-off is',
+    title: 'Explain compromises and trade-offs',
     description:
-      'There is no magic option that wins on every dimension. I make the constraints visible, suggest alternatives, and help choose the right compromise.',
+       "I might be a web developer, but I fall a little bit short of being a magician. Whenever we discuss your website, I'll explain what the benefits and disadvantages may be, and where appropriate, I'll suggest alternatives to try and meet happy middles if necessary.",
     signals: ['Honest constraints', 'Useful options', 'Sound decisions'],
   },
 ];
@@ -95,14 +95,14 @@ const About = memo(() => {
       </div>
       <div className={styles.storyCopy}>
         <p className={styles.storyLead}>
-          My work sits where design judgment, product thinking, and engineering meet. I care about
-          the moment a person understands what to do next, and the decisions that make it feel effortless.
+          My work sits where design judgment, product thinking, and engineering meet. I care about how customers feel when they're navigating the web.
         </p>
         <p>
           Five years across applications, content platforms, and websites taught me to stay close
-          to the whole problem: audience, content, interaction, accessibility, performance, search,
-          and what happens after launch. The technology serves that outcome, never the reverse.
-        </p>
+          to the problem. The deeper I've gone technically, the clearer it became that code can only
+            come after you've figured out the real business outcome you're trying to solve.
+          </p>
+          <p>Keeping you, your business, and your customers front-and-centre is core to my entire approach. I treat your customers as if they were my own. I focus on outcomes and experiences, not just code, and I never let tech for the sake of it supercede what we're trying to solve with it.</p>
         <blockquote>
           If your customer is happy navigating your website, they're more likely to stay.
         </blockquote>
@@ -148,23 +148,36 @@ const About = memo(() => {
     </section>
 
     <ScrollReveal as="section" className={styles.craftSection} aria-labelledby="craft-heading">
-      <div className={styles.craftCopy}>
+      <div className={styles.craftHeading}>
         <p className={styles.eyebrow}>Depth under the interface</p>
         <h2 id="craft-heading">
           I can talk strategy in the morning and ship the component in the afternoon.
         </h2>
-        <p>
-          I work across discovery, design, and development, which means fewer hand-offs and a more
-          coherent result. AI accelerates research and repetitive work; evidence, judgment, and
-          responsibility for the result remain mine.
-        </p>
-        <ButtonLink to="/skills" variant="secondary">Explore technical capabilities</ButtonLink>
       </div>
       <div className={styles.craftVisual} aria-hidden="true">
         <span className={styles.orbitCore}>Idea<br />to launch</span>
         {technologyExperience.slice(0, 8).map(technology => (
           <span key={technology} className={styles.orbitItem}>{technology}</span>
         ))}
+      </div>
+      <div className={styles.craftBody}>
+        <p>
+          Unlike agencies where you might have to coordinate with multiple different people across
+          different domains, I cover the entire process from start to finish.
+        </p>
+        <p>
+          From initial consultation, through to design and development, all the way to handoff,
+          you&apos;ll work with one individual - me.
+        </p>
+        <p>
+          Where circumstances permit, and thanks to my AI-native approach, I can sometimes start a
+          project on the same day as our consultation, and have a basic proof of concept delivered
+          to you within 24 hours.
+        </p>
+        <p>It&apos;s all part of helping you and your customers get the best web experience.</p>
+      </div>
+      <div className={styles.craftAction}>
+        <ButtonLink to="/skills" variant="secondary">Explore technical capabilities</ButtonLink>
       </div>
       <div className={styles.stackRail} aria-label="Technology experience">
         {technologyExperience.map(technology => <span key={technology}>{technology}</span>)}

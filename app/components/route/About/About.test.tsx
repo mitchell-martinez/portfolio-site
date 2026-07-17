@@ -28,7 +28,7 @@ describe('About', () => {
     const user = userEvent.setup();
     renderAbout();
     expect(screen.getByRole('heading', { name: /point of view behind every pixel/i })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { level: 3, name: /make the hard thing feel simple/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 3, name: /keeping it simple/i })).toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: /design and engineering move together/i }));
     expect(screen.getByRole('heading', { level: 3, name: /design and engineering move together/i })).toBeInTheDocument();

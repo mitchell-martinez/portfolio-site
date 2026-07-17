@@ -276,6 +276,9 @@
   margin-top: 1.75rem;
   color: var(--color-text-secondary);
   line-height: 1.7;
+
+  @include respond-to('lg') { min-height: 8.2rem; }
+  @include respond-to('xl') { min-height: 6.8rem; }
 }
 
 .packageBody {
@@ -285,7 +288,6 @@
 }
 
 .bestFor {
-  min-height: 7rem;
   padding: 1.25rem 0;
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
@@ -304,6 +306,9 @@
     font-size: 0.9375rem;
     line-height: 1.55;
   }
+
+  @include respond-to('lg') { min-height: 15.5rem; }
+  @include respond-to('xl') { min-height: 12.5rem; }
 }
 
 .listHeading {

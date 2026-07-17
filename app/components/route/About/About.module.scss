@@ -186,7 +186,7 @@
 
 .storyHeading,
 .sectionHeader,
-.craftCopy,
+.craftHeading,
 .personalSection,
 .closingSection {
   h2 {
@@ -388,13 +388,31 @@
   @include respond-to('lg') {
     grid-template-columns: minmax(0, 0.9fr) minmax(430px, 1.1fr);
     align-items: center;
-    gap: 6rem;
+    column-gap: 6rem;
+    row-gap: 4rem;
   }
 }
 
-.craftCopy {
-  p:not(.eyebrow) { margin-top: 1.5rem; color: var(--color-text-secondary); line-height: 1.75; }
-  a { margin-top: 1.5rem; }
+.craftBody {
+  color: var(--color-text-secondary);
+  line-height: 1.75;
+
+  p { max-width: 82ch; }
+  p + p { margin-top: 1.25rem; }
+
+  @include respond-to('lg') {
+    grid-column: 1 / -1;
+    columns: 2;
+    column-gap: 6rem;
+
+    p { break-inside: avoid; }
+  }
+}
+
+.craftAction {
+  display: flex;
+  grid-column: 1 / -1;
+  justify-content: center;
 }
 
 .craftVisual {

@@ -9,7 +9,9 @@ describe('Home', () => {
   it('leads with the website offer and conversion routes', () => {
     renderHome();
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Mitchell Martínez');
-    expect(screen.getByText('I design and build websites', { exact: false })).toBeInTheDocument();
+    expect(screen.getByText('Building', { exact: false })).toHaveTextContent(
+      'Building unbeatable digital experiences'
+    );
     expect(screen.getByRole('link', { name: "View Mitchell's selected work" })).toHaveAttribute('href', '/projects');
     expect(screen.getByRole('link', { name: 'Start a website project with Mitchell' })).toHaveAttribute('href', '/contact');
   });
@@ -33,18 +35,23 @@ describe('Home', () => {
     expect(screen.getByText('From A$7,500')).toBeInTheDocument();
   });
 
-  it('lets visitors explore the disciplines behind the work', async () => {
+  it('lets visitors explore the client value behind the work', async () => {
     const user = userEvent.setup();
     renderHome();
 
-    const wordpressButton = screen.getByRole('button', { name: /wordpress without the drag/i });
-    expect(wordpressButton).toHaveAttribute('aria-pressed', 'false');
+    const ownershipButton = screen.getByRole('button', { name: /a site your team can run/i });
+    expect(ownershipButton).toHaveAttribute('aria-pressed', 'false');
 
-    await user.click(wordpressButton);
+    await user.click(ownershipButton);
 
-    expect(wordpressButton).toHaveAttribute('aria-pressed', 'true');
-    expect(screen.getByText('Active discipline').nextElementSibling).toHaveTextContent(
-      'WordPress without the drag'
+    expect(ownershipButton).toHaveAttribute('aria-pressed', 'true');
+    expect(
+      screen.getByRole('heading', { name: /publish without needing a developer for every change/i })
+    ).toBeInTheDocument();
+    expect(screen.getByText('Reusable CMS blocks')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /see the publishing work/i })).toHaveAttribute(
+      'href',
+      '/projects#fogsv'
     );
   });
 
