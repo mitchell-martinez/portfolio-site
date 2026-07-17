@@ -64,6 +64,15 @@
   transition: stroke-dashoffset 1400ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.arcAnimated {
+  animation: fillDonutArc 1400ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes fillDonutArc {
+  from { stroke-dashoffset: var(--donut-circumference); }
+  to { stroke-dashoffset: var(--donut-offset); }
+}
+
 .donutLabel {
   margin-top: 1.5rem;
   color: var(--color-text-secondary);
@@ -85,6 +94,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .arcAnimated { animation: none; }
   .arc,
   .clickable { transition: none; }
 }

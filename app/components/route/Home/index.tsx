@@ -1,5 +1,5 @@
 import type { ReactNode, RefObject } from 'react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { ButtonLink } from '~/components/ui/ButtonLink/';
 import { ScrollReveal } from '~/components/ui/ScrollReveal/';
 import { websitePackages } from '~/data/freelanceServices';
@@ -89,6 +89,8 @@ type ProjectRevealProps = {
 };
 
 const ProjectReveal = ({ children, className = '', direction }: ProjectRevealProps) => {
+  const [isReady, setIsReady] = useState(false);
+  const [isFallbackVisible, setIsFallbackVisible] = useState(false);
   const { ref, isIntersecting } = useIntersectionObserver({
     threshold: 0.05,
     rootMargin: '0px 0px -5% 0px',
@@ -99,14 +101,40 @@ const ProjectReveal = ({ children, className = '', direction }: ProjectRevealPro
     right: styles.projectRevealRight,
     top: styles.projectRevealTop,
   }[direction];
+  const isVisible = isIntersecting || isFallbackVisible;
+
+  useLayoutEffect(() => {
+    const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    setIsReady('IntersectionObserver' in window && !reducedMotion);
+  }, []);
+
+  useEffect(() => {
+    if (!isReady || isVisible) return;
+
+    const revealWhenVisible = () => {
+      const bounds = ref.current?.getBoundingClientRect();
+      if (bounds && bounds.top < window.innerHeight * 0.95 && bounds.bottom > 0) {
+        setIsFallbackVisible(true);
+      }
+    };
+
+    revealWhenVisible();
+    window.addEventListener('scroll', revealWhenVisible, { passive: true });
+    window.addEventListener('resize', revealWhenVisible);
+
+    return () => {
+      window.removeEventListener('scroll', revealWhenVisible);
+      window.removeEventListener('resize', revealWhenVisible);
+    };
+  }, [isReady, isVisible, ref]);
 
   return (
     <article
       ref={ref as RefObject<HTMLElement>}
-      className={`${styles.showcase} ${styles.projectReveal} ${directionClass}${isIntersecting ? ` ${styles.projectRevealVisible}` : ''}${className ? ` ${className}` : ''}`}
+      className={`${styles.showcase} ${styles.projectReveal} ${directionClass}${isReady ? ` ${styles.projectRevealReady}` : ''}${isVisible ? ` ${styles.projectRevealVisible}` : ''}${className ? ` ${className}` : ''}`}
       data-reveal-direction={direction}
     >
-      {children(isIntersecting)}
+      {children(isVisible)}
     </article>
   );
 };

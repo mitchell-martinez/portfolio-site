@@ -1,5 +1,4 @@
 import type { CSSProperties } from 'react';
-import { useEffect, useState } from 'react';
 import { useCountUp } from '~/hooks/useCountUp';
 import styles from './BudgetoDonut.module.scss';
 
@@ -19,24 +18,8 @@ const BudgetoDonut = ({ value, total, color, label, animate = false, onClick }: 
   const circumference = normalizedRadius * 2 * Math.PI;
   const percent = Math.min(100, (value / Math.max(total, 1)) * 100);
   const dash = (percent / 100) * circumference;
-  const [arcReady, setArcReady] = useState(false);
   const displayValue = useCountUp(value, animate);
-  const dashOffset = animate && !arcReady ? circumference : circumference - dash;
-
-  useEffect(() => {
-    if (!animate) return;
-
-    setArcReady(false);
-    let fillFrameId = 0;
-    const resetFrameId = requestAnimationFrame(() => {
-      fillFrameId = requestAnimationFrame(() => setArcReady(true));
-    });
-
-    return () => {
-      cancelAnimationFrame(resetFrameId);
-      cancelAnimationFrame(fillFrameId);
-    };
-  }, [animate]);
+  const dashOffset = circumference - dash;
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (onClick && (e.key === 'Enter' || e.key === ' ')) {
@@ -73,7 +56,11 @@ const BudgetoDonut = ({ value, total, color, label, animate = false, onClick }: 
             fill="none"
             stroke={color}
             strokeWidth={stroke}
-            className={`${styles.ring} ${styles.arc}`}
+            className={`${styles.ring} ${styles.arc} ${animate ? styles.arcAnimated : ''}`}
+            style={{
+              '--donut-circumference': circumference,
+              '--donut-offset': dashOffset,
+            } as CSSProperties}
             strokeDasharray={circumference}
             strokeDashoffset={dashOffset}
             strokeLinecap="round"
