@@ -596,17 +596,9 @@
 // Project enquiry
 .page {
   --contact-green: #75e38d;
+  overflow: hidden;
   padding-bottom: 8rem;
-  background:
-    linear-gradient(126deg, var(--color-wash-green), transparent 34%) 0 44% / 100% 42rem no-repeat,
-    linear-gradient(306deg, var(--color-wash-cyan), transparent 36%) 0 68% / 100% 46rem no-repeat,
-    linear-gradient(128deg, var(--color-wash-gold), transparent 36%) 0 92% / 100% 36rem no-repeat,
-    linear-gradient(
-      180deg,
-      var(--color-bg-green) 0 46%,
-      var(--color-bg-cyan) 46% 76%,
-      var(--color-bg-gold) 76% 100%
-    );
+  background: var(--color-bg-black);
 }
 
 .hero {
@@ -618,8 +610,9 @@
   padding: 8rem 1.25rem 5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   background:
-    linear-gradient(115deg, rgba(117, 227, 141, 0.06), transparent 42%),
-    #101218;
+    radial-gradient(ellipse 62% 78% at -8% 78%, rgba(74, 183, 220, 0.42), transparent 64%),
+    radial-gradient(ellipse 52% 70% at 108% 20%, rgba(117, 227, 141, 0.32), transparent 64%),
+    #090d12;
   color: #fff;
   isolation: isolate;
 
@@ -665,13 +658,13 @@
   line-height: 0.96;
   text-wrap: balance;
 
-  span { color: rgba(255, 255, 255, 0.5); }
+  span { color: #9de9af; }
 }
 
 .description {
   max-width: 640px;
   margin: 0;
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.84);
   font-size: clamp(1.05rem, 2vw, 1.28rem);
   line-height: 1.65;
 }
@@ -680,14 +673,22 @@
   margin-top: 1.5rem;
   padding-left: 1rem;
   border-left: 2px solid var(--contact-green);
-  color: rgba(255, 255, 255, 0.58);
-  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 0.9375rem;
   line-height: 1.5;
 }
 
 .heroPortrait {
+  position: relative;
   min-width: 0;
   margin: 0;
+  padding: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  background:
+    radial-gradient(ellipse 80% 56% at 100% 0%, rgba(117, 227, 141, 0.2), transparent 66%),
+    rgba(255, 255, 255, 0.035);
+  box-shadow: 0 32px 90px rgba(0, 0, 0, 0.36);
   animation: contactHeroReveal 700ms 120ms cubic-bezier(0.22, 1, 0.36, 1) both;
 
   img {
@@ -706,20 +707,20 @@
     gap: 0.3rem 1rem;
     padding-top: 0.85rem;
     border-top: 1px solid rgba(255, 255, 255, 0.32);
-    color: rgba(255, 255, 255, 0.52);
-    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.74);
+    font-size: 0.8125rem;
   }
 
-  strong { color: #fff; font-size: 0.78rem; }
+  strong { color: #fff; font-size: 0.875rem; }
 }
 
 .contactBand {
   padding: 0 1.25rem;
   border-bottom: 1px solid var(--color-border);
   background:
-    linear-gradient(104deg, var(--color-wash-green), transparent 38%),
-    linear-gradient(284deg, var(--color-wash-cyan), transparent 42%),
-    var(--color-bg-green);
+    radial-gradient(ellipse 62% 180% at -8% 50%, rgba(117, 227, 141, 0.52), transparent 68%),
+    radial-gradient(ellipse 58% 170% at 108% 50%, rgba(74, 183, 220, 0.46), transparent 68%),
+    var(--color-bg-black);
 
   > dl {
     display: grid;
@@ -744,7 +745,7 @@
 
   dt {
     color: var(--color-text-secondary);
-    font-size: 0.68rem;
+    font-size: 0.8125rem;
     font-weight: 600;
     text-transform: uppercase;
   }
@@ -752,16 +753,32 @@
   dd {
     margin-top: 0.35rem;
     color: var(--color-text-primary);
-    font-size: 0.86rem;
+    font-size: 1rem;
   }
 }
 
 .briefSection {
+  position: relative;
   display: grid;
   max-width: 1200px;
   margin: 0 auto;
   padding: 6rem 1.25rem 0;
   gap: 4rem;
+  isolation: isolate;
+
+  &::before {
+    position: absolute;
+    inset: 0 auto -8rem 50%;
+    z-index: -1;
+    width: 100vw;
+    background:
+      radial-gradient(ellipse 58% 44% at -8% 18%, rgba(117, 227, 141, 0.54), transparent 66%),
+      radial-gradient(ellipse 56% 42% at 108% 62%, rgba(74, 183, 220, 0.5), transparent 66%),
+      radial-gradient(ellipse 48% 30% at 0% 98%, rgba(242, 198, 109, 0.34), transparent 68%),
+      var(--color-bg-green);
+    content: '';
+    transform: translateX(-50%);
+  }
 
   @include respond-to('md') { padding: 9rem 2rem 0; }
   @include respond-to('lg') {
@@ -771,7 +788,18 @@
   }
 }
 
-.formColumn { min-width: 0; }
+.formColumn {
+  min-width: 0;
+  padding: 2rem 1.25rem;
+  border: 1px solid var(--color-card-border);
+  border-radius: 6px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.045), transparent 34%),
+    var(--color-card-contrast);
+  box-shadow: 0 30px 90px var(--color-card-shadow);
+
+  @include respond-to('md') { padding: 3rem; }
+}
 
 .formHeader {
   max-width: 680px;
@@ -821,7 +849,7 @@
   max-width: 600px;
   margin: 0 0 1.5rem;
   color: var(--color-text-secondary);
-  font-size: 0.82rem;
+  font-size: 0.9375rem;
   line-height: 1.6;
 }
 
@@ -830,8 +858,8 @@
 }
 
 .label {
-  color: var(--color-text-secondary);
-  font-size: 0.78rem;
+  color: var(--color-text-primary);
+  font-size: 0.9375rem;
   font-weight: 600;
 }
 
@@ -839,7 +867,8 @@
   min-height: 3.25rem;
   padding: 0.85rem 1rem;
   border-radius: 4px;
-  background: var(--color-bg);
+  border-color: var(--color-border-strong);
+  background: var(--color-bg-black);
   transition: border-color $transition-fast, box-shadow $transition-fast, background-color $transition-fast;
 
   &:hover { border-color: var(--color-border-strong); }
@@ -860,7 +889,7 @@
   padding-left: 0.75rem;
   border-left: 2px solid var(--contact-green);
   color: var(--color-text-secondary);
-  font-size: 0.76rem;
+  font-size: 0.9rem;
   line-height: 1.5;
 
   strong { color: var(--color-text-primary); }
@@ -881,7 +910,8 @@
   max-width: 32rem;
   margin-top: 0.8rem;
   color: var(--color-text-secondary);
-  font-size: 0.72rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
 }
 
 .successBanner,
@@ -894,6 +924,13 @@
   display: grid;
   min-width: 0;
   gap: 1rem;
+  padding: 2rem;
+  border: 1px solid var(--color-card-border);
+  border-radius: 6px;
+  background:
+    radial-gradient(ellipse 92% 62% at 100% 0%, rgba(74, 183, 220, 0.2), transparent 66%),
+    var(--color-bg-black);
+  box-shadow: 0 24px 70px var(--color-card-shadow);
 
   @include respond-to('lg') {
     position: sticky;
@@ -908,6 +945,8 @@
   border-top: 1px solid var(--color-border);
 }
 
+.conversationNote { padding-top: 0; border-top: 0; }
+
 .conversationNote {
   h2 {
     max-width: 8ch;
@@ -920,7 +959,7 @@
   > p:last-child {
     margin-top: 1rem;
     color: var(--color-text-secondary);
-    font-size: 0.9rem;
+    font-size: 1rem;
     line-height: 1.7;
   }
 }
@@ -928,19 +967,19 @@
 .summaryLabel {
   margin: 0;
   color: var(--contact-green);
-  font-size: 0.68rem;
+  font-size: 0.8125rem;
   font-weight: 650;
   text-transform: uppercase;
 }
 
 .usefulContext {
   ul { display: grid; gap: 0.75rem; margin-top: 1rem; }
-  li { color: var(--color-text-secondary); font-size: 0.82rem; line-height: 1.55; }
+  li { color: var(--color-text-secondary); font-size: 0.9375rem; line-height: 1.6; }
   li::before { margin-right: 0.55rem; color: var(--contact-green); content: '↳'; }
 }
 
 .directContact {
-  > p:not(.summaryLabel) { margin-top: 0.65rem; color: var(--color-text-secondary); font-size: 0.82rem; line-height: 1.55; }
+  > p:not(.summaryLabel) { margin-top: 0.65rem; color: var(--color-text-secondary); font-size: 0.9375rem; line-height: 1.6; }
   .ctaGroup { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.65rem; margin-top: 1rem; }
   .ctaGroup > * { width: 100%; min-width: 0; min-height: 2.75rem; padding: 0.7rem; justify-content: center; }
 }
@@ -961,6 +1000,7 @@
   .heading { font-size: clamp(3.15rem, 15vw, 4.8rem); }
   .heroPortrait img { aspect-ratio: 4 / 3; object-position: 72% 42%; }
   .briefSection { gap: 3rem; }
+  .contextColumn { padding: 1.5rem; }
   .submitButton { width: 100%; }
 }
 

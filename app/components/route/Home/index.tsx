@@ -1,7 +1,9 @@
-import { useCallback, useRef, useState } from 'react';
+import type { RefObject } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { ButtonLink } from '~/components/ui/ButtonLink/';
 import { ScrollReveal } from '~/components/ui/ScrollReveal/';
 import { websitePackages } from '~/data/freelanceServices';
+import { useIntersectionObserver } from '~/hooks/useIntersectionObserver';
 import { BudgetoDonut } from '../Hero/Donut/';
 import styles from './Home.module.scss';
 
@@ -76,13 +78,61 @@ const projectOutcomes = [
   'Accessibility and performance',
 ];
 
+const introStatement =
+  "You've invested time and money in your business. Let your website reflect that.";
+
 const Home = () => {
   const [income, setIncome] = useState(3200);
   const [spending, setSpending] = useState(1880);
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeValue, setActiveValue] = useState(0);
+  const [isIntroAnimationReady, setIsIntroAnimationReady] = useState(false);
+  const [isIntroAnimationTriggered, setIsIntroAnimationTriggered] = useState(false);
+  const [introCharacterCount, setIntroCharacterCount] = useState(introStatement.length);
   const swiperRef = useRef<HTMLDivElement | null>(null);
+  const { ref: introRef, isIntersecting: isIntroVisible } = useIntersectionObserver({
+    threshold: 0,
+    rootMargin: '0px',
+    triggerOnce: true,
+  });
   const leftover = Math.max(0, income - spending);
+
+  useEffect(() => {
+    setIsIntroAnimationReady(typeof window !== 'undefined' && 'IntersectionObserver' in window);
+  }, []);
+
+  useEffect(() => {
+    if (!isIntroAnimationReady || !isIntroVisible) return;
+    setIntroCharacterCount(0);
+    setIsIntroAnimationTriggered(true);
+  }, [isIntroAnimationReady, isIntroVisible]);
+
+  useEffect(() => {
+    if (!isIntroAnimationReady || !isIntroAnimationTriggered) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setIntroCharacterCount(introStatement.length);
+      return;
+    }
+
+    let characterCount = 0;
+    let intervalId: ReturnType<typeof setInterval> | undefined;
+    const startTimeoutId = window.setTimeout(() => {
+      intervalId = setInterval(() => {
+        characterCount += 1;
+        setIntroCharacterCount(characterCount);
+
+        if (characterCount >= introStatement.length && intervalId) {
+          clearInterval(intervalId);
+        }
+      }, 42);
+    }, 220);
+
+    return () => {
+      window.clearTimeout(startTimeoutId);
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, [isIntroAnimationReady, isIntroAnimationTriggered]);
 
   const handleDonutScroll = useCallback(() => {
     const element = swiperRef.current;
@@ -171,14 +221,25 @@ const Home = () => {
         </dl>
       </ScrollReveal>
 
-      <ScrollReveal as="section" className={styles.introSection} aria-labelledby="value-heading">
+      <section
+        ref={introRef as RefObject<HTMLElement>}
+        className={`${styles.introSection}${isIntroAnimationReady ? ` ${styles.introReady}` : ''}${isIntroAnimationTriggered ? ` ${styles.introVisible}` : ''}`}
+        aria-labelledby="value-heading"
+      >
         <div className={styles.introInner}>
           <p className={styles.sectionEyebrow}>Not another interchangeable website</p>
-          <h2 id="value-heading" className={styles.statementHeading}>
-            You've invested time and money in your business. Let your website reflect that.
+          <h2 id="value-heading" className={styles.statementHeading} aria-label={introStatement}>
+            <span className={styles.typedMeasure} aria-hidden="true">
+              {introStatement}
+            </span>
+            <span className={styles.typedText} aria-hidden="true">
+              {isIntroAnimationReady
+                ? introStatement.slice(0, introCharacterCount)
+                : introStatement}
+            </span>
           </h2>
           <div className={styles.introGrid}>
-            <p className={styles.introLead}>
+            <div className={styles.introLead}>
               <p>
                 From the very start, I focus on your business. What you do, who your customers are, and what you need.
               </p>
@@ -190,7 +251,7 @@ const Home = () => {
               <p>
                 Code is just a tool to get there.
               </p>
-            </p>
+            </div>
             <div className={styles.introCopy}>
               <p>
                 Unlike other engineers, I don't just build websites. I build experiences. Regardless of whether you're an eCommerce business, a creative agency, a startup, or anything in between, I focus on understanding your business and your needs first.
@@ -205,7 +266,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </ScrollReveal>
+      </section>
 
       <section className={styles.outcomeRail} aria-label="What the work is built to do">
         <div className={styles.outcomeTrack}>
@@ -523,26 +584,26 @@ const Home = () => {
           />
         </div>
         <div className={styles.expertContent}>
-          <p className={`${styles.sectionEyebrow} ${styles.expertEyebrow}`}>The person doing the work</p>
+          <p className={`${styles.sectionEyebrow} ${styles.expertEyebrow}`}>Meet Mitch</p>
           <h2 id="expert-heading" className={styles.sectionHeading}>
             One expert, from first question to final handover
           </h2>
           <p className={styles.expertLead}>
-            I&apos;m Mitchell, a Sydney-based product engineer and website developer with more than
+            I&apos;m Mitch, a Sydney-based product engineer and website developer with more than
             five years of experience turning complex requirements into useful digital products.
           </p>
           <p>
-            You speak directly with the person planning, designing, and building the work. I will
+            You speak directly with the person planning, designing, and building the work. I'll work with you to
             challenge weak assumptions, explain trade-offs plainly, and leave you with a platform
-            you understand rather than a dependency you cannot escape.
+            you understand rather than a nightmare you're scared to touch.
           </p>
           <ul className={styles.expertFacts}>
-            <li>Australian business · ABN 40 927 243 914</li>
+            <li>Registered Aussie sole trader · ABN 40 927 243 914</li>
             <li>Direct collaboration and documented handover</li>
             <li>Accessibility, performance, and maintainability built in</li>
           </ul>
           <div className={styles.showcaseActions}>
-            <ButtonLink to="/about" variant="primary">More about Mitchell</ButtonLink>
+            <ButtonLink to="/about" variant="primary">More about Mitch</ButtonLink>
             <ButtonLink href="https://linkedin.com/in/mitchellmartinezadl" variant="secondary" external>
               LinkedIn
             </ButtonLink>

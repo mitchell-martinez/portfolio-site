@@ -350,7 +350,79 @@
   text-wrap: balance;
 }
 
-.statementHeading { max-width: 1000px; font-size: clamp(2.5rem, 7vw, 5.75rem); line-height: 1.03; }
+.statementHeading {
+  position: relative;
+  max-width: 1000px;
+  font-size: clamp(2.5rem, 7vw, 5.75rem);
+  line-height: 1.03;
+  text-wrap: wrap;
+}
+
+.typedMeasure {
+  display: block;
+  visibility: hidden;
+}
+
+.typedText {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.typedText::after {
+  display: inline-block;
+  width: 0.08em;
+  height: 0.82em;
+  margin-left: 0.08em;
+  background: currentColor;
+  content: '';
+  opacity: 0;
+  vertical-align: -0.04em;
+}
+
+.introReady {
+  .sectionEyebrow { opacity: 0; }
+}
+
+.introVisible {
+  .typedText { opacity: 1; }
+
+  .typedText::after {
+    animation: introTypeCursor 680ms steps(1, end) 220ms 5;
+  }
+
+  .sectionEyebrow {
+    animation: introCopyReveal 500ms 80ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .introLead {
+    animation: introLeadReveal 1.55s 220ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .introCopy {
+    animation: introCopyDrop 1.7s 950ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
+@keyframes introTypeCursor {
+  0%, 48% { opacity: 1; }
+  49%, 100% { opacity: 0; }
+}
+
+@keyframes introCopyReveal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes introLeadReveal {
+  from { opacity: 0; transform: translate3d(-4rem, 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes introCopyDrop {
+  from { opacity: 0; transform: translate3d(0, -5rem, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
 
 .introGrid {
   display: grid;
@@ -371,6 +443,19 @@
   line-height: 1.75;
   p + p { margin-top: 1rem; }
   a { margin-top: 1.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .introReady .sectionEyebrow,
+  .introReady .typedText,
+  .introVisible .introLead,
+  .introVisible .introCopy {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .introReady .typedText::after { display: none; }
 }
 
 .outcomeRail {

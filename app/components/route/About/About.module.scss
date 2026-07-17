@@ -218,8 +218,9 @@
 
 .personalSection::before {
   background:
-    radial-gradient(ellipse 58% 88% at 104% 42%, rgba(117, 227, 141, 0.4), transparent 68%),
-    var(--color-bg-cyan);
+    radial-gradient(ellipse 58% 88% at 104% 38%, rgba(255, 118, 94, 0.58), transparent 66%),
+    radial-gradient(ellipse 52% 82% at -6% 74%, rgba(242, 198, 109, 0.46), transparent 68%),
+    linear-gradient(180deg, var(--color-bg-cyan), var(--color-bg-gold) 30%, var(--color-bg-black));
 }
 
 .storySection {
@@ -546,9 +547,9 @@
 .closingSection {
   max-width: none;
   background:
-    radial-gradient(ellipse 62% 72% at 0% 66%, rgba(117, 227, 141, 0.52), transparent 66%),
-    radial-gradient(ellipse 62% 72% at 100% 66%, rgba(255, 118, 94, 0.5), transparent 66%),
-    linear-gradient(180deg, var(--color-bg-cyan), var(--color-bg-black) 28%);
+    radial-gradient(ellipse 60% 76% at -6% 68%, rgba(74, 183, 220, 0.66), transparent 64%),
+    radial-gradient(ellipse 58% 72% at 106% 62%, rgba(117, 227, 141, 0.6), transparent 64%),
+    linear-gradient(180deg, var(--color-bg-black), var(--color-bg-green) 34%);
   text-align: center;
 
   h2 { max-width: 900px; margin: 0 auto; }
