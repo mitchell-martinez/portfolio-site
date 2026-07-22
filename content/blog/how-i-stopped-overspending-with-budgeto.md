@@ -9,11 +9,11 @@ tags:
   - finance
   - fintech
 cover:
-  src: /images/blog/studio-zanetti-story/cover.png
-  alt: An image of the home page of Studio Zanetti's website after my work
+  src: /images/blog/budgeto-story/budgeto_hero.png
+  alt: An image of the hero block of the Budgeto website as of 22 July 2026
 ---
 
-# The prelude
+## The prelude
 
 I left home when I was 17 to move from my small country town to Adelaide, to start my university degree at The University of Adelaide. Combining Centrelink, a part time job at McDonald's and a couple of scholarships, I was making just enough to get by.
 
@@ -31,7 +31,7 @@ It was the wrong approach.
 
 &nbsp;
 
-## Things actually got worse when I got a full time job
+### Things actually got worse when I got a full time job
 
 I always told myself during uni that the problem wasn't my budgeting, it was that I didn't make enough money. During uni I had access to AfterPay and ZipPay which made it easier to spend, but harder to tell what was safe to spend. And while my limited income was part of the problem, the bad habits I had picked up during uni actually became much worse after I got a full time job.
 
@@ -49,7 +49,7 @@ I've seen multiple friends go through the exact same problem too in the past cou
 
 &nbsp;
 
-# The shift
+## The shift
 
 Eventually I started trying to save up to buy my own apartment. I got sick of my debt constantly growing. I felt like I had no visibility over whether I was actually growing my savings or not. Semi-frequent calculations about my net position were hard to manage - I needed something that worked at an individual pay cycle level, where I could really feel exactly where my money was going.
 
@@ -81,7 +81,7 @@ Almost overnight, my savings started growing - and my debt stopped growing.
 
 &nbsp;
 
-## Building Budgeto
+### Building Budgeto
 
 The system wasn't perfect though. I had direct debits that would need to come out of my bank account. I had to pay rent. If I went out for dinner with friends I would lose visibility over that money.
 
@@ -101,7 +101,7 @@ It was in that moment that Budgeto was born.
 
 &nbsp;
 
-## The Donut
+### The Donut
 
 The prime core of Budgeto is the Donut on the dashboard - the circle that visually indicates at the top of the dashboard what % of your pay you've spent and have left over. The idea of the Donut came from a literal donut representing your paycheque. Each expense represents taking a "bite" out of your leftover donut. The more you spend, the less you have for later.
 
@@ -141,7 +141,7 @@ Before I knew it, I was building a production-grade SaaS with login, monitoring,
 
 &nbsp;
 
-# What's Next?
+## What's Next?
 
 Today, Budgeto is a pre-launch startup.
 
